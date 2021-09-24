@@ -11,19 +11,30 @@ $xml = simplexml_load_file("BLOQUE_GENERAL_CCAA_EXPORT.xml") or die("Error: Cann
 
 foreach ($xml->children() as $row) {
     $CODIGO_CCAA = $row->CODIGO_CCAA;
-    $NOMBRE_CCAA = $row->NOMBRE_CCAA;
+    $NOMBRE_CCAA = addslashes($row->NOMBRE_CCAA);
     $POBLACION_2017 = $row->POBLACION_2017;
-    $NOMBREPRESIDENTE = $row->NOMBREPRESIDENTE;
-    $APELLIDO1PRESIDENTE = $row->APELLIDO1PRESIDENTE;
-    $APELLIDO2PRESIDENTE = $row->APELLIDO2PRESIDENTE;
+    $NOMBREPRESIDENTE = addslashes($row->NOMBREPRESIDENTE);
+    $APELLIDO1PRESIDENTE = addslashes($row->APELLIDO1PRESIDENTE);
+    $APELLIDO2PRESIDENTE = addslashes($row->APELLIDO2PRESIDENTE);
     
-    $tiempo = strtotime($row->VIGENCIA);
-    $VIGENCIA=date('Y-m-d',$tiempo);
+    if($row->VIGENCIA){
+        $tiempo = (string)($row->VIGENCIA);
+        echo $tiempo.'<br>';
+        $tiempo2 = date_create_from_format("d/m/Y",$tiempo);
+        //echo date_format($tiempo2,"Y/m/d").'<br>';
+        $VIGENCIA = date_format($tiempo2,"Y/m/d");
+    }
     
-    $PARTIDO = $row->PARTIDO;
+    //$tiempo2 = strtotime($tiempo);
+    //echo $tiempo2.'<br>';
+    //$VIGENCIA=date('Y/m/d',$tiempo2);
+    //echo (string)$VIGENCIA.'<br>';
+    
+    //$VIGENCIA = $row->VIGENCIA;
+    $PARTIDO = addslashes($row->PARTIDO);
     $CIF = $row->CIF;
-    $TIPOVIA = $row->TIPOVIA;
-    $NOMBREVIA = $row->NOMBREVIA;
+    $TIPOVIA = addslashes($row->TIPOVIA);
+    $NOMBREVIA = addslashes($row->NOMBREVIA);
     $NUMVIA = $row->NUMVIA;
     $CODPOSTAL = $row->CODPOSTAL;
     $TELEFONO = $row->TELEFONO;
@@ -45,25 +56,31 @@ foreach ($xml->children() as $row) {
     echo($NOMBREPRESIDENTE."<br>");
     echo($APELLIDO1PRESIDENTE."<br>");
     echo($APELLIDO2PRESIDENTE."<br>");
-    echo($VIGENCIA."<br>");
+    //echo($VIGENCIA."<br>");
     echo("<br><br><br>");
     
-
-
     $sql = "INSERT INTO bloque_general_ccaa(CODIGO_CCAA,NOMBRE_CCAA,POBLACION_2017,NOMBREPRESIDENTE,
     APELLIDO1PRESIDENTE, APELLIDO2PRESIDENTE, VIGENCIA, PARTIDO, CIF, TIPOVIA, NOMBREVIA, NUMVIA, 
-    CODPOSTAL, TELEFONO,FAX, WEB, MAIL, REFPIB, PIB, REFPIBC, PIBC, REFRESULTADO, RESULTADO, REFDEUDAVIVA, 
+    CODPOSTAL,TELEFONO,FAX,WEB,MAIL,REFPIB, PIB, REFPIBC, PIBC, REFRESULTADO, RESULTADO, REFDEUDAVIVA, 
     DEUDAVIVA) VALUES ('" . $CODIGO_CCAA . "','" . $NOMBRE_CCAA . "','" . $POBLACION_2017 . "',
     '" . $NOMBREPRESIDENTE . "','".$APELLIDO1PRESIDENTE."','".$APELLIDO2PRESIDENTE."','".$VIGENCIA."',
     '".$PARTIDO."','".$CIF."','".$TIPOVIA."','".$NOMBREVIA."','".$NUMVIA."','".$CODPOSTAL."','".$TELEFONO."','".
     $FAX."','".$WEB."','".$MAIL."','".$REFPIB."','".$PIB."','".$REFPIBC."','".$PIBC."','".$REFRESULTADO."',
     '".$RESULTADO."','".$REFDEUDAVIVA."','".$DEUDAVIVA."')";
     
+    $VIGENCIA=null;
+    /*$sql = "INSERT INTO bloque_general_ccaa(CODIGO_CCAA, NOMBRE_CCAA, POBLACION_2017, NOMBREPRESIDENTE, APELLIDO1PRESIDENTE, APELLIDO2PRESIDENTE, VIGENCIA,
+    PARTIDO, CIF, TIPOVIA, NOMBREVIA, NUMVIA, CODPOSTAL, TELEFONO,FAX, WEB, MAIL, REFPIB, PIB, REFPIBC, PIBC, REFRESULTADO, RESULTADO, REFDEUDAVIVA, DEUDAVIVA)
+    VALUES ({$CODIGO_CCAA},{$NOMBRE_CCAA},{$POBLACION_2017},{$NOMBREPRESIDENTE},{$APELLIDO1PRESIDENTE},{$APELLIDO2PRESIDENTE},{$VIGENCIA}
+    ,{$PARTIDO},{$CIF},{$TIPOVIA},{$NOMBREVIA},{$NUMVIA},{$CODPOSTAL},{$TELEFONO},{$FAX},{$WEB},{$MAIL},{$REFPIB}
+    ,{$PIB},{$REFPIBC},{$PIBC},{$REFRESULTADO},{$RESULTADO},{$REFDEUDAVIVA},{$DEUDAVIVA})";
+    */
     $result = mysqli_query($conn, $sql);
     
     if (!empty($result)) {
         $affectedRow ++;
     } else {
+        echo mysqli_error($conn);
         $error_message = mysqli_error($conn) . "n";
     }
     
