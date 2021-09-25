@@ -21,16 +21,9 @@ foreach ($xml->children() as $row) {
         $tiempo = (string)($row->VIGENCIA);
         echo $tiempo.'<br>';
         $tiempo2 = date_create_from_format("d/m/Y",$tiempo);
-        //echo date_format($tiempo2,"Y/m/d").'<br>';
         $VIGENCIA = date_format($tiempo2,"Y/m/d");
     }
     
-    //$tiempo2 = strtotime($tiempo);
-    //echo $tiempo2.'<br>';
-    //$VIGENCIA=date('Y/m/d',$tiempo2);
-    //echo (string)$VIGENCIA.'<br>';
-    
-    //$VIGENCIA = $row->VIGENCIA;
     $PARTIDO = addslashes($row->PARTIDO);
     $CIF = $row->CIF;
     $TIPOVIA = addslashes($row->TIPOVIA);
@@ -69,12 +62,7 @@ foreach ($xml->children() as $row) {
     '".$RESULTADO."','".$REFDEUDAVIVA."','".$DEUDAVIVA."')";
     
     $VIGENCIA=null;
-    /*$sql = "INSERT INTO bloque_general_ccaa(CODIGO_CCAA, NOMBRE_CCAA, POBLACION_2017, NOMBREPRESIDENTE, APELLIDO1PRESIDENTE, APELLIDO2PRESIDENTE, VIGENCIA,
-    PARTIDO, CIF, TIPOVIA, NOMBREVIA, NUMVIA, CODPOSTAL, TELEFONO,FAX, WEB, MAIL, REFPIB, PIB, REFPIBC, PIBC, REFRESULTADO, RESULTADO, REFDEUDAVIVA, DEUDAVIVA)
-    VALUES ({$CODIGO_CCAA},{$NOMBRE_CCAA},{$POBLACION_2017},{$NOMBREPRESIDENTE},{$APELLIDO1PRESIDENTE},{$APELLIDO2PRESIDENTE},{$VIGENCIA}
-    ,{$PARTIDO},{$CIF},{$TIPOVIA},{$NOMBREVIA},{$NUMVIA},{$CODPOSTAL},{$TELEFONO},{$FAX},{$WEB},{$MAIL},{$REFPIB}
-    ,{$PIB},{$REFPIBC},{$PIBC},{$REFRESULTADO},{$RESULTADO},{$REFDEUDAVIVA},{$DEUDAVIVA})";
-    */
+
     $result = mysqli_query($conn, $sql);
     
     if (!empty($result)) {
