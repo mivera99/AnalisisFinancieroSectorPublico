@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2021 a las 17:27:48
+-- Tiempo de generación: 25-09-2021 a las 19:56:20
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -115,6 +115,54 @@ CREATE TABLE `bloque_general_dip` (
   `INGRESOSCORR_2019` decimal(10,2) NOT NULL,
   `GASTOCORR_2020` decimal(10,2) DEFAULT NULL,
   `GASTOCORR_2019` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bloque_general_mun`
+--
+
+CREATE TABLE `bloque_general_mun` (
+  `CODIGO_MUN` int(5) NOT NULL,
+  `CIF_MUNICIPIO` varchar(9) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `MUNICIPIO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `CODIGO_PROV` int(2) NOT NULL,
+  `PROVINCIA` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `AUTONOMIA` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `POBLACION_2020` int(10) NOT NULL,
+  `NOMBREALCALDE` int(20) NOT NULL,
+  `APELLIDO1ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `APELLIDO2ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `VIGENCIA` date NOT NULL DEFAULT current_timestamp(),
+  `PARTIDO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `TIPOVIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NOMBREVIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NUMVIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `CODPOSTAL` int(5) DEFAULT NULL,
+  `TELEFONO` int(10) DEFAULT NULL,
+  `FAX` int(10) DEFAULT NULL,
+  `WEB` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `MAIL` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `PARO_2021` int(10) DEFAULT NULL,
+  `TRANSAC_INMOBILIARIAS_2021` int(10) DEFAULT NULL,
+  `TRANSAC_INMOBILIARIAS_2020` int(10) DEFAULT NULL,
+  `INGRESOS_2020` decimal(10,4) DEFAULT NULL,
+  `INGRESOS_2019` decimal(10,4) DEFAULT NULL,
+  `FONDLIQUIDOS_2020` decimal(10,4) DEFAULT NULL,
+  `FONDLIQUIDOS_2019` decimal(10,4) DEFAULT NULL,
+  `DERPENDCOBRO_2020` decimal(10,4) DEFAULT NULL,
+  `DERPENDCOBRO_2019` decimal(10,4) DEFAULT NULL,
+  `DEUDACOM_2020` decimal(10,4) DEFAULT NULL,
+  `DEUDACOM_2019` decimal(10,4) DEFAULT NULL,
+  `DEUDAFIN_2020` decimal(10,4) DEFAULT NULL,
+  `DEUDAFIN_2019` decimal(10,4) DEFAULT NULL,
+  `LIQUAJUST_2020` decimal(10,4) DEFAULT NULL,
+  `LIQUAJUST_2019` decimal(10,4) DEFAULT NULL,
+  `INGRESOSCORR_2020` decimal(10,4) DEFAULT NULL,
+  `INGRESOSCORR_2019` decimal(10,4) DEFAULT NULL,
+  `GASTOSCORR_2020` decimal(10,4) DEFAULT NULL,
+  `GASTOSCORR_2019` decimal(10,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
