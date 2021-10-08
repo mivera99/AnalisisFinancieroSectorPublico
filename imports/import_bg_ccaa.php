@@ -1,0 +1,135 @@
+<?php
+
+//Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
+ini_set('memory_limit', '1G');
+ini_set("default_charset", "UTF-8");
+ini_set('max_execution_time', 200);
+
+/*
+Importar libreria PHPSpreadsheet
+*/
+
+require "../includes/vendor/autoload.php";
+
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+//Path del archivo
+$path = "../files/BLOQUE_GENERAL_CCAA.xlsx";
+//Cargamos el archivo en la variable de documento "doc"
+$doc = IOFactory::load($path);
+
+//Número total de hojas
+$totalHojas = $doc->getSheetCount();
+
+$hoja = $doc->getSheet(0);
+
+//Última fila con datos
+$rows = $hoja->getHighestDataRow();//Número
+echo $rows."<br>";
+$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
+echo $cols."<br>";
+$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
+echo $cols."<br>";
+
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+$conn->set_charset("utf8");
+$values=array();
+
+
+for($x = 1; $x < $rows + 1; $x++){
+
+
+    for($y = 1; $y <= $cols; $y++){
+
+        $valor = $hoja->getCellByColumnAndRow($y,$x);
+        //Para eliminar espacios vacios y enters
+        $valor = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $valor)));
+        if($x>1)
+            $values[$y-1]=$valor;
+    }
+    if($x>1 && $values[0]!= "") {
+
+        $CODIGO_CCAA = $values[0];
+        $NOMBRE_CCAA = addslashes($values[1]);
+        $POBLACION_2017 = $values[2];
+        $NOMBREPRESIDENTE = addslashes($values[3]);
+        $APELLIDO1PRESIDENTE = addslashes($values[4]);
+        $APELLIDO2PRESIDENTE = addslashes($values[5]);
+
+        if($values[6]){
+            $tiempo = strtotime($values[6]);
+            $VIGENCIA = date("Y-m-d", $tiempo);
+        }
+
+        $PARTIDO = addslashes($values[7]);
+        $CIF = $values[8];
+        $TIPOVIA = addslashes($values[9]);
+        $NOMBREVIA = addslashes($values[10]);
+        $NUMVIA = $values[11];
+        $CODPOSTAL = $values[12];
+        $TELEFONO = $values[13];
+        $FAX = $values[14];
+        $WEB = $values[15];
+        $MAIL = $values[16];
+        $REFPIB = $values[17];
+        $PIB = $values[18];
+        $REFPIBC = $values[19];
+        $PIBC = $values[20];
+        $REFRESULTADO = $values[21];
+        $RESULTADO = $values[22];
+        $REFDEUDAVIVA = $values[23];
+        $DEUDAVIVA = $values[24];
+
+        $sql = "INSERT INTO bloque_general_ccaa VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA','$POBLACION_2017','$NOMBREPRESIDENTE','$APELLIDO1PRESIDENTE','$APELLIDO2PRESIDENTE',
+        '$VIGENCIA','$PARTIDO','$CIF','$TIPOVIA','$NOMBREVIA','$NUMVIA','$CODPOSTAL','$TELEFONO','$FAX','$WEB','$MAIL','$REFPIB','$PIB','$REFPIBC','$PIBC',
+        '$REFRESULTADO','$RESULTADO','$REFDEUDAVIVA','$DEUDAVIVA')";
+    
+        $VIGENCIA=null;
+
+        $result = mysqli_query($conn, $sql);
+            if (!empty($result)) {
+                //$affectedRow ++;
+            } else {
+                echo mysqli_error($conn);
+                $error_message = mysqli_error($conn) . "n";
+            }
+            $values = array();
+        }
+}
+
+
+
+/*
+
+Presentamos los datos por pantalla, en formato tabla
+
+*/
+
+
+
+
+$sql = "SELECT * FROM bloque_general_ccaa";
+
+$result = mysqli_query($conn, $sql);
+$columnas = mysqli_fetch_fields($result);
+echo "<pre>";
+echo "<table border='1'>";
+foreach($columnas AS $value){
+    echo "<th> $value->name </th>";
+}
+$all = $result->fetch_all();
+for($x = 0; $x < count($all); $x++){
+    echo "<tr>";
+
+    for ($y = 0; $y < count($columnas); $y++) {
+        echo "<td>".$all[$x][$y]."</td>";
+    }
+
+    echo "</tr>";
+}
+
+
+?>
+
+<?php //insertarXML(totalVariables, variables["nombres"], fichero);?>
