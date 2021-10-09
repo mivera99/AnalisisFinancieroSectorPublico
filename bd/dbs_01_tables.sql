@@ -110,7 +110,7 @@ CREATE TABLE `bloque_general_mun` (
   `NOMBREALCALDE` varchar(20) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO1ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
   `APELLIDO2ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `VIGENCIA` date NOT NULL DEFAULT current_timestamp(),
+  `VIGENCIA` date DEFAULT NULL,
   `PARTIDO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
   `TIPOVIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `NOMBREVIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,

@@ -1,0 +1,4 @@
+Host DB: db5005176895.hosting-data.io // localhost
+User DB: dbu1879501 // root
+Password DB: ij1YGZo@gIEKAJ#&PcCXpHR0o // ""
+Name DB: dbs4330017 // dbs_01
