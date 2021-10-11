@@ -32,7 +32,9 @@ echo $cols."<br>";
 $cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
 echo $cols."<br>";
 
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
 
@@ -57,9 +59,26 @@ for($x = 1; $x < $rows + 1; $x++){
         $APELLIDO1PRESIDENTE = addslashes($values[4]);
         $APELLIDO2PRESIDENTE = addslashes($values[5]);
 
-        if($values[6]){
-            $tiempo = strtotime($values[6]);
-            $VIGENCIA = date("Y-m-d", $tiempo);
+        if($values[6]!=""){
+            //$VIGENCIA = date_create_from_format("m-d-Y", $values[6]);
+            
+            //echo '<br>Dato del Excel:'.$values[6].'<br>';
+            
+            //$tiempo = strtotime($values[6]);
+            
+            //echo 'Despues del strtotime():'.$tiempo.'<br>';
+            
+            //$VIGENCIA = date("Y-m-d", $tiempo);
+            
+            //echo '<br>Valor de Vigencia:'.$VIGENCIA.'<br>';
+            //$VIGENCIA=$values[6];
+            
+            $tiempo = date_create_from_format("d/m/Y",$values[6]);
+            //echo date_format($tiempo2,"Y/m/d").'<br>';
+            $VIGENCIA = date_format($tiempo,"Y/m/d");
+        }
+        else{
+            $VIGENCIA=$values[6];
         }
 
         $PARTIDO = addslashes($values[7]);
@@ -81,9 +100,9 @@ for($x = 1; $x < $rows + 1; $x++){
         $REFDEUDAVIVA = $values[23];
         $DEUDAVIVA = $values[24];
 
-        $sql = "INSERT INTO bloque_general_ccaa VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA','$POBLACION_2017','$NOMBREPRESIDENTE','$APELLIDO1PRESIDENTE','$APELLIDO2PRESIDENTE',
-        '$VIGENCIA','$PARTIDO','$CIF','$TIPOVIA','$NOMBREVIA','$NUMVIA','$CODPOSTAL','$TELEFONO','$FAX','$WEB','$MAIL','$REFPIB','$PIB','$REFPIBC','$PIBC',
-        '$REFRESULTADO','$RESULTADO','$REFDEUDAVIVA','$DEUDAVIVA')";
+        $sql = "INSERT INTO bloque_general_ccaa VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$POBLACION_2017',''),NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
+        NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$CIF',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''),NULLIF('$REFPIB',''),NULLIF('$PIB',''),NULLIF('$REFPIBC',''),NULLIF('$PIBC',''),
+        NULLIF('$REFRESULTADO',''),NULLIF('$RESULTADO',''),NULLIF('$REFDEUDAVIVA',''),NULLIF('$DEUDAVIVA',''))";
     
         $VIGENCIA=null;
 

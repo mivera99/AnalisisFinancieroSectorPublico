@@ -11,9 +11,9 @@
 <?php
 
 //Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-ini_set('memory_limit', '1G');
+ini_set('memory_limit', '2G');
 ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 200);
+ini_set('max_execution_time', 1200);
 
 
 /*
@@ -49,7 +49,8 @@ $cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
 echo $cols."<br>";
 $cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
 
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
 
@@ -85,9 +86,14 @@ for($x = 1; $x < $rows + 1; $x++){
         $APELLIDO2ALCALDE=addslashes($values[9]);
 
         //echo '<td>'.gettype($values[10]).' '.$values[10].'</td>';
-        $tiempo = strtotime($values[10]);
-        $VIGENCIA=date("Y-m-d", $tiempo);
-
+     
+        if($values[10]!=""){
+            $tiempo = strtotime($values[10]);
+            $VIGENCIA=date("Y-m-d", $tiempo);
+        }
+        else {
+            $VIGENCIA="";
+        }
         $PARTIDO=addslashes($values[11]);
         $TIPOVIA=$values[12];
         $NOMBREVIA=$values[13];
@@ -116,12 +122,13 @@ for($x = 1; $x < $rows + 1; $x++){
         $INGRESOSCORR_2019=$values[36];
         $GASTOSCORR_2020=$values[37];
         $GASTOSCORR_2019=$values[38];
-        $sql="INSERT INTO bloque_general_mun VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO','$CODIGO_PROV','$PROVINCIA','$AUTONOMIA',
-        '$POBLACION_2020','$NOMBREALCALDE','$APELLIDO1ALCALDE','$APELLIDO2ALCALDE','$VIGENCIA','$PARTIDO','$TIPOVIA','$NOMBREVIA','$NUMVIA',
-        '$CODPOSTAL','$TELEFONO','$FAX','$WEB','$MAIL','$PARO_2021','$TRANSAC_INMOBILIARIAS_2021','$TRANSAC_INMOBILIARIAS_2020','$INGRESOS_2020',
-        '$INGRESOS_2019','$FONDLIQUIDOS_2020','$FONDLIQUIDOS_2019','$DERPENDCOBRO_2020','$DERPENDCOBRO_2019','$DEUDACOM_2020','$DEUDACOM_2019',
-        '$DEUDAFIN_2020','$DEUDAFIN_2019','$LIQUAJUST_2020','$LIQUAJUST_2019','$INGRESOSCORR_2020','$INGRESOSCORR_2019','$GASTOSCORR_2020',
-        '$GASTOSCORR_2019')";
+        
+        $sql="INSERT INTO bloque_general_mun VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$PROVINCIA',''),NULLIF('$AUTONOMIA',''),
+        NULLIF('$POBLACION_2020',''),NULLIF('$NOMBREALCALDE',''),NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
+        NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''),NULLIF('$PARO_2021',''),NULLIF('$TRANSAC_INMOBILIARIAS_2021',''),NULLIF('$TRANSAC_INMOBILIARIAS_2020',''),NULLIF('$INGRESOS_2020',''),
+        NULLIF('$INGRESOS_2019',''),NULLIF('$FONDLIQUIDOS_2020',''),NULLIF('$FONDLIQUIDOS_2019',''),NULLIF('$DERPENDCOBRO_2020',''),NULLIF('$DERPENDCOBRO_2019',''),NULLIF('$DEUDACOM_2020',''),NULLIF('$DEUDACOM_2019',''),
+        NULLIF('$DEUDAFIN_2020',''),NULLIF('$DEUDAFIN_2019',''),NULLIF('$LIQUAJUST_2020',''),NULLIF('$LIQUAJUST_2019',''),NULLIF('$INGRESOSCORR_2020',''),NULLIF('$INGRESOSCORR_2019',''),NULLIF('$GASTOSCORR_2020',''),
+        NULLIF('$GASTOSCORR_2019',''))";
 
         $result=mysqli_query($conn,$sql);
         if (!empty($result)) {
@@ -327,7 +334,7 @@ for($i = 2; $i <= $filas; $i++){
 
 */
 
-$sql = "SELECT * FROM bloque:_general_mun";
+$sql = "SELECT * FROM bloque_general_mun";
 
 $result = mysqli_query($conn, $sql);
 $columnas = mysqli_fetch_fields($result);

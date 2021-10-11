@@ -49,7 +49,8 @@ echo $columnas."<br>";
 $columnas = Coordinate::columnIndexFromString($columnas);//Conversion a numero
 echo $columnas.'<br>';
 
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 
 
@@ -85,7 +86,7 @@ for($i = 2; $i <= $filas; $i++){
     echo "<br>";
 
 
-    $query="INSERT INTO scoring_ccaa VALUES ('$CIF','$CODIGO_CCAA','$NOMBRE_CCAA','$RATING_N_1','$TENDENCIA_N_1','$RATING_N','$TENDENCIA_N')";
+    $query="INSERT INTO scoring_ccaa VALUES ('$CIF','$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$RATING_N_1',''),NULLIF('$TENDENCIA_N_1',''),NULLIF('$RATING_N',''),NULLIF('$TENDENCIA_N',''))";
 
     $res=mysqli_query($conn,$query);
     if (!empty($res)) {

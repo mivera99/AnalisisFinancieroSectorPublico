@@ -49,7 +49,8 @@ echo $columnas."<br>";
 $columnas = Coordinate::columnIndexFromString($columnas);//Conversion a numero
 echo $columnas.'<br>';
 
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 
 
@@ -198,14 +199,14 @@ for($i = 2; $i <= $filas; $i++){
         $TENDENCIA_N_1=$vals[54];
         $RATING_N=$vals[55];
         $TENDENCIA_N=$vals[56];
-        $query="INSERT INTO scoring_dip VALUES ('$COD_DIP','$R1_2020','$R2_2020','$R3_2020',
-        '$R4_2020','$R5_2020','$R6_2020','$R7_2020','$R8_2020','$R9_2020','$R10_2020','$R11_2020','$R12_2020',
-        '$R13_2020','$R1_2019','$R2_2019','$R3_2019','$R4_2019','$R5_2019','$R6_2019','$R7_2019','$R8_2019',
-        '$R9_2019','$R10_2019','$R11_2019','$R12_2019','$R13_2019','$R1_NAC_2020','$R2_NAC_2020',
-        '$R3_NAC_2020','$R4_NAC_2020','$R5_NAC_2020','$R6_NAC_2020','$R7_NAC_2020','$R8_NAC_2020','$R9_NAC_2020',
-        '$R10_NAC_2020','$R11_NAC_2020','$R12_NAC_2020','$R13_NAC_2020','$R1_NAC_2019','$R2_NAC_2019',
-        '$R3_NAC_2019','$R4_NAC_2019','$R5_NAC_2019','$R6_NAC_2019','$R7_NAC_2019','$R8_NAC_2019','$R9_NAC_2019',
-        '$R10_NAC_2019','$R11_NAC_2019','$R12_NAC_2019','$R13_NAC_2019','$RATING_N_1','$TENDENCIA_N_1','$RATING_N','$TENDENCIA_N')";
+        $query="INSERT INTO scoring_dip VALUES ('$COD_DIP',NULLIF('$R1_2020',''), NULLIF('$R2_2020',''), NULLIF('$R3_2020',''),
+        NULLIF('$R4_2020',''), NULLIF('$R5_2020',''), NULLIF('$R6_2020',''), NULLIF('$R7_2020',''), NULLIF('$R8_2020',''), NULLIF('$R9_2020',''), NULLIF('$R10_2020',''), NULLIF('$R11_2020',''), NULLIF('$R12_2020',''),
+        NULLIF('$R13_2020',''), NULLIF('$R1_2019',''), NULLIF('$R2_2019',''), NULLIF('$R3_2019',''), NULLIF('$R4_2019',''), NULLIF('$R5_2019',''), NULLIF('$R6_2019',''), NULLIF('$R7_2019',''), NULLIF('$R8_2019',''),
+        NULLIF('$R9_2019',''), NULLIF('$R10_2019',''), NULLIF('$R11_2019',''), NULLIF('$R12_2019',''), NULLIF('$R13_2019',''), NULLIF('$R1_NAC_2020',''), NULLIF('$R2_NAC_2020',''),
+        NULLIF('$R3_NAC_2020',''), NULLIF('$R4_NAC_2020',''), NULLIF('$R5_NAC_2020',''), NULLIF('$R6_NAC_2020',''), NULLIF('$R7_NAC_2020',''), NULLIF('$R8_NAC_2020',''), NULLIF('$R9_NAC_2020',''),
+        NULLIF('$R10_NAC_2020',''), NULLIF('$R11_NAC_2020',''), NULLIF('$R12_NAC_2020',''), NULLIF('$R13_NAC_2020',''), NULLIF('$R1_NAC_2019',''), NULLIF('$R2_NAC_2019',''),
+        NULLIF('$R3_NAC_2019',''), NULLIF('$R4_NAC_2019',''), NULLIF('$R5_NAC_2019',''), NULLIF('$R6_NAC_2019',''), NULLIF('$R7_NAC_2019',''), NULLIF('$R8_NAC_2019',''), NULLIF('$R9_NAC_2019',''),
+        NULLIF('$R10_NAC_2019',''), NULLIF('$R11_NAC_2019',''), NULLIF('$R12_NAC_2019',''), NULLIF('$R13_NAC_2019',''), NULLIF('$RATING_N_1',''), NULLIF('$TENDENCIA_N_1',''), NULLIF('$RATING_N',''), NULLIF('$TENDENCIA_N',''))";
         
 
         $res=mysqli_query($conn,$query);

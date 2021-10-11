@@ -32,7 +32,8 @@ echo $cols."<br>";
 $cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
 echo $cols."<br>";
 
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+$conn = new mysqli("localhost", "root", "", "dbs_01");
+//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
 
@@ -93,10 +94,9 @@ for($x = 1; $x < $rows + 1; $x++){
         $GASTOCORR_2019 = $values[28];
 
 
-
-        $sql = "INSERT INTO bloque_general_dip VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF','$TIPOVIA','$NOMBREVIA','$NUMVIA','$CODPOSTAL','$PROVINCIA','$AUTONOMIA',
-        '$TELEFONO','$FAX','$WEB','$MAIL','$INGRESOS_2020','$INGRESOS_2019','$FONDLIQUIDOS_2020','$FONDLIQUIDOS_2019','$DERPENDCOBRO_2020','$DERPENDCOBRO_2019',
-        '$DEUDACOM_2020','$DEUDACOM_2019','$DEUDAFIN_2020','$DEUDAFIN_2019','$LIQUAJUST_2020','$LIQUAJUST_2019','$INGRESOSCORR_2020','$INGRESOSCORR_2019','$GASTOCORR_2020','$GASTOCORR_2019')";
+        $sql = "INSERT INTO bloque_general_dip VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF',NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''), NULLIF('$NUMVIA',''), NULLIF('$CODPOSTAL',''), NULLIF('$PROVINCIA',''), NULLIF('$AUTONOMIA',''),
+        NULLIF('$TELEFONO',''), NULLIF('$FAX',''), NULLIF('$WEB',''), NULLIF('$MAIL',''), NULLIF('$INGRESOS_2020',''), NULLIF('$INGRESOS_2019',''), NULLIF('$FONDLIQUIDOS_2020',''), NULLIF('$FONDLIQUIDOS_2019',''), NULLIF('$DERPENDCOBRO_2020',''), NULLIF('$DERPENDCOBRO_2019',''),
+        NULLIF('$DEUDACOM_2020',''), NULLIF('$DEUDACOM_2019',''), NULLIF('$DEUDAFIN_2020',''), NULLIF('$DEUDAFIN_2019',''), NULLIF('$LIQUAJUST_2020',''), NULLIF('$LIQUAJUST_2019',''), NULLIF('$INGRESOSCORR_2020',''), NULLIF('$INGRESOSCORR_2019',''), NULLIF('$GASTOCORR_2020',''), NULLIF('$GASTOCORR_2019',''))";
 
         $result = mysqli_query($conn, $sql);
             if (!empty($result)) {
