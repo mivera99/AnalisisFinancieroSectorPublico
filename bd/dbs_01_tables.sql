@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2021 a las 02:44:02
+-- Tiempo de generación: 29-10-2021 a las 12:33:32
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -24,137 +24,131 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bloque_general_ccaa`
+-- Estructura de tabla para la tabla `ccaas`
 --
 
-DROP TABLE IF EXISTS `bloque_general_ccaa`;
-CREATE TABLE `bloque_general_ccaa` (
-  `CODIGO_CCAA` int(10) NOT NULL,
-  `NOMBRE_CCAA` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `POBLACION_2017` int(10) DEFAULT NULL,
-  `NOMBREPRESIDENTE` varchar(35) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `APELLIDO1PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `APELLIDO2PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+CREATE TABLE `ccaas` (
+  `CODIGO` int(10) NOT NULL,
+  `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `POBLACION` int(10) DEFAULT NULL,
+  `NOMBRE_PRESIDENTE` varchar(35) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `APELLIDO1_PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `APELLIDO2_PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `VIGENCIA` date DEFAULT NULL,
   `PARTIDO` varchar(15) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `CIF` varchar(15) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TIPOVIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `NOMBREVIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `NUMVIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `CODPOSTAL` int(15) DEFAULT NULL,
-  `TELEFONO` int(10) DEFAULT NULL,
+  `TIPO_VIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NOMBRE_VIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NUM_VIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `COD_POSTAL` int(5) DEFAULT NULL,
+  `TELEFONO` int(15) DEFAULT NULL,
   `FAX` int(10) DEFAULT NULL,
   `WEB` varchar(40) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `MAIL` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `REFPIB` int(4) NOT NULL,
-  `PIB` int(15) NOT NULL,
-  `REFPIBC` int(4) NOT NULL,
-  `PIBC` int(2) NOT NULL,
-  `REFRESULTADO` int(4) NOT NULL,
-  `RESULTADO` int(8) NOT NULL,
-  `REFDEUDAVIVA` int(6) NOT NULL,
-  `DEUDAVIVA` decimal(12,2) NOT NULL
+  `MAIL` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `bloque_general_ccaa`:
---
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bloque_general_dip`
+-- Estructura de tabla para la tabla `cuentas_ccaa_gastos`
 --
 
-DROP TABLE IF EXISTS `bloque_general_dip`;
-CREATE TABLE `bloque_general_dip` (
-  `CODIGO_DIP` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `DIPUTACION` varchar(60) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `CIF` varchar(9) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `TIPOVIA` varchar(6) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `NOMBREVIA` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `NUMVIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `CODPOSTAL` int(5) NOT NULL,
-  `PROVINCIA` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `AUTONOMIA` varchar(35) COLLATE utf8mb4_spanish_ci NOT NULL,
+CREATE TABLE `cuentas_ccaa_gastos` (
+  `CODIGO` int(10) NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `TIPO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `CRED_INI` decimal(17,4) DEFAULT NULL,
+  `MOD_CRED` decimal(17,4) DEFAULT NULL,
+  `CRED_TOT` decimal(17,4) DEFAULT NULL,
+  `OBLG_REC` decimal(17,4) DEFAULT NULL,
+  `PAGOS_COR` decimal(17,4) DEFAULT NULL,
+  `PAGOS_CER` decimal(17,4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas_ccaa_ingresos`
+--
+
+CREATE TABLE `cuentas_ccaa_ingresos` (
+  `CODIGO` int(10) NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `TIPO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `PREV_INI` decimal(17,4) DEFAULT NULL,
+  `MOD_PREV_INI` decimal(17,4) DEFAULT NULL,
+  `PREV_DEF` decimal(17,4) DEFAULT NULL,
+  `DER_REC` decimal(17,4) DEFAULT NULL,
+  `RECAUDA_COR` decimal(17,4) DEFAULT NULL,
+  `RECAUDA_CER` decimal(17,4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `deudas_ccaa`
+--
+
+CREATE TABLE `deudas_ccaa` (
+  `CODIGO` int(10) NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `PIB` int(15) DEFAULT NULL,
+  `PIBC` int(2) DEFAULT NULL,
+  `RESULTADO` int(8) DEFAULT NULL,
+  `DEUDAVIVA` decimal(12,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `deudas_dip`
+--
+
+CREATE TABLE `deudas_dip` (
+  `CODIGO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `INGRESOS` decimal(15,2) DEFAULT NULL,
+  `FONDLIQUIDOS` decimal(15,2) DEFAULT NULL,
+  `DERPENDCOBRO` decimal(15,2) DEFAULT NULL,
+  `DEUDACOM` decimal(15,2) DEFAULT NULL,
+  `DEUDAFIN` decimal(15,2) DEFAULT NULL,
+  `LIQUAJUST` decimal(15,2) DEFAULT NULL,
+  `INGRESOSCORR` decimal(15,2) DEFAULT NULL,
+  `GASTOSCORR` decimal(15,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `diputaciones`
+--
+
+CREATE TABLE `diputaciones` (
+  `CODIGO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `NOMBRE` varchar(60) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `CIF` varchar(9) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `TIPO_VIA` varchar(6) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NOMBRE_VIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `NUM_VIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `COD_POSTAL` int(5) DEFAULT NULL,
+  `PROVINCIA` int(2) NOT NULL,
+  `AUTONOMIA` int(10) NOT NULL,
   `TELEFONO` int(9) DEFAULT NULL,
   `FAX` int(9) DEFAULT NULL,
   `WEB` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `MAIL` varchar(40) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `INGRESOS_2020` decimal(15,2) DEFAULT NULL,
-  `INGRESOS_2019` decimal(15,2) DEFAULT NULL,
-  `FONDLIQUIDOS_2020` decimal(15,2) DEFAULT NULL,
-  `FONDLIQUIDOS_2019` decimal(15,2) DEFAULT NULL,
-  `DERPENDCOBRO_2020` decimal(15,2) DEFAULT NULL,
-  `DERPENDCOBRO_2019` decimal(15,2) DEFAULT NULL,
-  `DEUDACOM_2020` decimal(15,2) DEFAULT NULL,
-  `DEUDACOM_2019` decimal(15,2) DEFAULT NULL,
-  `DEUDAFIN_2020` decimal(15,2) DEFAULT NULL,
-  `DEUDAFIN_2019` decimal(15,2) DEFAULT NULL,
-  `LIQUAJUST_2020` decimal(15,2) DEFAULT NULL,
-  `LIQUAJUST_2019` decimal(15,2) DEFAULT NULL,
-  `INGRESOSCORR_2020` decimal(15,2) DEFAULT NULL,
-  `INGRESOSCORR_2019` decimal(15,2) DEFAULT NULL,
-  `GASTOCORR_2020` decimal(15,2) DEFAULT NULL,
-  `GASTOCORR_2019` decimal(15,2) DEFAULT NULL
+  `MAIL` varchar(40) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `bloque_general_dip`:
---
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bloque_general_mun`
+-- Estructura de tabla para la tabla `provincias`
 --
 
-DROP TABLE IF EXISTS `bloque_general_mun`;
-CREATE TABLE `bloque_general_mun` (
-  `CODIGO_MUN` int(5) NOT NULL,
-  `CIF_MUNICIPIO` varchar(9) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `MUNICIPIO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `CODIGO_PROV` int(2) DEFAULT NULL,
-  `PROVINCIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `AUTONOMIA` varchar(20) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `POBLACION_2020` int(10) DEFAULT NULL,
-  `NOMBREALCALDE` varchar(20) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `APELLIDO1ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `APELLIDO2ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `VIGENCIA` date DEFAULT NULL,
-  `PARTIDO` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TIPOVIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `NOMBREVIA` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `NUMVIA` varchar(5) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `CODPOSTAL` int(5) DEFAULT NULL,
-  `TELEFONO` int(10) DEFAULT NULL,
-  `FAX` int(10) DEFAULT NULL,
-  `WEB` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `MAIL` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `PARO_2021` int(10) DEFAULT NULL,
-  `TRANSAC_INMOBILIARIAS_2021` int(10) DEFAULT NULL,
-  `TRANSAC_INMOBILIARIAS_2020` int(10) DEFAULT NULL,
-  `INGRESOS_2020` decimal(16,4) DEFAULT NULL,
-  `INGRESOS_2019` decimal(16,4) DEFAULT NULL,
-  `FONDLIQUIDOS_2020` decimal(16,4) DEFAULT NULL,
-  `FONDLIQUIDOS_2019` decimal(16,4) DEFAULT NULL,
-  `DERPENDCOBRO_2020` decimal(16,4) DEFAULT NULL,
-  `DERPENDCOBRO_2019` decimal(16,4) DEFAULT NULL,
-  `DEUDACOM_2020` decimal(16,4) DEFAULT NULL,
-  `DEUDACOM_2019` decimal(16,4) DEFAULT NULL,
-  `DEUDAFIN_2020` decimal(16,4) DEFAULT NULL,
-  `DEUDAFIN_2019` decimal(16,4) DEFAULT NULL,
-  `LIQUAJUST_2020` decimal(16,4) DEFAULT NULL,
-  `LIQUAJUST_2019` decimal(16,4) DEFAULT NULL,
-  `INGRESOSCORR_2020` decimal(16,4) DEFAULT NULL,
-  `INGRESOSCORR_2019` decimal(16,4) DEFAULT NULL,
-  `GASTOSCORR_2020` decimal(16,4) DEFAULT NULL,
-  `GASTOSCORR_2019` decimal(16,4) DEFAULT NULL
+CREATE TABLE `provincias` (
+  `CODIGO` int(2) NOT NULL,
+  `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `bloque_general_mun`:
---
 
 -- --------------------------------------------------------
 
@@ -162,22 +156,12 @@ CREATE TABLE `bloque_general_mun` (
 -- Estructura de tabla para la tabla `scoring_ccaa`
 --
 
-DROP TABLE IF EXISTS `scoring_ccaa`;
 CREATE TABLE `scoring_ccaa` (
-  `CIF` varchar(15) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `CODIGO_CCAA` int(10) NOT NULL,
-  `NOMBRE_CCAA` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `RATING_N_1` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N_1` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `RATING_N` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL
+  `CODIGO` int(10) NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `SCORING` varchar(1) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `scoring_ccaa`:
---   `CODIGO_CCAA`
---       `bloque_general_ccaa` -> `CODIGO_CCAA`
---
 
 -- --------------------------------------------------------
 
@@ -185,70 +169,38 @@ CREATE TABLE `scoring_ccaa` (
 -- Estructura de tabla para la tabla `scoring_dip`
 --
 
-DROP TABLE IF EXISTS `scoring_dip`;
 CREATE TABLE `scoring_dip` (
-  `CODIGO_DIP` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `R1_2020` decimal(10,4) DEFAULT NULL,
-  `R2_2020` decimal(10,4) DEFAULT NULL,
-  `R3_2020` decimal(10,4) DEFAULT NULL,
-  `R4_2020` decimal(10,4) DEFAULT NULL,
-  `R5_2020` decimal(10,4) DEFAULT NULL,
-  `R6_2020` decimal(10,4) DEFAULT NULL,
-  `R7_2020` decimal(10,4) DEFAULT NULL,
-  `R8_2020` decimal(10,4) DEFAULT NULL,
-  `R9_2020` decimal(10,4) DEFAULT NULL,
-  `R10_2020` decimal(10,4) DEFAULT NULL,
-  `R11_2020` decimal(10,4) DEFAULT NULL,
-  `R12_2020` decimal(10,4) DEFAULT NULL,
-  `R13_2020` decimal(10,4) DEFAULT NULL,
-  `R1_2019` decimal(10,4) DEFAULT NULL,
-  `R2_2019` decimal(10,4) DEFAULT NULL,
-  `R3_2019` decimal(10,4) DEFAULT NULL,
-  `R4_2019` decimal(10,4) DEFAULT NULL,
-  `R5_2019` decimal(10,4) DEFAULT NULL,
-  `R6_2019` decimal(10,4) DEFAULT NULL,
-  `R7_2019` decimal(10,4) DEFAULT NULL,
-  `R8_2019` decimal(10,4) DEFAULT NULL,
-  `R9_2019` decimal(10,4) DEFAULT NULL,
-  `R10_2019` decimal(10,4) DEFAULT NULL,
-  `R11_2019` decimal(10,4) DEFAULT NULL,
-  `R12_2019` decimal(10,4) DEFAULT NULL,
-  `R13_2019` decimal(10,4) DEFAULT NULL,
-  `R1_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R2_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R3_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R4_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R5_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R6_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R7_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R8_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R9_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R10_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R11_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R12_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R13_NAC_2020` decimal(10,4) DEFAULT NULL,
-  `R1_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R2_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R3_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R4_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R5_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R6_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R7_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R8_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R9_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R10_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R11_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R12_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `R13_NAC_2019` decimal(10,4) DEFAULT NULL,
-  `RATING_N_1` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N_1` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `RATING_N` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL
+  `CODIGO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `R1` decimal(10,2) DEFAULT NULL,
+  `R2` decimal(10,2) DEFAULT NULL,
+  `R3` decimal(10,2) DEFAULT NULL,
+  `R4` decimal(10,2) DEFAULT NULL,
+  `R5` decimal(10,2) DEFAULT NULL,
+  `R6` decimal(10,2) DEFAULT NULL,
+  `R7` decimal(10,2) DEFAULT NULL,
+  `R8` decimal(10,2) DEFAULT NULL,
+  `R9` decimal(10,2) DEFAULT NULL,
+  `R10` decimal(10,2) DEFAULT NULL,
+  `R11` decimal(10,2) DEFAULT NULL,
+  `R12` decimal(10,2) DEFAULT NULL,
+  `R13` decimal(10,2) DEFAULT NULL,
+  `R1_NAC` decimal(10,2) DEFAULT NULL,
+  `R2_NAC` decimal(10,2) DEFAULT NULL,
+  `R3_NAC` decimal(10,2) DEFAULT NULL,
+  `R4_NAC` decimal(10,2) DEFAULT NULL,
+  `R5_NAC` decimal(10,2) DEFAULT NULL,
+  `R6_NAC` decimal(10,2) DEFAULT NULL,
+  `R7_NAC` decimal(10,2) DEFAULT NULL,
+  `R8_NAC` decimal(10,2) DEFAULT NULL,
+  `R9_NAC` decimal(10,2) DEFAULT NULL,
+  `R10_NAC` decimal(10,2) DEFAULT NULL,
+  `R11_NAC` decimal(10,2) DEFAULT NULL,
+  `R12_NAC` decimal(10,2) DEFAULT NULL,
+  `R13_NAC` decimal(10,2) DEFAULT NULL,
+  `RATING` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `scoring_dip`:
---
 
 -- --------------------------------------------------------
 
@@ -256,123 +208,144 @@ CREATE TABLE `scoring_dip` (
 -- Estructura de tabla para la tabla `scoring_mun`
 --
 
-DROP TABLE IF EXISTS `scoring_mun`;
 CREATE TABLE `scoring_mun` (
-  `CODIGO_MUN` int(5) NOT NULL,
-  `CIF_MUNICIPIO` varchar(9) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `MUNICIPIO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `R1_2020` decimal(10,5) DEFAULT NULL,
-  `R2_2020` decimal(10,5) DEFAULT NULL,
-  `R3_2020` decimal(10,5) DEFAULT NULL,
-  `R4_2020` decimal(10,5) DEFAULT NULL,
-  `R5_2020` decimal(10,5) DEFAULT NULL,
-  `R6_2020` decimal(10,5) DEFAULT NULL,
-  `R7_2020` decimal(10,5) DEFAULT NULL,
-  `R8_2020` decimal(10,5) DEFAULT NULL,
-  `R9_2020` decimal(10,5) DEFAULT NULL,
-  `R10_2020` decimal(10,5) DEFAULT NULL,
-  `R11_2020` decimal(10,5) DEFAULT NULL,
-  `R12_2020` decimal(10,5) DEFAULT NULL,
-  `R13_2020` decimal(10,5) DEFAULT NULL,
-  `R1_2019` decimal(10,5) DEFAULT NULL,
-  `R2_2019` decimal(10,5) DEFAULT NULL,
-  `R3_2019` decimal(10,5) DEFAULT NULL,
-  `R4_2019` decimal(10,5) DEFAULT NULL,
-  `R5_2019` decimal(10,5) DEFAULT NULL,
-  `R6_2019` decimal(10,5) DEFAULT NULL,
-  `R7_2019` decimal(10,5) DEFAULT NULL,
-  `R8_2019` decimal(10,5) DEFAULT NULL,
-  `R9_2019` decimal(10,5) DEFAULT NULL,
-  `R10_2019` decimal(10,5) DEFAULT NULL,
-  `R11_2019` decimal(10,5) DEFAULT NULL,
-  `R12_2019` decimal(10,5) DEFAULT NULL,
-  `R13_2019` decimal(10,5) DEFAULT NULL,
-  `R1_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R2_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R3_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R4_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R5_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R6_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R7_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R8_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R9_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R10_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R11_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R12_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R13_NAC_2020` decimal(10,5) DEFAULT NULL,
-  `R1_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R2_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R3_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R4_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R5_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R6_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R7_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R8_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R9_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R10_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R11_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R12_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `R13_NAC_2019` decimal(10,5) DEFAULT NULL,
-  `RATING_N_1` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N_1` varchar(8) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `RATING_N` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `TENDENCIA_N` varchar(8) COLLATE utf8mb4_spanish_ci DEFAULT NULL
+  `CODIGO` int(5) NOT NULL,
+  `R1` decimal(10,5) DEFAULT NULL,
+  `R2` decimal(10,5) DEFAULT NULL,
+  `R3` decimal(10,5) DEFAULT NULL,
+  `R4` decimal(10,5) DEFAULT NULL,
+  `R5` decimal(10,5) DEFAULT NULL,
+  `R6` decimal(10,5) DEFAULT NULL,
+  `R7` decimal(10,5) DEFAULT NULL,
+  `R8` decimal(10,5) DEFAULT NULL,
+  `R9` decimal(10,5) DEFAULT NULL,
+  `R10` decimal(10,5) DEFAULT NULL,
+  `R11` decimal(10,5) DEFAULT NULL,
+  `R12` decimal(10,5) DEFAULT NULL,
+  `R13` decimal(10,5) DEFAULT NULL,
+  `R1_NAC` decimal(10,5) DEFAULT NULL,
+  `R2_NAC` decimal(10,5) DEFAULT NULL,
+  `R3_NAC` decimal(10,5) DEFAULT NULL,
+  `R4_NAC` decimal(10,5) DEFAULT NULL,
+  `R5_NAC` decimal(10,5) DEFAULT NULL,
+  `R6_NAC` decimal(10,5) DEFAULT NULL,
+  `R7_NAC` decimal(10,5) DEFAULT NULL,
+  `R8_NAC` decimal(10,5) DEFAULT NULL,
+  `R9_NAC` decimal(10,5) DEFAULT NULL,
+  `R10_NAC` decimal(10,5) DEFAULT NULL,
+  `R11_NAC` decimal(10,5) DEFAULT NULL,
+  `R12_NAC` decimal(10,5) DEFAULT NULL,
+  `R13_NAC` decimal(10,5) DEFAULT NULL,
+  `RATING` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `TENDENCIA` varchar(8) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `scoring_mun`:
---
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `bloque_general_ccaa`
+-- Indices de la tabla `ccaas`
 --
-ALTER TABLE `bloque_general_ccaa`
-  ADD PRIMARY KEY (`CODIGO_CCAA`,`NOMBRE_CCAA`);
+ALTER TABLE `ccaas`
+  ADD PRIMARY KEY (`CODIGO`);
 
 --
--- Indices de la tabla `bloque_general_dip`
+-- Indices de la tabla `cuentas_ccaa_gastos`
 --
-ALTER TABLE `bloque_general_dip`
-  ADD PRIMARY KEY (`CODIGO_DIP`,`DIPUTACION`,`CIF`);
+ALTER TABLE `cuentas_ccaa_gastos`
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`,`TIPO`),
+  ADD KEY `CODIGO` (`CODIGO`);
 
 --
--- Indices de la tabla `bloque_general_mun`
+-- Indices de la tabla `cuentas_ccaa_ingresos`
 --
-ALTER TABLE `bloque_general_mun`
-  ADD PRIMARY KEY (`CODIGO_MUN`);
+ALTER TABLE `cuentas_ccaa_ingresos`
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`,`TIPO`),
+  ADD KEY `CODIGO` (`CODIGO`);
+
+--
+-- Indices de la tabla `deudas_ccaa`
+--
+ALTER TABLE `deudas_ccaa`
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`),
+  ADD KEY `CODIGO` (`CODIGO`);
+
+--
+-- Indices de la tabla `deudas_dip`
+--
+ALTER TABLE `deudas_dip`
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`),
+  ADD KEY `CODIGO` (`CODIGO`);
+
+--
+-- Indices de la tabla `diputaciones`
+--
+ALTER TABLE `diputaciones`
+  ADD PRIMARY KEY (`CODIGO`),
+  ADD KEY `PROVINCIA` (`PROVINCIA`),
+  ADD KEY `AUTONOMIA` (`AUTONOMIA`);
+
+--
+-- Indices de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  ADD PRIMARY KEY (`CODIGO`);
 
 --
 -- Indices de la tabla `scoring_ccaa`
 --
 ALTER TABLE `scoring_ccaa`
-  ADD PRIMARY KEY (`CIF`),
-  ADD KEY `CODIGO_CCAA` (`CODIGO_CCAA`,`NOMBRE_CCAA`);
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`),
+  ADD KEY `CODIGO` (`CODIGO`);
 
 --
 -- Indices de la tabla `scoring_dip`
 --
 ALTER TABLE `scoring_dip`
-  ADD PRIMARY KEY (`CODIGO_DIP`);
-
---
--- Indices de la tabla `scoring_mun`
---
-ALTER TABLE `scoring_mun`
-  ADD PRIMARY KEY (`CODIGO_MUN`) USING BTREE;
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`),
+  ADD KEY `CODIGO` (`CODIGO`);
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `cuentas_ccaa_gastos`
+--
+ALTER TABLE `cuentas_ccaa_gastos`
+  ADD CONSTRAINT `cuentas_ccaa_gastos_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `ccaas` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `cuentas_ccaa_ingresos`
+--
+ALTER TABLE `cuentas_ccaa_ingresos`
+  ADD CONSTRAINT `cuentas_ccaa_ingresos_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `ccaas` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `deudas_ccaa`
+--
+ALTER TABLE `deudas_ccaa`
+  ADD CONSTRAINT `deudas_ccaa_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `ccaas` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `diputaciones`
+--
+ALTER TABLE `diputaciones`
+  ADD CONSTRAINT `diputaciones_ibfk_1` FOREIGN KEY (`PROVINCIA`) REFERENCES `provincias` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `diputaciones_ibfk_2` FOREIGN KEY (`AUTONOMIA`) REFERENCES `ccaas` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `scoring_ccaa`
 --
 ALTER TABLE `scoring_ccaa`
-  ADD CONSTRAINT `scoring_ccaa_ibfk_1` FOREIGN KEY (`CODIGO_CCAA`) REFERENCES `bloque_general_ccaa` (`CODIGO_CCAA`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scoring_ccaa_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `ccaas` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `scoring_dip`
+--
+ALTER TABLE `scoring_dip`
+  ADD CONSTRAINT `scoring_dip_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `diputaciones` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
