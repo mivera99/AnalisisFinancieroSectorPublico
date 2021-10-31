@@ -20,116 +20,109 @@
     <title>Análisis Financiero en el Sector Público</title>
 </head>
     <body>
-        <h1>Análisis Financiero en el Sector Público</h1>
-        <br>
+        <div id = "cabecera">
+            <?php require("includes/comun/cabecera.php");?>    
+            <h1>Análisis Financiero en el Sector Público</h1>
+            <br>
+        </div>
+        <div id ="contenido"> 
 
-        <!-- ===== COMUNIDADES AUTÓNOMAS ===== -->
+            <!-- ===== COMUNIDADES AUTÓNOMAS ===== -->
 
-        <h2>Scoring de CCAA</h2>
-        <p>Busca una Comunidad Autónoma de la lista para visualizar datos sobre esta</p>
-        <br>
+            <h2>Scoring de CCAA</h2>
+            <p>Busca una Comunidad Autónoma de la lista para visualizar datos sobre esta</p>
+            <br>
 
-        <?php 
-            $conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
-            $conn->set_charset("utf8");
-
-
-            $sql = "SELECT NOMBRE_CCAA FROM bloque_general_ccaa";
-
-            $result = mysqli_query($conn, $sql);
-            $CCAAs = array();
-
-            while($nombre = mysqli_fetch_array($result)){
-                array_push($CCAAs, $nombre["NOMBRE_CCAA"]);
-            }
-        ?>
-        
-        <form autocomplete="off" action="ccaa.php" method="post">
-            <div class="autocomplete" style="width:300px;">
-                <input id="comunidades" type="text" name="ccaa" placeholder="Comunidad Autónoma">
-            </div>
-            <input type="submit">
-        </form>
-        <br><br>
-
-        
+            <?php 
+                $conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+                $conn->set_charset("utf8");
 
 
-        <!-- ===== DIPUTACIONES ===== -->
+                $sql = "SELECT NOMBRE_CCAA FROM bloque_general_ccaa";
 
-        <h2>Scoring de Diputaciones</h2>
-        <p>Busca una Diputación de la lista para visualizar datos sobre esta</p>
-        <br>
+                $result = mysqli_query($conn, $sql);
+                $CCAAs = array();
 
-        <?php 
-            $sql = "SELECT DIPUTACION FROM bloque_general_dip";
+                while($nombre = mysqli_fetch_array($result)){
+                    array_push($CCAAs, $nombre["NOMBRE_CCAA"]);
+                }
+            ?>
+            
+            <form autocomplete="off" action="ccaa.php" method="post">
+                <div class="autocomplete" style="width:300px;">
+                    <input id="comunidades" type="text" name="ccaa" placeholder="Comunidad Autónoma">
+                </div>
+                <input type="submit">
+            </form>
+            <br><br>
 
-            $result = mysqli_query($conn, $sql);
-            $DIPs = array();
+            <!-- ===== DIPUTACIONES ===== -->
 
-            while($nombre = mysqli_fetch_array($result)){
-                array_push($DIPs, $nombre["DIPUTACION"]);
-            }
- 
-        ?>
-        
-        <form autocomplete="off" action="dip.php" method="post">
-            <div class="autocomplete" style="width:300px;">
-                <input id="diputaciones" type="text" name="dip" placeholder="Diputación">
-            </div>
-            <input type="submit">
-        </form>
-        <br><br>
+            <h2>Scoring de Diputaciones</h2>
+            <p>Busca una Diputación de la lista para visualizar datos sobre esta</p>
+            <br>
 
+            <?php 
+                $sql = "SELECT DIPUTACION FROM bloque_general_dip";
 
+                $result = mysqli_query($conn, $sql);
+                $DIPs = array();
 
-        <!-- ===== MUNICIPIOS ===== -->
+                while($nombre = mysqli_fetch_array($result)){
+                    array_push($DIPs, $nombre["DIPUTACION"]);
+                }
+    
+            ?>
+            
+            <form autocomplete="off" action="dip.php" method="post">
+                <div class="autocomplete" style="width:300px;">
+                    <input id="diputaciones" type="text" name="dip" placeholder="Diputación">
+                </div>
+                <input type="submit">
+            </form>
+            <br><br>
 
-        <h2>Scoring de Municipios</h2>
-        <p>Busca un Municipio de la lista para visualizar datos sobre este</p>
-        <br>
+            <!-- ===== MUNICIPIOS ===== -->
 
-        <?php 
-            $sql = "SELECT MUNICIPIO FROM bloque_general_mun";
+            <h2>Scoring de Municipios</h2>
+            <p>Busca un Municipio de la lista para visualizar datos sobre este</p>
+            <br>
 
-            $result = mysqli_query($conn, $sql);
-            $MUNs = array();
+            <?php 
+                $sql = "SELECT MUNICIPIO FROM bloque_general_mun";
 
-            while($nombre = mysqli_fetch_array($result)){
-                array_push($MUNs, $nombre["MUNICIPIO"]);
-            }
- 
-        ?>
-        
-        <form autocomplete="off" action="mun.php" method="post">
-            <div class="autocomplete" style="width:300px;">
-                <input id="municipios" type="text" name="mun" placeholder="Municipio">
-            </div>
-            <input type="submit">
-        </form>
+                $result = mysqli_query($conn, $sql);
+                $MUNs = array();
 
+                while($nombre = mysqli_fetch_array($result)){
+                    array_push($MUNs, $nombre["MUNICIPIO"]);
+                }
+    
+            ?>
+            
+            <form autocomplete="off" action="mun.php" method="post">
+                <div class="autocomplete" style="width:300px;">
+                    <input id="municipios" type="text" name="mun" placeholder="Municipio">
+                </div>
+                <input type="submit">
+            </form>
 
-        
+            <script>
+                /*An array containing all the country names in the world:*/
+                var comunidades = <?php echo json_encode($CCAAs);?>;
+                var municipios = <?php echo json_encode($MUNs);?>;
+                var diputaciones = <?php echo json_encode($DIPs);?>;
 
+                /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
+                autocomplete(document.getElementById("comunidades"), comunidades);
+                autocomplete(document.getElementById("municipios"), municipios);
+                autocomplete(document.getElementById("diputaciones"), diputaciones);
+            </script>
 
-
-
-
-
-
-        <script>
-            /*An array containing all the country names in the world:*/
-            var comunidades = <?php echo json_encode($CCAAs);?>;
-            var municipios = <?php echo json_encode($MUNs);?>;
-            var diputaciones = <?php echo json_encode($DIPs);?>;
-
-            /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
-            autocomplete(document.getElementById("comunidades"), comunidades);
-            autocomplete(document.getElementById("municipios"), municipios);
-            autocomplete(document.getElementById("diputaciones"), diputaciones);
-        </script>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <div id = "pie">
+            <?php require("includes/comun/pie.php");?>
+        </div>
     </body>
 </html>

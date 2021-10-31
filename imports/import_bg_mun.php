@@ -13,8 +13,7 @@
 //Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
 ini_set('memory_limit', '2G');
 ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 1200);
-
+ini_set('max_execution_time', 7000);
 
 /*
 Importar libreria PHPSpreadsheet
@@ -33,13 +32,6 @@ $doc = IOFactory::load($path);
 //Número total de hojas
 $totalHojas = $doc->getSheetCount();
 
-//Recorrido por hojas...
-/*
-for($i = 0; $i < $totalHojas; $i++){
-    $hoja = $doc->getSheet($i);
-}
-*/
-
 $hoja = $doc->getSheet(0);
 
 //Última fila con datos
@@ -53,8 +45,8 @@ $conn = new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
+$fields=array();
 
-echo "<pre><table border='1'>";
 for($x = 1; $x < $rows + 1; $x++){
 
     echo "<tr>";
@@ -64,28 +56,41 @@ for($x = 1; $x < $rows + 1; $x++){
         $valor = $hoja->getCellByColumnAndRow($y,$x);
         //Para eliminar espacios vacios y enters
         $valor = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $valor)));
-        if($x == 1){
-            echo "<th>".$valor."</th>";
-        }
-        else{
-            echo "<td>".$valor."</td>";
-        }
+
         if($x>1)
             $values[$y-1]=$valor;
+        else {  
+            if($valor != "")
+                $fields[$y-1]=$valor;
+        }
     }
     if($x>1 && $values[0]!= "") {
         $CODIGO_MUN=$values[0];
         $CIF_MUNICIPIO=$values[1];
         $MUNICIPIO=addslashes($values[2]);
+
         $CODIGO_PROV=$values[3];
         $PROVINCIA=$values[4];
+        $query = "SELECT CODIGO, NOMBRE FROM provincias WHERE CODIGO = '$CODIGO_PROV'";
+        $result = mysqli_query($conn, $query);
+        if(!$result){
+            echo mysqli_error($conn);
+        }
+        if(mysqli_num_rows($result) == 0){
+            $insert = "INSERT INTO provincias VALUES ('$CODIGO_PROV',NULLIF('$PROVINCIA',''))";
+            mysqli_query($conn,$insert);
+        }
+
         $AUTONOMIA=$values[5];
-        $POBLACION_2020=$values[6];
+        $request = "SELECT CODIGO FROM ccaas WHERE NOMBRE = '$AUTONOMIA'";
+        $result_query = mysqli_query($conn,$request);
+        $dato_ccaa = mysqli_fetch_assoc($result_query);
+        $CODIGO_CCAA = $dato_ccaa['CODIGO'];
+
+        $POBLACION_2020=$values[6]; // debe de estar dividido de anhos?
         $NOMBREALCALDE=addslashes($values[7]);
         $APELLIDO1ALCALDE=addslashes($values[8]);
         $APELLIDO2ALCALDE=addslashes($values[9]);
-
-        //echo '<td>'.gettype($values[10]).' '.$values[10].'</td>';
      
         if($values[10]!=""){
             $tiempo = strtotime($values[10]);
@@ -103,238 +108,64 @@ for($x = 1; $x < $rows + 1; $x++){
         $FAX=$values[17];
         $WEB=$values[18];
         $MAIL=$values[19];
+        
+        $sql="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),
+        NULLIF('$POBLACION_2020',''),NULLIF('$NOMBREALCALDE',''),NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
+        NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''))";
+        $result=mysqli_query($conn,$sql);
+        if (!$result) {
+            echo mysqli_error($conn);
+        }
+        //Como sé yo en que trimestre es esto?
         $PARO_2021=$values[20];
         $TRANSAC_INMOBILIARIAS_2021=$values[21];
         $TRANSAC_INMOBILIARIAS_2020=$values[22];
-        $INGRESOS_2020=$values[23];
-        $INGRESOS_2019=$values[24];
-        $FONDLIQUIDOS_2020=$values[25];
-        $FONDLIQUIDOS_2019=$values[26];
-        $DERPENDCOBRO_2020=$values[27];
-        $DERPENDCOBRO_2019=$values[28];
-        $DEUDACOM_2020=$values[29];
-        $DEUDACOM_2019=$values[30];
-        $DEUDAFIN_2020=$values[31];
-        $DEUDAFIN_2019=$values[32];
-        $LIQUAJUST_2020=$values[33];
-        $LIQUAJUST_2019=$values[34];
-        $INGRESOSCORR_2020=$values[35];
-        $INGRESOSCORR_2019=$values[36];
-        $GASTOSCORR_2020=$values[37];
-        $GASTOSCORR_2019=$values[38];
-        
-        $sql="INSERT INTO bloque_general_mun VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$PROVINCIA',''),NULLIF('$AUTONOMIA',''),
-        NULLIF('$POBLACION_2020',''),NULLIF('$NOMBREALCALDE',''),NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
-        NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''),NULLIF('$PARO_2021',''),NULLIF('$TRANSAC_INMOBILIARIAS_2021',''),NULLIF('$TRANSAC_INMOBILIARIAS_2020',''),NULLIF('$INGRESOS_2020',''),
-        NULLIF('$INGRESOS_2019',''),NULLIF('$FONDLIQUIDOS_2020',''),NULLIF('$FONDLIQUIDOS_2019',''),NULLIF('$DERPENDCOBRO_2020',''),NULLIF('$DERPENDCOBRO_2019',''),NULLIF('$DEUDACOM_2020',''),NULLIF('$DEUDACOM_2019',''),
-        NULLIF('$DEUDAFIN_2020',''),NULLIF('$DEUDAFIN_2019',''),NULLIF('$LIQUAJUST_2020',''),NULLIF('$LIQUAJUST_2019',''),NULLIF('$INGRESOSCORR_2020',''),NULLIF('$INGRESOSCORR_2019',''),NULLIF('$GASTOSCORR_2020',''),
-        NULLIF('$GASTOSCORR_2019',''))";
 
-        $result=mysqli_query($conn,$sql);
-        if (!empty($result)) {
-            //$affectedRow ++;
-        } else {
-            echo mysqli_error($conn);
-            $error_message = mysqli_error($conn) . "n";
+        $arrayStr1 = explode('_',$fields[20]);
+        $arrayStr2 = explode('_',$fields[21]);
+        $arrayStr3 = explode('_',$fields[22]);
+
+        $year1 = $arrayStr1[1];
+        $year2 = $arrayStr3[2];
+
+        $sql1 = "INSERT INTO cuentas_mun_pmp VALUES ('$CODIGO_MUN','$year2',4, NULL, NULL,'$TRANSAC_INMOBILIARIAS_2020')";
+        $sql2 = "INSERT INTO cuentas_mun_pmp VALUES ('$CODIGO_MUN','$year1',4, NULL, '$PARO_2021','$TRANSAC_INMOBILIARIAS_2021')";
+
+        mysqli_query($conn,$sql1);
+        mysqli_query($conn,$sql2);
+
+        for($k = 0; $k < count($fields);$k++){
+            //En este caso en particular, a partir de la posición 23, comienzan los datos pertenecientes a la tabla deudas_mun
+            if($k >= 23){
+                //descompone el campo en varios strings que seran almacenados en un array
+                $arrayStr = explode('_',$fields[$k]);
+                $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings
+                $year = $arrayStr[1]; // obtenemos el anho de la deuda del array de strings
+                $value = $values[$k]; // obtenemos el valor correspondiente a ese campo
+                //revisamos si el valor existe previamente en la tabla 
+                $sql = "SELECT CODIGO, $tipo FROM deudas_mun WHERE CODIGO = '$CODIGO_MUN' AND ANHO = '$year' AND $tipo = '$value'";
+                $result = mysqli_query($conn,$sql);
+                if(!$result){
+                    echo mysqli_error($conn);
+                }
+                // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
+                if(mysqli_num_rows($result)==0){
+                    $insert = "INSERT INTO deudas_mun (CODIGO, ANHO, $tipo) VALUES ('$CODIGO_MUN','$year', NULLIF('$value',''))";
+                    mysqli_query($conn,$insert);
+                }
+                else {
+                    //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado del documento ($value)
+                    $update = "UPDATE deudas_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN'";
+                    mysqli_query($conn, $update);
+                }
+            }
         }
+
         $values = array();
     }
-    echo "</tr>";
-
-
 }
 
-
-
-/*
-
-    SCORING
-
-
-
-$hoja2 = $doc->getSheet(2);
-
-//Última fila con datos
-$filas = $hoja2->getHighestDataRow();//Número
-echo $filas."<br>";
-$columnas = $hoja2->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $columnas."<br>";
-$columnas = Coordinate::columnIndexFromString($columnas);//Conversion a numero
-echo $columnas.'<br>';
-
-$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
-$conn->set_charset("utf8");
-
-
-
-//Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
-function excelDecimalTranslation(&$var) {
-    //Cambiamos las "," por "."
-    //En Excel se usa la "," para separar los decimales
-    //En SQL se usa el "." para separar decimales
-    //Seguimos teniendo un dato string
-    $var = str_replace(',', '.', $var);
-    //Convertimos el string en float
-    $var = (float)$var;
-}
-
-
-
-
-$vals=array();
-for($i = 2; $i <= $filas; $i++){
-    for($j = 1; $j <= $columnas; $j++){
-        $value = $hoja2->getCellByColumnAndRow($j,$i);
-        $value = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $value)));
-        $vals[$j-1]=$value;
-    }
-    $COD_MUN=$vals[0];
-    $COD_MUN = (int)$COD_MUN;
-    $CIF_MUN=$vals[1];
-    $MUN=addslashes($vals[2]);
-
-    //Recogemos los valores en string
-    $R1_2020= $vals[3];
-    $R2_2020=$vals[4];
-    $R3_2020=$vals[5];
-    $R4_2020=$vals[6];
-    $R5_2020=$vals[7];
-    $R6_2020=$vals[8];
-    $R7_2020=$vals[9];
-    $R8_2020= $vals[10];
-    $R9_2020= $vals[11];
-    $R10_2020= $vals[12];
-    $R11_2020= $vals[13];
-    $R12_2020= $vals[14];
-    $R13_2020= $vals[15];
-    $R1_2019= $vals[16];
-    $R2_2019= $vals[17];
-    $R3_2019= $vals[18];
-    $R4_2019= $vals[19];
-    $R5_2019= $vals[20];
-    $R6_2019= $vals[21];
-    $R7_2019= $vals[22];
-    $R8_2019= $vals[23];
-    $R9_2019= $vals[24];
-    $R10_2019= $vals[25];
-    $R11_2019= $vals[26];
-    $R12_2019= $vals[27];
-    $R13_2019= $vals[28];
-
-    $R1_NAC_2020= $vals[29];
-    $R2_NAC_2020= $vals[30];
-    $R3_NAC_2020= $vals[31];
-    $R4_NAC_2020= $vals[32];
-    $R5_NAC_2020= $vals[33];
-    $R6_NAC_2020= $vals[34];
-    $R7_NAC_2020= $vals[35];
-    $R8_NAC_2020= $vals[36];
-    $R9_NAC_2020= $vals[37];
-    $R10_NAC_2020= $vals[38];
-    $R11_NAC_2020= $vals[39];
-    $R12_NAC_2020= $vals[40];
-    $R13_NAC_2020= $vals[41];
-    $R1_NAC_2019= $vals[42];
-    $R2_NAC_2019= $vals[43];
-    $R3_NAC_2019= $vals[44];
-    $R4_NAC_2019= $vals[45];
-    $R5_NAC_2019= $vals[46];
-    $R6_NAC_2019= $vals[47];
-    $R7_NAC_2019= $vals[48];
-    $R8_NAC_2019= $vals[49];
-    $R9_NAC_2019= $vals[50];
-    $R10_NAC_2019= $vals[51];
-    $R11_NAC_2019= $vals[52];
-    $R12_NAC_2019= $vals[53];
-    $R13_NAC_2019= $vals[54];
-
-    
-    //Traducimos de decimal excel a decimal PHP y MySQL
-    
-    excelDecimalTranslation($R1_2020);
-    excelDecimalTranslation($R2_2020);
-    excelDecimalTranslation($R3_2020);
-    excelDecimalTranslation($R4_2020);
-    excelDecimalTranslation($R5_2020);
-    excelDecimalTranslation($R6_2020);
-    excelDecimalTranslation($R7_2020);
-    excelDecimalTranslation($R8_2020);
-    excelDecimalTranslation($R9_2020);
-    excelDecimalTranslation($R10_2020);
-    excelDecimalTranslation($R11_2020);
-    excelDecimalTranslation($R12_2020);
-    excelDecimalTranslation($R13_2020);
-
-    excelDecimalTranslation($R1_2019);
-    excelDecimalTranslation($R2_2019);
-    excelDecimalTranslation($R3_2019);
-    excelDecimalTranslation($R4_2019);
-    excelDecimalTranslation($R5_2019);
-    excelDecimalTranslation($R6_2019);
-    excelDecimalTranslation($R7_2019);
-    excelDecimalTranslation($R8_2019);
-    excelDecimalTranslation($R9_2019);
-    excelDecimalTranslation($R10_2019);
-    excelDecimalTranslation($R11_2019);
-    excelDecimalTranslation($R12_2019);
-    excelDecimalTranslation($R13_2019);
-    
-    excelDecimalTranslation($R1_NAC_2020);
-    excelDecimalTranslation($R2_NAC_2020);
-    excelDecimalTranslation($R3_NAC_2020);
-    excelDecimalTranslation($R4_NAC_2020);
-    excelDecimalTranslation($R5_NAC_2020);
-    excelDecimalTranslation($R6_NAC_2020);
-    excelDecimalTranslation($R7_NAC_2020);
-    excelDecimalTranslation($R8_NAC_2020);
-    excelDecimalTranslation($R9_NAC_2020);
-    excelDecimalTranslation($R10_NAC_2020);
-    excelDecimalTranslation($R11_NAC_2020);
-    excelDecimalTranslation($R12_NAC_2020);
-    excelDecimalTranslation($R13_NAC_2020);
-
-    excelDecimalTranslation($R1_NAC_2019);
-    excelDecimalTranslation($R2_NAC_2019);
-    excelDecimalTranslation($R3_NAC_2019);
-    excelDecimalTranslation($R4_NAC_2019);
-    excelDecimalTranslation($R5_NAC_2019);
-    excelDecimalTranslation($R6_NAC_2019);
-    excelDecimalTranslation($R7_NAC_2019);
-    excelDecimalTranslation($R8_NAC_2019);
-    excelDecimalTranslation($R9_NAC_2019);
-    excelDecimalTranslation($R10_NAC_2019);
-    excelDecimalTranslation($R11_NAC_2019);
-    excelDecimalTranslation($R12_NAC_2019);
-    excelDecimalTranslation($R13_NAC_2019);
-
-
-
-    $RATING_N_1=$vals[55];
-    $TENDENCIA_N_1=$vals[56];
-    $RATING_N=$vals[57];
-    $TENDENCIA_N=$vals[58];
-    $query="INSERT INTO scoring_mun VALUES ('$COD_MUN','$CIF_MUN','$MUN','$R1_2020','$R2_2020','$R3_2020',
-    '$R4_2020','$R5_2020','$R6_2020','$R7_2020','$R8_2020','$R9_2020','$R10_2020','$R11_2020','$R12_2020',
-    '$R13_2020','$R1_2019','$R2_2019','$R3_2019','$R4_2019','$R5_2019','$R6_2019','$R7_2019','$R8_2019',
-    '$R9_2019','$R10_2019','$R11_2019','$R12_2019','$R13_2019','$R1_NAC_2020','$R2_NAC_2020',
-    '$R3_NAC_2020','$R4_NAC_2020','$R5_NAC_2020','$R6_NAC_2020','$R7_NAC_2020','$R8_NAC_2020','$R9_NAC_2020',
-    '$R10_NAC_2020','$R11_NAC_2020','$R12_NAC_2020','$R13_NAC_2020','$R1_NAC_2019','$R2_NAC_2019',
-    '$R3_NAC_2019','$R4_NAC_2019','$R5_NAC_2019','$R6_NAC_2019','$R7_NAC_2019','$R8_NAC_2019','$R9_NAC_2019',
-    '$R10_NAC_2019','$R11_NAC_2019','$R12_NAC_2019','$R13_NAC_2019','$RATING_N_1','$TENDENCIA_N_1','$RATING_N','$TENDENCIA_N')";
-
-    $res=mysqli_query($conn,$query);
-    if (!empty($res)) {
-        //$affectedRow ++;
-    } else {
-        echo mysqli_error($conn);
-        $error_message = mysqli_error($conn) . "n";
-    }
-    $vals = array();
-}
-
-*/
-
-$sql = "SELECT * FROM bloque_general_mun";
+$sql = "SELECT * FROM municipios";
 
 $result = mysqli_query($conn, $sql);
 $columnas = mysqli_fetch_fields($result);
@@ -353,14 +184,6 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
-
-
-
-
-
-
-
-
 
 mysqli_close($conn);
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2021 a las 03:29:44
+-- Tiempo de generación: 31-10-2021 a las 20:25:09
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ccaas` (
   `CODIGO` int(10) NOT NULL,
-  `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `POBLACION` int(10) DEFAULT NULL,
   `NOMBRE_PRESIDENTE` varchar(35) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO1_PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
@@ -258,7 +258,7 @@ CREATE TABLE `deudas_mun` (
   `DEUDACOM` decimal(15,2) DEFAULT NULL,
   `DEUDAFIN` decimal(15,2) DEFAULT NULL,
   `LIQUAJUST` decimal(15,2) DEFAULT NULL,
-  `INRGESOSCORR` decimal(15,2) DEFAULT NULL,
+  `INGRESOSCORR` decimal(15,2) DEFAULT NULL,
   `GASTOSCORR` decimal(15,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 

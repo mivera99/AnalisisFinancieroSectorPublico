@@ -3,7 +3,7 @@
 //Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
 ini_set('memory_limit', '1G');
 ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 1200);
+ini_set('max_execution_time', 200);
 
 /*
 Importar libreria PHPSpreadsheet
@@ -37,7 +37,7 @@ $conn = new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
-$fields=array();
+
 
 for($x = 1; $x < $rows + 1; $x++){
 
@@ -45,12 +45,10 @@ for($x = 1; $x < $rows + 1; $x++){
     for($y = 1; $y <= $cols; $y++){
 
         $valor = $hoja->getCellByColumnAndRow($y,$x);
-        //Para eliminar espacios vacios y enters (limpieza de caracteres del archivo excel)
+        //Para eliminar espacios vacios y enters
         $valor = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $valor)));
         if($x>1)
             $values[$y-1]=$valor;
-        else
-            $fields[$y-1]=$valor; 
     }
     if($x>1 && $values[0]!= "") {
 
@@ -62,7 +60,21 @@ for($x = 1; $x < $rows + 1; $x++){
         $APELLIDO2PRESIDENTE = addslashes($values[5]);
 
         if($values[6]!=""){
+            //$VIGENCIA = date_create_from_format("m-d-Y", $values[6]);
+            
+            //echo '<br>Dato del Excel:'.$values[6].'<br>';
+            
+            //$tiempo = strtotime($values[6]);
+            
+            //echo 'Despues del strtotime():'.$tiempo.'<br>';
+            
+            //$VIGENCIA = date("Y-m-d", $tiempo);
+            
+            //echo '<br>Valor de Vigencia:'.$VIGENCIA.'<br>';
+            //$VIGENCIA=$values[6];
+            
             $tiempo = date_create_from_format("d/m/Y",$values[6]);
+            //echo date_format($tiempo2,"Y/m/d").'<br>';
             $VIGENCIA = date_format($tiempo,"Y/m/d");
         }
         else{
@@ -79,46 +91,33 @@ for($x = 1; $x < $rows + 1; $x++){
         $FAX = $values[14];
         $WEB = $values[15];
         $MAIL = $values[16];
-        
-        $sql = "INSERT INTO ccaas VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$POBLACION_2017',''),NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
-        NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$CIF',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),
-        NULLIF('$WEB',''),NULLIF('$MAIL',''))";
+        $REFPIB = $values[17];
+        $PIB = $values[18];
+        $REFPIBC = $values[19];
+        $PIBC = $values[20];
+        $REFRESULTADO = $values[21];
+        $RESULTADO = $values[22];
+        $REFDEUDAVIVA = $values[23];
+        $DEUDAVIVA = $values[24];
 
-        if (!mysqli_query($conn, $sql)) {
-            echo mysqli_error($conn);
-        }
+        $sql = "INSERT INTO bloque_general_ccaa VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$POBLACION_2017',''),NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
+        NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$CIF',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''),NULLIF('$REFPIB',''),NULLIF('$PIB',''),NULLIF('$REFPIBC',''),NULLIF('$PIBC',''),
+        NULLIF('$REFRESULTADO',''),NULLIF('$RESULTADO',''),NULLIF('$REFDEUDAVIVA',''),NULLIF('$DEUDAVIVA',''))";
+    
         $VIGENCIA=null;
 
-        // Se espera poder añadir el resto de campos previos al 16 dentro de este loop
-        for($k=0;$k<count($fields);$k++){
-            // En este caso en particular, a partir de la posicion 16 comienzan los datos correspondientes a la tabla deudas_ccaa
-            if($k > 16){
-                // Inicializacion de los valores año, valor y tipo
-                $year=$values[$k];
-                $value = $values[$k+1];
-                $type = $fields[$k+1];
-                // Se revisa si la fila ya existe en la tabla o no
-                $query = "SELECT CODIGO, ANHO, $type FROM deudas_ccaa WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
-                $result = mysqli_query($conn,$query);
-                if(!$result){
-                    echo mysqli_error($conn);
-                }
-                //Si no existe, entonces se inserta como una nueva fila
-                if(mysqli_num_rows($result)==0){
-                    $insert = "INSERT INTO deudas_ccaa(CODIGO, ANHO, $type) VALUES ('$CODIGO_CCAA','$year',NULLIF('$value',''))";
-                    mysqli_query($conn,$insert);
-                }
-                else {
-                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                    $update = "UPDATE deudas_ccaa SET $type = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
-                    mysqli_query($conn, $update);
-                }
-                $k++;
+        $result = mysqli_query($conn, $sql);
+            if (!empty($result)) {
+                //$affectedRow ++;
+            } else {
+                echo mysqli_error($conn);
+                $error_message = mysqli_error($conn) . "n";
             }
+            $values = array();
         }
-        $values = array();
-    }
 }
+
+
 
 /*
 
@@ -126,7 +125,10 @@ Presentamos los datos por pantalla, en formato tabla
 
 */
 
-$sql = "SELECT * FROM ccaas";
+
+
+
+$sql = "SELECT * FROM bloque_general_ccaa";
 
 $result = mysqli_query($conn, $sql);
 $columnas = mysqli_fetch_fields($result);
@@ -145,27 +147,7 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
-echo '<br>';
 
-$sql = "SELECT * FROM deudas_ccaa";
-
-$result = mysqli_query($conn, $sql);
-$columnas = mysqli_fetch_fields($result);
-echo "<pre>";
-echo "<table border='1'>";
-foreach($columnas AS $value){
-    echo "<th> $value->name </th>";
-}
-$all = $result->fetch_all();
-for($x = 0; $x < count($all); $x++){
-    echo "<tr>";
-
-    for ($y = 0; $y < count($columnas); $y++) {
-        echo "<td>".$all[$x][$y]."</td>";
-    }
-
-    echo "</tr>";
-}
 
 ?>
 

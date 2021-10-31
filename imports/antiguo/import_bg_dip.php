@@ -36,7 +36,6 @@ $conn = new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 $values=array();
-$fields=array();
 
 
 //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
@@ -60,11 +59,7 @@ for($x = 1; $x < $rows + 1; $x++){
         //Para eliminar espacios vacios y enters
         $valor = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $valor)));
         if($x>1)
-            $values[$y-1]=$valor;   
-        else{
-            if($valor != "")
-                $fields[$y-1]=$valor;    
-        }
+            $values[$y-1]=$valor;
     }
     if($x>1 && $values[0]!= "") {
 
@@ -76,50 +71,45 @@ for($x = 1; $x < $rows + 1; $x++){
         $NUMVIA = addslashes($values[5]);
         $CODPOSTAL = $values[6];
         $PROVINCIA = addslashes($values[7]);
-
         $AUTONOMIA = addslashes($values[8]);
         $TELEFONO = $values[9];
         $FAX = $values[10];
         $WEB = addslashes($values[11]);
         $MAIL = addslashes($values[12]);
-        
-        $sql = "INSERT INTO diputaciones VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF',NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''), NULLIF('$NUMVIA',''), NULLIF('$CODPOSTAL',''), NULLIF('$PROVINCIA',''), NULLIF('$AUTONOMIA',''),
-        NULLIF('$TELEFONO',''), NULLIF('$FAX',''), NULLIF('$WEB',''), NULLIF('$MAIL',''))";
+        $INGRESOS_2020 = $values[13];
+        $INGRESOS_2019 = $values[14];
+        $FONDLIQUIDOS_2020 = $values[15];
+        $FONDLIQUIDOS_2019 = $values[16];
+        $DERPENDCOBRO_2020 = $values[17];
+        $DERPENDCOBRO_2019 = $values[18];
+        $DEUDACOM_2020 = $values[19];
+        $DEUDACOM_2019 = $values[20];
+        $DEUDAFIN_2020 = $values[21];
+        $DEUDAFIN_2019 = $values[22];
+        $LIQUAJUST_2020 = $values[23];
+        $LIQUAJUST_2019 = $values[24];
+        $INGRESOSCORR_2020 = $values[25];
+        $INGRESOSCORR_2019 = $values[26];
+        $GASTOCORR_2020 = $values[27];
+        $GASTOCORR_2019 = $values[28];
+
+
+        $sql = "INSERT INTO bloque_general_dip VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF',NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''), NULLIF('$NUMVIA',''), NULLIF('$CODPOSTAL',''), NULLIF('$PROVINCIA',''), NULLIF('$AUTONOMIA',''),
+        NULLIF('$TELEFONO',''), NULLIF('$FAX',''), NULLIF('$WEB',''), NULLIF('$MAIL',''), NULLIF('$INGRESOS_2020',''), NULLIF('$INGRESOS_2019',''), NULLIF('$FONDLIQUIDOS_2020',''), NULLIF('$FONDLIQUIDOS_2019',''), NULLIF('$DERPENDCOBRO_2020',''), NULLIF('$DERPENDCOBRO_2019',''),
+        NULLIF('$DEUDACOM_2020',''), NULLIF('$DEUDACOM_2019',''), NULLIF('$DEUDAFIN_2020',''), NULLIF('$DEUDAFIN_2019',''), NULLIF('$LIQUAJUST_2020',''), NULLIF('$LIQUAJUST_2019',''), NULLIF('$INGRESOSCORR_2020',''), NULLIF('$INGRESOSCORR_2019',''), NULLIF('$GASTOCORR_2020',''), NULLIF('$GASTOCORR_2019',''))";
 
         $result = mysqli_query($conn, $sql);
-        if (!$result) {
-            echo mysqli_error($conn);
-        }
-        //evalua cada valor array de valores. 
-        for($k = 0; $k < count($fields);$k++){
-            //En este caso en particular, a partir de la posición 13, comienzan los datos pertenecientes a la tabla deudas_ccaa
-            if($k > 13){
-                //descompone el campo en varios strings que seran almacenados en un array
-                $arrayStr = explode('_',$fields[$k]);
-                $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings
-                $year = $arrayStr[1]; // obtenemos el anho de la deuda del array de strings
-                $value = $values[$k]; // obtenemos el valor correspondiente a ese campo
-                //revisamos si el valor existe previamente en la tabla 
-                $sql = "SELECT CODIGO, $tipo FROM deudas_dip WHERE CODIGO = '$CODIGO_DIP' AND ANHO = '$year' AND $tipo = '$value'";
-                $result = mysqli_query($conn,$sql);
-                if(!$result){
-                    echo mysqli_error($conn);
-                }
-                // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
-                if(mysqli_num_rows($result)==0){
-                    $insert = "INSERT INTO deudas_dip (CODIGO, ANHO, $tipo) VALUES ('$CODIGO_DIP','$year', NULLIF('$value',''))";
-                    mysqli_query($conn,$insert);
-                }
-                else {
-                    //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado ($value)
-                    $update = "UPDATE deudas_dip SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_DIP'";
-                    mysqli_query($conn, $update);
-                }
+            if (!empty($result)) {
+                //$affectedRow ++;
+            } else {
+                echo mysqli_error($conn);
+                $error_message = mysqli_error($conn) . "n";
             }
+            $values = array();
         }
-        $values = array();
-    }
 }
+
+
 
 /*
 
@@ -127,7 +117,10 @@ Presentamos los datos por pantalla, en formato tabla
 
 */
 
-$sql = "SELECT * FROM diputaciones";
+
+
+
+$sql = "SELECT * FROM bloque_general_dip";
 
 $result = mysqli_query($conn, $sql);
 $columnas = mysqli_fetch_fields($result);
@@ -146,6 +139,8 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
+
+
 ?>
 
 <?php //insertarXML(totalVariables, variables["nombres"], fichero);?>

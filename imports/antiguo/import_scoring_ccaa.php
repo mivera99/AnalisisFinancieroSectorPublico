@@ -53,6 +53,8 @@ $conn = new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
 $conn->set_charset("utf8");
 
+
+
 //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
 function excelDecimalTranslation(&$var) {
     //Cambiamos las "," por "."
@@ -63,6 +65,9 @@ function excelDecimalTranslation(&$var) {
     //Convertimos el string en float
     $var = (float)$var;
 }
+
+
+
 
 $vals=array();
 for($i = 2; $i <= $filas; $i++){
@@ -113,8 +118,13 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
+
+
+
+
 mysqli_close($conn);
 ?>
+
 
 </body>
 </html>
