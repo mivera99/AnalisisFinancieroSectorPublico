@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2021 a las 20:25:09
+-- Tiempo de generación: 01-11-2021 a las 15:17:04
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -557,6 +557,52 @@ ALTER TABLE `scoring_dip`
 ALTER TABLE `scoring_mun`
   ADD PRIMARY KEY (`CODIGO`,`ANHO`),
   ADD KEY `CODIGO` (`CODIGO`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ccaas`
+--
+ALTER TABLE `ccaas`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_ccaa_gastos`
+--
+ALTER TABLE `cuentas_ccaa_gastos`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_ccaa_general`
+--
+ALTER TABLE `cuentas_ccaa_general`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_ccaa_general_mensual`
+--
+ALTER TABLE `cuentas_ccaa_general_mensual`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas_ccaa_ingresos`
+--
+ALTER TABLE `cuentas_ccaa_ingresos`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `deudas_ccaa`
+--
+ALTER TABLE `deudas_ccaa`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `scoring_ccaa`
+--
+ALTER TABLE `scoring_ccaa`
+  MODIFY `CODIGO` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

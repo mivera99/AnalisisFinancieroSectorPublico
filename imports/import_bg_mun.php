@@ -84,6 +84,12 @@ for($x = 1; $x < $rows + 1; $x++){
         $AUTONOMIA=$values[5];
         $request = "SELECT CODIGO FROM ccaas WHERE NOMBRE = '$AUTONOMIA'";
         $result_query = mysqli_query($conn,$request);
+        if(mysqli_num_rows($result_query)==0){
+            $sql = "INSERT INTO ccaas (NOMBRE) VALUES ('$AUTONOMIA')";
+            mysqli_query($conn,$sql);
+            $request = "SELECT CODIGO FROM ccaas WHERE NOMBRE = '$AUTONOMIA'";
+            $result_query = mysqli_query($conn,$request);
+        }
         $dato_ccaa = mysqli_fetch_assoc($result_query);
         $CODIGO_CCAA = $dato_ccaa['CODIGO'];
 
@@ -164,7 +170,7 @@ for($x = 1; $x < $rows + 1; $x++){
         $values = array();
     }
 }
-
+/*
 $sql = "SELECT * FROM municipios";
 
 $result = mysqli_query($conn, $sql);
@@ -184,7 +190,7 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
-
+*/
 mysqli_close($conn);
 ?>
 
