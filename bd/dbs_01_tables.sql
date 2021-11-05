@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2021 a las 15:17:04
+-- Tiempo de generación: 05-11-2021 a las 12:31:49
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `ccaas` (
   `CODIGO` int(10) NOT NULL,
   `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `POBLACION` int(10) DEFAULT NULL,
   `NOMBRE_PRESIDENTE` varchar(35) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO1_PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO2_PRESIDENTE` varchar(30) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
@@ -100,7 +99,8 @@ CREATE TABLE `cuentas_ccaa_general_mensual` (
   `MES` int(1) NOT NULL,
   `PARO` decimal(5,4) DEFAULT NULL,
   `PMP` decimal(5,2) DEFAULT NULL,
-  `R_DCPP` decimal(5,4) DEFAULT NULL
+  `R_DCPP` decimal(5,4) DEFAULT NULL,
+  `DEUDAVIVA` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -220,8 +220,7 @@ CREATE TABLE `deudas_ccaa` (
   `ANHO` int(4) NOT NULL,
   `PIB` int(15) DEFAULT NULL,
   `PIBC` int(2) DEFAULT NULL,
-  `RESULTADO` int(8) DEFAULT NULL,
-  `DEUDAVIVA` decimal(12,2) DEFAULT NULL
+  `RESULTADO` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -296,7 +295,6 @@ CREATE TABLE `municipios` (
   `NOMBRE` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
   `PROVINCIA` int(2) NOT NULL,
   `AUTONOMIA` int(10) NOT NULL,
-  `POBLACION` int(10) DEFAULT NULL,
   `NOMBREALCALDE` varchar(20) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO1ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `APELLIDO2ALCALDE` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
@@ -332,6 +330,7 @@ CREATE TABLE `provincias` (
 CREATE TABLE `scoring_ccaa` (
   `CODIGO` int(10) NOT NULL,
   `ANHO` int(4) NOT NULL,
+  `POBLACION` int(10) DEFAULT NULL,
   `SCORING` varchar(1) COLLATE utf8mb4_spanish_ci NOT NULL,
   `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -384,6 +383,7 @@ CREATE TABLE `scoring_dip` (
 CREATE TABLE `scoring_mun` (
   `CODIGO` int(5) NOT NULL,
   `ANHO` int(4) NOT NULL,
+  `POBLACION` int(10) DEFAULT NULL,
   `R1` decimal(10,5) DEFAULT NULL,
   `R2` decimal(10,5) DEFAULT NULL,
   `R3` decimal(10,5) DEFAULT NULL,
