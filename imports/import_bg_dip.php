@@ -76,8 +76,25 @@ for($x = 1; $x < $rows + 1; $x++){
         $NUMVIA = addslashes($values[5]);
         $CODPOSTAL = $values[6];
         $PROVINCIA = addslashes($values[7]);
+        
+        $query = "SELECT CODIGO FROM provincias WHERE NOMBRE = '$PROVINCIA'";
+        $result = mysqli_query($conn, $query);
+        if(!$result){
+            echo mysqli_error($conn);
+        }
+        $dato_sql = mysqli_fetch_assoc($result);
+        $PROVINCIA = $dato_sql['CODIGO'];
 
         $AUTONOMIA = addslashes($values[8]);
+        $query = "SELECT CODIGO FROM ccaas WHERE NOMBRE = '$AUTONOMIA'";
+        $result = mysqli_query($conn, $query);
+        if(!$result){
+            echo mysqli_error($conn);
+        }
+        $dato_sql = mysqli_fetch_assoc($result);
+        $AUTONOMIA = $dato_sql['CODIGO'];
+
+
         $TELEFONO = $values[9];
         $FAX = $values[10];
         $WEB = addslashes($values[11]);
