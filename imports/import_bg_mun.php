@@ -25,7 +25,8 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 //Path del archivo
-$path = "../files/BLOQUE_GENERAL_MUN.xlsx";
+$path = "../files/BLOQUE_GENERAL_MUN_202109.xlsx";
+//$path = "../files/BLOQUE_GENERAL_MUN.xlsx";
 //Cargamos el archivo en la variable de documento "doc"
 $doc = IOFactory::load($path);
 

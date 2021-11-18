@@ -24,7 +24,7 @@
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
         <div id ="contenido"> 
-            <?php require("includesWeb/comun/contenido.php");?>
+            <?php ?>
         </div>
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>

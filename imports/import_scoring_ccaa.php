@@ -25,7 +25,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 //Path del archivo
-$path = "../files/BLOQUE_GENERAL_CCAA.xlsx";
+$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
 //Cargamos el archivo en la variable de documento "doc"
 $doc = IOFactory::load($path);
 
@@ -65,33 +65,61 @@ function excelDecimalTranslation(&$var) {
 }
 
 $vals=array();
-for($i = 2; $i <= $filas; $i++){
+$fields = array();
+for($i = 1; $i < $filas+1; $i++){
     for($j = 1; $j <= $columnas; $j++){
         $value = $hoja->getCellByColumnAndRow($j,$i);
         $value = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $value)));
-        $vals[$j-1]=$value;
+        if($i>1)
+            $vals[$j-1]=$value;
+        else
+            $fields[$j-1]=$value;
     }
-    echo $CIF = addslashes($vals[0]);
-    echo $CODIGO_CCAA = $vals[1];
-    echo $NOMBRE_CCAA = addslashes($vals[2]);
-    echo $RATING_N_1 = addslashes($vals[3]);
-    echo $TENDENCIA_N_1=addslashes($vals[4]);
-    echo $RATING_N = addslashes($vals[5]);
-    echo $TENDENCIA_N = addslashes($vals[6]);
-    echo "<br>";
+    if($i>1 && $vals[0]!=""){
+        $CODIGO_CCAA=$vals[1];
+        $RATING_N_1 = $vals[3];
+        $TENDENCIA_N_1=addslashes($vals[4]);
+        $RATING_N = $vals[5];
+        $TENDENCIA_N=addslashes($vals[6]);
+        // Posteriormente este nombre del Excel se puede sustituir por el nomrbe del archivo que incluya el usuario como input
+        $strArray = explode('_',(explode('.','BLOQUE_GENERAL_CCAA_202109.xlsx'))[0]);
+        $year=substr($strArray[3], 0, 4);
+        $prev_year = $year-1;
 
-
-    $query="INSERT INTO scoring_ccaa VALUES ('$CIF','$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$RATING_N_1',''),NULLIF('$TENDENCIA_N_1',''),NULLIF('$RATING_N',''),NULLIF('$TENDENCIA_N',''))";
-
-    $res=mysqli_query($conn,$query);
-    if (!empty($res)) {
-        //$affectedRow ++;
-    } else {
-        echo mysqli_error($conn);
-        $error_message = mysqli_error($conn) . "n";
+        //Information from the current year
+        $query="SELECT CODIGO,ANHO FROM scoring_ccaa WHERE ANHO = '$year' AND CODIGO='$CODIGO_CCAA'";
+        $res= mysqli_query($conn,$query);
+        if(!$res){
+            echo mysqli_error($conn);
+        }
+        if(mysqli_num_rows($res)==0){
+            $insert="INSERT INTO scoring_ccaa VALUES ('$CODIGO_CCAA','$year',NULLIF('$RATING_N',''),NULLIF('$TENDENCIA_N',''))";
+            mysqli_query($conn,$insert);
+        }
+        else {
+            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+            $update = "UPDATE scoring_ccaa SET RATING = NULLIF('$RATING_N',''), TENDENCIA = NULLIF('$TENDENCIA_N','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
+            mysqli_query($conn, $update);
+        }
+        
+        //Information from the previous year
+        $query="SELECT CODIGO,ANHO FROM scoring_ccaa WHERE ANHO = '$prev_year' AND CODIGO='$CODIGO_CCAA'";
+        $res=mysqli_query($conn,$query);
+        if (!$res) {
+            echo mysqli_error($conn);
+        }
+        //echo "<br><br>";
+        if(mysqli_num_rows($res)==0){
+            $insert="INSERT INTO scoring_ccaa (CODIGO,ANHO, SCORING,TENDENCIA) VALUES ('$CODIGO_CCAA','$prev_year',NULLIF('$RATING_N_1',''),NULLIF('$TENDENCIA_N_1',''))";
+            mysqli_query($conn,$insert);
+        }
+        else {
+            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+            $update = "UPDATE scoring_ccaa SET RATING = NULLIF('$RATING_N_1',''), TENDENCIA = NULLIF('$TENDENCIA_N_1','') WHERE ANHO = '$prev_year' AND CODIGO = '$CODIGO_CCAA'";
+            mysqli_query($conn, $update);
+        }
+        $vals = array();
     }
-    echo "<br><br>";
-    $vals = array();
 }
 
 $sql = "SELECT * FROM scoring_ccaa ORDER BY CODIGO_CCAA";

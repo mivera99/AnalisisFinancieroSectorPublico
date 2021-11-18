@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 //Path del archivo
-$path = "../files/BLOQUE_GENERAL_CCAA.xlsx";
+$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
 //Cargamos el archivo en la variable de documento "doc"
 $doc = IOFactory::load($path);
 
@@ -40,7 +40,6 @@ $values=array();
 $fields=array();
 
 for($x = 1; $x < $rows + 1; $x++){
-
 
     for($y = 1; $y <= $cols; $y++){
 
@@ -90,12 +89,11 @@ for($x = 1; $x < $rows + 1; $x++){
         }
         $VIGENCIA=null;
 
-
         //POBLACION
         //descompone el campo en varios strings que seran almacenados en un array
         $arrayStr = explode('_',$fields[2]);
-        $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings
-        $year = $arrayStr[1]; // obtenemos el anho de la deuda del array de strings
+        $tipo = $arrayStr[0]; // obtenemos el tipo del campo. En este caso, el campo
+        $year = $arrayStr[1]; // obtenemos el anho de la poblacion
         $value = $values[2]; // obtenemos el valor correspondiente a ese campo
         //revisamos si el valor existe previamente en la tabla 
         $sql = "SELECT CODIGO, ANHO FROM scoring_ccaa WHERE CODIGO = '$CODIGO_CCAA' AND ANHO = '$year'";
@@ -114,10 +112,6 @@ for($x = 1; $x < $rows + 1; $x++){
             $update = "UPDATE scoring_ccaa SET POBLACION = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
             mysqli_query($conn, $update);
         }
-        
-
-
-
 
         // Se espera poder añadir el resto de campos previos al 16 dentro de este loop
         for($k=0;$k<count($fields);$k++){
@@ -133,7 +127,6 @@ for($x = 1; $x < $rows + 1; $x++){
                     $deudaviva_year = substr($year, 0, 4);
                     $deudaviva_month = substr($year, 4);
                     
-
                     // Se revisa si la fila ya existe en la tabla o no
                     $query = "SELECT CODIGO, ANHO, MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE ANHO = '$deudaviva_year' AND MES = $deudaviva_month AND CODIGO = '$CODIGO_CCAA'";
                     $result = mysqli_query($conn,$query);

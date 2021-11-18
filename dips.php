@@ -17,7 +17,7 @@
     <script src="functions.js"></script>
 
 
-    <title>Análisis Financiero en el Sector Público</title>
+    <title>Diputaciones - Análisis Financiero en el Sector Público</title>
 </head>
     <body>
         <div id = "cabecera">
