@@ -116,13 +116,53 @@ for($x = 1; $x < $rows + 1; $x++){
         $WEB=$values[18];
         $MAIL=$values[19];
         
-        $sql="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),
-        NULLIF('$POBLACION_2020',''),NULLIF('$NOMBREALCALDE',''),NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
+        $sql="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
+        NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
         NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''))";
         $result=mysqli_query($conn,$sql);
         if (!$result) {
             echo mysqli_error($conn);
         }
+
+
+        //POBLACION
+        //descompone el campo en varios strings que seran almacenados en un array
+        $arrayStr = explode('_',$fields[6]);
+        $tipo = $arrayStr[0]; // obtenemos el tipo del campo. En este caso, el campo
+        $year = $arrayStr[1]; // obtenemos el anho de la poblacion
+        $value = $values[6]; // obtenemos el valor correspondiente a ese campo
+        //revisamos si el valor existe previamente en la tabla 
+        $sql = "SELECT CODIGO, ANHO FROM scoring_mun WHERE CODIGO = '$CODIGO_MUN' AND ANHO = '$year'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            echo mysqli_error($conn);
+        }
+        // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
+        if(mysqli_num_rows($result)==0){
+            $insert = "INSERT INTO scoring_mun (CODIGO, ANHO, POBLACION) VALUES ('$CODIGO_MUN','$year', NULLIF('$value',''))";
+            mysqli_query($conn,$insert);
+            echo mysqli_error($conn);
+        }
+        else {
+            //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado del documento ($value)
+            $update = "UPDATE scoring_mun SET POBLACION = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN'";
+            mysqli_query($conn, $update);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Como sé yo en que trimestre es esto?
         $PARO_2021=$values[20];
         $TRANSAC_INMOBILIARIAS_2021=$values[21];

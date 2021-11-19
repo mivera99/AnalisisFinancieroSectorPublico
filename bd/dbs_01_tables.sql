@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2021 a las 12:31:49
+-- Tiempo de generación: 19-11-2021 a las 14:36:00
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -57,7 +57,7 @@ CREATE TABLE `cuentas_ccaa_gastos` (
   `ANHO` int(4) NOT NULL,
   `TIPO` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
   `CRED_INI` decimal(17,4) DEFAULT NULL,
-  `MOD_CRED` decimal(17,4) DEFAULT NULL,
+  `MOD_CRED_INI` decimal(17,4) DEFAULT NULL,
   `CRED_TOT` decimal(17,4) DEFAULT NULL,
   `OBLG_REC` decimal(17,4) DEFAULT NULL,
   `PAGOS_COR` decimal(17,4) DEFAULT NULL,
@@ -73,18 +73,17 @@ CREATE TABLE `cuentas_ccaa_gastos` (
 CREATE TABLE `cuentas_ccaa_general` (
   `CODIGO` int(10) NOT NULL,
   `ANHO` int(4) NOT NULL,
-  `INCR_PIB` decimal(5,4) NOT NULL,
-  `TRANSAC_INMOBILIARIAS` decimal(5,4) NOT NULL,
-  `N_EMPRESAS` decimal(5,4) NOT NULL,
-  `CCAA_PIB` decimal(7,6) NOT NULL,
-  `DEUDA_VIVA` decimal(5,4) NOT NULL,
-  `R_SOSTE_FINANCIERA` decimal(5,4) NOT NULL,
-  `R_RIGIDEZ` decimal(5,4) NOT NULL,
-  `R_SOSTE_ENDEUDA` decimal(5,4) NOT NULL,
-  `R_EJE_INGR_CORR` decimal(5,4) NOT NULL,
-  `R_EJE_GASTOS_CORR` decimal(5,4) NOT NULL,
-  `PAGOS_OBLIGACIONES` decimal(5,4) NOT NULL,
-  `R_EFICACIA_REC` decimal(5,4) NOT NULL
+  `INCR_PIB` decimal(5,4) DEFAULT NULL,
+  `N_EMPRESAS` decimal(5,4) DEFAULT NULL,
+  `CCAA_PIB` decimal(7,6) DEFAULT NULL,
+  `R_SOSTE_FINANCIERA` decimal(5,4) DEFAULT NULL,
+  `R_EFIC` decimal(10,4) DEFAULT NULL,
+  `R_RIGIDEZ` decimal(5,4) DEFAULT NULL,
+  `R_SOSTE_ENDEUDA` decimal(5,4) DEFAULT NULL,
+  `R_EJE_INGR_CORR` decimal(5,4) DEFAULT NULL,
+  `R_EJE_GASTOS_CORR` decimal(5,4) DEFAULT NULL,
+  `PAGOS_OBLIGACIONES` decimal(5,4) DEFAULT NULL,
+  `R_EFICACIA_REC` decimal(5,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -100,7 +99,9 @@ CREATE TABLE `cuentas_ccaa_general_mensual` (
   `PARO` decimal(5,4) DEFAULT NULL,
   `PMP` decimal(5,2) DEFAULT NULL,
   `R_DCPP` decimal(5,4) DEFAULT NULL,
-  `DEUDAVIVA` decimal(12,2) DEFAULT NULL
+  `DEUDAVIVA` decimal(12,2) DEFAULT NULL,
+  `DEUDA_VIVA_INGR_COR` decimal(10,4) DEFAULT NULL,
+  `TRANSAC_INMOBILIARIAS` decimal(10,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -331,8 +332,8 @@ CREATE TABLE `scoring_ccaa` (
   `CODIGO` int(10) NOT NULL,
   `ANHO` int(4) NOT NULL,
   `POBLACION` int(10) DEFAULT NULL,
-  `SCORING` varchar(1) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL
+  `SCORING` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
