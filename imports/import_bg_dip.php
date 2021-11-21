@@ -99,25 +99,40 @@ for($x = 1; $x < $rows + 1; $x++){
         $FAX = $values[10];
         $WEB = addslashes($values[11]);
         $MAIL = addslashes($values[12]);
-        
-        $sql = "INSERT INTO diputaciones VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF',NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''), NULLIF('$NUMVIA',''), NULLIF('$CODPOSTAL',''), NULLIF('$PROVINCIA',''), NULLIF('$AUTONOMIA',''),
-        NULLIF('$TELEFONO',''), NULLIF('$FAX',''), NULLIF('$WEB',''), NULLIF('$MAIL',''))";
 
-        $result = mysqli_query($conn, $sql);
-        if (!$result) {
+        $sql = "SELECT CODIGO FROM diputaciones WHERE CODIGO = '$CODIGO_DIP'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
+            echo mysqli_error($conn);
+        }
+        // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
+        if(mysqli_num_rows($result)==0){
+            $insert = "INSERT INTO diputaciones VALUES ('$CODIGO_DIP','$DIPUTACION','$CIF',NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''), NULLIF('$NUMVIA',''), NULLIF('$CODPOSTAL',''), '$PROVINCIA', '$AUTONOMIA',
+            NULLIF('$TELEFONO',''), NULLIF('$FAX',''), NULLIF('$WEB',''), NULLIF('$MAIL',''))";
+            $result = mysqli_query($conn,$insert);
+        }
+        else {
+            //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado ($value)
+            $update = "UPDATE diputaciones SET NOMBRE = NULLIF('$DIPUTACION',''), CIF = NULLIF('$CIF',''),
+            TIPOVIA = NULLIF('$TIPOVIA',''),NOMBREVIA = NULLIF('$NOMBREVIA',''),NUMVIA = NULLIF('$NUMVIA',''), CODPOSTAL = NULLIF('$CODPOSTAL',''),
+            PROVINCIA='$PROVINCIA',AUTONOMIA = '$AUTONOMIA',TELEFONO = NULLIF('$TELEFONO',''),FAX = NULLIF('$FAX',''),
+            WEB = NULLIF('$WEB',''),MAIL = NULLIF('$MAIL','') WHERE CODIGO = '$CODIGO_DIP'";
+            $result = mysqli_query($conn, $update);
+        }
+        if(!$result){
             echo mysqli_error($conn);
         }
         //evalua cada valor array de valores. 
         for($k = 0; $k < count($fields);$k++){
-            //En este caso en particular, a partir de la posición 13, comienzan los datos pertenecientes a la tabla deudas_ccaa
-            if($k > 13){
+            //En este caso en particular, a partir de la posición 12, comienzan los datos pertenecientes a la tabla deudas_dip
+            if($k > 12){
                 //descompone el campo en varios strings que seran almacenados en un array
                 $arrayStr = explode('_',$fields[$k]);
                 $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings
                 $year = $arrayStr[1]; // obtenemos el anho de la deuda del array de strings
                 $value = $values[$k]; // obtenemos el valor correspondiente a ese campo
                 //revisamos si el valor existe previamente en la tabla 
-                $sql = "SELECT CODIGO, $tipo FROM deudas_dip WHERE CODIGO = '$CODIGO_DIP' AND ANHO = '$year' AND $tipo = '$value'";
+                $sql = "SELECT CODIGO, ANHO FROM deudas_dip WHERE CODIGO = '$CODIGO_DIP' AND ANHO = '$year'";
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     echo mysqli_error($conn);
@@ -125,12 +140,15 @@ for($x = 1; $x < $rows + 1; $x++){
                 // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                 if(mysqli_num_rows($result)==0){
                     $insert = "INSERT INTO deudas_dip (CODIGO, ANHO, $tipo) VALUES ('$CODIGO_DIP','$year', NULLIF('$value',''))";
-                    mysqli_query($conn,$insert);
+                    $result = mysqli_query($conn,$insert);
                 }
                 else {
                     //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado ($value)
                     $update = "UPDATE deudas_dip SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_DIP'";
-                    mysqli_query($conn, $update);
+                    $result = mysqli_query($conn, $update);
+                }
+                if(!$result){
+                    echo mysqli_error($conn);
                 }
             }
         }

@@ -77,69 +77,47 @@ for($i = 1; $i < $filas+1; $i++){
     }
     if($i>1 && $vals[0]!=""){
         $CODIGO_CCAA=$vals[1];
-        $RATING_N_1 = $vals[3];
-        $TENDENCIA_N_1=addslashes($vals[4]);
-        $RATING_N = $vals[5];
-        $TENDENCIA_N=addslashes($vals[6]);
-        // Posteriormente este nombre del Excel se puede sustituir por el nomrbe del archivo que incluya el usuario como input
-        $strArray = explode('_',(explode('.','BLOQUE_GENERAL_CCAA_202109.xlsx'))[0]);
-        $year=substr($strArray[3], 0, 4);
-        $prev_year = $year-1;
+        //Se comienza a leer todas las filas. Se empieza desde la columna 3 porque es donde empieza la información que queremos guardar en la BBDD. 
+        for($k=0;$k<count($fields);$k++){
+            if($k>=3){
+                $value = addslashes($vals[$k]); // Guardamos el valor de la columna
+                // Posteriormente este nombre del Excel se puede sustituir por el nombre del archivo que incluya el usuario como input
+                $strArray = explode('_',(explode('.','BLOQUE_GENERAL_CCAA_202109.xlsx'))[0]); // Extraemos el año del título del Excel
+                $fieldStr= explode('_',$fields[$k]); //Más tarde revisar si el tamaño de fields es 2, sino lanzar error
+                /*Por defecto, guardamos el año en el que se crea el Excel,
+                es decir, el año que está contenida en el título del archivo Excel*/ 
+                $year=intval(intval($strArray[3])/100); 
+                $tipo=$fieldStr[0]; // Guardamos el nombre de la columna
+                if($fieldStr[1]=='N-1'){
+                    /* Si la columna donde nos encontramos contiene el string 'N-1', entonces restamos -1 al año del título del Excel y lo guardamos 
+                    en la variable. El año se encuentra en la tercera posición del sarray strArray*/
+                    $year=$year-1;
+                }
 
-        //Information from the current year
-        $query="SELECT CODIGO,ANHO FROM scoring_ccaa WHERE ANHO = '$year' AND CODIGO='$CODIGO_CCAA'";
-        $res= mysqli_query($conn,$query);
-        if(!$res){
-            echo mysqli_error($conn);
-        }
-        if(mysqli_num_rows($res)==0){
-            $insert="INSERT INTO scoring_ccaa VALUES ('$CODIGO_CCAA','$year',NULLIF('$RATING_N',''),NULLIF('$TENDENCIA_N',''))";
-            mysqli_query($conn,$insert);
-        }
-        else {
-            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-            $update = "UPDATE scoring_ccaa SET RATING = NULLIF('$RATING_N',''), TENDENCIA = NULLIF('$TENDENCIA_N','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
-            mysqli_query($conn, $update);
-        }
-        
-        //Information from the previous year
-        $query="SELECT CODIGO,ANHO FROM scoring_ccaa WHERE ANHO = '$prev_year' AND CODIGO='$CODIGO_CCAA'";
-        $res=mysqli_query($conn,$query);
-        if (!$res) {
-            echo mysqli_error($conn);
-        }
-        //echo "<br><br>";
-        if(mysqli_num_rows($res)==0){
-            $insert="INSERT INTO scoring_ccaa (CODIGO,ANHO, SCORING,TENDENCIA) VALUES ('$CODIGO_CCAA','$prev_year',NULLIF('$RATING_N_1',''),NULLIF('$TENDENCIA_N_1',''))";
-            mysqli_query($conn,$insert);
-        }
-        else {
-            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-            $update = "UPDATE scoring_ccaa SET RATING = NULLIF('$RATING_N_1',''), TENDENCIA = NULLIF('$TENDENCIA_N_1','') WHERE ANHO = '$prev_year' AND CODIGO = '$CODIGO_CCAA'";
-            mysqli_query($conn, $update);
+                //Consulta para averiguar si ya existe la fila 
+                $query="SELECT CODIGO,ANHO FROM scoring_ccaa WHERE ANHO = '$year' AND CODIGO='$CODIGO_CCAA'";
+                $result= mysqli_query($conn,$query);
+                if(!$result){
+                    echo mysqli_error($conn);
+                }
+                if(mysqli_num_rows($res)==0){
+                    //Si la fila no existe, lo inserta por primera vezz en la BBDD
+                    $insert="INSERT INTO scoring_ccaa(CODIGO,ANHO,$tipo) VALUES ('$CODIGO_CCAA','$year',NULLIF('$value',''))";
+                    $result = mysqli_query($conn,$insert);
+                }
+                else {
+                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                    $update = "UPDATE scoring_ccaa SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA'";
+                    $result = mysqli_query($conn, $update);
+                }
+                //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
+                if(!$result){
+                    echo mysqli_error($conn);
+                }
+            }
         }
         $vals = array();
     }
-}
-
-$sql = "SELECT * FROM scoring_ccaa ORDER BY CODIGO_CCAA";
-
-$result = mysqli_query($conn, $sql);
-$columnas = mysqli_fetch_fields($result);
-echo "<pre>";
-echo "<table border='1'>";
-foreach($columnas AS $value){
-    echo "<th> $value->name </th>";
-}
-$all = $result->fetch_all();
-for($x = 0; $x < count($all); $x++){
-    echo "<tr>";
-
-    for ($y = 0; $y < count($columnas); $y++) {
-        echo "<td>".$all[$x][$y]."</td>";
-    }
-
-    echo "</tr>";
 }
 mysqli_close($conn);
 ?>
