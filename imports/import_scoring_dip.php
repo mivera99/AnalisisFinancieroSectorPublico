@@ -112,7 +112,7 @@ for($i = 1; $i <= $filas; $i++){
                 //Consulta para averiguar si ya existe la fila 
                 echo 'Nombre de field: '.$tipo.'<br>';
                 echo 'Año: '.$year.'<br>';
-                echo 'Valor de value: '.$value.'<br>';
+                echo 'Valor de value: '.$value.'<br><br>';
                 $query="SELECT CODIGO,ANHO FROM scoring_dip WHERE ANHO = '$year' AND CODIGO='$COD_DIP'";
                 $result= mysqli_query($conn,$query);
                 if(!$result){
