@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2021 a las 14:36:00
+-- Tiempo de generación: 25-11-2021 a las 21:48:49
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -131,7 +131,7 @@ CREATE TABLE `cuentas_ccaa_ingresos` (
 CREATE TABLE `cuentas_dip_gastos` (
   `CODIGO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
   `ANHO` int(4) NOT NULL,
-  `TIPO` int(2) NOT NULL,
+  `TIPO` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
   `PRES` decimal(15,2) DEFAULT NULL,
   `OBLG` decimal(15,2) DEFAULT NULL,
   `PAGOS` decimal(15,2) DEFAULT NULL
@@ -146,7 +146,7 @@ CREATE TABLE `cuentas_dip_gastos` (
 CREATE TABLE `cuentas_dip_ingresos` (
   `CODIGO` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
   `ANHO` int(4) NOT NULL,
-  `TIPO` int(2) NOT NULL,
+  `TIPO` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
   `PRES` decimal(15,2) DEFAULT NULL,
   `DERE` decimal(15,2) DEFAULT NULL,
   `RECA` decimal(15,2) DEFAULT NULL
@@ -174,7 +174,7 @@ CREATE TABLE `cuentas_dip_pmp` (
 CREATE TABLE `cuentas_mun_gastos` (
   `CODIGO` int(5) NOT NULL,
   `ANHO` int(4) NOT NULL,
-  `TIPO` int(2) NOT NULL,
+  `TIPO` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
   `PRES` decimal(15,2) DEFAULT NULL,
   `OBLG` decimal(15,2) DEFAULT NULL,
   `PAGOS` decimal(15,2) DEFAULT NULL
@@ -189,7 +189,7 @@ CREATE TABLE `cuentas_mun_gastos` (
 CREATE TABLE `cuentas_mun_ingresos` (
   `CODIGO` int(5) NOT NULL,
   `ANHO` int(4) NOT NULL,
-  `TIPO` int(2) NOT NULL,
+  `TIPO` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
   `PRES` decimal(15,2) DEFAULT NULL,
   `DERE` decimal(15,2) DEFAULT NULL,
   `RECA` decimal(15,2) DEFAULT NULL
@@ -332,7 +332,7 @@ CREATE TABLE `scoring_ccaa` (
   `CODIGO` int(10) NOT NULL,
   `ANHO` int(4) NOT NULL,
   `POBLACION` int(10) DEFAULT NULL,
-  `SCORING` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `RATING` varchar(1) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `TENDENCIA` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 

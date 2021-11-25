@@ -100,7 +100,7 @@ for($i = 1; $i < $filas+1; $i++){
                 if(!$result){
                     echo mysqli_error($conn);
                 }
-                if(mysqli_num_rows($res)==0){
+                if(mysqli_num_rows($result)==0){
                     //Si la fila no existe, lo inserta por primera vezz en la BBDD
                     $insert="INSERT INTO scoring_ccaa(CODIGO,ANHO,$tipo) VALUES ('$CODIGO_CCAA','$year',NULLIF('$value',''))";
                     $result = mysqli_query($conn,$insert);
