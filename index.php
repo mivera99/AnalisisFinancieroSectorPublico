@@ -16,6 +16,8 @@
     <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
     <script src="functions.js"></script>
 
+    <script src="node_modules/chart.js/dist/chart.js"></script>
+
     <title>Análisis Financiero del Sector Público</title>
 </head>
     <body>
