@@ -1,11 +1,14 @@
-<h1><a href="index.php">Análisis Financiero en el Sector Público</a></h1>
-<p>Noster Economía</p>
-
-<p>Informes</p>
-<p>Ayuda</p>
-<p>Sobre nosotros</p>
-<p>Contacto</p>
-
-<h1><a href="ccaas.php">Comunidades Autónomas</a></h1>
-<h1><a href="dips.php">Provincias</a></h1>
-<h1><a href="muns.php">Municipios</a></h1>
+<div id="menu">
+    <div id="menu-left">
+        <a href="index.php">
+            <p class="title">Análisis Financiero del Sector Público</p>
+            <p class="subtitle">Noster Economia</p>
+        </a>
+    </div>
+    <div id="menu-right">
+        <a href="#home">INFORMES</a>
+        <a href="#news">AYUDA</a>
+        <a href="#contact">SOBRE NOSOTROS</a>
+        <a href="#about">CONTACTO</a>
+    </div>
+</div>

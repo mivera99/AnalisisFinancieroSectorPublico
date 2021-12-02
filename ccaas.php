@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--  ====== STYLES (CSS) ===== -->
-    <link rel="stylesheet" href="index_styles.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!--  ====== FONTS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
