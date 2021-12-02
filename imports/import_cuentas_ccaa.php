@@ -34,7 +34,7 @@ echo $cols."<br>";
 
 
 $conn = new mysqli("localhost", "root", "", "dbs_01");
-//$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+//$conn = new mysqli("localhost", "root", "", "dbs_01");
 $conn->set_charset("utf8");
 $values=array();
 $fields=array();
