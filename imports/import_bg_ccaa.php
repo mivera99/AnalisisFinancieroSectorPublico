@@ -79,13 +79,28 @@ for($x = 1; $x < $rows + 1; $x++){
         $FAX = $values[14];
         $WEB = $values[15];
         $MAIL = $values[16];
-        
-        $sql = "INSERT INTO ccaas VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
-        NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$CIF',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),
-        NULLIF('$WEB',''),NULLIF('$MAIL',''))";
-
-        if (!mysqli_query($conn, $sql)) {
+        $sql = "SELECT CODIGO FROM ccaas WHERE CODIGO='$CODIGO_CCAA'";
+        $result = mysqli_query($conn,$sql);
+        if(!$result){
             echo mysqli_error($conn);
+        }
+        if(mysqli_num_rows($result)==0){
+            $insert = "INSERT INTO ccaas VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
+                NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$CIF',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),
+                NULLIF('$WEB',''),NULLIF('$MAIL',''))";
+            if (!mysqli_query($conn, $insert)) {
+                echo mysqli_error($conn);
+            }
+        }
+        else {
+            //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado del documento ($value)
+            $update = "UPDATE ccaas SET NOMBRE = NULLIF('$NOMBRE_CCAA',''), NOMBRE_PRESIDENTE = NULLIF('$NOMBREPRESIDENTE',''), APELLIDO1_PRESIDENTE = NULLIF('$APELLIDO1PRESIDENTE',''),
+            APELLIDO2_PRESIDENTE = NULLIF('$APELLIDO2PRESIDENTE',''),VIGENCIA = NULLIF('$VIGENCIA',''),PARTIDO = NULLIF('$PARTIDO',''),CIF = NULLIF('$CIF',''),TIPO_VIA = NULLIF('$TIPOVIA',''),
+            NOMBRE_VIA = NULLIF('$NOMBREVIA',''),NUM_VIA = NULLIF('$NUMVIA',''),COD_POSTAL = NULLIF('$CODPOSTAL',''),TELEFONO = NULLIF('$TELEFONO',''),FAX = NULLIF('$FAX',''),
+            WEB = NULLIF('$WEB',''),MAIL = NULLIF('$MAIL','') WHERE CODIGO = '$CODIGO_CCAA'";
+            if (!mysqli_query($conn, $update)) {
+                echo mysqli_error($conn);
+            }
         }
         $VIGENCIA=null;
 
@@ -175,7 +190,7 @@ for($x = 1; $x < $rows + 1; $x++){
 Presentamos los datos por pantalla, en formato tabla
 
 */
-
+/*
 $sql = "SELECT * FROM ccaas";
 
 $result = mysqli_query($conn, $sql);
@@ -216,7 +231,7 @@ for($x = 0; $x < count($all); $x++){
 
     echo "</tr>";
 }
-
+*/
 ?>
 
 <?php //insertarXML(totalVariables, variables["nombres"], fichero);?>

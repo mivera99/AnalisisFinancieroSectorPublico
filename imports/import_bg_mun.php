@@ -130,13 +130,39 @@ for($x = 1; $x < $rows + 1; $x++){
             $WEB=$values[18];
             $MAIL=$values[19];
             
-            $sql="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
+            $sql = "SELECT CODIGO FROM municipios WHERE CODIGO='$CODIGO_MUN'";
+            $result = mysqli_query($conn,$sql);
+            if(!$result){
+                echo mysqli_error($conn);
+            }
+            if(mysqli_num_rows($result)==0){
+                $insert="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
+                    NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
+                    NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''))";
+                $result=mysqli_query($conn,$insert);
+                if (!$result) {
+                    echo mysqli_error($conn);
+                }
+            }
+            else {
+                //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado del documento ($value)
+                $update = "UPDATE municipios SET CIF = NULLIF('$CIF',''),NOMBRE = NULLIF('$MUNICIPIO',''),PROVINCIA = NULLIF('$CODIGO_PROV',''), AUTONOMIA = NULLIF('$CODIGO_CCAA',''), NOMBREALCALDE = NULLIF('$NOMBREALCALDE',''), APELLIDO1ALCALDE = NULLIF('$APELLIDO1ALCALDE',''),
+                APELLIDO2ALCALDE = NULLIF('$APELLIDO2ALCALDE',''),VIGENCIA = NULLIF('$VIGENCIA',''),PARTIDO = NULLIF('$PARTIDO',''),
+                TIPOVIA = NULLIF('$TIPOVIA',''), NOMBREVIA = NULLIF('$NOMBREVIA',''),NUMVIA = NULLIF('$NUMVIA',''),CODPOSTAL = NULLIF('$CODPOSTAL',''),TELEFONO = NULLIF('$TELEFONO',''),FAX = NULLIF('$FAX',''),
+                WEB = NULLIF('$WEB',''),MAIL = NULLIF('$MAIL','') WHERE CODIGO = '$CODIGO_MUN'";
+                $result=mysqli_query($conn,$update);
+                if (!$result) {
+                    echo mysqli_error($conn);
+                }
+            }
+
+            /*$insert="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
             NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
             NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''))";
             $result=mysqli_query($conn,$sql);
             if (!$result) {
                 echo mysqli_error($conn);
-            }
+            }*/
 
             //POBLACION
             //descompone el campo en varios strings que seran almacenados en un array
