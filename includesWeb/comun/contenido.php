@@ -1,3 +1,6 @@
+<h3>Informes financieros para la <b>transparencia</b> del sector público</h3>
+<p>Obten información detallada y actualizada sobre CCAAs.</p>
+<p>Provincias, diputaciones y municipios en segundos.</p>
 <?php
     /*   Consulta Ratings año 2020   */
     $datos = array(20,12,3,7,14,5);
@@ -72,10 +75,6 @@
     var datosRating2020 = <?php echo json_encode($datosRating2020)?>;
     var etiquetasRating2020 = <?php echo json_encode($etiquetasRating2020)?>;
     var colorRatings = <?php echo json_encode($colorRatings)?>;
-
-
-
-
 
     /*  setup  */
     //data
