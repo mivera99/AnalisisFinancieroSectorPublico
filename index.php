@@ -26,6 +26,17 @@
         </div>
         <div id ="contenido"> 
             <?php require("includesWeb/comun/contenido.php");?>
+
+            <form action='procesarSubida.php' method='POST' enctype="multipart/form-data">
+            <!--<form action='imports/import_bg_ccaa.php'  method='POST' enctype='multipart/form-data'>-->
+                <h2 class="form-name">Subir archivo</h2>
+                <fieldset>
+                    <p>Selecciona el archivo: </p><input type='file' name='file_button'> <br><br> 
+                    <br><br><br>
+                    <button type="submit" class="form-button">Enviar</button>
+                </fieldset>
+            </form>
+
         </div>
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>
