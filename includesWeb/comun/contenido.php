@@ -1,12 +1,47 @@
+<?php 
+require_once('includesWeb/config.php'); // Temporal
+//require_once('includesWeb/daos/DAOConsultor.php');
+?>
 <h3>Informes financieros para la <b>transparencia</b> del sector público</h3>
 <p>Obten información detallada y actualizada sobre CCAAs.</p>
 <p>Provincias, diputaciones y municipios en segundos.</p>
+<?php
+
+    /*$conn = new mysqli("db5005176895.hosting-data.io", "dbu1879501", "ij1YGZo@gIEKAJ#&PcCXpHR0o", "dbs4330017");
+    $conn->set_charset("utf8");
+
+
+    $sql = "SELECT NOMBRE_CCAA FROM bloque_general_ccaa";
+
+    $result = mysqli_query($conn, $sql);
+    $CCAAs = array();
+
+    while($nombre = mysqli_fetch_array($result)){
+        array_push($CCAAs, $nombre["NOMBRE_CCAA"]);
+    }*/
+    //$facilities = (new DAOConsultor()).getAllFacilities();
+    
+?>
+<!--<form autocomplete="off" action="institucion.php" method="post">
+    <div class="autocomplete" style="width:300px;">
+        <input id="instituciones" type="text" name="institucion" placeholder="Instituciones">
+    </div>
+    <input type="submit">
+</form>
+<br><br>
+<script>
+    /*An array containing all the country names in the world:*/
+    var instituciones = <?php echo json_encode($facilities);?>;
+
+    /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
+    autocomplete(document.getElementById("instituciones"), instituciones);
+</script>-->
 <?php
     /*   Consulta Ratings año 2020   */
     $datos = array(20,12,3,7,14,5);
     $etiquetas = array('A', 'B', 'C', 'D', 'E', 'F');
 
-    $conn = new mysqli("localhost", "root", "", "dbs_01");
+    $conn = getConexionBD();//new mysqli("localhost", "root", "", "dbs_01");
     $sql = "SELECT RATING, COUNT(RATING) FROM scoring_ccaa WHERE ANHO = '2020' GROUP BY RATING";
     $result = mysqli_query($conn, $sql);
 
