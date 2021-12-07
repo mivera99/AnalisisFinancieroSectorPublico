@@ -1,19 +1,16 @@
 <?php
 
 class Cargador {
-    private $path;
+    
     private static $instance = null;
-
-    private function __construct(){
-        $this->path = $path;
-    }
+    private $path;
 
     public function setPath($path){
         $this->path = $path;
     }
 
     public function getPath(){
-        return $path;
+        return $this->path;
     }
 
     public static function getInstance(){

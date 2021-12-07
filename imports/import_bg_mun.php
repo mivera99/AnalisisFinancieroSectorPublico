@@ -28,7 +28,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 //Path del archivo
 $path = "../files/BLOQUE_GENERAL_MUN_202109.xlsx"; // posteriormente habria que incluir una variable en lugar de un string de un archivo fijo
 //$path = "../files/BLOQUE_GENERAL_MUN.xlsx";
-$fileMonth = intval((explode('_',(explode('.','BLOQUE_GENERAL_MUN_202109.xlsx'))[0]))[3])%100; // hecho para obtener el mes del titulo del archivo excel
+
 
 //Cargamos el archivo en la variable de documento "doc"
 $doc = IOFactory::load($path);
@@ -51,13 +51,26 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_bg_mun{
 
-    public function import_bg_mun($filename){
+    public function import_bg_mun($filename, $realname){
         $path = $filename;
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(0);
+
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+
+        $conn = getConexionBD();
+
+        $fileMonth = intval((explode('_',(explode('.',$realname))[0]))[3])%100; // hecho para obtener el mes del titulo del archivo excel
+
         for($x = 1; $x < $rows + 1; $x++){
             //echo "<tr>";
         
@@ -85,6 +98,7 @@ class Import_bg_mun{
                 $result = mysqli_query($conn, $query);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 if(mysqli_num_rows($result) == 0){
                     $insert = "INSERT INTO provincias VALUES ('$CODIGO_PROV',NULLIF('$PROVINCIA',''))";
@@ -92,6 +106,7 @@ class Import_bg_mun{
                 }
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 else {
                     $AUTONOMIA=$values[5];
@@ -99,17 +114,20 @@ class Import_bg_mun{
                     $result_query = mysqli_query($conn,$request);
                     if(!$result_query){
                         echo mysqli_error($conn);
+                        return false;
                     }
                     if(mysqli_num_rows($result_query)==0){
                         $sql = "INSERT INTO ccaas (NOMBRE) VALUES ('$AUTONOMIA')";
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                         $request = "SELECT CODIGO FROM ccaas WHERE NOMBRE = '$AUTONOMIA'";
                         $result_query = mysqli_query($conn,$request);
                         if(!$result_query){
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
                     $dato_ccaa = mysqli_fetch_assoc($result_query);
@@ -141,6 +159,7 @@ class Import_bg_mun{
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         echo mysqli_error($conn);
+                        return false;
                     }
                     if(mysqli_num_rows($result)==0){
                         $insert="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
@@ -149,17 +168,19 @@ class Import_bg_mun{
                         $result=mysqli_query($conn,$insert);
                         if (!$result) {
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
                     else {
                         //si ya existe la fila, entonces se actualiza el valor del campo con el nuevo valor dado del documento ($value)
-                        $update = "UPDATE municipios SET CIF = NULLIF('$CIF',''),NOMBRE = NULLIF('$MUNICIPIO',''),PROVINCIA = NULLIF('$CODIGO_PROV',''), AUTONOMIA = NULLIF('$CODIGO_CCAA',''), NOMBREALCALDE = NULLIF('$NOMBREALCALDE',''), APELLIDO1ALCALDE = NULLIF('$APELLIDO1ALCALDE',''),
+                        $update = "UPDATE municipios SET CIF = NULLIF('$CIF_MUNICIPIO',''),NOMBRE = NULLIF('$MUNICIPIO',''),PROVINCIA = NULLIF('$CODIGO_PROV',''), AUTONOMIA = NULLIF('$CODIGO_CCAA',''), NOMBREALCALDE = NULLIF('$NOMBREALCALDE',''), APELLIDO1ALCALDE = NULLIF('$APELLIDO1ALCALDE',''),
                         APELLIDO2ALCALDE = NULLIF('$APELLIDO2ALCALDE',''),VIGENCIA = NULLIF('$VIGENCIA',''),PARTIDO = NULLIF('$PARTIDO',''),
                         TIPOVIA = NULLIF('$TIPOVIA',''), NOMBREVIA = NULLIF('$NOMBREVIA',''),NUMVIA = NULLIF('$NUMVIA',''),CODPOSTAL = NULLIF('$CODPOSTAL',''),TELEFONO = NULLIF('$TELEFONO',''),FAX = NULLIF('$FAX',''),
                         WEB = NULLIF('$WEB',''),MAIL = NULLIF('$MAIL','') WHERE CODIGO = '$CODIGO_MUN'";
                         $result=mysqli_query($conn,$update);
                         if (!$result) {
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
         
@@ -182,6 +203,7 @@ class Import_bg_mun{
                     $result = mysqli_query($conn,$sql);
                     if(!$result){
                         echo mysqli_error($conn);
+                        return false;
                     }
                     // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                     if(mysqli_num_rows($result)==0){
@@ -195,6 +217,7 @@ class Import_bg_mun{
                     }
                     if(!$result){
                         echo mysqli_error($conn);
+                        return false;
                     }
                     //Como sé yo en que trimestre es esto?
                     /*$PARO_2021=$values[20];
@@ -235,6 +258,7 @@ class Import_bg_mun{
                                 $result = mysqli_query($conn,$sql);
                                 if(!$result){
                                     echo mysqli_error($conn);
+                                    return false;
                                 }
                                 // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                                 if(mysqli_num_rows($result)==0){
@@ -249,6 +273,7 @@ class Import_bg_mun{
                                 //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                                 if(!$result){
                                     echo mysqli_error($conn);
+                                    return false;
                                 }
                             }
                         }
@@ -263,6 +288,7 @@ class Import_bg_mun{
                             $result = mysqli_query($conn,$sql);
                             if(!$result){
                                 echo mysqli_error($conn);
+                                return false;
                             }
                             // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                             if(mysqli_num_rows($result)==0){
@@ -277,6 +303,7 @@ class Import_bg_mun{
                             //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                             if(!$result){
                                 echo mysqli_error($conn);
+                                return false;
                             }
                         }
                     }
@@ -306,7 +333,9 @@ class Import_bg_mun{
         }
         */
         //mysqli_close($conn);
-        cierraConexion();
+        //cierraConexion();
+
+        return true;
     }
 
 }

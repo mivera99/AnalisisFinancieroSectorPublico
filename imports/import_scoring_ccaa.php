@@ -42,17 +42,21 @@ for($i = 0; $i < $totalHojas; $i++){
 $hoja = $doc->getSheet(2);
 
 //Última fila con datos
-$filas = $hoja->getHighestDataRow();//Número
-echo $filas."<br>";
-$columnas = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $columnas."<br>";
-$columnas = Coordinate::columnIndexFromString($columnas);//Conversion a numero
-echo $columnas.'<br>';
+$rows = $hoja->getHighestDataRow();//Número
+echo $rows."<br>";
+$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
+echo $cols."<br>";
+$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
+echo $cols.'<br>';
 
 $conn = getConexionBD();//new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("localhost", "root", "", "dbs_01");
 $conn->set_charset("utf8");
 */
+
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_scoring_ccaa{
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
     private function excelDecimalTranslation(&$var) {
@@ -70,8 +74,15 @@ class Import_scoring_ccaa{
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(2);
-        for($i = 1; $i < $filas+1; $i++){
-            for($j = 1; $j <= $columnas; $j++){
+
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+        $conn = getConexionBD();
+
+        for($i = 1; $i < $rows+1; $i++){
+            for($j = 1; $j <= $cols; $j++){
                 $value = $hoja->getCellByColumnAndRow($j,$i);
                 $value = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $value)));
                 if($i>1)
@@ -81,7 +92,7 @@ class Import_scoring_ccaa{
             }
             if($i>1 && $vals[0]!=""){
                 $CODIGO_CCAA=$vals[1];
-                //Se comienza a leer todas las filas. Se empieza desde la columna 3 porque es donde empieza la información que queremos guardar en la BBDD. 
+                //Se comienza a leer todas las rows. Se empieza desde la columna 3 porque es donde empieza la información que queremos guardar en la BBDD. 
                 for($k=0;$k<count($fields);$k++){
                     if($k>=3){
                         $value = addslashes($vals[$k]); // Guardamos el valor de la columna
@@ -103,6 +114,7 @@ class Import_scoring_ccaa{
                         $result= mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                         if(mysqli_num_rows($result)==0){
                             //Si la fila no existe, lo inserta por primera vezz en la BBDD
@@ -117,6 +129,7 @@ class Import_scoring_ccaa{
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
                 }
@@ -124,7 +137,9 @@ class Import_scoring_ccaa{
             }
         }
         //mysqli_close($conn);
-        cierraConexion();
+        ////cierraConexion();
+
+        return true;
     }
 
 }

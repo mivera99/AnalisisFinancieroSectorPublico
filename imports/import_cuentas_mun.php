@@ -40,12 +40,23 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
+
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_cuentas_mun{
-    public function import_cuentas_mun(){
+    public function import_cuentas_mun($filename){
         $path = $filename;
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(0);
+
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+        $conn = getConexionBD();
+
         //Recorrer hoja
         //for($x = 1; $x < $rows + 1; $x++)
         for($x = 1; $x < $rows + 1; $x++){
@@ -88,6 +99,7 @@ class Import_cuentas_mun{
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn)."<br>";
+                            return false;
                         }
                         //Si no existe, entonces se inserta como una nueva fila
                         if(mysqli_num_rows($result)==0){
@@ -119,6 +131,7 @@ class Import_cuentas_mun{
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                         echo mysqli_error($conn)."<br>";
+                        return false;
                         }
                         //    Si no existe, entonces se inserta como una nueva fila
                         if(mysqli_num_rows($result)==0){
@@ -154,6 +167,7 @@ class Import_cuentas_mun{
                     $result = mysqli_query($conn,$query);
                     if(!$result){
                         echo mysqli_error($conn)."<br>";
+                        return false;
                     }
                     //Si no existe, entonces se inserta como una nueva fila
                     if(mysqli_num_rows($result)==0){
@@ -170,7 +184,9 @@ class Import_cuentas_mun{
             }
         }
         echo "<b><h2>Terminó</h2></b>";
-        cierraConexion();
+        //cierraConexion();
+
+        return true;
     }
 }
 

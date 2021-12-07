@@ -1,6 +1,6 @@
 <?php
-require_once("includesWeb/config.php");
-require_once('imports/configFile.php');
+//require("includesWeb/config.php");
+require("configFile.php");
 //Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
 /*ini_set('memory_limit', '1G');
 ini_set("default_charset", "UTF-8");
@@ -40,9 +40,17 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
+
+//require "../includes/vendor/autoload.php";
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_bg_ccaa{
+
     
     public function import_bg_ccaa($filename){ 
+
+
         //Path del archivo
         //$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
         //Cargamos el archivo en la variable de documento "doc"
@@ -50,6 +58,13 @@ class Import_bg_ccaa{
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(0);
+
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+
+        $conn = getConexionBD();
 
         for($x = 1; $x < $rows + 1; $x++){
 
@@ -61,7 +76,7 @@ class Import_bg_ccaa{
                 if($x>1)
                     $values[$y-1]=$valor;
                 else
-                    $fields[$y-1]=$valor; 
+                    $fields[$y-1]=strtoupper($valor); 
             }
             if($x>1 && $values[0]!= "") {
 
@@ -94,6 +109,7 @@ class Import_bg_ccaa{
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 if(mysqli_num_rows($result)==0){
                     $insert = "INSERT INTO ccaas VALUES ('$CODIGO_CCAA','$NOMBRE_CCAA',NULLIF('$NOMBREPRESIDENTE',''),NULLIF('$APELLIDO1PRESIDENTE',''),NULLIF('$APELLIDO2PRESIDENTE',''),
@@ -101,6 +117,7 @@ class Import_bg_ccaa{
                         NULLIF('$WEB',''),NULLIF('$MAIL',''))";
                     if (!mysqli_query($conn, $insert)) {
                         echo mysqli_error($conn);
+                        return false;
                     }
                 }
                 else {
@@ -111,6 +128,7 @@ class Import_bg_ccaa{
                     WEB = NULLIF('$WEB',''),MAIL = NULLIF('$MAIL','') WHERE CODIGO = '$CODIGO_CCAA'";
                     if (!mysqli_query($conn, $update)) {
                         echo mysqli_error($conn);
+                        return false;
                     }
                 }
                 $VIGENCIA=null;
@@ -126,6 +144,7 @@ class Import_bg_ccaa{
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                 if(mysqli_num_rows($result)==0){
@@ -158,6 +177,7 @@ class Import_bg_ccaa{
                             $result = mysqli_query($conn,$query);
                             if(!$result){
                                 echo mysqli_error($conn);
+                                return false;
                             }
                             //Si no existe, entonces se inserta como una nueva fila
                             if(mysqli_num_rows($result)==0){
@@ -176,6 +196,7 @@ class Import_bg_ccaa{
                             $result = mysqli_query($conn,$query);
                             if(!$result){
                                 echo mysqli_error($conn);
+                                return false;
                             }
                             //Si no existe, entonces se inserta como una nueva fila
                             if(mysqli_num_rows($result)==0){
@@ -243,7 +264,9 @@ class Import_bg_ccaa{
             echo "</tr>";
         }
         */
-        cierraConexion();
+        ////cierraConexion();
+
+        return true;
     }
 }
 ?>

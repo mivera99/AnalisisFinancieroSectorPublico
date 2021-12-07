@@ -41,20 +41,24 @@ for($i = 0; $i < $totalHojas; $i++){
 }
 */
 
-/*$hoja2 = $doc->getSheet(2);
+/*$hoja = $doc->getSheet(2);
 
 //Última fila con datos
-$filas = $hoja2->getHighestDataRow();//Número
-echo $filas."<br>";
-$columnas = $hoja2->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $columnas."<br>";
-$columnas = Coordinate::columnIndexFromString($columnas);//Conversion a numero
-echo $columnas.'<br>';
+$rows = $hoja->getHighestDataRow();//Número
+echo $rows."<br>";
+$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
+echo $cols."<br>";
+$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
+echo $cols.'<br>';
 
 $conn = getConexionBD();//new mysqli("localhost", "root", "", "dbs_01");
 //$conn = new mysqli("localhost", "root", "", "dbs_01");
 $conn->set_charset("utf8");
 */
+
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_scoring_dip{
 
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
@@ -74,18 +78,24 @@ class Import_scoring_dip{
 
         $hoja = $doc->getSheet(2);
 
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+        $conn = getConexionBD();
+
         $vals=array();
         $fields=array();
-        for($i = 1; $i <= $filas; $i++){
-            for($j = 1; $j <= $columnas; $j++){
-                $value = $hoja2->getCellByColumnAndRow($j,$i);
+        for($i = 1; $i <= $rows; $i++){
+            for($j = 1; $j <= $cols; $j++){
+                $value = $hoja->getCellByColumnAndRow($j,$i);
                 $value = preg_replace('/\s+/',' ', html_entity_decode(preg_replace('/_x([0-9a-fA-F]{4})_/', '&#x$1;', $value)));
                 if($i>1)
                     $vals[$j-1]=$value;
                 else
                     $fields[$j-1]=$value;
             }
-            if($i>1 && $vals[0]!= ""){ //Para evitar filas vacías
+            if($i>1 && $vals[0]!= ""){ //Para evitar rows vacías
                 $COD_DIP=$vals[0];
                 for($k=1;$k<count($fields);$k++){
                     if($k>=1 && $k<53){
@@ -127,6 +137,7 @@ class Import_scoring_dip{
                         $result= mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                         if(mysqli_num_rows($result)==0){
                             //Si la fila no existe, lo inserta por primera vez en la BBDD
@@ -141,6 +152,7 @@ class Import_scoring_dip{
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
                 }
@@ -148,7 +160,9 @@ class Import_scoring_dip{
             }
         }
         //mysqli_close($conn);
-        cierraConexion();
+        //cierraConexion();
+
+        return true;
     }
 }
 ?>

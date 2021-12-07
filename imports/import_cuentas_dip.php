@@ -39,6 +39,9 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_cuentas_dip{
     public function import_cuentas_dip($filename){
         //Cargamos el archivo en la variable de documento "doc"
@@ -46,6 +49,13 @@ class Import_cuentas_dip{
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(1);
+        
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+        $conn = getConexionBD();
+
         //Recorrer hoja
         for($x = 1; $x < $rows + 1; $x++){
 
@@ -102,6 +112,7 @@ class Import_cuentas_dip{
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn)."<br>";
+                            return false;
                         }
                         //Si no existe, entonces se inserta como una nueva fila
                         if(mysqli_num_rows($result)==0){
@@ -147,6 +158,7 @@ class Import_cuentas_dip{
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn)."<br>";
+                            return false;
                         }
                         //Si no existe, entonces se inserta como una nueva fila
                         if(mysqli_num_rows($result)==0){
@@ -191,6 +203,7 @@ class Import_cuentas_dip{
                     $result = mysqli_query($conn,$query);
                     if(!$result){
                         echo mysqli_error($conn)."<br>";
+                        return false;
                     }
                     //Si no existe, entonces se inserta como una nueva fila
                     if(mysqli_num_rows($result)==0){
@@ -206,7 +219,9 @@ class Import_cuentas_dip{
                 $values = array();
             }
         }
-        cierraConexion();
+        //cierraConexion();
+
+        return true;
     }
 }
 ?>

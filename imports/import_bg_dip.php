@@ -39,6 +39,10 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
+
+require("includes/vendor/autoload.php");
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_bg_dip{
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
     private function excelDecimalTranslation(&$var) {
@@ -59,6 +63,13 @@ class Import_bg_dip{
         $doc = IOFactory::load($path);
 
         $hoja = $doc->getSheet(0);
+
+        $rows = $hoja->getHighestDataRow();
+        $cols = $hoja->getHighestDataColumn();
+        $cols = Coordinate::columnIndexFromString($cols);
+
+
+        $conn = getConexionBD();
 
         for($x = 1; $x < $rows + 1; $x++){
 
@@ -89,6 +100,7 @@ class Import_bg_dip{
                 $result = mysqli_query($conn, $query);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 $dato_sql = mysqli_fetch_assoc($result);
                 $PROVINCIA = $dato_sql['CODIGO'];
@@ -98,6 +110,7 @@ class Import_bg_dip{
                 $result = mysqli_query($conn, $query);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 $dato_sql = mysqli_fetch_assoc($result);
                 $AUTONOMIA = $dato_sql['CODIGO'];
@@ -112,6 +125,7 @@ class Import_bg_dip{
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                 if(mysqli_num_rows($result)==0){
@@ -129,6 +143,7 @@ class Import_bg_dip{
                 }
                 if(!$result){
                     echo mysqli_error($conn);
+                    return false;
                 }
                 //evalua cada valor array de valores. 
                 for($k = 0; $k < count($fields);$k++){
@@ -144,6 +159,7 @@ class Import_bg_dip{
                         $result = mysqli_query($conn,$sql);
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                         // si no devuelve ninguna fila, eso quiere decir que la fila no existe, entonces se inserta con el valor dado
                         if(mysqli_num_rows($result)==0){
@@ -157,6 +173,7 @@ class Import_bg_dip{
                         }
                         if(!$result){
                             echo mysqli_error($conn);
+                            return false;
                         }
                     }
                 }
@@ -190,7 +207,9 @@ class Import_bg_dip{
             echo "</tr>";
         }
         */
-        cierraConexion();
+        //cierraConexion();
+
+        return true;
     }
 }
 ?>
