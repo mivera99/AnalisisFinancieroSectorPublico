@@ -7,8 +7,8 @@
     </div>
     <div id="menu-right">
         <!--<a href="#home">INFORMES</a>-->
-        <a href="#news">CONSULTAS</a>
-        <a href="#contact">SOBRE NOSOTROS</a>
-        <a href="#about">CONTACTO</a>
+        <a href="consultas.php">CONSULTAS</a>
+        <a href="sobre_nosotros.php">SOBRE NOSOTROS</a>
+        <a href="contacto.php">CONTACTO</a>
     </div>
 </div>
