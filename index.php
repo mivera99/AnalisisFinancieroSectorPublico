@@ -42,7 +42,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                 </div>
-                <input type="submit">
+                <button type="submit">Consultar</button>
             </form>
             <script>
                 /*An array containing all the country names in the world:*/
