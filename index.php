@@ -42,7 +42,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                 </div>
-                <button type="submit">Consultar</button>
+                <input type="submit" value="Consultar">
             </form>
             <script>
                 /*An array containing all the country names in the world:*/
@@ -61,8 +61,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 <br>
                 <fieldset>
                     <p>Selecciona el archivo: </p><input type='file' name='file_button'> <br><br> 
-                    <br><br><br>
-                    <button type="submit" class="form-button">Enviar</button>
+                    <input type="submit" class="form-button" value="Enviar">
                 </fieldset>
             </form>
             <br><br>
