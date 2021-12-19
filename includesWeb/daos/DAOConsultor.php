@@ -40,9 +40,5 @@ class DAOConsultor{
         cierraConexion();
         return $facilities;
     }
-
-
 }
-
-
 ?>

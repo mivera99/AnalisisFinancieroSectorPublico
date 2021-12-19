@@ -1,3 +1,6 @@
+<?php
+require_once('includesWeb\daos\DAOConsultor.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,23 +31,32 @@
 
         <div id ="contenido"> 
 
-            <?php
-                /*
-                <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
-                <p>Obten información detallada y actualizada sobre CCAAs.</p>
-                <p>Provincias, diputaciones y municipios en segundos.</p>
-                <br><br>
-                */
-            ?>
+            <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
+            <p>Obten información detallada y actualizada sobre CCAAs.</p>
+            <p>Provincias, diputaciones y municipios en segundos.</p>
 
+            <?php
+                $facilities = (new DAOConsultor())->getAllFacilities();
+            ?>
+            <form autocomplete="off" action="ccaa.php" method="post">
+                <div class="autocomplete" style="width:300px;">
+                    <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
+                </div>
+                <!--<input type="submit">-->
+            </form>
+            <script>
+                /*An array containing all the country names in the world:*/
+                var facilities = <?php echo json_encode($facilities);?>;
+                /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
+                autocomplete(document.getElementById("facility"), facilities);
+            </script>
+            <br><br>
             <h2>Informes</h2>
             <br>
             <a href="ccaa.php"><button>Comunidad de Madrid (prueba)</button></a>
             <br><br><br><br>
             
-
             <form action='procesarSubida.php' method='POST' enctype="multipart/form-data">
-            <!--<form action='imports/import_bg_ccaa.php'  method='POST' enctype='multipart/form-data'>-->
                 <h2 class="form-name">Subir archivo</h2>
                 <br>
                 <fieldset>
