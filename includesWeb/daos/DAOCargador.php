@@ -22,16 +22,13 @@ class DAOCargador {
     }
 
     public function carga($file){
-        echo "<br>hola jeje<br>";
         if($this->checkFile($file)){
-            echo "<br>chingatumadres<br>";
             $cargador = Cargador::getInstance();
             $cargador->setPath($file);
             $tmp_name = ($cargador->getPath())['tmp_name'];
             $realname = ($cargador->getPath())['name'];
             $filenamestr = explode('_',(explode('.',$realname))[0]);
 
-            
             if(strtolower($filenamestr[2])=='ccaa'){
                 if($this->import_ccaas($tmp_name, $realname)){
                     return true;
