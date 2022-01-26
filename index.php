@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('includesWeb\daos\DAOConsultor.php');
 ?>
 <!DOCTYPE html>
@@ -55,16 +56,6 @@ require_once('includesWeb\daos\DAOConsultor.php');
             <br>
             <a href="ccaa.php"><button>Comunidad de Madrid (prueba)</button></a>
             <br><br><br><br>
-            
-            <form action='procesarSubida.php' method='POST' enctype="multipart/form-data">
-                <h2 class="form-name">Subir archivo</h2>
-                <br>
-                <fieldset>
-                    <p>Selecciona el archivo: </p><input type='file' name='file_button'> <br><br> 
-                    <input type="submit" class="form-button" value="Enviar">
-                </fieldset>
-            </form>
-            <br><br>
 
         </div>
 
