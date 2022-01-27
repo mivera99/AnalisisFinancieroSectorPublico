@@ -26,7 +26,7 @@
     <script src="functions.js"></script>
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
-	<title>Perfil</title>
+	<title>Análisis Financiero Sector Público - Perfil</title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                 if($usuario->getrol()=="admin"){
                 ?>
                     <h3>Usuarios</h3>
-                    <a href="añadirUsuarios.php"><button>Añadir usuarios</button></a><br><br>
+                    <a href="insertarUsuario.php"><button>Añadir usuarios</button></a><br><br>
                     <a href="eliminarUsuarios.php"><button>Eliminar usuarios</button></a><br><br>
                 <?php
                 }

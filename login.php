@@ -24,7 +24,7 @@
 
     <!-- ====== FUNCIÓN PARA MOSTRAR LA CONTRASEÑA SI PULSAMOS UN BOTÓN ==== -->
     <script src="functions2.js"></script>
-    <title>Iniciar Sesión</title>
+    <title>Análisis Financiero Sector Público - Iniciar sesión</title>
 </head>
 <body>
 <div id="contenedor">
@@ -36,20 +36,19 @@
 </div>
 <div id="contenido">
     <?php
-    (new DAOUsuario())->insertaUsuario("admin@hotmail.com", "admin4444", "admin", "admin");
+    //(new DAOUsuario())->insertaUsuario("admin@hotmail.com", "admin4444", "admin", "admin");
     ?>
     <form action='procesarLogin.php' method='POST'>
         <h2 class="form-name">Login</h2>
         <fieldset>
-            <p>Email: </p><input type='email' name='email'> <br><br>
-            <p>Contraseña: </p><input type='password' name='password' id='password'>
+            <p>Email * </p><input type='email' name='email' required> <br><br>
+            <p>Contraseña * </p><input type='password' name='password' id='password' required>
             <button type="button" onclick=showPassword()>Mostrar contraseña</button>  
             <br> 
             <br><br><br>
             <button type="submit" class="form-button">Enviar</button>
         </fieldset>
     </form>
-
 </div>
 <div id="pie">
     <?php

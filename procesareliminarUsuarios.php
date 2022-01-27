@@ -1,5 +1,16 @@
 <?php
 session_start();
+require_once('includesWeb/daos/DAOUsuario.php');
+
+$usuariosToRemove=$_REQUEST['usuarios'];
+$daoUsuario = new DAOUsuario();
+$i=0;
+foreach($usuariosToRemove as $usuario){
+    if($daoUsuario->delete($usuario)){
+        $i++;
+    }
+}
+unset($_REQUEST['usuarios']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +32,7 @@ session_start();
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
 
-    <title>Análisis Financiero del Sector Público - Ayuda</title>
+    <title>Análisis Financiero del Sector Público</title>
 </head>
     <body>
 
@@ -30,8 +41,10 @@ session_start();
         </div>
 
         <div id ="contenido"> 
-
-
+            <?php
+                echo '<p>'.$i.' usuarios eliminados correctamente</p>'
+            
+            ?>
         </div>
 
         <div id = "pie">

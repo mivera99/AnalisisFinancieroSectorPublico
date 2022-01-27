@@ -21,7 +21,7 @@ session_start();
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
 
-    <title>Análisis Financiero del Sector Público</title>
+    <title>Análisis Financiero del Sector Público - Sobre nosotros</title>
 </head>
     <body>
         <div id = "cabecera">

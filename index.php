@@ -22,7 +22,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
 
-    <title>Análisis Financiero del Sector Público</title>
+    <title>Análisis Financiero del Sector Público - Inicio</title>
 </head>
     <body>
 
@@ -51,12 +51,12 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
                 autocomplete(document.getElementById("facility"), facilities);
             </script>
+
             <br><br>
             <h2>Informes</h2>
             <br>
             <a href="ccaa.php"><button>Comunidad de Madrid (prueba)</button></a>
             <br><br><br><br>
-
         </div>
 
         <div id = "pie">

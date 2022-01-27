@@ -111,9 +111,9 @@ class DAOUsuario {
         return mysqli_query($db,$sql);
     }
 
-    public function contraseniasCoinciden($contra1, $contra2){
+    /*public function contraseniasCoinciden($contra1, $contra2){
         return $contra1==$contra2;
-    }
+    }*/
 
     public function delete($email){
         $db = getConexionBD();
@@ -127,21 +127,22 @@ class DAOUsuario {
 
     public function getAllUsuarios($correo){
         $db = getConexionBD();
-        $sql = "SELECT * FROM usuario WHERE correo != '$correo'"; //WHERE correo!='$correo'
+        $sql = "SELECT * FROM usuarios WHERE correo != '$correo'"; //WHERE correo!='$correo'
         $res = mysqli_query($db,$sql);
+        
+        if(!$res){
+            return false;
+        }
+
         $allUsuarios = array();
         $i = 0;
         
         while($row = mysqli_fetch_assoc($res)) {
             $usuario = new Usuario();
-            $usuario->setnombreusuario($row['nombreusuario']);
+            $usuario->setnombreusuario($row['nombre']);
             $usuario->setcorreo($row['correo']);
             $usuario->setcontrasenia($row['contrasenia']);
             $usuario->setrol($row['rol']);
-            $usuario->settelefono($row['telefono']);
-            $usuario->setdireccion($row['direccion']);
-            $usuario->setnick($row['nick']);
-            $usuario->seturlfoto($row['urlfoto']);
             $allUsuarios[$i] = $usuario;
             $i += 1;
         }

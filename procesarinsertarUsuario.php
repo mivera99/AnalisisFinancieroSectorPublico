@@ -1,5 +1,15 @@
 <?php
 session_start();
+require_once('includesWeb/daos/DAOUsuario.php');
+
+$email = htmlspecialchars(trim(strip_tags($_REQUEST["email"])));
+$password = htmlspecialchars(trim(strip_tags($_REQUEST["password"])));
+$nombreusuario = htmlspecialchars(trim(strip_tags($_REQUEST["username"])));
+$rol = htmlspecialchars(trim(strip_tags($_REQUEST["rol"])));
+$insertado = false;
+if(!(new DAOUsuario())->insertaUsuario($email, $password, $nombreusuario, $rol)){
+    $insertado = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +31,7 @@ session_start();
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
 
-    <title>Análisis Financiero del Sector Público - Ayuda</title>
+    <title>Análisis Financiero del Sector Público</title>
 </head>
     <body>
 
@@ -30,8 +40,14 @@ session_start();
         </div>
 
         <div id ="contenido"> 
-
-
+            <?php
+            if($insertado){
+                echo '<p>Error. El usuario no se ha creado</p>';
+            }
+            else {
+                echo '<p>Usuario creado correctamente</p>';
+            }
+            ?>
         </div>
 
         <div id = "pie">
