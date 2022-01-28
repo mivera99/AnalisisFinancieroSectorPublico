@@ -43,8 +43,9 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                 </div>
-                <input type="submit" value="Consultar">
+                <input type="submit" value="Consultar"> <?php // Meter el onlcik para redirigir a la página ed ccaa, diputacion o municipio?>
             </form>
+
             <script>
                 /*An array containing all the country names in the world:*/
                 var facilities = <?php echo json_encode($facilities);?>;

@@ -2,7 +2,7 @@
 require_once('includesWeb/config.php');
 class DAOConsultor{
 
-    public function getAllFacilities(){
+    public function getAllFacilities(){ //Modificar el array que te devuelva, debe contener un array de pares clave valor <clave,valor>. Clave es MUNICPIO, DIPUTACION o MUNICIPIO. Valor es el nombre de la facility. 
         $facilities = array();
         $conn = getConexionBD();
         $ccaa_sql = "SELECT NOMBRE FROM ccaas";

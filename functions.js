@@ -19,6 +19,8 @@ function autocomplete(inp, arr) {
         for (i = 0; i < arr.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
             //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+
             if ((arr[i].toUpperCase()).includes(val.toUpperCase())) {
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
@@ -37,6 +39,8 @@ function autocomplete(inp, arr) {
             });
             a.appendChild(b);
             }
+
+            
         }
     });
     /*execute a function presses a key on the keyboard:*/

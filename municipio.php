@@ -1,8 +1,6 @@
 <?php
 session_start();
-
-
-
+require_once('includesWeb\daos\DAOConsultor.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,19 +22,22 @@ session_start();
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
 
-    <title>Análisis Financiero del Sector Público - Comunidad Autónoma</title>
+    <title>Análisis Financiero del Sector Público - Municipio</title>
 </head>
     <body>
+
         <div id = "cabecera">
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
-        
+
         <div id ="contenido"> 
-            <h2>Comunidad de Madrid</h2>
+
+            
         </div>
 
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>
         </div>
+
     </body>
 </html>
