@@ -31,6 +31,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
         </div>
 
         <div id ="contenido"> 
+            <h3>Municipio</h3>
 
             
         </div>
