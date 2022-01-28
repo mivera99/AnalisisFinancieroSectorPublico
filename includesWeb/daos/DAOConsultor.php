@@ -12,10 +12,8 @@ class DAOConsultor{
             cierraConexion();
             return false;
         }
-        $i=0;
         while($nombre = mysqli_fetch_array($result)){
             array_push($facilities, ["CCAA" => $nombre['NOMBRE']]);
-            $i++;
         }
 
         $dip_sql = "SELECT NOMBRE FROM diputaciones";
@@ -25,10 +23,8 @@ class DAOConsultor{
             cierraConexion();
             return false;
         }
-        $i=0;
         while($nombre = mysqli_fetch_array($result)){
             array_push($facilities, ["DIPUTACION" => $nombre['NOMBRE']]);
-            $i++;
         }
         $mun_sql = "SELECT NOMBRE FROM municipios";
         $result = mysqli_query($conn, $mun_sql);
@@ -37,10 +33,8 @@ class DAOConsultor{
             cierraConexion();
             return false;
         }
-        $i=0;
         while($nombre = mysqli_fetch_array($result)){
             array_push($facilities, ["MUNICIPIO" => $nombre['NOMBRE']]);
-            $i++;
         }
 
         cierraConexion();
