@@ -25,7 +25,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
     <!-- ======= FUNCIÓN PARA MOSTRAR LA CONTRASEÑA ==== -->
     <script src="functions2.js"></script>
 
-        <title>Análisis Financiero Sector Público - Creación de usuario</title>
+    <title>Análisis Financiero Sector Público - Creación de usuario</title>
 </head>
 <body>
 
