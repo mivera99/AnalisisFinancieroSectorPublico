@@ -39,6 +39,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
             <?php
                 $facilities = (new DAOConsultor())->getAllFacilities();
                 //print_r($facilities);
+                
             ?>
             <script>
                 var nom = <?php echo json_encode($facilities);?>;
