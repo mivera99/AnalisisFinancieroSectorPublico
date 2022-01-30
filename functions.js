@@ -1,7 +1,30 @@
-function autocomplete(inp, arr) {
+
+/* Cargamos en un array todos los nombres que usaremos en el autocompletar */
+/* Lo hacemos antes de todo, justamente cuando se carga el documento porque así quita retrasos a la hora de escribir */
+nombres = [];
+function cargarNombres(arr){
+    for (i = 0; i < arr.length; i++){
+        //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+        hijo = arr[i]; //Recogemos el valor en una variable para no modificar el array original
+        console.log(Object.keys(hijo)); //Mostramos el mensaje por consola para poder depurar
+        clave = Object.keys(hijo); //Asignamos a una variable "clave" el objeto de la clave --> CCAA / DIP / MUN"
+        valor = Object.values(hijo); //Asignamos a una variable "valor" el objeto del valor --> Andalucía (por ejemplo)
+        clave = clave[0]; //El objeto clave tiene, en la posición 0, el string que necesitamos, por lo que lo recogemos
+        valor = valor[0]; //El objeto valor tiene, en la posición 0, el string que necesitamos, por lo que lo recogemos
+        console.log(clave); //Mostramos por consola para depurar
+        console.log(valor); //Mostramos por consola para depurar
+
+        nombres.push(valor + " - " + clave);
+        console.log(nombres);
+    }
+}
+
+function autocomplete(inp) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
+
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
@@ -16,19 +39,20 @@ function autocomplete(inp, arr) {
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
-        for (i = 0; i < arr.length; i++) {
+
+        for (i = 0; i < nombres.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
             //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 
-
-            if ((arr[i].toUpperCase()).includes(val.toUpperCase())) {
+            if ((nombres[i].toUpperCase()).includes(val.toUpperCase())) { // ***cambiamos arr[i] por nombres[i] ***
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
             /*make the matching letters bold:*/
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += arr[i].substr(val.length);
+            //b.innerHTML = "<strong>" + nombres[i].substr(0, val.length) + "</strong>"; // *** cambiamos arr[i] por nombres[i] ***
+            //b.innerHTML += nombres[i].substr(val.length);  // *** cambiamos arr[i] por nombres[i] ***
+            b.innerHTML = nombres[i];
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            b.innerHTML += "<input type='hidden' value='" + nombres[i] + "'>"; // *** cambiamos arr[i] por nombres[i] ***
             /*execute a function when someone clicks on the item value (DIV element):*/
             b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/

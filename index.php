@@ -40,6 +40,13 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 $facilities = (new DAOConsultor())->getAllFacilities();
                 //print_r($facilities);
             ?>
+            <script>
+                var nom = <?php echo json_encode($facilities);?>;
+                cargarNombres(nom);
+            </script>
+
+
+            <br><br><br><br><br>
             <form autocomplete="off" action="ccaa.php" method="post">
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
@@ -51,7 +58,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
                 /*An array containing all the country names in the world:*/
                 var facilities = <?php echo json_encode($facilities);?>;
                 /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
-                autocomplete(document.getElementById("facility"), facilities);
+                autocomplete(document.getElementById("facility"));
             </script>
 
             <br><br>
