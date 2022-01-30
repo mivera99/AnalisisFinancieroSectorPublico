@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$ccaa = (new DAOConsultor())->getCCAA($nombre);
 
 
 ?>
@@ -33,6 +33,19 @@ session_start();
         
         <div id ="contenido"> 
             <h2>Comunidad de Madrid</h2>
+            <?php
+            echo '<h2>'.$ccaa->getNombre().'</h2>';
+            echo '<p>Presidente de la comunidad: '.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
+            echo '<p>Vigencia: '.$ccaa->getVigencia().'</p>';
+            echo '<p>Partido político'.$ccaa->getPartido().'</p>';
+            echo '<p>CIF: '.$ccaa->getCif().'</p>';
+            echo '<p>Via: '.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().' '.$ccaa->getNumVia().'</p>';
+            echo '<p>Teléfono: '.$ccaa->getTelefono().'</p>';
+            echo '<p>Código Postal: '.$ccaa->getCodigoPostal().'</p>';
+            echo '<p>Fax: '.$ccaa->getFax().'</p>';
+            echo '<p>Sitio web: '.$ccaa->getWeb().'</p>';
+            echo '<p>Correo electrónico: '.$ccaa->getMail().'</p>';
+            ?>
         </div>
 
         <div id = "pie">

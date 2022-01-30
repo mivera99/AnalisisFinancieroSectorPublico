@@ -39,6 +39,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
             <?php
                 $facilities = (new DAOConsultor())->getAllFacilities();
                 //print_r($facilities);
+                
             ?>
             <form autocomplete="off" action="ccaa.php" method="post">
                 <div class="autocomplete" style="width:300px;">
