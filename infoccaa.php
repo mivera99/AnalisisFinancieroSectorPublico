@@ -1,6 +1,10 @@
 <?php
 session_start();
+require_once('includesWeb/daos/DAOConsultor.php');
+
 $nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
+//echo $nombre;
+
 $ccaa = (new DAOConsultor())->getCCAA($nombre);
 $encontrado = false;
 if($ccaa){

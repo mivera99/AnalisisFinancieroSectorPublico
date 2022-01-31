@@ -56,7 +56,7 @@ class CCAA{
     }
 
     public function setApellido2($apellido2){
-        $this->codigo = $cod;
+        $this->apellido2 = $apellido2;
     }
     
     public function getVigencia(){

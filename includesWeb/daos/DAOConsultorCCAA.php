@@ -1,17 +1,18 @@
 <?php
 require_once('includesWeb/config.php');
+require_once('includesWeb/ccaa.php');
 
 class DAOConsultorCCAA {
 
     public function getGeneralInfo($nombre){
         $db = getConexionBD();
-        $sql = "SELECT * FROM ccaas WHERE nombre = '$nombre'";
+        $sql = "SELECT * FROM ccaas WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
         }
         $ccaa = new CCAA();
-        $ccaa_res = mysqli_fetch_array($result);
+        $ccaa_res = mysqli_fetch_assoc($result);
 
         $ccaa->setCodigo($ccca_res['CODIGO']);
         $ccaa->setNombre($ccca_res['NOMBRE']);

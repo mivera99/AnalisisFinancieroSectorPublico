@@ -3,9 +3,9 @@ require_once('includesWeb/config.php');
 require_once('includesWeb/ccaa.php');
 require_once('includesWeb/municipio.php');
 require_once('includesWeb/diputacion.php');
-require_once('includesWeb/DAOConsultorCCAA.php');
-require_once('includesWeb/DAOConsultorMunicipio.php');
-require_once('includesWeb/DAOConsultorDiputacion.php');
+require_once('includesWeb/daos/DAOConsultorCCAA.php');
+require_once('includesWeb/daos/DAOConsultorMunicipio.php');
+require_once('includesWeb/daos/DAOConsultorDiputacion.php');
 
 class DAOConsultor{
 

@@ -1,7 +1,6 @@
 <?php
 
 require_once('includesWeb/config.php');
-$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
 
 class DAOConsultorDiputacion {
 
