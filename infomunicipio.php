@@ -2,7 +2,7 @@
 session_start();
 require_once('includesWeb\daos\DAOConsultor.php');
 
-$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
+$nombre = htmlspecialchars(trim(strip_tags($_GET["mun"])));
 $municipio = (new DAOConsultor())->getMunicipio($nombre);
 $encontrado = false;
 if($municipio){

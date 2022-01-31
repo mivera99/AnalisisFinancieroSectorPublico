@@ -2,8 +2,7 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
-//echo $nombre;
+$nombre = htmlspecialchars(trim(strip_tags($_GET["ccaa"])));
 
 $ccaa = (new DAOConsultor())->getCCAA($nombre);
 $encontrado = false;
@@ -46,7 +45,7 @@ if($ccaa){
                 echo '<h2>Información general</h2>';
                 echo '<p>Presidente de la comunidad: '.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
                 echo '<p>Vigencia: '.$ccaa->getVigencia().'</p>';
-                echo '<p>Partido político'.$ccaa->getPartido().'</p>';
+                echo '<p>Partido político: '.$ccaa->getPartido().'</p>';
                 echo '<p>CIF: '.$ccaa->getCif().'</p>';
                 echo '<p>Via: '.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().' '.$ccaa->getNumVia().'</p>';
                 echo '<p>Teléfono: '.$ccaa->getTelefono().'</p>';

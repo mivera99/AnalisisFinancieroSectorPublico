@@ -14,22 +14,22 @@ class DAOConsultorCCAA {
         $ccaa = new CCAA();
         $ccaa_res = mysqli_fetch_assoc($result);
 
-        $ccaa->setCodigo($ccca_res['CODIGO']);
-        $ccaa->setNombre($ccca_res['NOMBRE']);
-        $ccaa->setNombrePresidente($ccca_res['NOMBRE_PRESIDENTE']);
-        $ccaa->setApellido1($ccca_res['APELLIDO1_PRESIDENTE']);
-        $ccaa->setApellido2($ccca_res['APELLIDO2_PRESIDENTE']);
-        $ccaa->setVigencia($ccca_res['VIGENCIA']);
-        $ccaa->setPartido($ccca_res['PARTIDO']);
-        $ccaa->setCif($ccca_res['CIF']);
-        $ccaa->setTipoVia($ccca_res['TIPO_VIA']);
-        $ccaa->setNumVia($ccca_res['NUM_VIA']);
-        $ccaa->setNombreVia($ccca_res['NOMBRE_VIA']);
-        $ccaa->setTelefono($ccca_res['TELEFONO']);
-        $ccaa->setCodigoPostal($ccca_res['COD_POSTAL']);
-        $ccaa->setFax($ccca_res['FAX']);
-        $ccaa->setMail($ccca_res['MAIL']);
-        $ccaa->setWeb($ccca_res['WEB']);
+        $ccaa->setCodigo($ccaa_res['CODIGO']);
+        $ccaa->setNombre($ccaa_res['NOMBRE']);
+        $ccaa->setNombrePresidente($ccaa_res['NOMBRE_PRESIDENTE']);
+        $ccaa->setApellido1($ccaa_res['APELLIDO1_PRESIDENTE']);
+        $ccaa->setApellido2($ccaa_res['APELLIDO2_PRESIDENTE']);
+        $ccaa->setVigencia($ccaa_res['VIGENCIA']);
+        $ccaa->setPartido($ccaa_res['PARTIDO']);
+        $ccaa->setCif($ccaa_res['CIF']);
+        $ccaa->setTipoVia($ccaa_res['TIPO_VIA']);
+        $ccaa->setNumVia($ccaa_res['NUM_VIA']);
+        $ccaa->setNombreVia($ccaa_res['NOMBRE_VIA']);
+        $ccaa->setTelefono($ccaa_res['TELEFONO']);
+        $ccaa->setCodigoPostal($ccaa_res['COD_POSTAL']);
+        $ccaa->setFax($ccaa_res['FAX']);
+        $ccaa->setMail($ccaa_res['MAIL']);
+        $ccaa->setWeb($ccaa_res['WEB']);
 
         return $ccaa;
     }

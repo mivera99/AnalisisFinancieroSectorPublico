@@ -48,7 +48,7 @@ require_once('includesWeb\daos\DAOConsultor.php');
 
 
             <br><br><br><br><br>
-            <form autocomplete="off" action="infoccaa.php" method="post">
+            <form autocomplete="off" action="redirect.php" method="post">
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                 </div>
