@@ -52,8 +52,8 @@ class DAOConsultor{
         $ccaa = new CCAA();
         $daoccaa = new DAOConsultorCCAA();
 
-        $tmpCCCAA = $daoccaa->getGeneralInfo($nombre);
-        if(!$tempCCAA){
+        $tmpCCAA = $daoccaa->getGeneralInfo($nombre);
+        if(!$tmpCCAA){
             return false;
         }
         $ccaa->setCodigo($tmpCCAA->getCodigo());
@@ -74,7 +74,66 @@ class DAOConsultor{
         $ccaa->setWeb($tmpCCAA->getWeb());
         
         return $ccaa;
+    }
 
+    public function getMunicipio($nombre){
+
+        $municipio = new Municipio();
+        $daomunicipio = new DAOConsultorMunicipio();
+
+        $tmpMunicipio = $daomunicipio->getGeneralInfo($nombre);
+        if(!$tmpMunicipio){
+            return false;
+        }
+
+        $municipio->setCodigo($tmpMunicipio->getCodigo());
+        $municipio->setNombre($tmpMunicipio->getNombre());
+        $municipio->setNombrePresidente($tmpMunicipio->getNombrePresidente());
+        $municipio->setApellido1($tmpMunicipio->getApellido1());
+        $municipio->setApellido2($tmpMunicipio->getApellido2());
+        $municipio->setVigencia($tmpMunicipio->getVigencia());
+        $municipio->setPartido($tmpMunicipio->getPartido());
+        $municipio->setCif($tmpMunicipio->getCif());
+        $municipio->setTipoVia($tmpMunicipio->getTipoVia());
+        $municipio->setNumVia($tmpMunicipio->getNombreVia());
+        $municipio->setNumVia($tmpMunicipio->getNumVia());
+        $municipio->setTelefono($tmpMunicipio->getTelefono());
+        $municipio->setCodigoPostal($tmpMunicipio->getCodigoPostal());
+        $municipio->setFax($tmpMunicipio->getFax());
+        $municipio->setMail($tmpMunicipio->getMail());
+        $municipio->setWeb($tmpMunicipio->getWeb());
+
+        return $municipio;
+    }
+
+    public function getDiputacion($nombre){
+
+        $diputacion = new Diputacion();
+        $daodiputacion = new DAOConsultorDiputacion();
+
+        $tmpDiputacion = $daodiputacion->getGeneralInfo($nombre);
+        if(!$tmpDiputaciohn){
+            return false;
+        }
+
+        $diputacion->setCodigo($tmpDiputacion->getCodigo());
+        $diputacion->setNombre($tmpDiputacion->getNombre());
+        $diputacion->setNombrePresidente($tmpDiputacion->getNombrePresidente());
+        $diputacion->setApellido1($tmpDiputacion->getApellido1());
+        $diputacion->setApellido2($tmpDiputacion->getApellido2());
+        $diputacion->setVigencia($tmpDiputacion->getVigencia());
+        $diputacion->setPartido($tmpDiputacion->getPartido());
+        $diputacion->setCif($tmpDiputacion->getCif());
+        $diputacion->setTipoVia($tmpDiputacion->getTipoVia());
+        $diputacion->setNumVia($tmpDiputacion->getNombreVia());
+        $diputacion->setNumVia($tmpDiputacion->getNumVia());
+        $diputacion->setTelefono($tmpDiputacion->getTelefono());
+        $diputacion->setCodigoPostal($tmpDiputacion->getCodigoPostal());
+        $diputacion->setFax($tmpDiputacion->getFax());
+        $diputacion->setMail($tmpDiputacion->getMail());
+        $diputacion->setWeb($tmpDiputacion->getWeb());
+
+        return $diputacion;
     }
 
 }

@@ -1,6 +1,14 @@
 <?php
 session_start();
 require_once('includesWeb\daos\DAOConsultor.php');
+
+$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
+$municipio = (new DAOConsultor())->getMunicipio($nombre);
+$encontrado = false;
+if($municipio){
+    $encontrado = true;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +40,27 @@ require_once('includesWeb\daos\DAOConsultor.php');
 
         <div id ="contenido"> 
             <h3>Municipio</h3>
-
+            <?php
+            if($encontrado){
+                echo '<h2>'.$municipio->getNombre().'</h2>';
+                echo '<h2>Información general</h2>';
+                echo '<p>Provincia: '.$municipio->getProvincia().'</p>';
+                echo '<p>Autonomía: '.$municipio->getAutonomia().'</p>';
+                echo '<p>Alcalde del municipio: '.$municipio->getNombrePresidente().' '.$municipio->getApellido1().' '.$municipio->getApellido2().'</p>';
+                echo '<p>Vigencia: '.$municipio->getVigencia().'</p>';
+                echo '<p>Partido político'.$municipio->getPartido().'</p>';
+                echo '<p>CIF: '.$municipio->getCif().'</p>';
+                echo '<p>Via: '.$municipio->getTipoVia().' '.$municipio->getNombreVia().' '.$municipio->getNumVia().'</p>';
+                echo '<p>Teléfono: '.$municipio->getTelefono().'</p>';
+                echo '<p>Código Postal: '.$municipio->getCodigoPostal().'</p>';
+                echo '<p>Fax: '.$municipio->getFax().'</p>';
+                echo '<p>Sitio web: '.$municipio->getWeb().'</p>';
+                echo '<p>Correo electrónico: '.$municipio->getMail().'</p>';
+            }
+            else {
+                echo '<p>Municipio no encontrado</p>';
+            }
+            ?>
             
         </div>
 

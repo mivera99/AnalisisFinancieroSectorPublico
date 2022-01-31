@@ -1,8 +1,11 @@
 <?php
 session_start();
+$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
 $ccaa = (new DAOConsultor())->getCCAA($nombre);
-
-
+$encontrado = false;
+if($ccaa){
+    $encontrado = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,17 +37,23 @@ $ccaa = (new DAOConsultor())->getCCAA($nombre);
         <div id ="contenido"> 
             <h2>Comunidad de Madrid</h2>
             <?php
-            echo '<h2>'.$ccaa->getNombre().'</h2>';
-            echo '<p>Presidente de la comunidad: '.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
-            echo '<p>Vigencia: '.$ccaa->getVigencia().'</p>';
-            echo '<p>Partido político'.$ccaa->getPartido().'</p>';
-            echo '<p>CIF: '.$ccaa->getCif().'</p>';
-            echo '<p>Via: '.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().' '.$ccaa->getNumVia().'</p>';
-            echo '<p>Teléfono: '.$ccaa->getTelefono().'</p>';
-            echo '<p>Código Postal: '.$ccaa->getCodigoPostal().'</p>';
-            echo '<p>Fax: '.$ccaa->getFax().'</p>';
-            echo '<p>Sitio web: '.$ccaa->getWeb().'</p>';
-            echo '<p>Correo electrónico: '.$ccaa->getMail().'</p>';
+            if($encontrado){
+                echo '<h2>'.$ccaa->getNombre().'</h2>';
+                echo '<h2>Información general</h2>';
+                echo '<p>Presidente de la comunidad: '.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
+                echo '<p>Vigencia: '.$ccaa->getVigencia().'</p>';
+                echo '<p>Partido político'.$ccaa->getPartido().'</p>';
+                echo '<p>CIF: '.$ccaa->getCif().'</p>';
+                echo '<p>Via: '.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().' '.$ccaa->getNumVia().'</p>';
+                echo '<p>Teléfono: '.$ccaa->getTelefono().'</p>';
+                echo '<p>Código Postal: '.$ccaa->getCodigoPostal().'</p>';
+                echo '<p>Fax: '.$ccaa->getFax().'</p>';
+                echo '<p>Sitio web: '.$ccaa->getWeb().'</p>';
+                echo '<p>Correo electrónico: '.$ccaa->getMail().'</p>';
+            }
+            else {
+                echo '<p>Comunidad autónoma no encontrada</p>';
+            }
             ?>
         </div>
 

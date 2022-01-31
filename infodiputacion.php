@@ -1,6 +1,13 @@
 <?php
 session_start();
 require_once('includesWeb\daos\DAOConsultor.php');
+$nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
+
+$diputacion = (new DAOConsultor())->getDiputacion($nombre);
+$encontrado = false;
+if($diputacion){
+    $encontrado = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,7 +39,24 @@ require_once('includesWeb\daos\DAOConsultor.php');
 
         <div id ="contenido"> 
             <h3>Diputación</h3>
-            
+            <?php
+            if($encontrado){
+                echo '<h2>'.$diputacion->getNombre().'</h2>';
+                echo '<h2>Información general</h2>';
+                echo '<p>Provincia: '.$diputacion->getProvincia().'</p>';
+                echo '<p>Autonomía: '.$diputacion->getAutonomia().'</p>';
+                echo '<p>CIF: '.$diputacion->getCif().'</p>';
+                echo '<p>Via: '.$diputacion->getTipoVia().' '.$diputacion->getNombreVia().' '.$diputacion->getNumVia().'</p>';
+                echo '<p>Teléfono: '.$diputacion->getTelefono().'</p>';
+                echo '<p>Código Postal: '.$diputacion->getCodigoPostal().'</p>';
+                echo '<p>Fax: '.$diputacion->getFax().'</p>';
+                echo '<p>Sitio web: '.$diputacion->getWeb().'</p>';
+                echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
+            }
+            else {
+                echo '<p>Diputación no encontrada</p>';
+            }
+            ?>
         </div>
 
         <div id = "pie">
