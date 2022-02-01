@@ -88,7 +88,7 @@ class DAOConsultor{
 
         $municipio->setCodigo($tmpMunicipio->getCodigo());
         $municipio->setNombre($tmpMunicipio->getNombre());
-        $municipio->setNombrePresidente($tmpMunicipio->getNombrePresidente());
+        $municipio->setNombreAlcalde($tmpMunicipio->getNombreAlcalde());
         $municipio->setApellido1($tmpMunicipio->getApellido1());
         $municipio->setApellido2($tmpMunicipio->getApellido2());
         $municipio->setVigencia($tmpMunicipio->getVigencia());
@@ -112,17 +112,17 @@ class DAOConsultor{
         $daodiputacion = new DAOConsultorDiputacion();
 
         $tmpDiputacion = $daodiputacion->getGeneralInfo($nombre);
-        if(!$tmpDiputaciohn){
+        if(!$tmpDiputacion){
             return false;
         }
 
         $diputacion->setCodigo($tmpDiputacion->getCodigo());
         $diputacion->setNombre($tmpDiputacion->getNombre());
-        $diputacion->setNombrePresidente($tmpDiputacion->getNombrePresidente());
-        $diputacion->setApellido1($tmpDiputacion->getApellido1());
-        $diputacion->setApellido2($tmpDiputacion->getApellido2());
-        $diputacion->setVigencia($tmpDiputacion->getVigencia());
-        $diputacion->setPartido($tmpDiputacion->getPartido());
+        //$diputacion->setNombrePresidente($tmpDiputacion->getNombrePresidente());
+        //$diputacion->setApellido1($tmpDiputacion->getApellido1());
+        //$diputacion->setApellido2($tmpDiputacion->getApellido2());
+        //$diputacion->setVigencia($tmpDiputacion->getVigencia());
+        //$diputacion->setPartido($tmpDiputacion->getPartido());
         $diputacion->setCif($tmpDiputacion->getCif());
         $diputacion->setTipoVia($tmpDiputacion->getTipoVia());
         $diputacion->setNumVia($tmpDiputacion->getNombreVia());

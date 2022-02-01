@@ -36,11 +36,11 @@ class DAOConsultorDiputacion {
         $provincia = mysqli_fetch_array($result);
         $diputacion->setProvincia($provincia['NOMBRE']);
 
-        $diputacion->setTipoVia($diputacion_res['TIPO_VIA']);
-        $diputacion->setNumVia($diputacion_res['NUM_VIA']);
-        $diputacion->setNombreVia($diputacion_res['NOMBRE_VIA']);
+        $diputacion->setTipoVia($diputacion_res['TIPOVIA']);
+        $diputacion->setNumVia($diputacion_res['NUMVIA']);
+        $diputacion->setNombreVia($diputacion_res['NOMBREVIA']);
         $diputacion->setTelefono($diputacion_res['TELEFONO']);
-        $diputacion->setCodigoPostal($diputacion_res['COD_POSTAL']);
+        $diputacion->setCodigoPostal($diputacion_res['CODPOSTAL']);
         $diputacion->setFax($diputacion_res['FAX']);
         $diputacion->setMail($diputacion_res['MAIL']);
         $diputacion->setWeb($diputacion_res['WEB']);

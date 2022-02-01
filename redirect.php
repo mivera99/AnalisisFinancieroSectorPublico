@@ -1,7 +1,8 @@
 <?php
 $nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
 
-$arr = explode(' - ', $nombre); 
+$arr = explode(' (', $nombre);
+$arr[1] = substr($arr[1], 0, -1);
 
 if(count($arr)==2){
     if($arr[1]=="CCAA"){

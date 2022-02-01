@@ -33,17 +33,17 @@ class DAOConsultorMunicipio{
         $provincia = mysqli_fetch_array($result);
         $municipio->setProvincia($provincia['NOMBRE']);
         
-        $municipio->setNombrePresidente($municipio_res['NOMBREALCALDE']);
+        $municipio->setNombreAlcalde($municipio_res['NOMBREALCALDE']);
         $municipio->setApellido1($municipio_res['APELLIDO1ALCALDE']);
         $municipio->setApellido2($municipio_res['APELLIDO2ALCALDE']);
         $municipio->setVigencia($municipio_res['VIGENCIA']);
         $municipio->setPartido($municipio_res['PARTIDO']);
         $municipio->setCif($municipio_res['CIF']);
-        $municipio->setTipoVia($municipio_res['TIPO_VIA']);
-        $municipio->setNumVia($municipio_res['NUM_VIA']);
-        $municipio->setNombreVia($municipio_res['NOMBRE_VIA']);
+        $municipio->setTipoVia($municipio_res['TIPOVIA']);
+        $municipio->setNumVia($municipio_res['NUMVIA']);
+        $municipio->setNombreVia($municipio_res['NOMBREVIA']);
         $municipio->setTelefono($municipio_res['TELEFONO']);
-        $municipio->setCodigoPostal($municipio_res['COD_POSTAL']);
+        $municipio->setCodigoPostal($municipio_res['CODPOSTAL']);
         $municipio->setFax($municipio_res['FAX']);
         $municipio->setMail($municipio_res['MAIL']);
         $municipio->setWeb($municipio_res['WEB']);
