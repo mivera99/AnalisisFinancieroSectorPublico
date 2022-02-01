@@ -10,7 +10,7 @@ class DAOConsultorMunicipio{
             return false;
         }
         $municipio = new Municipio();
-        $municipio_res = mysqli_fetch_array($result);
+        $municipio_res = mysqli_fetch_assoc($result);
 
         $municipio->setCodigo($municipio_res['CODIGO']);
         $municipio->setNombre($municipio_res['NOMBRE']);

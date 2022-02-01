@@ -24,7 +24,7 @@ class DAOConsultorDiputacion {
         if(!$result){
             return false;
         }
-        $autonomia = mysqli_fetch_array($result);
+        $autonomia = mysqli_fetch_assoc($result);
         $diputacion->setAutonomia($autonomia['NOMBRE']);
 
         $provinciaCode = $diputacion_res['PROVINCIA'];
