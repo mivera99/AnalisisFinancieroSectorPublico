@@ -33,7 +33,7 @@ class DAOConsultorDiputacion {
         if(!$result){
             return false;
         }
-        $provincia = mysqli_fetch_array($result);
+        $provincia = mysqli_fetch_assoc($result);
         $diputacion->setProvincia($provincia['NOMBRE']);
 
         $diputacion->setTipoVia($diputacion_res['TIPOVIA']);

@@ -21,7 +21,7 @@ class DAOConsultorMunicipio{
         if(!$result){
             return false;
         }
-        $autonomia = mysqli_fetch_array($result);
+        $autonomia = mysqli_fetch_assoc($result);
         $municipio->setAutonomia($autonomia['NOMBRE']);
 
         $provinciaCode = $municipio_res['PROVINCIA'];
