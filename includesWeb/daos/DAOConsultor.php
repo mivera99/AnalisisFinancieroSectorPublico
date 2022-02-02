@@ -102,6 +102,55 @@ class DAOConsultor{
         $municipio->setFax($tmpMunicipio->getFax());
         $municipio->setMail($tmpMunicipio->getMail());
         $municipio->setWeb($tmpMunicipio->getWeb());
+        $municipio->setScoring($tmpMunicipio->getScoring());
+
+        $municipio->setImpuestosDirectos1($tmpMunicipio->getImpuestosDirectos1());
+        $municipio->setImpuestosDirectos2($tmpMunicipio->getImpuestosDirectos2());
+        $municipio->setImpuestosDirectos3($tmpMunicipio->getImpuestosDirectos3());
+
+        $municipio->setImpuestosIndirectos1($tmpMunicipio->getImpuestosIndirectos1());
+        $municipio->setImpuestosIndirectos2($tmpMunicipio->getImpuestosIndirectos2());
+        $municipio->setImpuestosIndirectos3($tmpMunicipio->getImpuestosIndirectos3());
+
+        $municipio->setTasasPreciosOtros1($tmpMunicipio->getTasasPreciosOtros1());
+        $municipio->setTasasPreciosOtros2($tmpMunicipio->getTasasPreciosOtros2());
+        $municipio->setTasasPreciosOtros3($tmpMunicipio->getTasasPreciosOtros3());
+
+        $municipio->setTransferenciasCorrientes1($tmpMunicipio->getTransferenciasCorrientes1());
+        $municipio->setTransferenciasCorrientes2($tmpMunicipio->getTransferenciasCorrientes2());
+        $municipio->setTransferenciasCorrientes3($tmpMunicipio->getTransferenciasCorrientes3());
+
+        $municipio->setIngresosPatrimoniales1($tmpMunicipio->getIngresosPatrimoniales1());
+        $municipio->setIngresosPatrimoniales2($tmpMunicipio->getIngresosPatrimoniales2());
+        $municipio->setIngresosPatrimoniales3($tmpMunicipio->getIngresosPatrimoniales3());
+
+        $municipio->setTotalIngresosCorrientes1($tmpMunicipio->getTotalIngresosCorrientes1());
+        $municipio->setTotalIngresosCorrientes2($tmpMunicipio->getTotalIngresosCorrientes2());
+        $municipio->setTotalIngresosCorrientes3($tmpMunicipio->getTotalIngresosCorrientes3());
+        
+        $municipio->setEnajenacionInversionesReales1($tmpMunicipio->getEnajenacionInversionesReales1());
+        $municipio->setEnajenacionInversionesReales2($tmpMunicipio->getEnajenacionInversionesReales2());
+        $municipio->setEnajenacionInversionesReales3($tmpMunicipio->getEnajenacionInversionesReales3());
+
+        $municipio->setTransferenciasCapital1($tmpMunicipio->getTransferenciasCapital1());
+        $municipio->setTransferenciasCapital2($tmpMunicipio->getTransferenciasCapital2());
+        $municipio->setTransferenciasCapital3($tmpMunicipio->getTransferenciasCapital3());
+
+        $municipio->setTotalIngresosNoCorrientes1($tmpMunicipio->getTotalIngresosNoCorrientes1());
+        $municipio->setTotalIngresosNoCorrientes2($tmpMunicipio->getTotalIngresosNoCorrientes2());
+        $municipio->setTotalIngresosNoCorrientes3($tmpMunicipio->getTotalIngresosNoCorrientes3());
+
+        $municipio->setActivosFinancieros1($tmpMunicipio->getActivosFinancieros1());
+        $municipio->setActivosFinancieros2($tmpMunicipio->getActivosFinancieros2());
+        $municipio->setActivosFinancieros3($tmpMunicipio->getActivosFinancieros3());
+
+        $municipio->setPasivosFinancieros1($tmpMunicipio->getPasivosFinancieros1());
+        $municipio->setPasivosFinancieros2($tmpMunicipio->getPasivosFinancieros2());
+        $municipio->setPasivosFinancieros3($tmpMunicipio->getPasivosFinancieros3());
+
+        $municipio->setTotalIngresos1($tmpMunicipio->getTotalIngresos1());
+        $municipio->setTotalIngresos2($tmpMunicipio->getTotalIngresos2());
+        $municipio->setTotalIngresos3($tmpMunicipio->getTotalIngresos3());
 
         return $municipio;
     }
