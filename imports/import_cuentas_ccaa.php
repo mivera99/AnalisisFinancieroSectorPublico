@@ -94,10 +94,10 @@ class Import_cuentas_ccaa{
                         $leyenda = array(
                             "INCREMENTO PIB FECHA_REF" => "INCR_PIB",
                             "TASA DE PARO EN EL ÚLTIMO TRIMESTRE EN LA FECHA DE REFERENCIA" => "PARO", //tabla mensual
-                            "TRANSACCIONES INMOBILIARIAS FECHA_REF" => "TRANSAC_INMOBILIARIAS",
+                            "TRANSACCIONES INMOBILIARIAS FECHA_REF" => "TRANSAC_INMOBILIARIAS", //tabla mensual
                             "NÚMERO DE EMPRESAS EN LA FECHA DE REFERENCIA" => "N_EMPRESAS",
                             "PORCENTAJE DE LA CCAA EN EL PIB FECHA_REF" => "CCAA_PIB",
-                            "DEUDA VIVA ENTRE INGRESOS CORRIENTES FECHA_REF" => "DEUDA_VIVA_INGR_COR",
+                            "DEUDA VIVA ENTRE INGRESOS CORRIENTES FECHA_REF" => "DEUDA_VIVA_INGR_COR", //tabla amensual
                             "RATIO DE SOSTENIBILIDAD FINANCIERA FECHA_REF" => "R_SOSTE_FINANCIERA",
                             "RATIO DE EFICIENCIA EN LA FECHA DE REFERENCIA" => "R_EFIC",
                             "RATIO DE RIGIDEZ EN EL AÑO LA FECHA DE REFERENCIA" => "R_RIGIDEZ",
@@ -212,7 +212,7 @@ class Import_cuentas_ccaa{
                             $k--;
                         }
                         else{ //Bloque tamaño 4
-        
+                            //echo 'Bloque 4';
                             if($type == "PARO" || $type == "DEUDA_VIVA_INGR_COR" || $type == "TRANSAC_INMOBILIARIAS"){
                                 if($type == "PARO") {
                                     $yearArray = str_split($yearString);
@@ -415,7 +415,7 @@ class Import_cuentas_ccaa{
                     for($w;$w<$w_end;$w+=6){
                         $col = explode("_",$fields[$w]);
                         $tipo = $col[0];
-                        echo "<br><b>".$tipo."</b><br>";
+                        //echo "<br><b>".$tipo."</b><br>";
         
                         $v1 = $values[$w];      //CRED_INI
                         $v2 = $values[$w+1];    //MOD_CRED_INI
