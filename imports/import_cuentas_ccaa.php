@@ -56,7 +56,9 @@ class Import_cuentas_ccaa{
         $cols = Coordinate::columnIndexFromString($cols);
 
         $conn = getConexionBD();
-
+        /*echo $rows.'<br>';
+        echo $hoja->getCellByColumnAndRow(3,$hoja->getHighestDataRow()).'<br>';
+        */
         for($x = 1; $x < $rows + 1; $x++){
 
             for($y = 1; $y <= $cols; $y++){
@@ -69,11 +71,11 @@ class Import_cuentas_ccaa{
                 else
                     $fields[$y-1]=$valor; 
             }
-            if($x>1 && $values[0]!= "") {
+            if($x>1 && $values[1]!= "") { // Se escoge la posicion 1 en este caso porque es la que se va a usar como clave en la BBDD
                 /* EMPIEZA LA TOMA DE DATOS */
         
                 //$CIF_CCAA = $values[0];
-                $CODIGO_CCAA = $values[1];
+                $CODIGO_CCAA = intval($values[1]);
                 //$NOMBRE_CCAA = addslashes($values[2]);
                 //Añadimos el primer formato de datos (desde la columna D[3] hasta la BM[64], ambas incluidas)
                 for($k=3;$k<=64;$k+=4){

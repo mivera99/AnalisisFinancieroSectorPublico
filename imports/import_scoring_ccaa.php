@@ -90,7 +90,7 @@ class Import_scoring_ccaa{
                 else
                     $fields[$j-1]=$value;
             }
-            if($i>1 && $vals[0]!=""){
+            if($i>1 && $vals[1]!=""){
                 $CODIGO_CCAA=$vals[1];
                 //Se comienza a leer todas las rows. Se empieza desde la columna 3 porque es donde empieza la información que queremos guardar en la BBDD. 
                 for($k=0;$k<count($fields);$k++){

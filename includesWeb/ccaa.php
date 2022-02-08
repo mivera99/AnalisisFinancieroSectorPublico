@@ -119,6 +119,14 @@ class CCAA{
     /*private $total_gastos2;
     private $total_gastos3;*/
 
+    /*Cuentas mensuales */
+    private $paro;
+    private $pmp;
+    private $r_dcpp;
+    private $deuda_viva;
+    private $deuda_viva_ingr_cor;
+    private $transac_inmobiliarias;
+
     //Datos de scoring (tabla SCORING_CCAA)
     private $scoring;
     private $tendencia;
@@ -965,7 +973,58 @@ class CCAA{
     public function setTotalGastos3($total_gastos3){
         $this->total_gastos3 = $total_gastos3;
     }*/
-    // TABLA SCORING
+
+    /*Getters y setters de las cuentas mensuales*/
+
+    public function getParo(){
+        return $this->paro;
+    }
+
+    public function setParo($paro){
+        $this->paro = $paro;
+    }
+
+    public function getPMP(){
+        return $this->pmp;
+    }
+
+    public function setPMP($pmp){
+        $this->pmp = $pmp;
+    }
+
+    public function getRDCPP(){
+        return $this->r_dcpp;
+    }
+
+    public function setRDCPP($r_dcpp){
+        $this->r_dcpp = $r_dcpp;
+    }
+
+    public function getDeudaViva(){
+        return $this->deuda_viva;
+    }
+
+    public function setDeudaViva($deuda_viva){
+        $this->deuda_viva = $deuda_viva;
+    }
+
+    public function getDeudaVivaIngrCor(){
+        return $this->deuda_viva_ingr_cor;
+    }
+
+    public function setDeudaVivaIngrCor($deuda_viva_ingr_cor){
+        $this->deuda_viva_ingr_cor = $deuda_viva_ingr_cor;
+    }
+
+    public function getTransacInmobiliarias(){
+        return $this->transac_inmobiliarias;
+    }
+
+    public function setTransacInmobiliarias($transac_inmobiliarias){
+        $this->transac_inmobiliarias = $transac_inmobiliarias;
+    }
+
+    /*Getters y setters del scoring*/
     public function getScoring(){
         return $this->scoring;
     }

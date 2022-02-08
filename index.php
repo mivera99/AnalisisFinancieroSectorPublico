@@ -71,7 +71,8 @@ require_once('includesWeb/daos/DAOConsultor.php');
             <form autocomplete="off" action="redirect.php" method="post">
                 <div class="autocomplete" style="width:300px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
-                    <input type="submit" value="Consultar">
+                    <!--<input type="submit" value="Consultar">-->
+                    <button>Consultar</button>
                 </div>
                  <?php // Meter el onlcik para redirigir a la página ed ccaa, diputacion o municipio?>
             </form>
@@ -82,14 +83,6 @@ require_once('includesWeb/daos/DAOConsultor.php');
                 /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
                 autocomplete(document.getElementById("facility"));
             </script>
-
-
-
-            <br><br>
-            <h2>Informes</h2>
-            <br>
-            <a href="ccaa.php"><button>Comunidad de Madrid (prueba)</button></a>
-            <br><br><br><br>
         </div>
 
         <div id = "pie">

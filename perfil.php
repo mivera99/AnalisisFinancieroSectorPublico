@@ -59,7 +59,7 @@
                     <br>
                     <fieldset>
                         <p>Selecciona el archivo: </p><input type='file' name='file_button'> <br><br> 
-                        <input type="submit" class="form-button" value="Enviar">
+                        <button>Subir archivo</button>
                     </fieldset>
                 </form>
                 <br><br>

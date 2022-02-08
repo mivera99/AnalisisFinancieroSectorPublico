@@ -181,6 +181,27 @@ class DAOConsultor{
         return $ccaa;
     }
 
+    public function getCuentasMensualesInfo($ccaa, $codigo, $year, $month){
+        if(get_class($ccaa)!='CCAA')
+            return false;
+
+        $daoccaa = new DAOConsultorCCAA();
+
+        $tmpCCAA = $daoccaa->getCuentasGeneralMensual($codigo, $year, $month);
+        if(!$tmpCCAA){
+            return false;
+        }
+        
+        $ccaa->setParo($tmpCCAA->getParo());
+        $ccaa->setPMP($tmpCCAA->getPMP());
+        $ccaa->setRDCPP($tmpCCAA->getRDCPP());
+        $ccaa->setDeudaViva($tmpCCAA->getDeudaViva());
+        $ccaa->setDeudaVivaIngrCor($tmpCCAA->getDeudaVivaIngrCor());
+        $ccaa->setTransacInmobiliarias($tmpCCAA->getTransacInmobiliarias());
+
+        return $ccaa;
+    }
+
     public function getRatingInfo($ccaa, $codigo, $year){
         if(get_class($ccaa)!='CCAA')
             return false;

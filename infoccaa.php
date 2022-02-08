@@ -14,10 +14,35 @@ $ccaa2020 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2020);
 $ccaa2020 = $daoccaa->getRatingInfo($ccaa2020, $ccaa->getCodigo(), 2020);
 $ccaa2021 = $daoccaa->getRatingInfo(new CCAA(), $ccaa->getCodigo(), 2021);
 
-/*$ccaa2020nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2020);
+$ccaa2021Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2021, 6);
+$ccaa2020Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 6);
+$ccaa2019Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 6);
+$ccaa2018Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2018, 6);
+
+$ccaa2021Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2021, 3);
+$ccaa2020Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 3);
+$ccaa2019Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 3);
+$ccaa2018Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2018, 3);
+
+$ccaa2020nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2020);
 $ccaa2019nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2019);
 $ccaa2018nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2018);
-*/
+
+$ccaa2021nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2021, 3);
+$ccaa2020nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 3);
+$ccaa2019nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 3);
+$ccaa2018nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2018, 3);
+
+$ccaa2020nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 6);
+$ccaa2019nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 6);
+$ccaa2018nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2018, 6);
+
+$ccaa2020Mes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 5);
+$ccaa2019Mes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 5);
+$ccaa2020nacMes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 5);
+$ccaa2019nacMes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 5);
+
+
 $encontrado = false;
 if($ccaa){
     $encontrado = true;
@@ -75,11 +100,100 @@ if($ccaa){
                 echo '<p>Correo electrónico: '.$ccaa->getMail().'</p>';
             ?>
                 <h3>Datos económicos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Población: <?php echo $ccaa->getNombre();?></th>
+                            <th></th>
+                            <th>PIB per cápita: <?php echo $ccaa2020->getCCAAPib();?></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <h4>Incremento del PIB de la comunidad<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020->getIncrPib()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019->getIncrPib()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018->getIncrPib()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Incremento del PIB nacional<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020nac->getIncrPib()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019nac->getIncrPib()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018nac->getIncrPib()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Paro<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020Mes6->getParo()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019Mes6->getParo()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018Mes6->getParo()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Paro nacional<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020nacMes6->getParo()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019nacMes6->getParo()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018nacMes6->getParo()*100).'%';?></li>
+                                </ul>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h4>Transacciones inmobiliarias<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020Mes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019Mes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018Mes3->getTransacInmobiliarias()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Transacciones inmobiliarias nacionales<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020nacMes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019nacMes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018nacMes3->getTransacInmobiliarias()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Crecimiento de las empresas en la comunidad<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020->getEmpresas()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019->getEmpresas()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018->getEmpresas()*100).'%';?></li>
+                                </ul>
+                            </th>
+                            <th>
+                                <h4>Crecimiento de las empresas a nivel nacional<h4>
+                                <ul>
+                                    <li>2020: <?php echo ($ccaa2020nac->getEmpresas()*100).'%';?></li>
+                                    <li>2019: <?php echo ($ccaa2019nac->getEmpresas()*100).'%';?></li>
+                                    <li>2018: <?php echo ($ccaa2018nac->getEmpresas()*100).'%';?></li>
+                                </ul>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
                 <br>
                 <h3>Resultado presupuestario y endeudamiento</h3>
                 <p>Resultado presupuestario 2020: <?php echo $ccaa2020->getCCAAPib();?></p>
                 <p>Resultado presupuestario 2019: <?php echo $ccaa2019->getCCAAPib();?></p>
                 <p>Resultado presupuestario 2018: <?php echo $ccaa2018->getCCAAPib();?></p>
+                <p>Resultado presupuestario nacional 2020: <?php echo $ccaa2020nac->getCCAAPib();?></p>
+                <p>Resultado presupuestario nacional 2019: <?php echo $ccaa2019nac->getCCAAPib();?></p>
+                <p>Resultado presupuestario nacional 2018: <?php echo $ccaa2018nac->getCCAAPib();?></p>
+                <p>Deuda viva sobre ingresos corrientes 2021 trimestre n : <?php echo $ccaa2021Mes3->getDeudaVivaIngrCor();?></p>
+                <p>Deuda viva sobre ingresos corrientes 2020 trimestre n : <?php echo $ccaa2020Mes3->getDeudaVivaIngrCor();?></p>
+                <p>Deuda viva sobre ingresos corrientes 2019 trimestre n : <?php echo $ccaa2019Mes3->getDeudaVivaIngrCor();?></p>
+                <p>Deuda viva nacional sobre ingresos corrientes 2021 trimestre n : <?php echo $ccaa2021nacMes3->getDeudaVivaIngrCor();?></p>
+                <p>Deuda viva nacional sobre ingresos corrientes 2020 trimestre n : <?php echo $ccaa2020nacMes3->getDeudaVivaIngrCor();?></p>
+                <p>Deuda viva nacional sobre ingresos corrientes 2019 trimestre n : <?php echo $ccaa2019nacMes3->getDeudaVivaIngrCor();?></p>
                 <br>
                 <p></p>
                 <h3>Ingresos (en €)</h3>
@@ -374,7 +488,10 @@ if($ccaa){
                     const barChartA = new Chart(chartA, configChartA);
                 </script>
                 <h3>Liquidez</h3>
-
+                <p>PMP 2020: <?php echo $ccaa2020Mes5->getPMP();?></p>
+                <p>PMP 2019: <?php echo $ccaa2019Mes5->getPMP();?></p>
+                <p>PMP media 2020: <?php echo $ccaa2020nacMes5->getPMP();?></p>
+                <p>PMP media 2019: <?php echo $ccaa2019nacMes5->getPMP();?></p>
                 <h3>Eficiencia</h3>
                 <p>Eficiencia 2020: <?php echo $ccaa2020->getREfic();?></p>
                 <p>Eficiencia 2019: <?php echo $ccaa2019->getREfic();?></p>
