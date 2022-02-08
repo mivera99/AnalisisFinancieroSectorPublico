@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('includesWeb\daos\DAOConsultor.php');
+require_once('includesWeb/daos/DAOConsultor.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">

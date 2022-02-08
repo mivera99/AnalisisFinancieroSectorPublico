@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('includesWeb\daos\DAOUsuario.php');
+require_once('includesWeb/daos/DAOUsuario.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">

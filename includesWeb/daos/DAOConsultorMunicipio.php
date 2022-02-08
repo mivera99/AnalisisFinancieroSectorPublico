@@ -13,6 +13,7 @@ class DAOConsultorMunicipio{
         $municipio_res = mysqli_fetch_assoc($result);
 
         $municipio->setCodigo($municipio_res['CODIGO']);
+        $municipio->setCif($municipio_res['CIF']);
         $municipio->setNombre($municipio_res['NOMBRE']);
         
         $ccaaCode = $municipio_res['AUTONOMIA'];
@@ -31,22 +32,25 @@ class DAOConsultorMunicipio{
             return false;
         }
         $provincia = mysqli_fetch_array($result);
+
         $municipio->setProvincia($provincia['NOMBRE']);
-        
+
         $municipio->setNombreAlcalde($municipio_res['NOMBREALCALDE']);
         $municipio->setApellido1($municipio_res['APELLIDO1ALCALDE']);
         $municipio->setApellido2($municipio_res['APELLIDO2ALCALDE']);
         $municipio->setVigencia($municipio_res['VIGENCIA']);
         $municipio->setPartido($municipio_res['PARTIDO']);
-        $municipio->setCif($municipio_res['CIF']);
         $municipio->setTipoVia($municipio_res['TIPOVIA']);
-        $municipio->setNumVia($municipio_res['NUMVIA']);
         $municipio->setNombreVia($municipio_res['NOMBREVIA']);
-        $municipio->setTelefono($municipio_res['TELEFONO']);
+        $municipio->setNumVia($municipio_res['NUMVIA']);
         $municipio->setCodigoPostal($municipio_res['CODPOSTAL']);
+        $municipio->setTelefono($municipio_res['TELEFONO']);
         $municipio->setFax($municipio_res['FAX']);
-        $municipio->setMail($municipio_res['MAIL']);
         $municipio->setWeb($municipio_res['WEB']);
+        $municipio->setMail($municipio_res['MAIL']);
+
+
+        
 
         $cod = $municipio_res['CODIGO'];
         $sql = "SELECT RATING FROM scoring_mun WHERE CODIGO = '$cod' AND ANHO = '2021'";
@@ -57,10 +61,18 @@ class DAOConsultorMunicipio{
         $scoring = mysqli_fetch_assoc($result);
         $municipio->setScoring($scoring['RATING']);
 
+        
 
+        return $municipio;
+    }
+
+    public function getIngresos($codigo, $year){
+        $db = getConexionBD();
+
+        $municipio = new Municipio();
         /* INGRESOS */
-        $cod = $municipio_res['CODIGO'];
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR1'";
+        //Impuestos Directos
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR1'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -68,24 +80,9 @@ class DAOConsultorMunicipio{
         $impuestos_directos1 = mysqli_fetch_assoc($result);
         $municipio->setImpuestosDirectos1($impuestos_directos1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR1'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $impuestos_directos2 = mysqli_fetch_assoc($result);
-        $municipio->setImpuestosDirectos2($impuestos_directos2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR1'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $impuestos_directos3 = mysqli_fetch_assoc($result);
-        $municipio->setImpuestosDirectos3($impuestos_directos3['DERE']);
 
         //Impuestos Indirectos
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR2'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR2'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -93,24 +90,9 @@ class DAOConsultorMunicipio{
         $impuestos_indirectos1 = mysqli_fetch_assoc($result);
         $municipio->setImpuestosIndirectos1($impuestos_indirectos1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR2'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $impuestos_indirectos2 = mysqli_fetch_assoc($result);
-        $municipio->setImpuestosIndirectos2($impuestos_indirectos2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR2'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $impuestos_indirectos3 = mysqli_fetch_assoc($result);
-        $municipio->setImpuestosIndirectos3($impuestos_indirectos3['DERE']);
 
         //Tasas Precios Otros
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR3'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR3'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -118,24 +100,9 @@ class DAOConsultorMunicipio{
         $tasas_precios_otros1 = mysqli_fetch_assoc($result);
         $municipio->setTasasPreciosOtros1($tasas_precios_otros1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR3'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $tasas_precios_otros2 = mysqli_fetch_assoc($result);
-        $municipio->setTasasPreciosOtros2($tasas_precios_otros2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR3'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $tasas_precios_otros3 = mysqli_fetch_assoc($result);
-        $municipio->setTasasPreciosOtros3($tasas_precios_otros3['DERE']);
 
         //Transferencias Corrientes
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR4'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR4'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -143,24 +110,9 @@ class DAOConsultorMunicipio{
         $transferencias_corrientes1 = mysqli_fetch_assoc($result);
         $municipio->setTransferenciasCorrientes1($transferencias_corrientes1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR4'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $transferencias_corrientes2 = mysqli_fetch_assoc($result);
-        $municipio->setTransferenciasCorrientes2($transferencias_corrientes2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR4'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $transferencias_corrientes3 = mysqli_fetch_assoc($result);
-        $municipio->setTransferenciasCorrientes3($transferencias_corrientes3['DERE']);
 
         //Ingresos Patrimoniales
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR5'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR5'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -168,34 +120,14 @@ class DAOConsultorMunicipio{
         $ingresos_patrimoniales1 = mysqli_fetch_assoc($result);
         $municipio->setIngresosPatrimoniales1($ingresos_patrimoniales1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR5'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $ingresos_patrimoniales2 = mysqli_fetch_assoc($result);
-        $municipio->setIngresosPatrimoniales2($ingresos_patrimoniales2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR5'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $ingresos_patrimoniales3 = mysqli_fetch_assoc($result);
-        $municipio->setIngresosPatrimoniales3($ingresos_patrimoniales3['DERE']);
 
         //Total Ingresos Corrientes
         $totalIngresosCorrientes1 = floatval($impuestos_directos1['DERE']) + floatval($impuestos_indirectos1['DERE']) + floatval($tasas_precios_otros1['DERE']) + floatval($transferencias_corrientes1['DERE']) + floatval($ingresos_patrimoniales1['DERE']);
         $municipio->setTotalIngresosCorrientes1($totalIngresosCorrientes1);
 
-        $totalIngresosCorrientes2 = floatval($impuestos_directos2['DERE']) + floatval($impuestos_indirectos2['DERE']) + floatval($tasas_precios_otros2['DERE']) + floatval($transferencias_corrientes2['DERE']) + floatval($ingresos_patrimoniales2['DERE']);
-        $municipio->setTotalIngresosCorrientes2($totalIngresosCorrientes2);
-
-        $totalIngresosCorrientes3 = floatval($impuestos_directos3['DERE']) + floatval($impuestos_indirectos3['DERE']) + floatval($tasas_precios_otros3['DERE']) + floatval($transferencias_corrientes3['DERE']) + floatval($ingresos_patrimoniales3['DERE']);
-        $municipio->setTotalIngresosCorrientes3($totalIngresosCorrientes3);
-
+        
         //Enajenación de Inversiones Reales
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR6'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR6'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -203,24 +135,9 @@ class DAOConsultorMunicipio{
         $enajenacion_inversiones_reales1 = mysqli_fetch_assoc($result);
         $municipio->setEnajenacionInversionesReales1($enajenacion_inversiones_reales1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR6'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $enajenacion_inversiones_reales2 = mysqli_fetch_assoc($result);
-        $municipio->setEnajenacionInversionesReales2($enajenacion_inversiones_reales2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR6'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $enajenacion_inversiones_reales3 = mysqli_fetch_assoc($result);
-        $municipio->setEnajenacionInversionesReales3($enajenacion_inversiones_reales3['DERE']);
 
         //Transferencias de Capital
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR7'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR7'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -228,34 +145,13 @@ class DAOConsultorMunicipio{
         $transferencias_capital1 = mysqli_fetch_assoc($result);
         $municipio->setTransferenciasCapital1($transferencias_capital1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR7'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $transferencias_capital2 = mysqli_fetch_assoc($result);
-        $municipio->setTransferenciasCapital2($transferencias_capital2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR7'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $transferencias_capital3 = mysqli_fetch_assoc($result);
-        $municipio->setTransferenciasCapital3($transferencias_capital3['DERE']);
-
         //Ingresos No Financieros
         $total_ingresos_no_corrientes1 = floatval($enajenacion_inversiones_reales1['DERE']) + floatval($transferencias_capital1['DERE']);
         $municipio->setTotalIngresosNoCorrientes1($total_ingresos_no_corrientes1);
 
-        $total_ingresos_no_corrientes2 = floatval($enajenacion_inversiones_reales2['DERE']) + floatval($transferencias_capital2['DERE']);
-        $municipio->setTotalIngresosNoCorrientes2($total_ingresos_no_corrientes2);
-
-        $total_ingresos_no_corrientes3 = floatval($enajenacion_inversiones_reales3['DERE']) + floatval($transferencias_capital3['DERE']);
-        $municipio->setTotalIngresosNoCorrientes3($total_ingresos_no_corrientes3);
 
         //Activos Financieros
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR8'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR8'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -263,24 +159,8 @@ class DAOConsultorMunicipio{
         $activos_financieros1 = mysqli_fetch_assoc($result);
         $municipio->setActivosFinancieros1($activos_financieros1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR8'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $activos_financieros2 = mysqli_fetch_assoc($result);
-        $municipio->setActivosFinancieros2($activos_financieros2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR8'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $activos_financieros3 = mysqli_fetch_assoc($result);
-        $municipio->setActivosFinancieros3($activos_financieros3['DERE']);
-
         //Pasivos Financieros
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2020' AND TIPO = 'PARTIDAINGR9'";
+        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR9'";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -288,36 +168,231 @@ class DAOConsultorMunicipio{
         $pasivos_financieros1 = mysqli_fetch_assoc($result);
         $municipio->setPasivosFinancieros1($pasivos_financieros1['DERE']);
 
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2019' AND TIPO = 'PARTIDAINGR9'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $pasivos_financieros2 = mysqli_fetch_assoc($result);
-        $municipio->setPasivosFinancieros2($pasivos_financieros2['DERE']);
-
-        $sql = "SELECT DERE FROM cuentas_mun_ingresos WHERE CODIGO = '$cod' AND ANHO = '2018' AND TIPO = 'PARTIDAINGR9'";
-        $result = mysqli_query($db,$sql);
-        if(!$result){
-            return false;
-        }
-        $pasivos_financieros3 = mysqli_fetch_assoc($result);
-        $municipio->setPasivosFinancieros3($pasivos_financieros3['DERE']);
 
         //TOTAL INGRESOS
         $total_ingresos1 = $totalIngresosCorrientes1 + $total_ingresos_no_corrientes1 + $activos_financieros1['DERE'] + $pasivos_financieros1['DERE'];
         $municipio->setTotalIngresos1($total_ingresos1);
 
-        $total_ingresos2 = floatval($totalIngresosCorrientes2) + floatval($total_ingresos_no_corrientes2) + floatval($activos_financieros2['DERE']) + floatval($pasivos_financieros2['DERE']);
-        $municipio->setTotalIngresos2($total_ingresos2);
-
-        $total_ingresos3 = floatval($totalIngresosCorrientes3) + floatval($total_ingresos_no_corrientes3) + floatval($activos_financieros3['DERE']) + floatval($pasivos_financieros3['DERE']);
-        $municipio->setTotalIngresos3($total_ingresos3);
-
-
-
         return $municipio;
     }
+
+    public function getGastos($codigo, $year){
+        $db = getConexionBD();
+        /*$sql = "SELECT * FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $ccaa = new CCAA();
+        $ccaa_res = mysqli_fetch_assoc($result);
+
+        $ccaa->setCredIni($ccaa_res['CRED_INI']);
+        $ccaa->setModCred($ccaa_res['MOD_CRED']);
+        $ccaa->setCredTot($ccaa_res['CRED_TOT']);
+        $ccaa->setOblgRec($ccaa_res['OBLG']);
+        $ccaa->setPagosCor($ccaa_res['PAGOS_COR']);
+        $ccaa->setPagosCer($ccaa_res['PAGOS_CER']);
+        */
+        $mun = new Municipio();
+        /* GASTOS */
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST1'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $gastos_personal1 = mysqli_fetch_assoc($result);
+        $mun->setGastosPersonal1($gastos_personal1['OBLG']);
+
+        //Gastos Corrientes de Bienes y Servicios
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST2'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $gastos_corrientes_bienes_servicios1 = mysqli_fetch_assoc($result);
+        $mun->setGastosCorrientesBienesServicios1($gastos_corrientes_bienes_servicios1['OBLG']);
+
+        //Gastos Financieros
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST3'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $gastos_financieros1 = mysqli_fetch_assoc($result);
+        $mun->setGastosFinancieros1($gastos_financieros1['OBLG']);
+
+        //Transferencias Corrientes
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST4'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $transferencias_corrientes_gastos1 = mysqli_fetch_assoc($result);
+        $mun->setTransferenciasCorrientesGastos1($transferencias_corrientes_gastos1['OBLG']);
+
+        //Fondo Contingencia
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST5'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $fondo_contingencia1 = mysqli_fetch_assoc($result);
+        $mun->setFondoContingencia1($fondo_contingencia1['OBLG']);
+
+        //Total Gastos Corrientes
+        $total_gastos_corrientes1 = floatval($gastos_personal1['OBLG']) + floatval($gastos_corrientes_bienes_servicios1['OBLG']) + floatval($gastos_financieros1['OBLG']) + floatval($transferencias_corrientes_gastos1['OBLG']) + floatval($fondo_contingencia1['OBLG']);
+        $mun->setTotalGastosCorrientes1($total_gastos_corrientes1);
+
+        //Inversiones Reales
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST6'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $inversiones_reales1 = mysqli_fetch_assoc($result);
+        $mun->setInversionesReales1($inversiones_reales1['OBLG']);
+
+        //Transferencias de Capital
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST7'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $transferencias_capital_gastos1 = mysqli_fetch_assoc($result);
+        $mun->setTransferenciasCapitalGastos1($transferencias_capital_gastos1['OBLG']);
+
+        //Gastos No Financieros
+        $total_gastos_no_corrientes1 = floatval($inversiones_reales1['OBLG']) + floatval($transferencias_capital_gastos1['OBLG']);
+        $mun->setTotalIngresosNoCorrientes1($total_gastos_no_corrientes1);
+
+        //Activos Financieros
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST8'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $activos_financieros_gastos1 = mysqli_fetch_assoc($result);
+        $mun->setActivosFinancierosGastos1($activos_financieros_gastos1['OBLG']);
+
+        //Pasivos Financieros
+        $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST9'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $pasivos_financieros_gastos1 = mysqli_fetch_assoc($result);
+        $mun->setPasivosFinancierosGastos1($pasivos_financieros_gastos1['OBLG']);
+
+        //TOTAL GASTOS
+
+        $total_gastos1 = floatval($total_gastos_corrientes1) + floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
+        $mun->setTotalIngresos1($total_gastos1);
+
+
+        return $mun;
+    }
+
+    public function getEndeudamiento($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+        //Deuda Financiera
+        $sql = "SELECT DEUDAFIN FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $deuda_financiera = mysqli_fetch_assoc($result);
+        
+        $mun->setDeudaFinanciera($deuda_financiera['DEUDAFIN']);
+
+        //Endeudamiento
+        $sql = "SELECT R1 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $endeudamiento = mysqli_fetch_assoc($result);
+        $mun->setEndeudamiento($endeudamiento['R1']);
+
+        //Endeudamiento Media Nacional
+        $sql = "SELECT R1_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $endeudamiento_media_nacional = mysqli_fetch_assoc($result);
+        $mun->setEndeudamientoMediaDiputaciones($endeudamiento_media_nacional['R1_NAC']);
+        
+
+        return $mun;
+
+    } 
+
+    public function getSostenibilidad($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+ 
+        //Sostenibilidad Financiera
+        $sql = "SELECT R2 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $sostenibilidad_financiera = mysqli_fetch_assoc($result);
+        $mun->setSostenibilidadFinanciera($sostenibilidad_financiera['R2']);
+
+        //Sostenibilidad Financiera Media Diputaciones
+        $sql = "SELECT R2_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $sostenibilidad_financiera_media = mysqli_fetch_assoc($result);
+        $mun->setSostenibilidadFinancieraMediaDiputaciones($sostenibilidad_financiera_media['R2_NAC']);
+
+        //Apalancamiento Operativo
+        $sql = "SELECT R3 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $apalancamiento_operativo = mysqli_fetch_assoc($result);
+        $mun->setApalancamientoOperativo($apalancamiento_operativo['R3']);
+
+        //Apalancamiento Operativo Media Diputaciones
+        $sql = "SELECT R3_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $apalancamiento_operativo_media = mysqli_fetch_assoc($result);
+        $mun->setApalancamientoOperativoMediaDiputaciones($apalancamiento_operativo_media['R3_NAC']);
+
+        //Sostenibilidad de la Deuda
+        $sql = "SELECT R4 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $sostenibilidad_deuda = mysqli_fetch_assoc($result);
+        $mun->setSostenibilidadDeuda($sostenibilidad_deuda['R4']);
+
+
+        //Sostenibilidad de la Deuda Media Diputaciones
+        $sql = "SELECT R4_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $sostenibilidad_deuda_media = mysqli_fetch_assoc($result);
+        $mun->setSostenibilidadDeudaMediaDiputaciones($sostenibilidad_deuda_media['R4_NAC']);
+
+
+        return $mun;
+
+    } 
 
 }
 

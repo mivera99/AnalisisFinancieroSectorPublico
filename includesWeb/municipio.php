@@ -27,41 +27,70 @@ class Municipio{
 
     /* INGRESOS */
     private $impuestos_directos1;
-    private $impuestos_directos2;
-    private $impuestos_directos3;
     private $impuestos_indirectos1;
-    private $impuestos_indirectos2;
-    private $impuestos_indirectos3;
     private $tasas_precios_otros1;
-    private $tasas_precios_otros2;
-    private $tasas_precios_otros3;
     private $transferencias_corrientes1;
-    private $transferencias_corrientes2;
-    private $transferencias_corrientes3;
     private $ingresos_patrimoniales1;
-    private $ingresos_patrimoniales2;
-    private $ingresos_patrimoniales3;
     private $total_ingresos_corrientes1;
-    private $total_ingresos_corrientes2;
-    private $total_ingresos_corrientes3;
     private $enajenacion_inversiones_reales1;
-    private $enajenacion_inversiones_reales2;
-    private $enajenacion_inversiones_reales3;
     private $transferencias_capital1;
-    private $transferencias_capital2;
-    private $transferencias_capital3;
     private $total_ingresos_no_corrientes1;
-    private $total_ingresos_no_corrientes2;
-    private $total_ingresos_no_corrientes3;
     private $activos_financieros1;
-    private $activos_financieros2;
-    private $activos_financieros3;
     private $pasivos_financieros1;
-    private $pasivos_financieros2;
-    private $pasivos_financieros3;
     private $total_ingresos1;
-    private $total_ingresos2;
-    private $total_ingresos3;
+
+    /* GASTOS */
+    private $gastos_personal1;
+    /*private $gastos_personal2;
+    private $gastos_personal3;*/
+    private $gastos_corrientes_bienes_servicios1;
+    /*private $gastos_corrientes_bienes_servicios2;
+    private $gastos_corrientes_bienes_servicios3;*/
+    private $gastos_financieros1;
+    /*private $gastos_financieros2;
+    private $gastos_financieros3;*/
+    private $transferencias_corrientes_gastos1;
+    /*private $transferencias_corrientes_gastos2;
+    private $transferencias_corrientes_gastos3;*/
+    private $fondo_contingencia1;
+    /*private $fondo_contingencia2;
+    private $fondo_contingencia3;*/
+    private $total_gastos_corrientes1;
+    /*private $total_gastos_corrientes2;
+    private $total_gastos_corrientes3;*/
+    private $inversiones_reales1;
+    /*private $inversiones_reales2;
+    private $inversiones_reales3;*/
+    private $transferencias_capital_gastos1;
+    /*private $transferencias_capital_gastos2;
+    private $transferencias_capital_gastos3;*/
+    private $total_gastos_no_financieros1;
+    /*private $total_gastos_no_financieros2;
+    private $total_gastos_no_financieros3;*/
+    private $activos_financieros_gastos1;
+    /*private $activos_financieros_gastos2;
+    private $activos_financieros_gastos3;*/
+    private $pasivos_financieros_gastos1;
+    /*private $pasivos_financieros_gastos2;
+    private $pasivos_financieros_gastos3;*/
+    private $total_gastos1;
+    /*private $total_gastos2;
+    private $total_gastos3;*/
+
+
+    /* ENDEUDAMIENTO */
+    private $deuda_financiera;
+    private $endeudamiento;
+    private $endeudamiento_media;
+
+    /* SOLVENCIA */
+    private $sostenibilidad_financiera;
+    private $sostenibilidad_financiera_media;
+    private $apalancamiento_operativo;
+    private $apalancamiento_operativo_media;
+    private $sostenibilidad_deuda;
+    private $sostenibilidad_deuda_media;
+
 
     public function getCodigo(){
         return $this->codigo;
@@ -147,8 +176,8 @@ class Municipio{
         return $this->tipo_via;
     }
     
-    public function setTipoVia($cod){
-        $this->codigo = $cod;
+    public function setTipoVia($tipo_via){
+        $this->tipo_via = $tipo_via;
     }
     
     public function getNombreVia(){
@@ -224,44 +253,12 @@ class Municipio{
         $this->impuestos_directos1 = $impuestos_directos1;
     }
 
-    public function getImpuestosDirectos2(){
-        return $this->impuestos_directos2;
-    }
-
-    public function setImpuestosDirectos2($impuestos_directos2){
-        $this->impuestos_directos2 = $impuestos_directos2;
-    }
-
-    public function getImpuestosDirectos3(){
-        return $this->impuestos_directos3;
-    }
-
-    public function setImpuestosDirectos3($impuestos_directos3){
-        $this->impuestos_directos3 = $impuestos_directos3;
-    }
-
     public function getImpuestosIndirectos1(){
         return $this->impuestos_indirectos1;
     }
 
     public function setImpuestosIndirectos1($impuestos_indirectos1){
         $this->impuestos_indirectos1 = $impuestos_indirectos1;
-    }
-
-    public function getImpuestosIndirectos2(){
-        return $this->impuestos_indirectos2;
-    }
-
-    public function setImpuestosIndirectos2($impuestos_indirectos2){
-        $this->impuestos_indirectos2 = $impuestos_indirectos2;
-    }
-
-    public function getImpuestosIndirectos3(){
-        return $this->impuestos_indirectos3;
-    }
-
-    public function setImpuestosIndirectos3($impuestos_indirectos3){
-        $this->impuestos_indirectos3 = $impuestos_indirectos3;
     }
 
     public function getTasasPreciosOtros1(){
@@ -272,44 +269,12 @@ class Municipio{
         $this->tasas_precios_otros1 = $tasas_precios_otros1;
     }
 
-    public function getTasasPreciosOtros2(){
-        return $this->tasas_precios_otros2;
-    }
-
-    public function setTasasPreciosOtros2($tasas_precios_otros2){
-        $this->tasas_precios_otros2 = $tasas_precios_otros2;
-    }
-
-    public function getTasasPreciosOtros3(){
-        return $this->tasas_precios_otros3;
-    }
-
-    public function setTasasPreciosOtros3($tasas_precios_otros3){
-        $this->tasas_precios_otros3 = $tasas_precios_otros3;
-    }
-
     public function getTransferenciasCorrientes1(){
         return $this->transferencias_corrientes1;
     }
 
     public function setTransferenciasCorrientes1($transferencias_corrientes1){
         $this->transferencias_corrientes1 = $transferencias_corrientes1;
-    }
-
-    public function getTransferenciasCorrientes2(){
-        return $this->transferencias_corrientes2;
-    }
-
-    public function setTransferenciasCorrientes2($transferencias_corrientes2){
-        $this->transferencias_corrientes2 = $transferencias_corrientes2;
-    }
-
-    public function getTransferenciasCorrientes3(){
-        return $this->transferencias_corrientes3;
-    }
-
-    public function setTransferenciasCorrientes3($transferencias_corrientes3){
-        $this->transferencias_corrientes3 = $transferencias_corrientes3;
     }
 
     public function getIngresosPatrimoniales1(){
@@ -320,44 +285,12 @@ class Municipio{
         $this->ingresos_patrimoniales1 = $ingresos_patrimoniales1;
     }
 
-    public function getIngresosPatrimoniales2(){
-        return $this->ingresos_patrimoniales2;
-    }
-
-    public function setIngresosPatrimoniales2($ingresos_patrimoniales2){
-        $this->ingresos_patrimoniales2 = $ingresos_patrimoniales2;
-    }
-
-    public function getIngresosPatrimoniales3(){
-        return $this->ingresos_patrimoniales3;
-    }
-
-    public function setIngresosPatrimoniales3($ingresos_patrimoniales3){
-        $this->ingresos_patrimoniales3 = $ingresos_patrimoniales3;
-    }
-
     public function getTotalIngresosCorrientes1(){
         return $this->total_ingresos_corrientes1;
     }
 
     public function setTotalIngresosCorrientes1($total_ingresos_corrientes1){
         $this->total_ingresos_corrientes1 = $total_ingresos_corrientes1;
-    }
-
-    public function getTotalIngresosCorrientes2(){
-        return $this->total_ingresos_corrientes2;
-    }
-
-    public function setTotalIngresosCorrientes2($total_ingresos_corrientes2){
-        $this->total_ingresos_corrientes2 = $total_ingresos_corrientes2;
-    }
-
-    public function getTotalIngresosCorrientes3(){
-        return $this->total_ingresos_corrientes3;
-    }
-
-    public function setTotalIngresosCorrientes3($total_ingresos_corrientes3){
-        $this->total_ingresos_corrientes3 = $total_ingresos_corrientes3;
     }
 
     public function getEnajenacionInversionesReales1(){
@@ -368,44 +301,12 @@ class Municipio{
         $this->enajenacion_inversiones_reales1 = $enajenacion_inversiones_reales1;
     }
 
-    public function getEnajenacionInversionesReales2(){
-        return $this->enajenacion_inversiones_reales2;
-    }
-
-    public function setEnajenacionInversionesReales2($enajenacion_inversiones_reales2){
-        $this->enajenacion_inversiones_reales2 = $enajenacion_inversiones_reales2;
-    }
-
-    public function getEnajenacionInversionesReales3(){
-        return $this->enajenacion_inversiones_reales3;
-    }
-
-    public function setEnajenacionInversionesReales3($enajenacion_inversiones_reales3){
-        $this->enajenacion_inversiones_reales3 = $enajenacion_inversiones_reales3;
-    }
-
     public function getTransferenciasCapital1(){
         return $this->transferencias_capital1;
     }
 
     public function setTransferenciasCapital1($transferencias_capital1){
         $this->transferencias_capital1 = $transferencias_capital1;
-    }
-
-    public function getTransferenciasCapital2(){
-        return $this->transferencias_capital2;
-    }
-
-    public function setTransferenciasCapital2($transferencias_capital2){
-        $this->transferencias_capital2 = $transferencias_capital2;
-    }
-
-    public function getTransferenciasCapital3(){
-        return $this->transferencias_capital3;
-    }
-
-    public function setTransferenciasCapital3($transferencias_capital3){
-        $this->transferencias_capital3 = $transferencias_capital3;
     }
 
     public function getTotalIngresosNoCorrientes1(){
@@ -416,44 +317,12 @@ class Municipio{
         $this->total_ingresos_no_corrientes1 = $total_ingresos_no_corrientes1;
     }
 
-    public function getTotalIngresosNoCorrientes2(){
-        return $this->total_ingresos_no_corrientes2;
-    }
-
-    public function setTotalIngresosNoCorrientes2($total_ingresos_no_corrientes2){
-        $this->total_ingresos_no_corrientes2 = $total_ingresos_no_corrientes2;
-    }
-
-    public function getTotalIngresosNoCorrientes3(){
-        return $this->total_ingresos_no_corrientes3;
-    }
-
-    public function setTotalIngresosNoCorrientes3($total_ingresos_no_corrientes3){
-        $this->total_ingresos_no_corrientes3 = $total_ingresos_no_corrientes3;
-    }
-
     public function getActivosFinancieros1(){
         return $this->activos_financieros1;
     }
 
     public function setActivosFinancieros1($activos_financieros1){
         $this->activos_financieros1 = $activos_financieros1;
-    }
-
-    public function getActivosFinancieros2(){
-        return $this->activos_financieros2;
-    }
-
-    public function setActivosFinancieros2($activos_financieros2){
-        $this->activos_financieros2 = $activos_financieros2;
-    }
-
-    public function getActivosFinancieros3(){
-        return $this->activos_financieros3;
-    }
-
-    public function setActivosFinancieros3($activos_financieros3){
-        $this->activos_financieros3 = $activos_financieros3;
     }
 
     public function getPasivosFinancieros1(){
@@ -464,22 +333,6 @@ class Municipio{
         $this->pasivos_financieros1 = $pasivos_financieros1;
     }
 
-    public function getPasivosFinancieros2(){
-        return $this->pasivos_financieros2;
-    }
-
-    public function setPasivosFinancieros2($pasivos_financieros2){
-        $this->pasivos_financieros2 = $pasivos_financieros2;
-    }
-
-    public function getPasivosFinancieros3(){
-        return $this->pasivos_financieros3;
-    }
-
-    public function setPasivosFinancieros3($pasivos_financieros3){
-        $this->pasivos_financieros3 = $pasivos_financieros3;
-    }
-
     public function getTotalIngresos1(){
         return $this->total_ingresos1;
     }
@@ -488,20 +341,179 @@ class Municipio{
         $this->total_ingresos1 = $total_ingresos1;
     }
 
-    public function getTotalIngresos2(){
-        return $this->total_ingresos2;
+    /* GETTERS Y SETTERS DE LOS GASTOS*/
+
+    public function getGastosPersonal1(){
+        return $this->gastos_personal1;
     }
 
-    public function setTotalIngresos2($total_ingresos2){
-        $this->total_ingresos2 = $total_ingresos2;
+    public function setGastosPersonal1($gastos_personal){
+        $this->gastos_personal1 = $gastos_personal;
     }
 
-    public function getTotalIngresos3(){
-        return $this->total_ingresos3;
+    public function getGastosCorrientesBienesServicios1(){
+        return $this->gastos_corrientes_bienes_servicios1;
     }
 
-    public function setTotalIngresos3($total_ingresos3){
-        $this->total_ingresos3 = $total_ingresos3;
+    public function setGastosCorrientesBienesServicios1($gastos_corrientes_bienes_servicios1){
+        $this->gastos_corrientes_bienes_servicios1 = $gastos_corrientes_bienes_servicios1;
+    }
+
+    public function getGastosFinancieros1(){
+        return $this->gastos_financieros1;
+    }
+
+    public function setGastosFinancieros1($gastos_financieros1){
+        $this->gastos_financieros1 = $gastos_financieros1;
+    }
+
+    public function getTransferenciasCorrientesGastos1(){
+        return $this->transferencias_corrientes_gastos1;
+    }
+
+    public function setTransferenciasCorrientesGastos1($transferencias_corrientes_gastos1){
+        $this->transferencias_corrientes_gastos1 = $transferencias_corrientes_gastos1;
+    }
+
+    public function getFondoContingencia1(){
+        return $this->fondo_contingencia1;
+    }
+
+    public function setFondoContingencia1($fondo_contingencia1){
+        $this->fondo_contingencia1 = $fondo_contingencia1;
+    }
+
+    public function getTotalGastosCorrientes1(){
+        return $this->total_gastos_corrientes1;
+    }
+
+    public function setTotalGastosCorrientes1($total_gastos_corrientes1){
+        $this->total_gastos_corrientes1 = $total_gastos_corrientes1;
+    }
+
+    public function getInversionesReales1(){
+        return $this->inversiones_reales1;
+    }
+
+    public function setInversionesReales1($inversiones_reales1){
+        $this->inversiones_reales1 = $inversiones_reales1;
+    }
+
+    public function getTransferenciasCapitalGastos1(){
+        return $this->transferencias_capital_gastos1;
+    }
+
+    public function setTransferenciasCapitalGastos1($transferencias_capital_gastos1){
+        $this->transferencias_capital_gastos1 = $transferencias_capital_gastos1;
+    }
+
+    public function getTotalGastosNoFinancieros1(){
+        return $this->total_gastos_no_financieros1;
+    }
+
+    public function setTotalGastosNoFinancieros1($total_gastos_no_financieros1){
+        $this->total_gastos_no_financieros1 = $total_gastos_no_financieros1;
+    }
+
+    public function getActivosFinancierosGastos1(){
+        return $this->activos_financieros_gastos1;
+    }
+
+    public function setActivosFinancierosGastos1($activos_financieros_gastos1){
+        $this->activos_financieros_gastos1 = $activos_financieros_gastos1;
+    }
+
+    public function getPasivosFinancierosGastos1(){
+        return $this->pasivos_financieros_gastos1;
+    }
+
+    public function setPasivosFinancierosGastos1($pasivos_financieros_gastos1){
+        $this->pasivos_financieros_gastos1 = $pasivos_financieros_gastos1;
+    }
+
+    public function getTotalGastos1(){
+        return $this->total_gastos1;
+    }
+
+    public function setTotalGastos1($total_gastos1){
+        $this->total_gastos1 = $total_gastos1;
+    }
+
+
+    /* ENDEUDAMIENTO */
+    
+    public function getDeudaFinanciera(){
+        return $this->deuda_financiera;
+    }
+
+    public function setDeudaFinanciera($deuda_financiera){
+        $this->deuda_financiera = $deuda_financiera;
+    }
+
+    public function getEndeudamiento(){
+        return $this->endeudamiento;
+    }
+
+    public function setEndeudamiento($endeudamiento){
+        $this->endeudamiento = $endeudamiento;
+    }
+
+    public function getEndeudamientoMediaDiputaciones(){
+        return $this->endeudamiento_media;
+    }
+
+    public function setEndeudamientoMediaDiputaciones($endeudamiento_media){
+        $this->endeudamiento_media = $endeudamiento_media;
+    }
+
+
+    /* SOLVENCIA */
+    public function getSostenibilidadFinanciera() {
+        return $this->sostenibilidad_financiera;
+    }
+
+    public function setSostenibilidadFinanciera($sostenibilidad_financiera) {
+        $this->sostenibilidad_financiera = $sostenibilidad_financiera;
+    }
+
+    public function getSostenibilidadFinancieraMediaDiputaciones() {
+        return $this->sostenibilidad_financiera_media;
+    }
+
+    public function setSostenibilidadFinancieraMediaDiputaciones($sostenibilidad_financiera_media) {
+        $this->sostenibilidad_financiera_media = $sostenibilidad_financiera_media;
+    }
+
+    public function getApalancamientoOperativo() {
+        return $this->apalancamiento_operativo;
+    }
+
+    public function setApalancamientoOperativo($apalancamiento_operativo) {
+        $this->apalancamiento_operativo = $apalancamiento_operativo;
+    }
+
+    public function getApalancamientoOperativoMediaDiputaciones() {
+        return $this->apalancamiento_operativo_media;
+    }
+
+    public function setApalancamientoOperativoMediaDiputaciones($apalancamiento_operativo_media) {
+        $this->apalancamiento_operativo_media = $apalancamiento_operativo_media;
+    }
+
+    public function getSostenibilidadDeuda() {
+        return $this->sostenibilidad_deuda;
+    }
+
+    public function setSostenibilidadDeuda($sostenibilidad_deuda) {
+        $this->sostenibilidad_deuda = $sostenibilidad_deuda;
+    }
+
+    public function getSostenibilidadDeudaMediaDiputaciones() {
+        return $this->sostenibilidad_deuda_media;
+    }
+
+    public function setSostenibilidadDeudaMediaDiputaciones($sostenibilidad_deuda_media) {
+        $this->sostenibilidad_deuda_media = $sostenibilidad_deuda_media;
     }
 
 }
