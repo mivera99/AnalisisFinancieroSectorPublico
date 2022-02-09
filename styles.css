@@ -175,3 +175,75 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+
+.autocomplete-items{
+  margin-top: 5px;
+  cursor:pointer;
+  min-height: 200px;
+  max-height: 200px;
+  overflow-y:scroll;
+}
+
+.lista-autocompletar{
+  color:#003E99;
+}
+
+.lista-autocompletar:hover{
+  color:#003E99;
+}
+
+.elementos{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: white;
+  border: solid 1px #dbe7f8;
+  font-weight: 500;
+  border-radius: 0px;
+  margin-top:0px;
+  margin-bottom:-1px;
+  margin-right:4px;
+  transition: 0.2s;
+}
+
+.elementos:hover {
+  background-color: #dbe7f8;
+  color: #5287D5;
+  transition: 0.2s;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 30px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #003E99; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #003E99; 
+}
+
+input#facility{
+  border: solid 3px #003E99;
+  color: #003E99;
+  font-weight: 900;
+  border-radius: 7px;;
+  height: 30px;
+  width: 400px;
+  padding-left: 10px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #003E99;
+  font-weight: 700;
+  opacity: 5; /* Firefox */
+}

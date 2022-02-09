@@ -85,20 +85,21 @@ if($ccaa){
                 echo '<button class="scoring '. $ccaa2020->getScoring() . '">'. $ccaa2020->getScoring() .'</button><p>Tendencia:'.$ccaa2020->getTendencia().'</p>';
                 echo '<h2>Rating 2021</h2>';
                 echo '<button class="scoring '. $ccaa2021->getScoring() . '">'. $ccaa2021->getScoring() .'</button><p>Tendencia:'.$ccaa2021->getTendencia().'</p>';
-
+                echo "<br>";
                 echo '<h3>Datos generales</h3>';
-                echo '<p>Población: '.$ccaa2020->getPoblacion().'</p>';
-                echo '<p>Presidente de la comunidad: '.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
-                echo '<p>Vigencia: '.$ccaa->getVigencia().'</p>';
-                echo '<p>Partido político: '.$ccaa->getPartido().'</p>';
-                echo '<p>CIF: '.$ccaa->getCif().'</p>';
-                echo '<p>Via: '.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().', '.$ccaa->getNumVia().'</p>';
-                echo '<p>Teléfono: '.$ccaa->getTelefono().'</p>';
-                echo '<p>Código Postal: '.$ccaa->getCodigoPostal().'</p>';
-                echo '<p>Fax: '.$ccaa->getFax().'</p>';
-                echo '<p>Sitio web: <a href="https://'.$ccaa->getWeb().'" target="_blank">'.$ccaa->getWeb().'</a></p>';
-                echo '<p>Correo electrónico: '.$ccaa->getMail().'</p>';
+                echo '<p><b>Población: </b>'.$ccaa2020->getPoblacion().'</p>';
+                echo '<p><b>Presidente de la comunidad: </b>'.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
+                echo '<p><b>Vigencia: </b>'.$ccaa->getVigencia().'</p>';
+                echo '<p><b>Partido político: </b>'.$ccaa->getPartido().'</p>';
+                echo '<p><b>CIF: </b>'.$ccaa->getCif().'</p>';
+                echo '<p><b>Via: </b>'.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().', '.$ccaa->getNumVia().'</p>';
+                echo '<p><b>Teléfono: </b>'.$ccaa->getTelefono().'</p>';
+                echo '<p><b>Código Postal: </b>'.$ccaa->getCodigoPostal().'</p>';
+                echo '<p><b>Fax: </b>'.$ccaa->getFax().'</p>';
+                echo '<p><b>Sitio web: </b><a href="https://'.$ccaa->getWeb().'" target="_blank">'.$ccaa->getWeb().'</a></p>';
+                echo '<p><b>Correo electrónico: </b>'.$ccaa->getMail().'</p>';
             ?>
+                <br><br>
                 <h3>Datos económicos</h3>
                 <table>
                     <thead>
@@ -180,21 +181,21 @@ if($ccaa){
                         </tr>
                     </tbody>
                 </table>
-                <br>
-                <h3>Resultado presupuestario y endeudamiento</h3>
-                <p>Resultado presupuestario 2020: <?php echo $ccaa2020->getCCAAPib();?></p>
-                <p>Resultado presupuestario 2019: <?php echo $ccaa2019->getCCAAPib();?></p>
-                <p>Resultado presupuestario 2018: <?php echo $ccaa2018->getCCAAPib();?></p>
-                <p>Resultado presupuestario nacional 2020: <?php echo $ccaa2020nac->getCCAAPib();?></p>
-                <p>Resultado presupuestario nacional 2019: <?php echo $ccaa2019nac->getCCAAPib();?></p>
-                <p>Resultado presupuestario nacional 2018: <?php echo $ccaa2018nac->getCCAAPib();?></p>
-                <p>Deuda viva sobre ingresos corrientes 2021 trimestre n : <?php echo $ccaa2021Mes3->getDeudaVivaIngrCor();?></p>
-                <p>Deuda viva sobre ingresos corrientes 2020 trimestre n : <?php echo $ccaa2020Mes3->getDeudaVivaIngrCor();?></p>
-                <p>Deuda viva sobre ingresos corrientes 2019 trimestre n : <?php echo $ccaa2019Mes3->getDeudaVivaIngrCor();?></p>
-                <p>Deuda viva nacional sobre ingresos corrientes 2021 trimestre n : <?php echo $ccaa2021nacMes3->getDeudaVivaIngrCor();?></p>
-                <p>Deuda viva nacional sobre ingresos corrientes 2020 trimestre n : <?php echo $ccaa2020nacMes3->getDeudaVivaIngrCor();?></p>
-                <p>Deuda viva nacional sobre ingresos corrientes 2019 trimestre n : <?php echo $ccaa2019nacMes3->getDeudaVivaIngrCor();?></p>
-                <br>
+                <br><br>
+                <h3><b>Resultado presupuestario y endeudamiento</b></h3>
+                <p><b>Resultado presupuestario 2020: </b><?php echo $ccaa2020->getCCAAPib();?></p>
+                <p><b>Resultado presupuestario 2019: </b><?php echo $ccaa2019->getCCAAPib();?></p>
+                <p><b>Resultado presupuestario 2018: </b><?php echo $ccaa2018->getCCAAPib();?></p>
+                <p><b>Resultado presupuestario nacional 2020: </b><?php echo $ccaa2020nac->getCCAAPib();?></p>
+                <p><b>Resultado presupuestario nacional 2019: </b><?php echo $ccaa2019nac->getCCAAPib();?></p>
+                <p><b>Resultado presupuestario nacional 2018: </b><?php echo $ccaa2018nac->getCCAAPib();?></p>
+                <p><b>Deuda viva sobre ingresos corrientes 2021 trimestre n : </b><?php echo $ccaa2021Mes3->getDeudaVivaIngrCor();?></p>
+                <p><b>Deuda viva sobre ingresos corrientes 2020 trimestre n : </b><?php echo $ccaa2020Mes3->getDeudaVivaIngrCor();?></p>
+                <p><b>Deuda viva sobre ingresos corrientes 2019 trimestre n : </b><?php echo $ccaa2019Mes3->getDeudaVivaIngrCor();?></p>
+                <p><b>Deuda viva nacional sobre ingresos corrientes 2021 trimestre n : </b><?php echo $ccaa2021nacMes3->getDeudaVivaIngrCor();?></p>
+                <p><b>Deuda viva nacional sobre ingresos corrientes 2020 trimestre n : </b><?php echo $ccaa2020nacMes3->getDeudaVivaIngrCor();?></p>
+                <p><b>Deuda viva nacional sobre ingresos corrientes 2019 trimestre n : </b><?php echo $ccaa2019nacMes3->getDeudaVivaIngrCor();?></p>
+                <br><br>
                 <p></p>
                 <h3>Ingresos (en €)</h3>
                 <table>
@@ -285,7 +286,7 @@ if($ccaa){
                         </tr>
                     </tbody>
                 </table>
-                <br>
+                <br><br>
                 <h3>Gastos (en €)</h3>
                 <table>
                     <thead>
@@ -375,19 +376,20 @@ if($ccaa){
                         </tr>
                     </tbody>
                 </table>
+                <br><br>
                 <h3>Solvencia</h3>
                 <!--METER LOS GRAFICOS AQUI-->
-                <p>Sostenibilidad financiera año 2020: <?php echo $ccaa2020->getRSosteFinanciera();?></p>
-                <p>Sostenibilidad financiera año 2019: <?php echo $ccaa2019->getRSosteFinanciera();?></p>
-                <p>Sostenibilidad financiera año 2018: <?php echo $ccaa2018->getRSosteFinanciera();?></p>
+                <p><B>Sostenibilidad financiera año 2020: </b><?php echo $ccaa2020->getRSosteFinanciera();?></p>
+                <p><B>Sostenibilidad financiera año 2019: </b><?php echo $ccaa2019->getRSosteFinanciera();?></p>
+                <p><B>Sostenibilidad financiera año 2018: </b><?php echo $ccaa2018->getRSosteFinanciera();?></p>
                 <br>
-                <p>Apalancamiento operativo año 2020: <?php echo $ccaa2020->getRRigidez();?></p>
-                <p>Apalancamiento operativo año 2019: <?php echo $ccaa2019->getRRigidez();?></p>
-                <p>Apalancamiento operativo año 2018: <?php echo $ccaa2018->getRRigidez();?></p>
+                <p><B>Apalancamiento operativo año 2020: </b><?php echo $ccaa2020->getRRigidez();?></p>
+                <p><B>Apalancamiento operativo año 2019: </b><?php echo $ccaa2019->getRRigidez();?></p>
+                <p><B>Apalancamiento operativo año 2018: </b><?php echo $ccaa2018->getRRigidez();?></p>
                 <br>
-                <p>Sostenibilidad de la deuda año 2020: <?php echo $ccaa2020->getRSosteEndeuda();?></p>
-                <p>Sostenibilidad de la deuda año 2019: <?php echo $ccaa2019->getRSosteEndeuda();?></p>
-                <p>Sostenibilidad de la deuda año 2018: <?php echo $ccaa2018->getRSosteEndeuda();?></p>
+                <p><B>Sostenibilidad de la deuda año 2020: </b><?php echo $ccaa2020->getRSosteEndeuda();?></p>
+                <p><B>Sostenibilidad de la deuda año 2019: </b><?php echo $ccaa2019->getRSosteEndeuda();?></p>
+                <p><B>Sostenibilidad de la deuda año 2018: </b><?php echo $ccaa2018->getRSosteEndeuda();?></p>
                 
                 <!-- GRAFICAS-->
                 <?php
@@ -402,11 +404,13 @@ if($ccaa){
                 </script>
 
                 <!--Grafica de ahorro neto-->
+                <br><br>
                 <div class="graficos">
-                    <canvas id="barChart" height="300" width="450"></canvas>
+                    <canvas id="ahorroNeto" height="500" width="700"></canvas>
+                    <br><br>
                 </div>
                 <script>
-                    const chart = document.getElementById('barChart').getContext('2d');
+                    const chart = document.getElementById('ahorroNeto').getContext('2d');
                     const configChart = {
                         type: 'bar',
                         data: {
@@ -429,7 +433,7 @@ if($ccaa){
                                     beginAtZero: true
                                 }
                             },
-                            responsive: true,
+                            responsive: false,
                             plugins:{
                                 title:{
                                     display: true,
@@ -442,14 +446,15 @@ if($ccaa){
                             }
                         }
                     };
-                    const barChart = new Chart(chart, configChart);
+                    const ahorroNeto = new Chart(chart, configChart);
                 </script>
                 <!-- Grafica de apalancamiento operativo--> 
+                <br><br>
                 <div class="graficos">
-                    <canvas id="barChartA" height="300" width="450"></canvas>
+                    <canvas id="apalancamientoOperativoA" height="500" width="700"></canvas>
                 </div>
                 <script>
-                    const chartA = document.getElementById('barChartA').getContext('2d');
+                    const chartA = document.getElementById('apalancamientoOperativoA').getContext('2d');
                     const configChartA = {
                         type: 'bar',
                         data: {
@@ -472,7 +477,7 @@ if($ccaa){
                                     beginAtZero: true
                                 }
                             },
-                            responsive: true,
+                            responsive: false,
                             plugins:{
                                 title:{
                                     display: true,
@@ -485,17 +490,20 @@ if($ccaa){
                             }
                         }
                     };
-                    const barChartA = new Chart(chartA, configChartA);
+                    const apalancamientoOperativoA = new Chart(chartA, configChartA);
                 </script>
+                <br><br>
                 <h3>Liquidez</h3>
-                <p>PMP 2020: <?php echo $ccaa2020Mes5->getPMP();?></p>
-                <p>PMP 2019: <?php echo $ccaa2019Mes5->getPMP();?></p>
-                <p>PMP media 2020: <?php echo $ccaa2020nacMes5->getPMP();?></p>
-                <p>PMP media 2019: <?php echo $ccaa2019nacMes5->getPMP();?></p>
+                <p><b>PMP 2020: </b><?php echo $ccaa2020Mes5->getPMP();?></p>
+                <p><b>PMP 2019: </b><?php echo $ccaa2019Mes5->getPMP();?></p>
+                <p><b>PMP media 2020: </b><?php echo $ccaa2020nacMes5->getPMP();?></p>
+                <p><b>PMP media 2019: </b><?php echo $ccaa2019nacMes5->getPMP();?></p>
+                <br><br>
                 <h3>Eficiencia</h3>
-                <p>Eficiencia 2020: <?php echo $ccaa2020->getREfic();?></p>
-                <p>Eficiencia 2019: <?php echo $ccaa2019->getREfic();?></p>
-                <p>Eficiencia 2018: <?php echo $ccaa2018->getREfic();?></p>
+                <p><b>Eficiencia 2020: </b><?php echo $ccaa2020->getREfic();?></p>
+                <p><b>Eficiencia 2019: </b><?php echo $ccaa2019->getREfic();?></p>
+                <p><b>Eficiencia 2018: </b><?php echo $ccaa2018->getREfic();?></p>
+                <br><br>
             <?php
             }
             else {

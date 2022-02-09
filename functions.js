@@ -108,10 +108,11 @@ function autocomplete(inp) {
                 if ((objeto.nombre.toUpperCase()).includes(val.toUpperCase())) { // ***cambiamos arr[i] por nombres[i].nombre ***
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
+                    b.setAttribute("class", "elementos")
                     /*make the matching letters bold:*/
                     //b.innerHTML = "<strong>" + nombres[i].nombre.substr(0, val.length) + "</strong>"; // *** cambiamos arr[i] por nombres[i].nombre ***
                     //b.innerHTML += nombres[i].nombre.substr(val.length);  // *** cambiamos arr[i] por nombres[i].nombre ***
-                    b.innerHTML = objeto.nombre;
+                    b.innerHTML = "<a class='lista-autocompletar'>" + objeto.nombre + "</a>";
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value='" + objeto.nombre + "'>"; // *** cambiamos arr[i] por nombres[i].nombre ***
                     /*execute a function when someone clicks on the item value (DIV element):*/
