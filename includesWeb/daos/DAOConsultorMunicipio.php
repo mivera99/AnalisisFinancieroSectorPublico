@@ -392,7 +392,250 @@ class DAOConsultorMunicipio{
 
         return $mun;
 
-    } 
+    }
+
+
+    public function getLiquidez($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+        //Fondos Liquidos
+        $sql = "SELECT FONDLIQUIDOS FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $fondos_liquidos = mysqli_fetch_assoc($result);
+        $mun->setFondosLiquidos($fondos_liquidos['FONDLIQUIDOS']);
+        
+        //Remanente Tesoreria Gastos Generales
+        $sql = "SELECT R5 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $remanente_tesoreria_gastos_generales = mysqli_fetch_assoc($result);
+        $mun->setRemanenteTesoreriaGastosGenerales($remanente_tesoreria_gastos_generales['R5']);
+
+        //Remanente Tesoreria Gastos Generales Media Diputaciones
+        $sql = "SELECT R5_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $remanente_tesoreria_gastos_generales_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setRemanenteTesoreriaGastosGeneralesMediaDiputaciones($remanente_tesoreria_gastos_generales_media_diputaciones['R5_NAC']);
+
+        //Liquidez Inmediata
+        $sql = "SELECT R6 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $liquidez_inmediata = mysqli_fetch_assoc($result);
+        $mun->setLiquidezInmediata($liquidez_inmediata['R6']);
+
+        //Solvencia Corto Plazo Media Diputaciones
+        $sql = "SELECT R6_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $solvencia_corto_plazo_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setSolvenciaCortoPlazoMediaDiputaciones($solvencia_corto_plazo_media_diputaciones['R6_NAC']);
+
+        //Solvencia Corto Plazo
+        $sql = "SELECT R7 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $solvencia_corto_plazo = mysqli_fetch_assoc($result);
+        $mun->setSolvenciaCortoPlazo($solvencia_corto_plazo['R7']);
+
+        //Solvencia Corto Plazo Media Diputaciones 2
+        $sql = "SELECT R7_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $solvencia_corto_plazo_media_diputaciones2 = mysqli_fetch_assoc($result);
+        $mun->setSolvenciaCortoPlazoMediaDiputaciones2($solvencia_corto_plazo_media_diputaciones2['R7_NAC']);
+
+
+        return $mun;
+
+    }
+
+    public function getEficiencia($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+        // TO DO
+
+        //Eficiencia
+        $sql = "SELECT R8 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $eficiencia = mysqli_fetch_assoc($result);
+        $mun->setEficiencia($eficiencia['R8']);
+
+        //Eficiencia Media Diputaciones
+        $sql = "SELECT R8_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $eficiencia_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setEficienciaMediaDiputaciones($eficiencia_media_diputaciones['R8_NAC']);
+
+        return $mun;
+
+    }
+
+    public function getGestionPresupuestaria($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+        // TO DO
+
+        //EjecucionIngresosCorrientes
+        $sql = "SELECT R9 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $ejecucion_ingresos_corrientes = mysqli_fetch_assoc($result);
+        $mun->setEjecucionIngresosCorrientes($ejecucion_ingresos_corrientes['R9']);
+
+        //EjecucionIngresosCorrientesMediaDiputaciones
+        $sql = "SELECT R9_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $ejecucion_ingresos_corrientes_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setEjecucionIngresosCorrientesMediaDiputaciones($ejecucion_ingresos_corrientes_media_diputaciones['R9_NAC']);
+
+        //EjecucionGastosCorrientes
+        $sql = "SELECT R10 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $ejecucion_gastos_corrientes = mysqli_fetch_assoc($result);
+        $mun->setEjecucionGastosCorrientes($ejecucion_gastos_corrientes['R10']);
+
+        //EjecucionGastosCorrientesMediaDiputaciones
+        $sql = "SELECT R10_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $ejecucion_gastos_corrientes_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setEjecucionGastosCorrientesMediaDiputaciones($ejecucion_gastos_corrientes_media_diputaciones['R10_NAC']);
+
+
+        return $mun;
+
+    }
+
+    public function getCumplimientoPagos($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+ 
+        // TO DO
+
+        //DeudaComercial
+        $sql = "SELECT DEUDACOM FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $deuda_comercial = mysqli_fetch_assoc($result);
+        $mun->setDeudaComercial($deuda_comercial['DEUDACOM']);
+
+        //PeriodoMedioPagos
+        $sql = "SELECT R11 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $periodo_medio_pagos = mysqli_fetch_assoc($result);
+        $mun->setPeriodoMedioPagos($periodo_medio_pagos['R11']);
+
+        //PeriodoMedioPagosMediaDiputaciones
+        $sql = "SELECT R11_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $periodo_medio_pagos_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setPeriodoMedioPagosMediaDiputaciones($periodo_medio_pagos_media_diputaciones['R11_NAC']);
+
+        //PagosSobreObligacionesReconocidas
+        $sql = "SELECT R12 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $pagos_sobre_obligaciones_reconocidas = mysqli_fetch_assoc($result);
+        $mun->setPagosSobreObligacionesReconocidas($pagos_sobre_obligaciones_reconocidas['R12']);
+
+        //PagosSobreObligacionesReconocidasMediaDiputaciones
+        $sql = "SELECT R12_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $pagos_sobre_obligaciones_reconocidas_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setPagosSobreObligacionesReconocidasMediaDiputaciones($pagos_sobre_obligaciones_reconocidas_media_diputaciones['R12_NAC']);
+
+
+
+        return $mun;
+
+    }
+
+    public function getGestionTributaria($codigo, $year) {
+        $db = getConexionBD();
+        $mun = new Municipio;
+
+        // TO DO
+
+        //DerechosPendientesCobro
+        $sql = "SELECT DERPENDCOBRO FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $derechos_pendientes_cobro = mysqli_fetch_assoc($result);
+        $mun->setDerechosPendientesCobro($derechos_pendientes_cobro['DERPENDCOBRO']);
+
+        //EficaciaRecaudatoria
+        $sql = "SELECT R13 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $eficacia_recaudatoria = mysqli_fetch_assoc($result);
+        $mun->setEficaciaRecaudatoria($eficacia_recaudatoria['R13']);
+
+        //EficaciaRecaudatoriaMediaDiputaciones
+        $sql = "SELECT R13_NAC FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $eficacia_recaudatoria_media_diputaciones = mysqli_fetch_assoc($result);
+        $mun->setEficaciaRecaudatoriaMediaDiputaciones($eficacia_recaudatoria_media_diputaciones['R13_NAC']);
+
+
+        return $mun;
+
+    }
 
 }
 

@@ -345,8 +345,243 @@ if($municipio){
                     </tr>
                 </tbody>
             </table>
+            <br>
+            <br>
 
+            <!-- TO DO -->
+            <h3>Liquidez (en €)</h3>
+            <br>
+            <p><b>Fondos líquidos 2020: </b><?php echo number_format($mun2019->getFondosLiquidos(), 2, ',','.');?></p>
+            <p><b>Fondos líquidos 2019: </b><?php echo number_format($mun2020->getFondosLiquidos(), 2, ',','.');?></p>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Remanente de Tesorería Gastos Generales</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGenerales(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGenerales(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Remanente de Tesorería Gastos Generales Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Liquidez Inmediata</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getLiquidezInmediata(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getLiquidezInmediata(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Solvencia Corto Plazo Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Solvencia Corto Plazo</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazo(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazo(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Solvencia Corto Plazo Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones2(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones2(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+            <!-- TO DO -->
+            <h3>Eficiencia (en €)</h3>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Eficiencia</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficiencia(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficiencia(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Eficiencia Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficienciaMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficienciaMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+
+            <!-- TO DO -->
+            <h3>Gestión Presupuestaria (en €)</h3>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Ejecución Ingresos corrientes</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientes(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientes(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Ejecución Ingresos Corrientes Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientesMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientesMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Ejecución Gastos corrientes</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientes(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientes(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Ejecución Gastos Corrientes Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientesMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientesMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+            <!-- TO DO -->
+            <h3>Cumplimiento de Pagos (en €)</h3>
+            <br>
+            <p><b>Deuda Comercial 2020: </b><?php echo number_format($mun2019->getDeudaComercial(), 2, ',','.');?></p>
+            <p><b>Deuda Comercial 2019: </b><?php echo number_format($mun2020->getDeudaComercial(), 2, ',','.');?></p>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Periodo Medio de Pagos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagos(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagos(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Periodo Medio de Pagos Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Pagos sobre Obligaciones Reconocidas</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidas(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidas(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Pagos sobre Obligaciones Reconocidas Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidasMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidasMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+            <!-- TO DO -->
+            <h3>Gestión Tributaria (en €)</h3>
+            <br>
+            <p><b>Derechos Pendientes de Cobro 2020: </b><?php echo number_format($mun2019->getDerechosPendientesCobro(), 2, ',','.');?></p>
+            <p><b>Derechos Pendientes de Cobro 2019: </b><?php echo number_format($mun2020->getDerechosPendientesCobro(), 2, ',','.');?></p>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>2019</th>
+                        <th>2020</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Eficacia Recaudatoria</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoria(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoria(), 2, ',','.');?></td>
+                    </tr>
+                    <tr>
+                        <th>Eficacia Recaudatoria Media Diputaciones</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoriaMediaDiputaciones(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoriaMediaDiputaciones(), 2, ',','.');?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
             
+
             <?php
             }
             else {

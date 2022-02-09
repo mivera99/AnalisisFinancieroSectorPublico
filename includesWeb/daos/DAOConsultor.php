@@ -355,6 +355,88 @@ class DAOConsultor{
             $mun->setSostenibilidadDeudaMediaDiputaciones($tmpMunicipio->getSostenibilidadDeudaMediaDiputaciones());
         }
 
+        /* LIQUIDEZ */
+        if($year >= 2019){
+            $tmpMunicipio = $daomun->getLiquidez($codigo, $year);
+            if(!$tmpMunicipio){
+                return false;
+            }
+            //Fondos Liquidos
+            $mun->setFondosLiquidos($tmpMunicipio->getFondosLiquidos());
+            //Remanente Tesoreria Gastos Generales
+            $mun->setRemanenteTesoreriaGastosGenerales($tmpMunicipio->getRemanenteTesoreriaGastosGenerales());
+            //Remanente Tesoreria Gastos Generales Media Diputaciones
+            $mun->setRemanenteTesoreriaGastosGeneralesMediaDiputaciones($tmpMunicipio->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones());
+            //Liquidez Inmediata
+            $mun->setLiquidezInmediata($tmpMunicipio->getLiquidezInmediata());
+            //Solvencia Corto Plazo Media Diputaciones
+            $mun->setSolvenciaCortoPlazoMediaDiputaciones($tmpMunicipio->getSolvenciaCortoPlazoMediaDiputaciones());
+            //Solvencia Corto Plazo Media Diputaciones2
+            $mun->setSolvenciaCortoPlazoMediaDiputaciones2($tmpMunicipio->getSolvenciaCortoPlazoMediaDiputaciones2());
+            //Solvencia Corto Plazo
+            $mun->setSolvenciaCortoPlazo($tmpMunicipio->getSolvenciaCortoPlazo());
+        }
+
+        /* EFICIENCIA */
+        if($year >= 2019){
+            $tmpMunicipio = $daomun->getEficiencia($codigo, $year);
+            if(!$tmpMunicipio){
+                return false;
+            }
+            //Eficiencia
+            $mun->setEficiencia($tmpMunicipio->getEficiencia());
+            //Eficiencia Media Diputaciones
+            $mun->setEficienciaMediaDiputaciones($tmpMunicipio->getEficienciaMediaDiputaciones());
+        }
+
+        /* GESTION PRESUPUESTARIA */
+        if($year >= 2019){
+            $tmpMunicipio = $daomun->getGestionPresupuestaria($codigo, $year);
+            if(!$tmpMunicipio){
+                return false;
+            }
+            //EjecucionIngresosCorrientes
+            $mun->setEjecucionIngresosCorrientes($tmpMunicipio->getEjecucionIngresosCorrientes());
+            //EjecucionIngresosCorrientesMediaDiputaciones
+            $mun->setEjecucionIngresosCorrientesMediaDiputaciones($tmpMunicipio->getEjecucionIngresosCorrientesMediaDiputaciones());
+            //EjecucionGastosCorrientes
+            $mun->setEjecucionGastosCorrientes($tmpMunicipio->getEjecucionGastosCorrientes());
+            //EjecucionGastosCorrientesMediaDiputaciones
+            $mun->setEjecucionGastosCorrientesMediaDiputaciones($tmpMunicipio->getEjecucionGastosCorrientesMediaDiputaciones());
+        }
+
+        /* CUMPLIMIENTO PAGOS */
+        if($year >= 2019){
+            $tmpMunicipio = $daomun->getCumplimientoPagos($codigo, $year);
+            if(!$tmpMunicipio){
+                return false;
+            }
+            //DeudaComercial
+            $mun->setDeudaComercial($tmpMunicipio->getDeudaComercial());
+            //PeriodoMedioPagos
+            $mun->setPeriodoMedioPagos($tmpMunicipio->getPeriodoMedioPagos());
+            //PeriodoMedioPagosMediaDiputaciones
+            $mun->setPeriodoMedioPagosMediaDiputaciones($tmpMunicipio->getPeriodoMedioPagosMediaDiputaciones());
+            //PagosSobreObligacionesReconocidas
+            $mun->setPagosSobreObligacionesReconocidas($tmpMunicipio->getPagosSobreObligacionesReconocidas());
+            //PagosSobreObligacionesReconocidasMediaDiputaciones
+            $mun->setPagosSobreObligacionesReconocidasMediaDiputaciones($tmpMunicipio->getPagosSobreObligacionesReconocidasMediaDiputaciones());
+        }
+
+        /* GESTION TRIBUTARIA */
+        if($year >= 2019){
+            $tmpMunicipio = $daomun->getGestionTributaria($codigo, $year);
+            if(!$tmpMunicipio){
+                return false;
+            }
+            //DerechosPendientesCobro
+            $mun->setDerechosPendientesCobro($tmpMunicipio->getDerechosPendientesCobro());
+            //EficaciaRecaudatoria
+            $mun->setEficaciaRecaudatoria($tmpMunicipio->getEficaciaRecaudatoria());
+            //EficaciaRecaudatoriaMediaDiputaciones
+            $mun->setEficaciaRecaudatoriaMediaDiputaciones($tmpMunicipio->getEficaciaRecaudatoriaMediaDiputaciones());
+        }
+
         return $mun;
 
     }
