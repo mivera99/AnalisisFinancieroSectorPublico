@@ -179,7 +179,7 @@ td, th {
 .autocomplete-items{
   margin-top: 5px;
   cursor:pointer;
-  min-height: 200px;
+  min-height: 201px;
   max-height: 200px;
   overflow-y:scroll;
 }
