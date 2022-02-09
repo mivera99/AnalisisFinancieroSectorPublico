@@ -453,6 +453,7 @@ class DAOConsultor{
 
         $diputacion->setCodigo($tmpDiputacion->getCodigo());
         $diputacion->setNombre($tmpDiputacion->getNombre());
+        $diputacion->setScoring($tmpDiputacion->getScoring());
         //$diputacion->setNombrePresidente($tmpDiputacion->getNombrePresidente());
         //$diputacion->setApellido1($tmpDiputacion->getApellido1());
         //$diputacion->setApellido2($tmpDiputacion->getApellido2());
@@ -469,6 +470,197 @@ class DAOConsultor{
         $diputacion->setWeb($tmpDiputacion->getWeb());
 
         return $diputacion;
+    }
+
+
+    public function getEconomiaDIP($dip, $codigo, $year){
+        if(get_class($dip)!='Diputacion')
+            return false;
+
+        $daodip = new DAOConsultorDiputacion();
+
+        /* INGRESOS */
+        $tmpDiputacion = $daodip->getIngresos($codigo, $year);
+        if(!$tmpDiputacion){
+            return false;
+        }
+        //Impuestos Directos
+        $dip->setImpuestosDirectos1($tmpDiputacion->getImpuestosDirectos1());
+        //Impuestos Indirectos
+        $dip->setImpuestosIndirectos1($tmpDiputacion->getImpuestosIndirectos1());
+        //Tasas Precios Otros
+        $dip->setTasasPreciosOtros1($tmpDiputacion->getTasasPreciosOtros1());
+        //Transferencias Corrientes
+        $dip->setTransferenciasCorrientes1($tmpDiputacion->getTransferenciasCorrientes1());
+        //Ingresos Patrimoniales
+        $dip->setIngresosPatrimoniales1($tmpDiputacion->getIngresosPatrimoniales1());
+        //Total Ingresos Corrientes
+        $dip->setTotalIngresosCorrientes1($tmpDiputacion->getTotalIngresosCorrientes1());
+        //Enajenación de Inversiones Reales
+        $dip->setEnajenacionInversionesReales1($tmpDiputacion->getEnajenacionInversionesReales1());
+        //Transferencias de Capital
+        $dip->setTransferenciasCapital1($tmpDiputacion->getTransferenciasCapital1());
+        //Ingresos No Financieros
+        $dip->setTotalIngresosNoCorrientes1($tmpDiputacion->getTotalIngresosNoCorrientes1());
+        //Activos Financieros
+        $dip->setActivosFinancieros1($tmpDiputacion->getActivosFinancieros1());
+        //Pasivos Financieros
+        $dip->setPasivosFinancieros1($tmpDiputacion->getPasivosFinancieros1());
+        //TOTAL INGRESOS
+        $dip->setTotalIngresos1($tmpDiputacion->getTotalIngresos1());
+
+
+
+
+        /* GASTOS */
+        $tmpDiputacion = $daodip->getGastos($codigo, $year);
+        if(!$tmpDiputacion){
+            return false;
+        }
+        //Gastos Personal
+        $dip->setGastosPersonal1($tmpDiputacion->getGastosPersonal1());
+        //Gastos Corrientes de Bienes y Servicios 
+        $dip->setGastosCorrientesBienesServicios1($tmpDiputacion->getGastosCorrientesBienesServicios1());
+        //Gastos Financieros
+        $dip->setGastosFinancieros1($tmpDiputacion->getGastosFinancieros1());
+        //Transferencias Corrientes
+        $dip->setTransferenciasCorrientesGastos1($tmpDiputacion->getTransferenciasCorrientesGastos1());
+        //Fondo de Contingencia
+        $dip->setFondoContingencia1($tmpDiputacion->getFondoContingencia1());
+        //Total Gastos Corrientes
+        $dip->setTotalGastosCorrientes1($tmpDiputacion->getTotalGastosCorrientes1());
+        //Inversiones Reales
+        $dip->setInversionesReales1($tmpDiputacion->getInversionesReales1());
+        //Transferencias de Capital
+        $dip->setTransferenciasCapitalGastos1($tmpDiputacion->getTransferenciasCapitalGastos1());
+        //Gastos No Financieros
+        $dip->setTotalGastosNoFinancieros1($tmpDiputacion->getTotalGastosNoFinancieros1());
+        //Activos Financieros
+        $dip->setActivosFinancierosGastos1($tmpDiputacion->getActivosFinancierosGastos1());
+        //Pasivos Financieros
+        $dip->setPasivosFinancierosGastos1($tmpDiputacion->getPasivosFinancierosGastos1());
+        //TOTAL GASTOS
+        $dip->setTotalGastos1($tmpDiputacion->getTotalGastos1());
+
+
+        /* ENDEUDAMIENTO */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getEndeudamiento($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //Deuda Financiera
+            $dip->setDeudaFinanciera($tmpDiputacion->getDeudaFinanciera());
+            //Endeudamiento
+            $dip->setEndeudamiento($tmpDiputacion->getEndeudamiento());
+            //Endeudamiento Media Diputaciones
+            $dip->setEndeudamientoMediaDiputaciones($tmpDiputacion->getEndeudamientoMediaDiputaciones());
+        }
+
+        /* SOLVENCIA */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getSostenibilidad($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //Sostenibilidad Financiera
+            $dip->setSostenibilidadFinanciera($tmpDiputacion->getSostenibilidadFinanciera());
+            //Sostenibilidad Financiera Media Diputaciones
+            $dip->setSostenibilidadFinancieraMediaDiputaciones($tmpDiputacion->getSostenibilidadFinancieraMediaDiputaciones());
+            //Apalancamiento Operativo
+            $dip->setApalancamientoOperativo($tmpDiputacion->getApalancamientoOperativo());
+            //Apalancamiento Operativo Media Diputaciones
+            $dip->setApalancamientoOperativoMediaDiputaciones($tmpDiputacion->getApalancamientoOperativoMediaDiputaciones());
+            //Sostenibilidad de la Deuda
+            $dip->setSostenibilidadDeuda($tmpDiputacion->getSostenibilidadDeuda());
+            //Sostenibilidad de la Deuda Media Diputaciones
+            $dip->setSostenibilidadDeudaMediaDiputaciones($tmpDiputacion->getSostenibilidadDeudaMediaDiputaciones());
+        }
+
+        /* LIQUIDEZ */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getLiquidez($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //Fondos Liquidos
+            $dip->setFondosLiquidos($tmpDiputacion->getFondosLiquidos());
+            //Remanente Tesoreria Gastos Generales
+            $dip->setRemanenteTesoreriaGastosGenerales($tmpDiputacion->getRemanenteTesoreriaGastosGenerales());
+            //Remanente Tesoreria Gastos Generales Media Diputaciones
+            $dip->setRemanenteTesoreriaGastosGeneralesMediaDiputaciones($tmpDiputacion->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones());
+            //Liquidez Inmediata
+            $dip->setLiquidezInmediata($tmpDiputacion->getLiquidezInmediata());
+            //Solvencia Corto Plazo Media Diputaciones
+            $dip->setSolvenciaCortoPlazoMediaDiputaciones($tmpDiputacion->getSolvenciaCortoPlazoMediaDiputaciones());
+            //Solvencia Corto Plazo Media Diputaciones2
+            $dip->setSolvenciaCortoPlazoMediaDiputaciones2($tmpDiputacion->getSolvenciaCortoPlazoMediaDiputaciones2());
+            //Solvencia Corto Plazo
+            $dip->setSolvenciaCortoPlazo($tmpDiputacion->getSolvenciaCortoPlazo());
+        }
+
+        /* EFICIENCIA */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getEficiencia($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //Eficiencia
+            $dip->setEficiencia($tmpDiputacion->getEficiencia());
+            //Eficiencia Media Diputaciones
+            $dip->setEficienciaMediaDiputaciones($tmpDiputacion->getEficienciaMediaDiputaciones());
+        }
+
+        /* GESTION PRESUPUESTARIA */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getGestionPresupuestaria($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //EjecucionIngresosCorrientes
+            $dip->setEjecucionIngresosCorrientes($tmpDiputacion->getEjecucionIngresosCorrientes());
+            //EjecucionIngresosCorrientesMediaDiputaciones
+            $dip->setEjecucionIngresosCorrientesMediaDiputaciones($tmpDiputacion->getEjecucionIngresosCorrientesMediaDiputaciones());
+            //EjecucionGastosCorrientes
+            $dip->setEjecucionGastosCorrientes($tmpDiputacion->getEjecucionGastosCorrientes());
+            //EjecucionGastosCorrientesMediaDiputaciones
+            $dip->setEjecucionGastosCorrientesMediaDiputaciones($tmpDiputacion->getEjecucionGastosCorrientesMediaDiputaciones());
+        }
+
+        /* CUMPLIMIENTO PAGOS */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getCumplimientoPagos($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //DeudaComercial
+            $dip->setDeudaComercial($tmpDiputacion->getDeudaComercial());
+            //PeriodoMedioPagos
+            $dip->setPeriodoMedioPagos($tmpDiputacion->getPeriodoMedioPagos());
+            //PeriodoMedioPagosMediaDiputaciones
+            $dip->setPeriodoMedioPagosMediaDiputaciones($tmpDiputacion->getPeriodoMedioPagosMediaDiputaciones());
+            //PagosSobreObligacionesReconocidas
+            $dip->setPagosSobreObligacionesReconocidas($tmpDiputacion->getPagosSobreObligacionesReconocidas());
+            //PagosSobreObligacionesReconocidasMediaDiputaciones
+            $dip->setPagosSobreObligacionesReconocidasMediaDiputaciones($tmpDiputacion->getPagosSobreObligacionesReconocidasMediaDiputaciones());
+        }
+
+        /* GESTION TRIBUTARIA */
+        if($year >= 2019){
+            $tmpDiputacion = $daodip->getGestionTributaria($codigo, $year);
+            if(!$tmpDiputacion){
+                return false;
+            }
+            //DerechosPendientesCobro
+            $dip->setDerechosPendientesCobro($tmpDiputacion->getDerechosPendientesCobro());
+            //EficaciaRecaudatoria
+            $dip->setEficaciaRecaudatoria($tmpDiputacion->getEficaciaRecaudatoria());
+            //EficaciaRecaudatoriaMediaDiputaciones
+            $dip->setEficaciaRecaudatoriaMediaDiputaciones($tmpDiputacion->getEficaciaRecaudatoriaMediaDiputaciones());
+        }
+
+        return $dip;
+
     }
 
 }
