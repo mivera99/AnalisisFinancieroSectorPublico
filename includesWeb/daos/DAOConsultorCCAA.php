@@ -467,6 +467,27 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
+    public function getDeudas($codigo, $year){
+        $db = getConexionBD();
+        $sql = "SELECT * FROM deudas_ccaa WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $ccaa = new CCAA();
+        $deudas = mysqli_fetch_assoc($result);
+        if(isset($deudas['PIB']))
+            $ccaa->setPib($deudas['PIB']);
+        
+        if(isset($deudas['PIBC']))
+            $ccaa->setPibc($deudas['PIBC']);
+        
+        if(isset($deudas['RESULTADO']))
+            $ccaa->setResultado($deudas['RESULTADO']);
+
+        return $ccaa;
+    }
+
 }
 
 ?>

@@ -220,6 +220,24 @@ class DAOConsultor{
         return $ccaa;
     }
 
+    public function getDeudasCCAA($ccaa, $codigo, $year){
+        if(get_class($ccaa)!='CCAA')
+            return false;
+
+        $daoccaa = new DAOConsultorCCAA();
+
+        $tmpCCAA = $daoccaa->getDeudas($codigo, $year);
+        if(!$tmpCCAA){
+            return false;
+        }
+        
+        $ccaa->setPib($tmpCCAA->getPib());
+        $ccaa->setPibc($tmpCCAA->getPibc());
+        $ccaa->setResultado($tmpCCAA->getResultado());
+
+        return $ccaa;
+    }
+
     public function getMunicipio($nombre){
 
         $municipio = new Municipio();

@@ -127,6 +127,11 @@ class CCAA{
     private $deuda_viva_ingr_cor;
     private $transac_inmobiliarias;
 
+    /*Deudas CCAAs*/
+    private $pibc;
+    private $pib;
+    private $resultado;
+
     //Datos de scoring (tabla SCORING_CCAA)
     private $scoring;
     private $tendencia;
@@ -1022,6 +1027,31 @@ class CCAA{
 
     public function setTransacInmobiliarias($transac_inmobiliarias){
         $this->transac_inmobiliarias = $transac_inmobiliarias;
+    }
+
+    /*Deudas CCAAs*/
+    public function getPibc(){
+        return $this->pibc;
+    }
+
+    public function setPibc($pibc){
+        $this->pibc = $pibc;
+    }
+
+    public function getPib(){
+        return $this->pib;
+    }
+
+    public function setPib($pib){
+        $this->pib = $pib;
+    }
+
+    public function getResultado(){
+        return $this->resultado;
+    }
+
+    public function setResultado($resultado){
+        $this->resultado = $resultado;
     }
 
     /*Getters y setters del scoring*/

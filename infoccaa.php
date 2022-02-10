@@ -14,6 +14,8 @@ $ccaa2020 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2020);
 $ccaa2020 = $daoccaa->getRatingInfo($ccaa2020, $ccaa->getCodigo(), 2020);
 $ccaa2021 = $daoccaa->getRatingInfo(new CCAA(), $ccaa->getCodigo(), 2021);
 
+$ccaa2019Deudas = $daoccaa->getDeudasCCAA(new CCAA(), $ccaa->getCodigo(), 2019);
+
 $ccaa2021Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2021, 6);
 $ccaa2020Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 6);
 $ccaa2019Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 6);
@@ -106,7 +108,7 @@ if($ccaa){
                         <tr>
                             <th>Población: <?php echo $ccaa->getNombre();?></th>
                             <th></th>
-                            <th>PIB per cápita: <?php echo $ccaa2020->getCCAAPib();?></th>
+                            <th>PIB per cápita: <?php echo $ccaa2019Deudas->getPibc();?></th>
                             <th></th>
                         </tr>
                     </thead>
