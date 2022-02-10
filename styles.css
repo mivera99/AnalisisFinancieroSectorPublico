@@ -49,8 +49,17 @@ button:hover {
 
 .subtitle {
   font-size: 14px;
-  color: #FFA401;
+  color:  #CC9905;
   margin-top: 0px;
+}
+
+#cabecera {
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: #D8E8E9;
 }
 
 #menu {
@@ -89,6 +98,7 @@ button:hover {
 #contenido {
   margin-left: 108px;
   height: 150vh;
+  padding-top: 120px;
 }
 
 .graficos {
