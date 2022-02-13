@@ -106,10 +106,8 @@ if($ccaa){
                 <table>
                     <thead>
                         <tr>
-                            <th>Población: <?php echo $ccaa->getNombre();?></th>
-                            <th></th>
-                            <th>PIB per cápita: <?php echo $ccaa2019Deudas->getPibc();?></th>
-                            <th></th>
+                            <th colspan="2">Población: <?php echo $ccaa->getNombre();?></th>
+                            <th colspan="2">PIB per cápita: <?php echo $ccaa2019Deudas->getPibc();?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -204,7 +202,7 @@ if($ccaa){
                     <thead>
                         <tr>
                             <th></th>
-                            <th>LIQUIDACIÓN derechos reconocidas</th>
+                            <th colspan="3">LIQUIDACIÓN derechos reconocidas</th>
                         </tr>
                         <tr>
                             <th>INGRESOS</th>
@@ -215,34 +213,34 @@ if($ccaa){
                     </thead>
                     <tbody>
                         <tr>
-                            <th>1. Impuestos Directos</th>
-                            <th><?php echo number_format($ccaa2018->getImpuestosDirectos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getImpuestosDirectos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getImpuestosDirectos1(), 2, ',','.');?></th>
+                            <td>1. Impuestos Directos</td>
+                            <td><?php echo number_format($ccaa2018->getImpuestosDirectos1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getImpuestosDirectos1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getImpuestosDirectos1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>2. Impuestos Indirectos</th>
-                            <th><?php echo number_format($ccaa2018->getImpuestosIndirectos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getImpuestosIndirectos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getImpuestosIndirectos1(), 2, ',','.');?></th>
+                            <td>2. Impuestos Indirectos</td>
+                            <td><?php echo number_format($ccaa2018->getImpuestosIndirectos1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getImpuestosIndirectos1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getImpuestosIndirectos1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>3. Tasas, Precios, Públicos y Otros Ingresos</th>
-                            <th><?php echo number_format($ccaa2018->getTasasPreciosOtros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTasasPreciosOtros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTasasPreciosOtros1(), 2, ',','.');?></th>
+                            <td>3. Tasas, Precios, Públicos y Otros Ingresos</td>
+                            <td><?php echo number_format($ccaa2018->getTasasPreciosOtros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getTasasPreciosOtros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getTasasPreciosOtros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>4. Transferencias Corrientes</th>
-                            <th><?php echo number_format($ccaa2018->getTransferenciasCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTransferenciasCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTransferenciasCorrientes1(), 2, ',','.');?></th>
+                            <td>4. Transferencias Corrientes</td>
+                            <td><?php echo number_format($ccaa2018->getTransferenciasCorrientes1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getTransferenciasCorrientes1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>5. Ingresos patrimoniales</th>
-                            <th><?php echo number_format($ccaa2018->getIngresosPatrimoniales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getIngresosPatrimoniales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getIngresosPatrimoniales1(), 2, ',','.');?></th>
+                            <td>5. Ingresos patrimoniales</td>
+                            <td><?php echo number_format($ccaa2018->getIngresosPatrimoniales1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getIngresosPatrimoniales1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getIngresosPatrimoniales1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
                             <th>Total ingresos corrientes</th>
@@ -251,16 +249,16 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>6. Enajenación de Inversiones Reales</th>
-                            <th><?php echo number_format($ccaa2018->getEnajenacionInversionesReales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getEnajenacionInversionesReales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getEnajenacionInversionesReales1(), 2, ',','.');?></th>
+                            <td>6. Enajenación de Inversiones Reales</td>
+                            <td><?php echo number_format($ccaa2018->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>7. Transferencias de Capital</th>
-                            <th><?php echo number_format($ccaa2018->getTransferenciasCapital1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTransferenciasCapital1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTransferenciasCapital1(), 2, ',','.');?></th>
+                            <td>7. Transferencias de Capital</td>
+                            <td><?php echo number_format($ccaa2018->getTransferenciasCapital1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getTransferenciasCapital1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getTransferenciasCapital1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
                             <th>Ingresos No financieros</th>
@@ -269,16 +267,16 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>8. Activos Financieros</th>
-                            <th><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getActivosFinancieros1(), 2, ',','.');?></th>
+                            <td>8. Activos Financieros</td>
+                            <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getActivosFinancieros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>9. Pasivos Financieros</th>
-                            <th><?php echo number_format($ccaa2018->getPasivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getPasivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getPasivosFinancieros1(), 2, ',','.');?></th>
+                            <td>9. Pasivos Financieros</td>
+                            <td><?php echo number_format($ccaa2018->getPasivosFinancieros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2019->getPasivosFinancieros1(), 2, ',','.');?></td>
+                            <td><?php echo number_format($ccaa2020->getPasivosFinancieros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
                             <th>TOTAL INGRESOS</th>
@@ -294,7 +292,7 @@ if($ccaa){
                     <thead>
                         <tr>
                             <th></th>
-                            <th>LIQUIDACIÓN obligaciones reconocidas</th>
+                            <th colspan="3" style="height:40px">LIQUIDACIÓN obligaciones reconocidas</th>
                         </tr>
                         <tr>
                             <th>GASTOS</th>
@@ -305,34 +303,34 @@ if($ccaa){
                     </thead>
                     <tbody>
                         <tr>
-                            <th>1. Gastos del Personal</th>
-                            <th><?php echo number_format($ccaa2018->getGastosPersonal1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getGastosPersonal1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getGastosPersonal1(), 2, ',','.');?></th>
+                            <td>1. Gastos del Personal</th>
+                            <td><?php echo number_format($ccaa2018->getGastosPersonal1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getGastosPersonal1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getGastosPersonal1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>2. Gastos Corrientes en Bienes y Servicios</th>
-                            <th><?php echo number_format($ccaa2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
+                            <td>2. Gastos Corrientes en Bienes y Servicios</th>
+                            <td><?php echo number_format($ccaa2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>3. Gastos Financieros</th>
-                            <th><?php echo number_format($ccaa2018->getGastosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getGastosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getGastosFinancieros1(), 2, ',','.');?></th>
+                            <td>3. Gastos Financieros</th>
+                            <td><?php echo number_format($ccaa2018->getGastosFinancieros1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getGastosFinancieros1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getGastosFinancieros1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>4. Transferencias Corrientes</th>
-                            <th><?php echo number_format($ccaa2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
+                            <td>4. Transferencias Corrientes</th>
+                            <td><?php echo number_format($ccaa2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>5. Fondo de contingencia</th>
-                            <th><?php echo number_format($ccaa2018->getFondoContingencia1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getFondoContingencia1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getFondoContingencia1(), 2, ',','.');?></th>
+                            <td>5. Fondo de contingencia</th>
+                            <td><?php echo number_format($ccaa2018->getFondoContingencia1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getFondoContingencia1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getFondoContingencia1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
                             <th>Total gastos corrientes</th>
@@ -341,16 +339,16 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalGastosCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>6. Inversiones Reales</th>
-                            <th><?php echo number_format($ccaa2018->getInversionesReales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getInversionesReales1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getInversionesReales1(), 2, ',','.');?></th>
+                            <td>6. Inversiones Reales</th>
+                            <td><?php echo number_format($ccaa2018->getInversionesReales1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getInversionesReales1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getInversionesReales1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>7. Transferencias de capital</th>
-                            <th><?php echo number_format($ccaa2018->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
+                            <td>7. Transferencias de capital</th>
+                            <td><?php echo number_format($ccaa2018->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
                             <th>Gastos No financieros</th>
@@ -359,16 +357,16 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>8. Activos Financieros</th>
-                            <th><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getActivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <td>8. Activos Financieros</th>
+                            <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getActivosFinancierosGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>9. Pasivos Financieros</th>
-                            <th><?php echo number_format($ccaa2018->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <td>9. Pasivos Financieros</th>
+                            <td><?php echo number_format($ccaa2018->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2019->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <td><?php echo number_format($ccaa2020->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
                             <th>TOTAL GASTOS</th>
