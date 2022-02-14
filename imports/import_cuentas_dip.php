@@ -42,7 +42,7 @@ $fields=array();
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_cuentas_dip{
+class Importer_cuentas_dip{
     public function import_cuentas_dip($filename){
         //Cargamos el archivo en la variable de documento "doc"
         $path = $filename;

@@ -44,7 +44,7 @@ $fields=array();
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_cuentas_mun{
+class Importer_cuentas_mun{
     public function import_cuentas_mun($filename){
         $path = $filename;
         $doc = IOFactory::load($path);

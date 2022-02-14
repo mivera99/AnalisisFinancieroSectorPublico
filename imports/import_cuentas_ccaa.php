@@ -43,7 +43,7 @@ $fields=array();
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_cuentas_ccaa{
+class Importer_cuentas_ccaa{
     public function import_cuentas_ccaa($filename){
         //Cargamos el archivo en la variable de documento "doc"
         $path = $filename;

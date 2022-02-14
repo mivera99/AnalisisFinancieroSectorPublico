@@ -57,7 +57,7 @@ $conn->set_charset("utf8");
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_scoring_ccaa{
+class Importer_scoring_ccaa{
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
     private function excelDecimalTranslation(&$var) {
         //Cambiamos las "," por "."

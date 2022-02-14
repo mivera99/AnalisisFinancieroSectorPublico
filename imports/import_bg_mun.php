@@ -54,7 +54,7 @@ $fields=array();
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_bg_mun{
+class Importer_bg_mun{
 
     public function import_bg_mun($filename, $realname){
         $path = $filename;

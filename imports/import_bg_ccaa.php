@@ -45,7 +45,7 @@ $fields=array();
 require("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-class Import_bg_ccaa{
+class Importer_bg_ccaa{
 
     
     public function import_bg_ccaa($filename){ //=null para PHP 7.X
