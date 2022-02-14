@@ -57,7 +57,7 @@ if($municipio){
                 echo '<h3>Información general</h3>';
                 echo '<p><b>Provincia:  </b>'.$municipio->getProvincia().'</p>';
                 echo '<p><b>Autonomía:  </b>'.$municipio->getAutonomia().'</p>';
-                echo '<p><b>Alcalde del municipio:  </b>'.$municipio->getNombreAlcalde().' '.$municipio->getApellido1().' '.$municipio->getApellido1().'</p>';
+                echo '<p><b>Alcalde del municipio:  </b>'.$municipio->getNombreAlcalde().' '.$municipio->getApellido1().' '.$municipio->getApellido2().'</p>';
                 echo '<p><b>Vigencia:  </b>'.$municipio->getVigencia().'</p>';
                 echo '<p><b>Partido político: </b>'.$municipio->getPartido().'</p>';
                 echo '<p><b>CIF:  </b>'.$municipio->getCif().'</p>';

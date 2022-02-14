@@ -48,7 +48,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Import_bg_ccaa{
 
     
-    public function import_bg_ccaa($filename){ 
+    public function import_bg_ccaa($filename){ //=null para PHP 7.X
 
 
         //Path del archivo

@@ -36,51 +36,25 @@ require_once('includesWeb/daos/DAOConsultor.php');
             <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
             <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
             <p>Provincias, diputaciones y municipios en segundos.</p>
-
-            <?php
-                //$facilities = (new DAOConsultor())->getAllFacilities();
-                //print_r($facilities);
-                
-            ?>
             <script>
-                //var nom = <?php //echo json_encode($facilities);?>;
                 cargarNombres();
-                //creardatos(nom);
             </script>
-            
-
-
-            <!--
-            <div class="wrapper">
-            <div class="search-input">
-                <a href="" target="_blank" hidden></a>
-                <input type="text" placeholder="Type to search..">
-                <div class="autocom-box">
-                 here list are inserted from javascript -->
-                 <!--
-                </div>
-                <div class="icon"><i class="fas fa-search"></i></div>
-            </div>
-            </div>
-            -->
-
-
-
             <br><br>
             
             <form autocomplete="off" action="redirect.php" method="post">
                 <div class="autocomplete" style="width:530px;">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
-                    <!--<input type="submit" value="Consultar">-->
+                    <!--<select class="year">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                    </select>-->
                     <button>Consultar</button>
                 </div>
-                 <?php // Meter el onlcik para redirigir a la página ed ccaa, diputacion o municipio?>
             </form>
 
             <script>
-                /*An array containing all the country names in the world:*/
-                //var facilities = <?php //echo json_encode($facilities);?>;
-                /*initiate the autocomplete function on the "myInput" element, and pass along the comunidades array as possible autocomplete values:*/
                 autocomplete(document.getElementById("facility"));
             </script>
         </div>
