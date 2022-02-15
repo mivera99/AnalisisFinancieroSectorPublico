@@ -3,16 +3,13 @@
     require('includesWeb/daos/DAOUsuario.php');
     $email = htmlspecialchars(trim(strip_tags($_REQUEST["email"])));
     $password = htmlspecialchars(trim(strip_tags($_REQUEST["password"])));
-    //$usuarioDAO = new DAOUsuario();
+    
     $usuario = (new DAOUsuario())->getUsuario($email, $password);
     if($usuario){
         $_SESSION['login'] = true;
         $_SESSION['email'] = $usuario->getcorreo();
         $_SESSION['password'] = $usuario->getcontrasenia();
     }
-    /*else{
-        $_SESSION["login"] = false;
-    }*/
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,10 +51,6 @@
         <?php
             }
             else { //Usuario registrado
-                //AQUI DEBERIA VOLVER A LA PAGINA PRINCIPAL CON EL CAMBIO YA PRODUCIDO
-                /*echo "<h1>Bienvenido {$p->getnick()}</h1>";
-                echo "<p>Tu rol de registro es: <b>{$p->getrol()}</b></p>";
-                echo "<p>Usa el menú para navegar.</p>";*/
                 echo '<h1>Bienvenido</h1>';
             }
         ?>
