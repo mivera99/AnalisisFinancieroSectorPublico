@@ -9,7 +9,7 @@ require_once('includesWeb/daos/DAOConsultorDiputacion.php');
 
 class DAOConsultor{
 
-    public function getAllFacilities(){ //Modificar el array que te devuelva, debe contener un array de pares clave valor <clave,valor>. Clave es MUNICPIO, DIPUTACION o MUNICIPIO. Valor es el nombre de la facility. 
+    public function getAllFacilities(){ 
         $facilities = array();
         $conn = getConexionBD();
         $ccaa_sql = "SELECT NOMBRE FROM ccaas";
@@ -141,26 +141,6 @@ class DAOConsultor{
         //TOTAL GASTOS
         $ccaa->setTotalGastos1($tmpCCAA->getTotalGastos1());
 
-        /*$ccaa->setPrevIni($tmpCCAA->getPrevIni());
-        $ccaa->setModPrevIni($tmpCCAA->getModPrevIni());
-        $ccaa->setPrevDef($tmpCCAA->getPrevDef());
-        $ccaa->setDerRec($tmpCCAA->getDerRec());
-        $ccaa->setRecaudaCor($tmpCCAA->getRecaudaCor());
-        $ccaa->setRecaudaCer($tmpCCAA->getRecaudaCer());
-        */
-        /*$tmpCCAA = $daoccaa->getGastos($codigo, $year);
-        if(!$tmpCCAA){
-            return false;
-        }
-
-        $ccaa->setCredIni($tmpCCAA->getCredIni());
-        $ccaa->setModCred($tmpCCAA->getModCred());
-        $ccaa->setCredDef($tmpCCAA->getCredDef());
-        $ccaa->setOblgRec($tmpCCAA->getOblgRec());
-        $ccaa->setPagosCor($tmpCCAA->getPagosCor());
-        $ccaa->setPagosCer($tmpCCAA->getPagosCer());      
-*/
-
         $tmpCCAA = $daoccaa->getCuentasGeneral($codigo, $year);
         if(!$tmpCCAA){
             return false;
@@ -253,11 +233,13 @@ class DAOConsultor{
         $municipio->setNombreAlcalde($tmpMunicipio->getNombreAlcalde());
         $municipio->setApellido1($tmpMunicipio->getApellido1());
         $municipio->setApellido2($tmpMunicipio->getApellido2());
+        $municipio->setAutonomia($tmpMunicipio->getAutonomia());
+        $municipio->setProvincia($tmpMunicipio->getProvincia());
         $municipio->setVigencia($tmpMunicipio->getVigencia());
         $municipio->setPartido($tmpMunicipio->getPartido());
         $municipio->setCif($tmpMunicipio->getCif());
         $municipio->setTipoVia($tmpMunicipio->getTipoVia());
-        $municipio->setNumVia($tmpMunicipio->getNombreVia());
+        $municipio->setNombreVia($tmpMunicipio->getNombreVia());
         $municipio->setNumVia($tmpMunicipio->getNumVia());
         $municipio->setTelefono($tmpMunicipio->getTelefono());
         $municipio->setCodigoPostal($tmpMunicipio->getCodigoPostal());
@@ -472,11 +454,8 @@ class DAOConsultor{
         $diputacion->setCodigo($tmpDiputacion->getCodigo());
         $diputacion->setNombre($tmpDiputacion->getNombre());
         $diputacion->setScoring($tmpDiputacion->getScoring());
-        //$diputacion->setNombrePresidente($tmpDiputacion->getNombrePresidente());
-        //$diputacion->setApellido1($tmpDiputacion->getApellido1());
-        //$diputacion->setApellido2($tmpDiputacion->getApellido2());
-        //$diputacion->setVigencia($tmpDiputacion->getVigencia());
-        //$diputacion->setPartido($tmpDiputacion->getPartido());
+        $diputacion->setAutonomia($tmpDiputacion->getAutonomia());
+        $diputacion->setProvincia($tmpDiputacion->getProvincia());
         $diputacion->setCif($tmpDiputacion->getCif());
         $diputacion->setTipoVia($tmpDiputacion->getTipoVia());
         $diputacion->setNumVia($tmpDiputacion->getNombreVia());

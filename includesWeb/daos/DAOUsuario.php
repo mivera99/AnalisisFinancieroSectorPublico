@@ -10,49 +10,24 @@ class DAOUsuario {
         $verificado=false;
         $sql = "SELECT nombre, correo, contrasenia, rol  FROM usuarios WHERE correo = '$emailS'";
         $rs = mysqli_query($db,$sql);
-        //$p = new Usuario();
         if($rs){
             if ( $rs->num_rows == 1) {
                 $fila = $rs->fetch_assoc();
                 $hashed_password=$fila['contrasenia'];
                 if (password_verify($password, $hashed_password)) {
-                    //$verificado=true;
-                    
                     $p = new Usuario();
                     $p->setnombreusuario($fila['nombre']);
                     $p->setcorreo($fila['correo']);
                     $p->setcontrasenia($password);
                     $p->setrol($fila['rol']);
                     return $p;
-                } /*else {
-                    //$p->setcorreo(NULL);
-                    return false;
-                }*/
+                }
             }
             return false;
         }
         else{
-            echo "Error al consultar la BD";
             return false;
         }
-        /*if($verificado){
-            $sql2 = "SELECT correo, contrasenia, nombreusuario, rol, telefono, direccion, nick, urlfoto 
-                FROM usuario WHERE correo = '$emailS'";
-            $res2 = mysqli_query($db,$sql2);
-            $fila = mysqli_fetch_assoc($res2);
-            $p->setnombreusuario($fila['nombreusuario']);
-            $p->setcorreo($fila['correo']);
-            $p->setcontrasenia($fila['contrasenia']);
-            $p->setrol($fila['rol']);
-            $p->settelefono($fila['telefono']);
-            $p->setdireccion($fila['direccion']);
-            $p->setnick($fila['nick']);
-            $p->seturlfoto($fila['urlfoto']);
-        }
-        else{
-            $p->setcorreo(NULL);
-        }*/
-        //return $p;
     }
 
     //get usuario para una vez registrado, tenemos problemas con la sal
@@ -79,9 +54,7 @@ class DAOUsuario {
         //por defecto se inserta como usuario registrado
         $db = getConexionBD();
         $passwordS = password_hash($contraseniaS, PASSWORD_DEFAULT, ['cost'=>12]);
-        /*if($telefono == ''){
-            $telefono = 0;
-        }*/
+        
         $sql = "INSERT INTO usuarios (correo, contrasenia, nombre, rol) VALUES ('$emailS','$passwordS','$nombre','$rol')";
         
         return mysqli_query($db,$sql);

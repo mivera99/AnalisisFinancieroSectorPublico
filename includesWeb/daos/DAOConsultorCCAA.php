@@ -67,21 +67,6 @@ class DAOConsultorCCAA {
 
     public function getIngresos($codigo, $year){
         $db = getConexionBD();
-        /*$sql = "SELECT * FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $result = mysqli_query($db, $sql);
-        if(!$result){
-            return false;
-        }
-        $ccaa = new CCAA();
-        $ccaa_res = mysqli_fetch_assoc($result);
-
-        $ccaa->setPrevIni($ccaa_res['PREV_INI']);
-        $ccaa->setModPrevIni($ccaa_res['MOD_PREV_INI']);
-        $ccaa->setPrevDef($ccaa_res['PREV_DEF']);
-        $ccaa->setDerRec($ccaa_res['DER_REC']);
-        $ccaa->setRecaudaCor($ccaa_res['RECAUDA_COR']);
-        $ccaa->setRecaudaCer($ccaa_res['RECAUDA_CER']);
-        */
         $ccaa = new CCAA();
         /* INGRESOS */
         $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR1'";
@@ -221,21 +206,6 @@ class DAOConsultorCCAA {
 
     public function getGastos($codigo, $year){
         $db = getConexionBD();
-        /*$sql = "SELECT * FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $result = mysqli_query($db, $sql);
-        if(!$result){
-            return false;
-        }
-        $ccaa = new CCAA();
-        $ccaa_res = mysqli_fetch_assoc($result);
-
-        $ccaa->setCredIni($ccaa_res['CRED_INI']);
-        $ccaa->setModCred($ccaa_res['MOD_CRED']);
-        $ccaa->setCredTot($ccaa_res['CRED_TOT']);
-        $ccaa->setOblgRec($ccaa_res['OBLG_REC']);
-        $ccaa->setPagosCor($ccaa_res['PAGOS_COR']);
-        $ccaa->setPagosCer($ccaa_res['PAGOS_CER']);
-        */
         $ccaa = new CCAA();
 
         /* GASTOS */

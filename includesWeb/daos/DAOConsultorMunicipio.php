@@ -49,9 +49,6 @@ class DAOConsultorMunicipio{
         $municipio->setWeb($municipio_res['WEB']);
         $municipio->setMail($municipio_res['MAIL']);
 
-
-        
-
         $cod = $municipio_res['CODIGO'];
         $sql = "SELECT RATING FROM scoring_mun WHERE CODIGO = '$cod' AND ANHO = '2021'";
         $result = mysqli_query($db,$sql);
@@ -60,8 +57,6 @@ class DAOConsultorMunicipio{
         }
         $scoring = mysqli_fetch_assoc($result);
         $municipio->setScoring($scoring['RATING']);
-
-        
 
         return $municipio;
     }
@@ -178,21 +173,6 @@ class DAOConsultorMunicipio{
 
     public function getGastos($codigo, $year){
         $db = getConexionBD();
-        /*$sql = "SELECT * FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $result = mysqli_query($db, $sql);
-        if(!$result){
-            return false;
-        }
-        $ccaa = new CCAA();
-        $ccaa_res = mysqli_fetch_assoc($result);
-
-        $ccaa->setCredIni($ccaa_res['CRED_INI']);
-        $ccaa->setModCred($ccaa_res['MOD_CRED']);
-        $ccaa->setCredTot($ccaa_res['CRED_TOT']);
-        $ccaa->setOblgRec($ccaa_res['OBLG']);
-        $ccaa->setPagosCor($ccaa_res['PAGOS_COR']);
-        $ccaa->setPagosCer($ccaa_res['PAGOS_CER']);
-        */
         $mun = new Municipio();
         /* GASTOS */
         $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST1'";
@@ -332,7 +312,6 @@ class DAOConsultorMunicipio{
     public function getSostenibilidad($codigo, $year) {
         $db = getConexionBD();
         $mun = new Municipio;
-
  
         //Sostenibilidad Financiera
         $sql = "SELECT R2 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -389,11 +368,9 @@ class DAOConsultorMunicipio{
         $sostenibilidad_deuda_media = mysqli_fetch_assoc($result);
         $mun->setSostenibilidadDeudaMediaDiputaciones($sostenibilidad_deuda_media['R4_NAC']);
 
-
         return $mun;
 
     }
-
 
     public function getLiquidez($codigo, $year) {
         $db = getConexionBD();
@@ -462,7 +439,6 @@ class DAOConsultorMunicipio{
         $solvencia_corto_plazo_media_diputaciones2 = mysqli_fetch_assoc($result);
         $mun->setSolvenciaCortoPlazoMediaDiputaciones2($solvencia_corto_plazo_media_diputaciones2['R7_NAC']);
 
-
         return $mun;
 
     }
@@ -470,8 +446,6 @@ class DAOConsultorMunicipio{
     public function getEficiencia($codigo, $year) {
         $db = getConexionBD();
         $mun = new Municipio;
-
-        // TO DO
 
         //Eficiencia
         $sql = "SELECT R8 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -492,14 +466,11 @@ class DAOConsultorMunicipio{
         $mun->setEficienciaMediaDiputaciones($eficiencia_media_diputaciones['R8_NAC']);
 
         return $mun;
-
     }
 
     public function getGestionPresupuestaria($codigo, $year) {
         $db = getConexionBD();
         $mun = new Municipio;
-
-        // TO DO
 
         //EjecucionIngresosCorrientes
         $sql = "SELECT R9 FROM scoring_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -537,7 +508,6 @@ class DAOConsultorMunicipio{
         $ejecucion_gastos_corrientes_media_diputaciones = mysqli_fetch_assoc($result);
         $mun->setEjecucionGastosCorrientesMediaDiputaciones($ejecucion_gastos_corrientes_media_diputaciones['R10_NAC']);
 
-
         return $mun;
 
     }
@@ -545,8 +515,6 @@ class DAOConsultorMunicipio{
     public function getCumplimientoPagos($codigo, $year) {
         $db = getConexionBD();
         $mun = new Municipio;
- 
-        // TO DO
 
         //DeudaComercial
         $sql = "SELECT DEUDACOM FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -593,17 +561,12 @@ class DAOConsultorMunicipio{
         $pagos_sobre_obligaciones_reconocidas_media_diputaciones = mysqli_fetch_assoc($result);
         $mun->setPagosSobreObligacionesReconocidasMediaDiputaciones($pagos_sobre_obligaciones_reconocidas_media_diputaciones['R12_NAC']);
 
-
-
         return $mun;
-
     }
 
     public function getGestionTributaria($codigo, $year) {
         $db = getConexionBD();
         $mun = new Municipio;
-
-        // TO DO
 
         //DerechosPendientesCobro
         $sql = "SELECT DERPENDCOBRO FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -632,9 +595,7 @@ class DAOConsultorMunicipio{
         $eficacia_recaudatoria_media_diputaciones = mysqli_fetch_assoc($result);
         $mun->setEficaciaRecaudatoriaMediaDiputaciones($eficacia_recaudatoria_media_diputaciones['R13_NAC']);
 
-
         return $mun;
-
     }
 
 }

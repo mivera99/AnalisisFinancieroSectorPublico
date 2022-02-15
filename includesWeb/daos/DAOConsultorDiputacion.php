@@ -171,21 +171,6 @@ class DAOConsultorDiputacion {
 
     public function getGastos($codigo, $year){
         $db = getConexionBD();
-        /*$sql = "SELECT * FROM cuentas_dip_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $result = mysqli_query($db, $sql);
-        if(!$result){
-            return false;
-        }
-        $ccaa = new CCAA();
-        $ccaa_res = mysqli_fetch_assoc($result);
-
-        $ccaa->setCredIni($ccaa_res['CRED_INI']);
-        $ccaa->setModCred($ccaa_res['MOD_CRED']);
-        $ccaa->setCredTot($ccaa_res['CRED_TOT']);
-        $ccaa->setOblgRec($ccaa_res['OBLG']);
-        $ccaa->setPagosCor($ccaa_res['PAGOS_COR']);
-        $ccaa->setPagosCer($ccaa_res['PAGOS_CER']);
-        */
         $dip = new Diputacion();
         /* GASTOS */
         $sql = "SELECT OBLG FROM cuentas_dip_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST1'";
@@ -464,8 +449,6 @@ class DAOConsultorDiputacion {
         $db = getConexionBD();
         $dip = new Diputacion;
 
-        // TO DO
-
         //Eficiencia
         $sql = "SELECT R8 FROM scoring_dip WHERE CODIGO = '$codigo' AND ANHO = '$year'";
         $result = mysqli_query($db,$sql);
@@ -491,8 +474,6 @@ class DAOConsultorDiputacion {
     public function getGestionPresupuestaria($codigo, $year) {
         $db = getConexionBD();
         $dip = new Diputacion;
-
-        // TO DO
 
         //EjecucionIngresosCorrientes
         $sql = "SELECT R9 FROM scoring_dip WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -538,8 +519,6 @@ class DAOConsultorDiputacion {
     public function getCumplimientoPagos($codigo, $year) {
         $db = getConexionBD();
         $dip = new Diputacion;
- 
-        // TO DO
 
         //DeudaComercial
         $sql = "SELECT DEUDACOM FROM deudas_dip WHERE CODIGO = '$codigo' AND ANHO = '$year'";
@@ -595,8 +574,6 @@ class DAOConsultorDiputacion {
     public function getGestionTributaria($codigo, $year) {
         $db = getConexionBD();
         $dip = new Diputacion;
-
-        // TO DO
 
         //DerechosPendientesCobro
         $sql = "SELECT DERPENDCOBRO FROM deudas_dip WHERE CODIGO = '$codigo' AND ANHO = '$year'";
