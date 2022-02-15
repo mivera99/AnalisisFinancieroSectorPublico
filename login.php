@@ -1,5 +1,4 @@
 <?php
-    require_once('includesWeb/daos/DAOUsuario.php');
     session_start();
 ?>
 <!DOCTYPE html>
@@ -35,9 +34,6 @@
     ?>
 </div>
 <div id="contenido">
-    <?php
-    //(new DAOUsuario())->insertaUsuario("admin@hotmail.com", "admin4444", "admin", "admin");
-    ?>
     <form action='procesarLogin.php' method='POST'>
         <h2 class="form-name">Login</h2>
         <fieldset>
