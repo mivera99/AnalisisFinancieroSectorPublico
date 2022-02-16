@@ -4,7 +4,6 @@
         private $correo = "";
         private $contrasenia = "";
         private $rol = "";
-        //private $telefono = "";
 
         public function getnombreusuario(){
             return $this->nombreusuario;
@@ -30,11 +29,5 @@
         public function setrol($x){
             return $this->rol=$x;
         }
-        /*public function gettelefono(){
-            return $this->telefono;
-        }
-        public function settelefono($x){
-            return $this->telefono=$x;
-        }*/
     }
 ?>
