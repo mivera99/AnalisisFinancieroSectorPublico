@@ -43,7 +43,7 @@
             <h2>Editar perfil</h2>
             <fieldset>
                 <p>Nombre * </p><input type='text' name='nombreusuario' value="<?php echo $usuario->getnombreusuario()?>" required> <br><br>
-                <p>Email * </p><input type='text' name='correo' value="<?php echo $usuario->getcorreo()?>" required> <br><br>     
+                <p>Email * </p><input type='email' name='correo' value="<?php echo $usuario->getcorreo()?>" required> <br><br>     
                 <p>Contraseña * </p><input type='password' name='password' id='password' value="<?php echo $_SESSION['password']?>" required>
                 <button type="button" onclick=showPassword()>Mostrar contraseña</button>  
                 <?php
