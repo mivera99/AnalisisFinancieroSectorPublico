@@ -1,9 +1,6 @@
 <?php
     session_start();
-    unset($_SESSION['login']);
-    unset($_SESSION['rol']);
-    unset($_SESSION['email']);
-    unset($_SESSION['password']);
+    session_unset();
     session_destroy();
 ?>
 <!DOCTYPE html>
