@@ -4,7 +4,7 @@
 
     if(isset($_SESSION['email'])){
         //$usuarioDAO = new DAOUsuario();
-        $usuario = (new DAOUsuario())->getUsuarioE($_SESSION['email'], $_SESSION['password']);
+        $usuario = (new DAOUsuario())->getUsuario($_SESSION['email'], $_SESSION['password']);
     }
 ?>
 <!DOCTYPE html>
@@ -43,14 +43,13 @@
         <p>Nombre: <b><?php echo $usuario->getnombreusuario();?></b></p> 
         <p>Email: <b><?php echo $usuario->getcorreo();?></b></p> 
         <p>Contraseña: <b><?php echo $_SESSION['password'];?></b></p> 
-        <p>Rol: <b><?php echo $usuario->getrol();?></b></p> 
+        <p>Rol: <b><?php echo $usuario->getRol();?></b></p> 
         <br><br>
-  </form>
         <a href="editarperfil.php"><button>Editar perfil</button></a>
-        <a href="editarcontrasenia.php"><button>Cambiar contraseña</button></a>
+        <!--<a href="editarcontrasenia.php"><button>Cambiar contraseña</button></a>-->
         <a href="logout.php"><button>Cerrar sesión</button></a><br><br>
         <?php
-            if($usuario->getrol()=="admin" || $usuario->getrol()=="gestor"){
+            if($usuario->getrol()=='Administrador' || $usuario->getrol()=='Gestor'){
         ?>      <br><br><br>
                 <h2>Panel de control</h2><br>   
                 
@@ -65,7 +64,7 @@
                 <br><br>
                 
                 <?php
-                if($usuario->getrol()=="admin"){
+                if($usuario->getrol()=='Administrador'){
                 ?>
                     <h3>Usuarios</h3>
                     <a href="insertarUsuario.php"><button>Añadir usuarios</button></a><br><br>

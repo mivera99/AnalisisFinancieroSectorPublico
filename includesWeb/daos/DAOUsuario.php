@@ -19,7 +19,14 @@ class DAOUsuario {
                     $p->setnombreusuario($fila['nombre']);
                     $p->setcorreo($fila['correo']);
                     $p->setcontrasenia($password);
-                    $p->setrol($fila['rol']);
+                    $rol='No definido';
+                    if($fila['rol']=='admin'){
+                        $rol = 'Administrador';
+                    }
+                    else if($fila['rol']=='gestor'){
+                        $rol = 'Gestor';
+                    }
+                    $p->setrol($rol);
                     return $p;
                 }
             }
@@ -65,8 +72,19 @@ class DAOUsuario {
         $db = getConexionBD();
         
         $hash = password_hash($contrasenia, PASSWORD_DEFAULT, ['cost'=>12]);
-        $sql = "UPDATE usuarios SET correo='$newemailS', nombre = '$nombre', contrasenia = '$hash', rol = '$rol' where correo = '$oldmail'";
-        return mysqli_query($db,$sql);
+        if($rol==NULL)
+            $sql = "UPDATE usuarios SET correo='$newemailS', nombre = '$nombre', contrasenia = '$hash' WHERE correo = '$oldmail'";
+        else
+            $sql = "UPDATE usuarios SET correo='$newemailS', nombre = '$nombre', contrasenia = '$hash', rol = '$rol' WHERE correo = '$oldmail'";
+        
+        $res = mysqli_query($db,$sql);
+        if($res){
+            return true;
+        }
+        else{
+            echo mysqli_error($db);
+        }
+        return false;
     }
 
     /*public function updateurl($emailS,$url){

@@ -8,3 +8,7 @@ function showPassword(){
         tipo.type = "password";
     }
 }
+
+/*function submit(){
+    var
+}*/
