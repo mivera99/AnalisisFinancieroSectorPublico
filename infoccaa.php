@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
-require_once('includesWeb/ccaa.php');
 
 $nombre = htmlspecialchars(trim(strip_tags($_GET["ccaa"])));
 
