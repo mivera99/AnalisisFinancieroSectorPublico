@@ -14,12 +14,12 @@
         <?php
         if(!isset($_SESSION['email'])) {
         ?>
-            <a href="login.php">INICIAR SESIÓN</a>
+        <a href="login.php">INICIAR SESIÓN</a>
         <?php
         }
         else {
         ?>
-            <a href="perfil.php">PERFIL</a>
+        <a href="perfil.php">PERFIL</a>
         <?php
         }
         ?>
