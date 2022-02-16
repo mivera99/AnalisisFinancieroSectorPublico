@@ -2,7 +2,7 @@
     <div id="menu-left">
         <a href="index.php">
             <p class="title">Análisis financiero del sector público</p>
-            <p class="subtitle">Noster Economia</p>
+            <p class="subtitle">Noster Economía</p>
         </a>
     </div>
     <div id="menu-right">
