@@ -6,6 +6,7 @@ $nombre = htmlspecialchars(trim(strip_tags($_GET["ccaa"])));
 
 $daoccaa = new DAOConsultor();
 $ccaa = $daoccaa->getCCAA($nombre);
+$ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
 $ccaa2018 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2018);
 $ccaa2019 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2019);
@@ -81,11 +82,11 @@ if($ccaa){
             <?php
             if($encontrado){
                 echo '<h2>'.$ccaa->getNombre().'</h2>';
-                
-                echo '<h2>Rating 2020</h2>';
-                echo '<button class="scoring '. $ccaa2020->getScoring() . '">'. $ccaa2020->getScoring() .'</button><p>Tendencia:'.$ccaa2020->getTendencia().'</p>';
-                echo '<h2>Rating 2021</h2>';
-                echo '<button class="scoring '. $ccaa2021->getScoring() . '">'. $ccaa2021->getScoring() .'</button><p>Tendencia:'.$ccaa2021->getTendencia().'</p>';
+                $ratings = $ccaa->getScoring();
+                foreach($ratings as $clave => $valor){
+                    echo '<h2>Rating '.$clave.'</h2>';
+                    echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.($ccaa->getTendencia())[$clave].'</p>';
+                }
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';
                 echo '<p><b>Presidente de la comunidad: </b>'.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
@@ -104,8 +105,8 @@ if($ccaa){
                 <table>
                     <thead>
                      <tr>
-                            <th colspan="2">Población (Año 2020): <?php echo number_format($ccaa2020->getPoblacion(), 0, '','.');?></th>
-                            <th colspan="2">PIB per cápita (Año 2019): <?php echo number_format($ccaa2019Deudas->getPibc()*1000, 0, '','.');?></th>
+                            <th colspan="2">Población (Año <?php echo key($ccaa->getPoblacion()).'): '. number_format(($ccaa->getPoblacion())[key($ccaa->getPoblacion())], 0, '','.');?></th>
+                            <th colspan="2">PIB per cápita (Año <?php echo key($ccaa->getPibc()).'): '. number_format(($ccaa->getPibc())[key($ccaa->getPibc())]*1000, 0, '','.');?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,33 +114,42 @@ if($ccaa){
                             <th>
                                 <h4>Incremento del PIB de la comunidad<h4>
                                 <ul>
-                                    <li>2020: <?php echo ($ccaa2020->getIncrPib()*100).'%';?></li>
-                                    <li>2019: <?php echo ($ccaa2019->getIncrPib()*100).'%';?></li>
-                                    <li>2018: <?php echo ($ccaa2018->getIncrPib()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaa->getIncrPib() as $clave=>$valor){
+                                        echo '<li>'.$clave.': '.($valor*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Incremento del PIB nacional<h4>
                                 <ul>
-                                    <li>2020: <?php echo ($ccaa2020nac->getIncrPib()*100).'%';?></li>
-                                    <li>2019: <?php echo ($ccaa2019nac->getIncrPib()*100).'%';?></li>
-                                    <li>2018: <?php echo ($ccaa2018nac->getIncrPib()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaaNac->getIncrPib() as $clave=>$valor){
+                                        echo '<li>'.$clave.': '.($valor*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Paro<h4>
                                 <ul>
-                                    <li>2020 (Trimestre 2): <?php echo ($ccaa2020Mes6->getParo()*100).'%';?></li>
-                                    <li>2019 (Trimestre 2): <?php echo ($ccaa2019Mes6->getParo()*100).'%';?></li>
-                                    <li>2018 (Trimestre 2): <?php echo ($ccaa2018Mes6->getParo()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaa->getParo() as $array){
+                                        echo '<li>'.$array[0].' (Trimestre '.$array[1].'): '.($array[2]*100).'%</li>';
+                                    }
+                                    
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Paro nacional<h4>
                                 <ul>
-                                    <li>2020 (Trimestre 2): <?php echo ($ccaa2020nacMes6->getParo()*100).'%';?></li>
-                                    <li>2019 (Trimestre 2): <?php echo ($ccaa2019nacMes6->getParo()*100).'%';?></li>
-                                    <li>2018 (Trimestre 2): <?php echo ($ccaa2018nacMes6->getParo()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaaNac->getParo() as $array){
+                                        echo '<li>'.$array[0].' (Trimestre '.$array[1].'): '.($array[2]*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                         </tr>
@@ -147,33 +157,41 @@ if($ccaa){
                             <th>
                                 <h4>Transacciones inmobiliarias<h4>
                                 <ul>
-                                    <li>2020 (Trimestre 1): <?php echo ($ccaa2020Mes3->getTransacInmobiliarias()*100).'%';?></li>
-                                    <li>2019 (Trimestre 1): <?php echo ($ccaa2019Mes3->getTransacInmobiliarias()*100).'%';?></li>
-                                    <li>2018 (Trimestre 1): <?php echo ($ccaa2018Mes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaa->getTransacInmobiliarias() as $array){
+                                        echo '<li>'.$array[0].' (Trimestre '.$array[1].'): '.($array[2]*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Transacciones inmobiliarias nacionales<h4>
                                 <ul>
-                                    <li>2020 (Trimestre 1): <?php echo ($ccaa2020nacMes3->getTransacInmobiliarias()*100).'%';?></li>
-                                    <li>2019 (Trimestre 1): <?php echo ($ccaa2019nacMes3->getTransacInmobiliarias()*100).'%';?></li>
-                                    <li>2018 (Trimestre 1): <?php echo ($ccaa2018nacMes3->getTransacInmobiliarias()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaaNac->getTransacInmobiliarias() as $array){
+                                        echo '<li>'.$array[0].' (Trimestre '.$array[1].'): '.($array[2]*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Crecimiento de las empresas en la comunidad<h4>
                                 <ul>
-                                    <li>2020: <?php echo ($ccaa2020->getEmpresas()*100).'%';?></li>
-                                    <li>2019: <?php echo ($ccaa2019->getEmpresas()*100).'%';?></li>
-                                    <li>2018: <?php echo ($ccaa2018->getEmpresas()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaa->getEmpresas() as $clave=>$valor){
+                                        echo '<li>'.$clave.': '.($valor*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                             <th>
                                 <h4>Crecimiento de las empresas a nivel nacional<h4>
                                 <ul>
-                                    <li>2020: <?php echo ($ccaa2020nac->getEmpresas()*100).'%';?></li>
-                                    <li>2019: <?php echo ($ccaa2019nac->getEmpresas()*100).'%';?></li>
-                                    <li>2018: <?php echo ($ccaa2018nac->getEmpresas()*100).'%';?></li>
+                                    <?php
+                                    foreach($ccaaNac->getEmpresas() as $clave=>$valor){
+                                        echo '<li>'.$clave.': '.($valor*100).'%</li>';
+                                    }
+                                    ?>
                                 </ul>
                             </th>
                         </tr>
@@ -181,29 +199,30 @@ if($ccaa){
                 </table>
                 <br><br>
                 <h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
-                <p><b>Resultado presupuestario 2020: </b><?php echo ($ccaa2020->getCCAAPib()*100).'%';?></p>
-                <p><b>Resultado presupuestario 2019: </b><?php echo ($ccaa2019->getCCAAPib()*100).'%';?></p>
-                <p><b>Resultado presupuestario 2018: </b><?php echo ($ccaa2018->getCCAAPib()*100).'%';?></p>
-                <p><b>Resultado presupuestario nacional 2020: </b><?php echo ($ccaa2020nac->getCCAAPib()*100).'%';?></p>
-                <p><b>Resultado presupuestario nacional 2019: </b><?php echo ($ccaa2019nac->getCCAAPib()*100).'%';?></p>
-                <p><b>Resultado presupuestario nacional 2018: </b><?php echo ($ccaa2018nac->getCCAAPib()*100).'%';?></p>
-                <p><b>Deuda viva sobre ingresos corrientes 2021 trimestre 1 : </b><?php echo ($ccaa2021Mes3->getDeudaVivaIngrCor()*100).'%';?></p>
-                <p><b>Deuda viva sobre ingresos corrientes 2020 trimestre 1 : </b><?php echo ($ccaa2020Mes3->getDeudaVivaIngrCor()*100).'%';?></p>
-                <p><b>Deuda viva sobre ingresos corrientes 2019 trimestre 1 : </b><?php echo ($ccaa2019Mes3->getDeudaVivaIngrCor()*100).'%';?></p>
-                <p><b>Deuda viva nacional sobre ingresos corrientes 2021 trimestre 1 : </b><?php echo ($ccaa2021nacMes3->getDeudaVivaIngrCor()*100).'%';?></p>
-                <p><b>Deuda viva nacional sobre ingresos corrientes 2020 trimestre 1 : </b><?php echo ($ccaa2020nacMes3->getDeudaVivaIngrCor()*100).'%';?></p>
-                <p><b>Deuda viva nacional sobre ingresos corrientes 2019 trimestre 1 : </b><?php echo ($ccaa2019nacMes3->getDeudaVivaIngrCor()*100).'%';?></p>
+                <?php
+                foreach($ccaa->getCCAAPib() as $clave=>$valor){
+                    echo '<p><b>Resultado presupuestario '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
+                    echo '<p><b>Resultado presupuestario nacional '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaa->getDeudaVivaIngrCor() as $array){
+                    echo '<p><b>Deuda viva sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
+                }
+                foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
+                    echo '<p><b>Deuda viva nacional sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
+                }
+                ?>
                 <br><br>
-                <p></p>
                 <h3>Ingresos (en €)</h3>
                 <table>
                     <thead>
                         <tr>
                             <th></th>
-                            <th colspan="3">LIQUIDACIÓN derechos reconocidas</th>
+                            <th colspan="3">Liquidación derechos reconocidas</th>
                         </tr>
                         <tr>
-                            <th>INGRESOS</th>
+                            <th>Ingresos</th>
                             <th>2018</th>
                             <th>2019</th>
                             <th>2020</th>
@@ -211,25 +230,25 @@ if($ccaa){
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1. Impuestos Directos</td>
+                            <td>1. Impuestos directos</td>
                             <td><?php echo number_format($ccaa2018->getImpuestosDirectos1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getImpuestosDirectos1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getImpuestosDirectos1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <td>2. Impuestos Indirectos</td>
+                            <td>2. Impuestos indirectos</td>
                             <td><?php echo number_format($ccaa2018->getImpuestosIndirectos1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getImpuestosIndirectos1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getImpuestosIndirectos1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <td>3. Tasas, Precios, Públicos y Otros Ingresos</td>
+                            <td>3. Tasas, precios, públicos y otros ingresos</td>
                             <td><?php echo number_format($ccaa2018->getTasasPreciosOtros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getTasasPreciosOtros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getTasasPreciosOtros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <td>4. Transferencias Corrientes</td>
+                            <td>4. Transferencias corrientes</td>
                             <td><?php echo number_format($ccaa2018->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getTransferenciasCorrientes1(), 2, ',','.');?></td>
@@ -247,37 +266,37 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>6. Enajenación de Inversiones Reales</td>
+                            <td>6. Enajenación de inversiones reales</td>
                             <td><?php echo number_format($ccaa2018->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <td>7. Transferencias de Capital</td>
+                            <td>7. Transferencias de capital</td>
                             <td><?php echo number_format($ccaa2018->getTransferenciasCapital1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getTransferenciasCapital1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getTransferenciasCapital1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>Ingresos No financieros</th>
+                            <th>Ingresos no financieros</th>
                             <th><?php echo number_format($ccaa2018->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2019->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2020->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>8. Activos Financieros</td>
+                            <td>8. Activos financieros</td>
                             <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getActivosFinancieros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <td>9. Pasivos Financieros</td>
+                            <td>9. Pasivos financieros</td>
                             <td><?php echo number_format($ccaa2018->getPasivosFinancieros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2019->getPasivosFinancieros1(), 2, ',','.');?></td>
                             <td><?php echo number_format($ccaa2020->getPasivosFinancieros1(), 2, ',','.');?></td>
                         </tr>
                         <tr>
-                            <th>TOTAL INGRESOS</th>
+                            <th>Ingresos totales</th>
                             <th><?php echo number_format($ccaa2018->getTotalIngresos1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2019->getTotalIngresos1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2020->getTotalIngresos1(), 2, ',','.');?></th>
@@ -290,7 +309,7 @@ if($ccaa){
                     <thead>
                         <tr>
                             <th></th>
-                            <th colspan="3" style="height:40px">LIQUIDACIÓN obligaciones reconocidas</th>
+                            <th colspan="3" style="height:40px">Liquidación  obligaciones reconocidas</th>
                         </tr>
                         <tr>
                             <th>GASTOS</th>
@@ -301,25 +320,25 @@ if($ccaa){
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1. Gastos del Personal</th>
+                            <td>1. Gastos del personal</th>
                             <td><?php echo number_format($ccaa2018->getGastosPersonal1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getGastosPersonal1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getGastosPersonal1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>2. Gastos Corrientes en Bienes y Servicios</th>
+                            <td>2. Gastos corrientes en bienes y servicios</th>
                             <td><?php echo number_format($ccaa2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>3. Gastos Financieros</th>
+                            <td>3. Gastos financieros</th>
                             <td><?php echo number_format($ccaa2018->getGastosFinancieros1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getGastosFinancieros1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getGastosFinancieros1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>4. Transferencias Corrientes</th>
+                            <td>4. Transferencias corrientes</th>
                             <td><?php echo number_format($ccaa2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
@@ -337,7 +356,7 @@ if($ccaa){
                             <th><?php echo number_format($ccaa2020->getTotalGastosCorrientes1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>6. Inversiones Reales</th>
+                            <td>6. Inversiones reales</th>
                             <td><?php echo number_format($ccaa2018->getInversionesReales1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getInversionesReales1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getInversionesReales1(), 2, ',','.');?></th>
@@ -349,25 +368,25 @@ if($ccaa){
                             <td><?php echo number_format($ccaa2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>Gastos No financieros</th>
+                            <th>Gastos no financieros</th>
                             <th><?php echo number_format($ccaa2018->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2019->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2020->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>8. Activos Financieros</th>
+                            <td>8. Activos financieros</th>
                             <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getActivosFinancierosGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <td>9. Pasivos Financieros</th>
+                            <td>9. Pasivos financieros</th>
                             <td><?php echo number_format($ccaa2018->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2019->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
                             <td><?php echo number_format($ccaa2020->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
                         </tr>
                         <tr>
-                            <th>TOTAL GASTOS</th>
+                            <th>Gasto total</th>
                             <th><?php echo number_format($ccaa2018->getTotalGastos1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2019->getTotalGastos1(), 2, ',','.');?></th>
                             <th><?php echo number_format($ccaa2020->getTotalGastos1(), 2, ',','.');?></th>
@@ -377,28 +396,39 @@ if($ccaa){
                 <br><br>
                 <h3>Solvencia</h3>
                 <!--METER LOS GRAFICOS AQUI-->
-                <p><B>Sostenibilidad financiera año 2020: </b><?php echo ($ccaa2020->getRSosteFinanciera()*100).'%';?></p>
-                <p><B>Sostenibilidad financiera año 2019: </b><?php echo ($ccaa2019->getRSosteFinanciera()*100).'%';?></p>
-                <p><B>Sostenibilidad financiera año 2018: </b><?php echo ($ccaa2018->getRSosteFinanciera()*100).'%';?></p>
-                <br>
-                <p><B>Apalancamiento operativo año 2020: </b><?php echo ($ccaa2020->getRRigidez()*100).'%';?></p>
-                <p><B>Apalancamiento operativo año 2019: </b><?php echo ($ccaa2019->getRRigidez()*100).'%';?></p>
-                <p><B>Apalancamiento operativo año 2018: </b><?php echo ($ccaa2018->getRRigidez()*100).'%';?></p>
-                <br>
-                <p><B>Sostenibilidad de la deuda año 2020: </b><?php echo ($ccaa2020->getRSosteEndeuda()*100).'%';?></p>
-                <p><B>Sostenibilidad de la deuda año 2019: </b><?php echo ($ccaa2019->getRSosteEndeuda()*100).'%';?></p>
-                <p><B>Sostenibilidad de la deuda año 2018: </b><?php echo ($ccaa2018->getRSosteEndeuda()*100).'%';?></p>
-                
+                <?php
+                foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
+                    echo '<p><b>Sostenibilidad financiera año '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                echo '<br>';
+                foreach($ccaa->getRRigidez() as $clave=>$valor){
+                    echo '<p><b>Apalancamiento operativo año '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                echo '<br>';
+                foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
+                    echo '<p><b>Sostenibilidad de la deuda año '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                ?>
                 <!-- GRAFICAS-->
                 <?php
-                $datos = array($ccaa2018->getRSosteFinanciera()*100,$ccaa2019->getRSosteFinanciera()*100,$ccaa2020->getRSosteFinanciera()*100);
-                $etiquetas = array(2018,2019,2020);
-                $datosApalancamiento = array($ccaa2018->getRRigidez()*100, $ccaa2019->getRRigidez()*100,$ccaa2020->getRRigidez()*100);
+                $datos = array();
+                $etiquetas = array();
+                foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
+                    array_push($etiquetas, $clave);
+                    array_push($datos, $valor*100);
+                }
+                $datosApalancamiento=array();
+                $etiquetasApalancamiento=array();
+                foreach($ccaa->getRRigidez() as $clave=>$valor){
+                    array_push($etiquetasApalancamiento, $clave);
+                    array_push($datosApalancamiento, $valor*100);
+                }
                 ?>
                 <script>
                     var datos = <?php echo json_encode($datos)?>;
                     var etiquetas = <?php echo json_encode($etiquetas)?>;
                     var datosA = <?php echo json_encode($datosApalancamiento)?>;
+                    var etiquetasA = <?php echo json_encode($etiquetasApalancamiento)?>;
                 </script>
 
                 <!--Grafica de ahorro neto-->
@@ -456,9 +486,9 @@ if($ccaa){
                     const configChartA = {
                         type: 'bar',
                         data: {
-                            labels: etiquetas,
+                            labels: etiquetasA,
                             datasets: [{
-                                label: 'Apalancamiento operativo',
+                                label: 'Porcentaje de apalancamiento operativo',
                                 data: datosA,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -492,15 +522,21 @@ if($ccaa){
                 </script>
                 <br><br>
                 <h3>Liquidez</h3>
-                <p><b>PMP 2020: </b><?php echo $ccaa2020Mes5->getPMP();?></p>
-                <p><b>PMP 2019: </b><?php echo $ccaa2019Mes5->getPMP();?></p>
-                <p><b>PMP media 2020: </b><?php echo $ccaa2020nacMes5->getPMP();?></p>
-                <p><b>PMP media 2019: </b><?php echo $ccaa2019nacMes5->getPMP();?></p>
+                <?php
+                foreach($ccaa->getPMP() as $array){
+                    echo '<p>PMP '.$array[0].' (Mes '.$array[1].'): '.$array[2].'</p>';
+                }
+                foreach($ccaaNac->getPMP() as $array){
+                    echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].'</p>';
+                }
+                ?>
                 <br><br>
                 <h3>Eficiencia</h3>
-                <p><b>Eficiencia 2020: </b><?php echo ($ccaa2020->getREfic()*100).'%';?></p>
-                <p><b>Eficiencia 2019: </b><?php echo ($ccaa2019->getREfic()*100).'%';?></p>
-                <p><b>Eficiencia 2018: </b><?php echo ($ccaa2018->getREfic()*100).'%';?></p>
+                <?php
+                foreach($ccaa->getREfic() as $clave=>$valor){
+                    echo '<p><b>Eficiencia '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                ?>
                 <br><br>
             <?php
             }

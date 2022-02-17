@@ -74,6 +74,53 @@ class DAOConsultor{
         $ccaa->setMail($tmpCCAA->getMail());
         $ccaa->setWeb($tmpCCAA->getWeb());
 
+        $tmpCCAA = $daoccaa->getRatingCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+        
+        $ccaa->setScoring($tmpCCAA->getScoring());
+        $ccaa->setTendencia($tmpCCAA->getTendencia());
+        $ccaa->setPoblacion($tmpCCAA->getPoblacion());
+
+        $tmpCCAA = $daoccaa->getCuentasGeneralCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+
+        $ccaa->setIncrPib($tmpCCAA->getIncrPib());
+        $ccaa->setEmpresas($tmpCCAA->getEmpresas());
+        $ccaa->setCCAAPib($tmpCCAA->getCCAAPib());
+        $ccaa->setRSosteFinanciera($tmpCCAA->getRSosteFinanciera());
+        $ccaa->setREfic($tmpCCAA->getREfic());
+        $ccaa->setRRigidez($tmpCCAA->getRRigidez());
+        $ccaa->setRSosteEndeuda($tmpCCAA->getRSosteEndeuda());
+        $ccaa->setREjeIngrCorr($tmpCCAA->getREjeIngrCorr());
+        $ccaa->setREjeGastosCorr($tmpCCAA->getREjeGastosCorr());
+        $ccaa->setPagosObligaciones($tmpCCAA->getPagosObligaciones());
+        $ccaa->setREficaciaRec($tmpCCAA->getREficaciaRec());
+
+        $tmpCCAA = $daoccaa->getDeudasCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+        
+        $ccaa->setPib($tmpCCAA->getPib());
+        $ccaa->setPibc($tmpCCAA->getPibc());
+        $ccaa->setResultado($tmpCCAA->getResultado());
+
+        $tmpCCAA = $daoccaa->getCuentasGeneralMensualCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+        
+        $ccaa->setParo($tmpCCAA->getParo());
+        $ccaa->setPMP($tmpCCAA->getPMP());
+        $ccaa->setRDCPP($tmpCCAA->getRDCPP());
+        $ccaa->setDeudaViva($tmpCCAA->getDeudaViva());
+        $ccaa->setDeudaVivaIngrCor($tmpCCAA->getDeudaVivaIngrCor());
+        $ccaa->setTransacInmobiliarias($tmpCCAA->getTransacInmobiliarias());
+
         return $ccaa;
     }
 

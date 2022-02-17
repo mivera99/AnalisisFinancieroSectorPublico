@@ -98,9 +98,9 @@ class Importer_cuentas_dip{
                         echo "<b>".$tipo."</b><br>";
                         echo "<b>".$year."</b><br>";
 
-                        $v1 = $values[$q];      //PRES
-                        $v2 = $values[$q+1];    //DERE
-                        $v3 = $values[$q+2];    //RECA
+                        $v1 = str_replace(',', '.', $values[$q]);      //PRES
+                        $v2 = str_replace(',', '.', $values[$q+1]);    //DERE
+                        $v3 = str_replace(',', '.', $values[$q+2]);    //RECA
 
                         echo "PRES: ".$v1."<br>";
                         echo "DERE: ".$v2."<br>";
@@ -139,19 +139,10 @@ class Importer_cuentas_dip{
                         $col = explode("_",$nombre);
                         $tipo = $col[0];
                         $tipo = mb_substr($tipo, 0, 12);
-                        echo "<b>".$q."</b><br>";
-                        echo "<b>".$tipo."</b><br>";
-                        echo "<b>".$year."</b><br>";
 
-                        $v1 = $values[$q];      //PRES
-                        $v2 = $values[$q+1];    //OBLG
-                        $v3 = $values[$q+2];    //PAGOS
-
-
-                        echo "PRES: ".$v1."<br>";
-                        echo "OBLG: ".$v2."<br>";
-                        echo "PAGOS: ".$v3."<br>";
-                        echo "<br>";
+                        $v1 = str_replace(',', '.', $values[$q]);      //PRES
+                        $v2 = str_replace(',', '.', $values[$q+1]);    //OBLG
+                        $v3 = str_replace(',', '.', $values[$q+2]);    //PAGOS
 
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_dip_gastos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_DIP' AND TIPO = '$tipo'";

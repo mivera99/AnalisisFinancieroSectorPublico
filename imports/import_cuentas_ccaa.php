@@ -385,12 +385,13 @@ class Importer_cuentas_ccaa{
                         $col = explode("_",$nombre);
                         $tipo = $col[0];
         
-                        $v1 = $values[$q];      //PREV_INI
-                        $v2 = $values[$q+1];    //MOD_PREV_INI
-                        $v3 = $values[$q+2];    //PREV_DEF
-                        $v4 = $values[$q+3];    //DER_REC
-                        $v5 = $values[$q+4];    //RECAUDA_COR
-                        $v6 = $values[$q+5];    //RECAUDA_CER
+                        $v1 = str_replace(',', '.', $values[$q]);      //PREV_INI
+                        $v2 = str_replace(',', '.', $values[$q+1]);    //MOD_PREV_INI
+                        $v3 = str_replace(',', '.', $values[$q+2]);    //PREV_DEF
+                        $v4 = str_replace(',', '.', $values[$q+3]);    //DER_REC
+                        $v5 = str_replace(',', '.', $values[$q+4]);    //RECAUDA_COR
+                        $v6 = str_replace(',', '.', $values[$q+5]);    //RECAUDA_CER
+                        
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_ccaa_ingresos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
                         $result = mysqli_query($conn,$query);
@@ -419,12 +420,12 @@ class Importer_cuentas_ccaa{
                         $tipo = $col[0];
                         //echo "<br><b>".$tipo."</b><br>";
         
-                        $v1 = $values[$w];      //CRED_INI
-                        $v2 = $values[$w+1];    //MOD_CRED_INI
-                        $v3 = $values[$w+2];    //CRED_TOT
-                        $v4 = $values[$w+3];    //OBLG_REC
-                        $v5 = $values[$w+4];    //PAGOS_COR
-                        $v6 = $values[$w+5];    //PAGOS_CER
+                        $v1 = str_replace(',', '.', $values[$w]);      //CRED_INI
+                        $v2 = str_replace(',', '.', $values[$w+1]);    //MOD_CRED_INI
+                        $v3 = str_replace(',', '.', $values[$w+2]);    //CRED_TOT
+                        $v4 = str_replace(',', '.', $values[$w+3]);    //OBLG_REC
+                        $v5 = str_replace(',', '.', $values[$w+4]);    //PAGOS_COR
+                        $v6 = str_replace(',', '.', $values[$w+5]);    //PAGOS_CER
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_ccaa_gastos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
                         $result = mysqli_query($conn,$query);

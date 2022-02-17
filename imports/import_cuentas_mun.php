@@ -90,9 +90,9 @@ class Importer_cuentas_mun{
                         $tipo = $col[0];
                         $tipo = mb_substr($tipo, 0, 12);
 
-                        $v1 = $values[$q];      //PRES
-                        $v2 = $values[$q+1];    //DERE
-                        $v3 = $values[$q+2];    //RECA
+                        $v1 = str_replace(',', '.', $values[$q]);      //PRES
+                        $v2 = str_replace(',', '.', $values[$q+1]);    //DERE
+                        $v3 = str_replace(',', '.', $values[$q+2]);    //RECA
             
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_mun_ingresos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
@@ -122,9 +122,9 @@ class Importer_cuentas_mun{
                         $tipo = $col[0];
                         $tipo = mb_substr($tipo, 0, 12);
 
-                        $v1 = $values[$q];      //PRES
-                        $v2 = $values[$q+1];    //OBLG
-                        $v3 = $values[$q+2];    //PAGOS
+                        $v1 = str_replace(',', '.', $values[$q]);      //PRES
+                        $v2 = str_replace(',', '.', $values[$q+1]);    //OBLG
+                        $v3 = str_replace(',', '.', $values[$q+2]);    //PAGOS
 
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_mun_gastos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";

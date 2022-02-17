@@ -458,6 +458,351 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
+
+
+    
+    public function getRatingCCAA($codigo){
+        $db = getConexionBD();
+        $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO DESC";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $ccaa = new CCAA();
+        $poblacion = mysqli_fetch_assoc($result);
+
+        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_ccaa WHERE CODIGO = '$codigo' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO DESC LIMIT 2";
+        $scoring = mysqli_fetch_assoc($result);
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $ratings=array();
+        $tendencias=array();
+        while($scoring = mysqli_fetch_assoc($result)){
+            $key=$scoring['ANHO'];
+            $value=$scoring['RATING'];
+            $ratings[$key]=$value;
+
+            $key=$scoring['ANHO'];
+            $value=$scoring['TENDENCIA'];
+            $tendencias[$key]=$value;
+        }
+        $ccaa->setScoring($ratings);
+        $ccaa->setTendencia($tendencias);
+
+        $elements=array();
+        $key=$poblacion['ANHO'];
+        $value=$poblacion['POBLACION'];
+        $elements[$key]=$value;
+        $ccaa->setPoblacion($elements);
+        
+        return $ccaa;
+    }
+
+    public function getCuentasGeneralCCAA($codigo){
+        $db = getConexionBD();
+        $ccaa = new CCAA();
+        
+        $sql = "SELECT ANHO, INCR_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND INCR_PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($incr_pib = mysqli_fetch_assoc($result)){
+            $key=$incr_pib['ANHO'];
+            $value=$incr_pib['INCR_PIB'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setIncrPib($elements);
+        
+        $sql = "SELECT ANHO, N_EMPRESAS FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND N_EMPRESAS IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($empresas = mysqli_fetch_assoc($result)){
+            $key=$empresas['ANHO'];
+            $value=$empresas['N_EMPRESAS'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setEmpresas($elements);
+
+        $sql = "SELECT ANHO, CCAA_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND CCAA_PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($ccaa_pib = mysqli_fetch_assoc($result)){
+            $key=$ccaa_pib['ANHO'];
+            $value=$ccaa_pib['CCAA_PIB'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setCCAAPib($elements);
+
+        $sql = "SELECT ANHO, R_SOSTE_FINANCIERA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_FINANCIERA IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($r_financiera = mysqli_fetch_assoc($result)){
+            $key=$r_financiera['ANHO'];
+            $value=$r_financiera['R_SOSTE_FINANCIERA'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setRSosteFinanciera($elements);
+
+        $sql = "SELECT ANHO, R_EFIC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFIC IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($r_efic = mysqli_fetch_assoc($result)){
+            $key=$r_efic['ANHO'];
+            $value=$r_efic['R_EFIC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setREfic($elements);
+
+        $sql = "SELECT ANHO, R_RIGIDEZ FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_RIGIDEZ IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($rigidez = mysqli_fetch_assoc($result)){
+            $key=$rigidez['ANHO'];
+            $value=$rigidez['R_RIGIDEZ'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setRRigidez($elements);
+
+        $sql = "SELECT ANHO, R_SOSTE_ENDEUDA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_ENDEUDA IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($endeuda = mysqli_fetch_assoc($result)){
+            $key=$endeuda['ANHO'];
+            $value=$endeuda['R_SOSTE_ENDEUDA'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setRSosteEndeuda($elements);
+
+        $sql = "SELECT ANHO, R_EJE_INGR_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_INGR_CORR IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($ingresos = mysqli_fetch_assoc($result)){
+            $key=$ingresos['ANHO'];
+            $value=$ingresos['R_EJE_INGR_CORR'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setREjeIngrCorr($elements);
+        
+        $sql = "SELECT ANHO, R_EJE_GASTOS_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_GASTOS_CORR IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($gastos = mysqli_fetch_assoc($result)){
+            $key=$gastos['ANHO'];
+            $value=$gastos['R_EJE_GASTOS_CORR'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setREjeGastosCorr($elements);
+
+        $sql = "SELECT ANHO, PAGOS_OBLIGACIONES FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND PAGOS_OBLIGACIONES IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($oblg = mysqli_fetch_assoc($result)){
+            $key=$oblg['ANHO'];
+            $value=$oblg['PAGOS_OBLIGACIONES'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setPagosObligaciones($elements);
+
+        $sql = "SELECT ANHO, R_EFICACIA_REC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFICACIA_REC IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($eficacia = mysqli_fetch_assoc($result)){
+            $key=$eficacia['ANHO'];
+            $value=$eficacia['R_EFICACIA_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setREficaciaRec($elements);
+
+        return $ccaa;
+    }
+
+    public function getCuentasGeneralMensualCCAA($codigo){
+        $db = getConexionBD();
+        
+        $ccaa = new CCAA();
+        $sql = "SELECT DISTINCT(ANHO), MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and PARO IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($paro = mysqli_fetch_assoc($result)){
+            array_push($elements2, $paro['ANHO']);
+            array_push($elements2, $paro['MES']/3);
+            array_push($elements2, $paro['PARO']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setParo($elements);
+
+        $sql = "SELECT DISTINCT(ANHO), MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($pmp = mysqli_fetch_assoc($result)){
+            array_push($elements2, $pmp['ANHO']);
+            array_push($elements2, $pmp['MES']);
+            array_push($elements2, $pmp['PMP']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setPMP($elements);
+
+        $sql = "SELECT DISTINCT(ANHO), MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($rdcpp = mysqli_fetch_assoc($result)){
+            array_push($elements2, $rdcpp['ANHO']);
+            array_push($elements2, $rdcpp['MES']);
+            array_push($elements2, $rdcpp['R_DCPP']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setRDCPP($elements);
+
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($deudaviva = mysqli_fetch_assoc($result)){
+            array_push($elements2, $deudaviva['ANHO']);
+            array_push($elements2, $deudaviva['MES']/3);
+            array_push($elements2, $deudaviva['DEUDAVIVA']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setDeudaViva($elements);
+
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($deudavivaingrcor = mysqli_fetch_assoc($result)){
+            array_push($elements2, $deudavivaingrcor['ANHO']);
+            array_push($elements2, $deudavivaingrcor['MES']/3);
+            array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setDeudaVivaIngrCor($elements);
+
+        $sql = "SELECT DISTINCT(ANHO), MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and TRANSAC_INMOBILIARIAS IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        $elements2=array();
+        while($transac = mysqli_fetch_assoc($result)){
+            array_push($elements2, $transac['ANHO']);
+            array_push($elements2, $transac['MES']/3);
+            array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        }
+        $ccaa->setTransacInmobiliarias($elements);
+
+        return $ccaa;
+    }
+
+    public function getDeudasCCAA($codigo){
+        $db = getConexionBD();
+        $ccaa = new CCAA();
+
+        $sql = "SELECT ANHO, PIB FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($pib = mysqli_fetch_assoc($result)){
+            $key=$pib['ANHO'];
+            $value=$pib['PIB'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setPib($elements);
+        
+        $sql = "SELECT ANHO, PIBC FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIBC IS NOT NULL ORDER BY ANHO DESC LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($pibc = mysqli_fetch_assoc($result)){
+            $key=$pibc['ANHO'];
+            $value=$pibc['PIBC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setPibc($elements);
+        
+        $sql = "SELECT ANHO, RESULTADO FROM deudas_ccaa WHERE CODIGO = '$codigo' AND RESULTADO IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($resultado = mysqli_fetch_assoc($result)){
+            $key=$resultado['ANHO'];
+            $value=$resultado['RESULTADO'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setResultado($elements);
+
+        return $ccaa;
+    }
+
+
+
+
+
 }
 
 ?>
