@@ -6,7 +6,6 @@
         </a>
     </div>
     <div id="menu-right">
-        <!--<a href="#home">INFORMES</a>-->
         <a href="index">INICIO</a>
         <a href="consultas">CONSULTAS</a>
         <a href="sobre_nosotros">SOBRE NOSOTROS</a>

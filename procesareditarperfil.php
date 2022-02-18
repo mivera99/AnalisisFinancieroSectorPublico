@@ -17,5 +17,6 @@
         $_SESSION['password']=$password;
     }
 
-    header('Location:perfil.php');
+    header('Location:perfil');
+    exit();
 ?>

@@ -3,7 +3,6 @@
     require('includesWeb/daos/DAOUsuario.php');
 
     if(isset($_SESSION['email'])){
-        //$usuarioDAO = new DAOUsuario();
         $usuario = (new DAOUsuario())->getUsuario($_SESSION['email'], $_SESSION['password']);
     }
 ?>

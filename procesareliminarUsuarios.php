@@ -43,7 +43,6 @@ unset($_REQUEST['usuarios']);
         <div id ="contenido"> 
             <?php
                 echo '<p>'.$i.' usuarios eliminados correctamente</p>'
-            
             ?>
         </div>
 
