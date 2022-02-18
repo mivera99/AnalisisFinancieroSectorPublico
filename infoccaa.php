@@ -93,44 +93,44 @@ if($ccaa && $ccaaNac){
     /*Ingresos corrientes CCAA */
     $datosIngresosCor = array();
     $etiquetasIngresosCor = array();
-    foreach($ccaaNac->getTotalIngresosCorrientes1() as $clave=>$valor){
-        array_unshift($etiquetasIngresosCor, $clave);
-        array_unshift($datosIngresosCor, $valor*100);
+    foreach($ccaa->getTotalIngresosCorrientes1() as $clave=>$valor){
+        array_push($etiquetasIngresosCor, $clave);
+        array_push($datosIngresosCor, $valor*100);
     }
     /*Ingresos no financieros CCAA*/
     $datosIngresosNoFinancieros = array();
     $etiquetasIngresosNoFinancieros = array();
-    foreach($ccaaNac->getTotalIngresosNoCorrientes1() as $clave=>$valor){
-        array_unshift($etiquetasIngresosNoFinancieros, $clave);
-        array_unshift($datosIngresosNoFinancieros, $valor*100);
+    foreach($ccaa->getTotalIngresosNoCorrientes1() as $clave=>$valor){
+        array_push($etiquetasIngresosNoFinancieros, $clave);
+        array_push($datosIngresosNoFinancieros, $valor*100);
     }
     /*Dato ingreso no financiero per cápita*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
-    foreach($ccaaNac->getTotalIngresos1() as $clave=>$valor){
-        array_unshift($etiquetasIngresosTotales, $clave);
-        array_unshift($datosIngresosTotales, $valor*100);
+    foreach($ccaa->getTotalIngresos1() as $clave=>$valor){
+        array_push($etiquetasIngresosTotales, $clave);
+        array_push($datosIngresosTotales, $valor*100);
     }
     /*Gastos corrientes CCAA */
     $datosGastosCor = array();
     $etiquetasGastosCor = array();
-    foreach($ccaaNac->getTotalGastosCorrientes1() as $clave=>$valor){
-        array_unshift($etiquetasGastosCor, $clave);
-        array_unshift($datosGastosCor, $valor*100);
+    foreach($ccaa->getTotalGastosCorrientes1() as $clave=>$valor){
+        array_push($etiquetasGastosCor, $clave);
+        array_push($datosGastosCor, $valor*100);
     }
     /*Gastos no financieros CCAA*/
     $datosGastosNoFinancieros = array();
     $etiquetasGastosNoFinancieros = array();
-    foreach($ccaaNac->getTotalGastosNoFinancieros1() as $clave=>$valor){
-        array_unshift($etiquetasGastosNoFinancieros, $clave);
-        array_unshift($datosGastosNoFinancieros, $valor*100);
+    foreach($ccaa->getTotalGastosNoFinancieros1() as $clave=>$valor){
+        array_push($etiquetasGastosNoFinancieros, $clave);
+        array_push($datosGastosNoFinancieros, $valor*100);
     }
     /*Dato gasto no financiero per cápita*/
     $datosGastosFinancieros = array();
     $etiquetasGastosFinancieros = array();
-    foreach($ccaaNac->getTotalGastos1() as $clave=>$valor){
-        array_unshift($etiquetasGastosFinancieros, $clave);
-        array_unshift($datosGastosFinancieros, $valor*100);
+    foreach($ccaa->getTotalGastos1() as $clave=>$valor){
+        array_push($etiquetasGastosFinancieros, $clave);
+        array_push($datosGastosFinancieros, $valor*100);
     }
     /*Ahorro Neto*/
     $datos = array();
@@ -149,7 +149,7 @@ if($ccaa && $ccaaNac){
     /*Sostenibilidad de la deuda CCAA, y media CCAA*/ 
     $datosSostenibilidad=array();
     $etiquetasSostenibilidad=array();
-    foreach($ccaa->getRRigidez() as $clave=>$valor){
+    foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
         array_unshift($etiquetasSostenibilidad, $clave);
         array_unshift($datosSostenibilidad, $valor*100);
     }
@@ -213,8 +213,7 @@ if($ccaa && $ccaaNac){
             <?php
             if($encontrado){
                 echo '<h2>'.$ccaa->getNombre().'</h2>';
-                $ratings = $ccaa->getScoring();
-                foreach($ratings as $clave => $valor){
+                foreach($ccaa->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
                     echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.($ccaa->getTendencia())[$clave].'</p>';
                 }
@@ -347,8 +346,8 @@ if($ccaa && $ccaaNac){
                     
                     var datosEmpresas = <?php echo json_encode($datosEmpresas)?>;
                     var etiquetasEmpresas = <?php echo json_encode($etiquetasEmpresas)?>;
-                    var datosEmpresasNac = <?php echo json_encode($datosEmpresas)?>;
-                    var etiquetasEmpresasNac = <?php echo json_encode($etiquetasEmpresas)?>;
+                    var datosEmpresasNac = <?php echo json_encode($datosEmpresasNac)?>;
+                    var etiquetasEmpresasNac = <?php echo json_encode($etiquetasEmpresasNac)?>;
                 </script>
 
                 <!--Grafica de ahorro neto-->
@@ -687,6 +686,178 @@ if($ccaa && $ccaaNac){
                     echo '<p><b>Deuda viva nacional sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
                 }
                 ?>
+                <!-- GRAFICAS-->
+                <script>
+                    var datosP = <?php echo json_encode($datosPresupuestario)?>;
+                    var etiquetasP = <?php echo json_encode($etiquetasPresupuestario)?>;
+                    var datosPNac = <?php echo json_encode($datosPresupuestarioNac)?>;
+                    var etiquetasPNac = <?php echo json_encode($etiquetasPresupuestarioNac)?>;
+                    var datosD = <?php echo json_encode($datosDeudaVivaIngrCor)?>;
+                    var etiquetasD = <?php echo json_encode($etiquetasDeudaVivaIngrCor)?>;
+                    var datosDNac = <?php echo json_encode($datosDeudaVivaNac)?>;
+                    var etiquetasDNac = <?php echo json_encode($etiquetasDeudaVivaNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="presupuesto" height="300" width="500"></canvas>
+                    <canvas id="presupuestoNac" height="300" width="500"></canvas>
+                    <canvas id="deudaviva" height="300" width="500"></canvas>
+                    <canvas id="deudavivaNac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartP = document.getElementById('presupuesto').getContext('2d');
+                    const configChartP = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasP,
+                            datasets: [{
+                                label: 'Porcentaje de resultado presupuestario de la comunidad',
+                                data: datosP,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Resultado presupuestario de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartPNac = document.getElementById('presupuestoNac').getContext('2d');
+                    const configChartPNac = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasPNac,
+                            datasets: [{
+                                label: 'Porcentaje de resultado presupuestario nacional',
+                                data: datosPNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Resultado presupuestario nacional',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartD = document.getElementById('deudaviva').getContext('2d');
+                    const configChartD = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasD,
+                            datasets: [{
+                                label: 'Porcentaje de la deuda de la comunidad',
+                                data: datosD,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Deuda de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartDNac = document.getElementById('deudavivaNac').getContext('2d');
+                    const configChartDNac = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasDNac,
+                            datasets: [{
+                                label: 'Porcentaje de la deuda nacional',
+                                data: datosDNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Deuda nacional',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const presupuesto = new Chart(chartP, configChartP);
+                    const presupuestoNac = new Chart(chartPNac, configChartPNac);
+                    const deudaviva = new Chart(chartD, configChartD);
+                    const deudavivaNac = new Chart(chartDNac, configChartDNac);
+                </script>
                 <br><br>
                 <h3>Ingresos (en €)</h3>
                 <table>
@@ -803,6 +974,137 @@ if($ccaa && $ccaaNac){
                         </tr>
                     </tbody>
                 </table>
+                <!-- GRAFICAS-->
+                <script>
+                    var datosI = <?php echo json_encode($datosIngresosCor)?>;
+                    var etiquetasI = <?php echo json_encode($etiquetasIngresosCor)?>;
+                    var datosIN = <?php echo json_encode($datosIngresosNoFinancieros)?>;
+                    var etiquetasIN = <?php echo json_encode($etiquetasIngresosNoFinancieros)?>;
+                    var datosIT = <?php echo json_encode($datosIngresosTotales)?>;
+                    var etiquetasIT = <?php echo json_encode($etiquetasIngresosTotales)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="ingr" height="300" width="500"></canvas>
+                    <canvas id="ingrN" height="300" width="500"></canvas>
+                    <canvas id="ingrT" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartIngr = document.getElementById('ingr').getContext('2d');
+                    const configChartIngr = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasI,
+                            datasets: [{
+                                label: 'Ingresos corrientes de la comunidad al año',
+                                data: datosI,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ingresos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartIngrN = document.getElementById('ingrN').getContext('2d');
+                    const configChartIngrN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasIN,
+                            datasets: [{
+                                label: 'Ingresos no financieros de la comunidad al año',
+                                data: datosIN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ingresos no financieros de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartIngrT = document.getElementById('ingrT').getContext('2d');
+                    const configChartIngrT = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasIT,
+                            datasets: [{
+                                label: 'Ingresos no financieros per cápita al año',
+                                data: datosIT,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ingresos no financieros per cápita',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const ingrcor = new Chart(chartIngr, configChartIngr);
+                    const ingrcorN = new Chart(chartIngrN, configChartIngrN);
+                    const ingrcorT = new Chart(chartIngrT, configChartIngrT);
+                </script>
                 <br><br>
                 <h3>Gastos (en €)</h3>
                 <table>
@@ -919,6 +1221,137 @@ if($ccaa && $ccaaNac){
                         </tr>
                     </tbody>
                 </table>
+                 <!-- GRAFICAS-->
+                 <script>
+                    var datosG = <?php echo json_encode($datosGastosCor)?>;
+                    var etiquetasG = <?php echo json_encode($etiquetasGastosCor)?>;
+                    var datosGN = <?php echo json_encode($datosGastosNoFinancieros)?>;
+                    var etiquetasGN = <?php echo json_encode($etiquetasGastosNoFinancieros)?>;
+                    var datosGT = <?php echo json_encode($datosGastosFinancieros)?>;
+                    var etiquetasGT = <?php echo json_encode($etiquetasGastosFinancieros)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="gastos" height="300" width="500"></canvas>
+                    <canvas id="gastosN" height="300" width="500"></canvas>
+                    <canvas id="gastosT" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartGastos = document.getElementById('gastos').getContext('2d');
+                    const configChartGastos = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasG,
+                            datasets: [{
+                                label: 'Gastos corrientes de la comunidad al año',
+                                data: datosG,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Gastos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartGastosN = document.getElementById('gastosN').getContext('2d');
+                    const configChartGastosN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasGN,
+                            datasets: [{
+                                label: 'Gastos no financieros de la comunidad al año',
+                                data: datosGN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Gastos no financieros de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartGastosT = document.getElementById('gastosT').getContext('2d');
+                    const configChartGastosT = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasGT,
+                            datasets: [{
+                                label: 'Gastos no financieros per cápita al año',
+                                data: datosGT,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Gastos no financieros per cápita',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const gastos = new Chart(chartGastos, configChartGastos);
+                    const gastosN = new Chart(chartGastosN, configChartGastosN);
+                    const gastosT = new Chart(chartGastosT, configChartGastosT);
+                </script>
                 <br><br>
                 <h3>Solvencia (en %)</h3>
                 <!--METER LOS GRAFICOS AQUI-->
@@ -941,12 +1374,16 @@ if($ccaa && $ccaaNac){
                     var etiquetas = <?php echo json_encode($etiquetas)?>;
                     var datosA = <?php echo json_encode($datosApalancamiento)?>;
                     var etiquetasA = <?php echo json_encode($etiquetasApalancamiento)?>;
+                    var datosSostenibilidad = <?php echo json_encode($datosSostenibilidad)?>;
+                    var etiquetasSostenibilidad = <?php echo json_encode($etiquetasSostenibilidad)?>;
                 </script>
 
                 <!--Grafica de ahorro neto-->
                 <br><br>
                 <div class="graficos">
                     <canvas id="ahorroNeto" height="300" width="500"></canvas>
+                    <canvas id="apalancamientoOperativoA" height="300" width="500"></canvas>
+                    <canvas id="sostenibilidad" height="300" width="500"></canvas>
                     <br><br>
                 </div>
                 <script>
@@ -986,14 +1423,6 @@ if($ccaa && $ccaaNac){
                             }
                         }
                     };
-                    const ahorroNeto = new Chart(chart, configChart);
-                </script>
-                <!-- Grafica de apalancamiento operativo--> 
-                <br><br>
-                <div class="graficos">
-                    <canvas id="apalancamientoOperativoA" height="300" width="500"></canvas>
-                </div>
-                <script>
                     const chartA = document.getElementById('apalancamientoOperativoA').getContext('2d');
                     const configChartA = {
                         type: 'bar',
@@ -1030,7 +1459,47 @@ if($ccaa && $ccaaNac){
                             }
                         }
                     };
+
+                    const chartS = document.getElementById('sostenibilidad').getContext('2d');
+                    const configChartS = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasSostenibilidad,
+                            datasets: [{
+                                label: 'Porcentaje de sostenibilidad de la deuda',
+                                data: datosSostenibilidad,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Sostenibilidad financiera',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const ahorroNeto = new Chart(chart, configChart);
                     const apalancamientoOperativoA = new Chart(chartA, configChartA);
+                    const sostenibilidad = new Chart(chartS, configChartS);
+
                 </script>
                 <br><br>
                 <h3>Liquidez</h3>
@@ -1042,6 +1511,96 @@ if($ccaa && $ccaaNac){
                     echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].'</p>';
                 }
                 ?>
+                <script>
+                    var datosPMP = <?php echo json_encode($datosPMP)?>;
+                    var etiquetasPMP = <?php echo json_encode($etiquetasPMP)?>;
+                    var datosPMPNac = <?php echo json_encode($datosPMPNac)?>;
+                    var etiquetasPMPNac = <?php echo json_encode($etiquetasPMPNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="pmp" height="300" width="500"></canvas>
+                    <canvas id="pmpNac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartPMP = document.getElementById('pmp').getContext('2d');
+                    const configChartPMP = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasPMP,
+                            datasets: [{
+                                label: 'PMP de la comunidad',
+                                data: datosPMP,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'PMP de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartPMPNac = document.getElementById('pmpNac').getContext('2d');
+                    const configChartPMPNac = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasPMPNac,
+                            datasets: [{
+                                label: 'PMP medio de la comunidad',
+                                data: datosPMPNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'PMP medio de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const pmp = new Chart(chartPMP, configChartPMP);
+                    const pmpNac = new Chart(chartPMPNac, configChartPMPNac);
+                </script>
                 <br><br>
                 <h3>Eficiencia (en %)</h3>
                 <?php
@@ -1052,6 +1611,97 @@ if($ccaa && $ccaaNac){
                     echo '<p><b>Eficiencia media '.$clave.': </b>'.($valor*100).'%</p>';
                 }
                 ?>
+                 <script>
+                    var datosE = <?php echo json_encode($datosEficiencia)?>;
+                    var etiquetasE = <?php echo json_encode($etiquetasEficiencia)?>;
+                    var datosEM = <?php echo json_encode($datosEficienciaNac)?>;
+                    var etiquetasEM = <?php echo json_encode($etiquetasEficienciaNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="eficiencia" height="300" width="500"></canvas>
+                    <canvas id="eficienciaMedia" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartE = document.getElementById('eficiencia').getContext('2d');
+                    const configChartE = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasE,
+                            datasets: [{
+                                label: 'Porcentaje de eficiencia',
+                                data: datosE,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Eficiencia',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartEM = document.getElementById('eficienciaMedia').getContext('2d');
+                    const configChartEM = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasEM,
+                            datasets: [{
+                                label: 'Porcentaje de eficiencia media',
+                                data: datosEM,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Eficiencia media',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const eficiencia = new Chart(chartE, configChartE);
+                    const eficienciaMedia = new Chart(chartEM, configChartEM);
+                </script>
                 <br><br>
             <?php
             }

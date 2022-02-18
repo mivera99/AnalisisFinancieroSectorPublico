@@ -39,7 +39,7 @@
 	</div>
 
 	<div id="contenido">
-        <form action='procesareditarperfil.php' method='POST'>
+        <form action='procesareditarperfil.php' method='POST' onsubmit="return confirm('¿Está seguro de aplicar los cambios?')">
             <h2>Editar perfil</h2>
             <fieldset>
                 <p>Nombre * </p><input type='text' name='nombreusuario' value="<?php echo $usuario->getnombreusuario()?>" required> <br><br>

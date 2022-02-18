@@ -53,7 +53,7 @@
         ?>      <br><br><br>
                 <h2>Panel de control</h2><br>   
                 
-                <form action='procesarSubida.php' method='POST' enctype="multipart/form-data">
+                <form action='procesarSubida.php' method='POST' enctype="multipart/form-data" onsubmit="return confirm('¿Está seguro de subir este archivo?')">
                     <h2 class="form-name">Subir archivo</h2>
                     <br>
                     <fieldset>

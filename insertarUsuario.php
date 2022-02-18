@@ -34,7 +34,7 @@ require_once('includesWeb/daos/DAOConsultor.php');
     </div>
 
     <div id ="contenido"> 
-        <form action='procesarinsertarUsuario.php' method='POST'>
+        <form action='procesarinsertarUsuario.php' method='POST' onsubmit="return confirm('¿Está seguro que desea añadir un nuevo usuario?')">
             <h2 class="form-name">Nuevo Usuario</h2>
             <fieldset>
                 <p>Nombre * </p><input type='text' name='username' required> <br><br>

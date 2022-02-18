@@ -1,8 +1,0 @@
-
-
-
-            <br><br>
-            <h2>Informes</h2>
-            <br>
-            <a href="ccaa.php"><button>Comunidad de Madrid (prueba)</button></a>
-            <br><br><br><br>

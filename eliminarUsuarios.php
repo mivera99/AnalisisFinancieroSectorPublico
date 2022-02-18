@@ -31,7 +31,7 @@ require_once('includesWeb/daos/DAOUsuario.php');
         </div>
 
         <div id ="contenido"> 
-            <form action='procesareliminarUsuarios.php' method='POST'>
+            <form action='procesareliminarUsuarios.php' method='POST' onsubmit="return confirm('¿Está seguro de eliminar los usuarios seleccionados?')">
                 <h2>Eliminar Usuarios</h2>
                 <?php
                 $usuarios=(new DAOUsuario())->getAllUsuarios($_SESSION["email"]);

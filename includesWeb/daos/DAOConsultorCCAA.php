@@ -1010,7 +1010,7 @@ class DAOConsultorCCAA {
         $elements=array();
         foreach($ccaa->getGastosPersonal1() as $clave=>$valor){
             $total_gastos_corrientes = floatval($valor) + floatval(($ccaa->getGastosCorrientesBienesServicios1())[$clave]) + floatval(($ccaa->getGastosFinancieros1())[$clave]) + floatval(($ccaa->getTransferenciasCorrientesGastos1())[$clave]) + floatval(($ccaa->getFondoContingencia1())[$clave]);
-            array_push($elements, $total_gastos_corrientes);
+            $elements[$clave] = $total_gastos_corrientes;
             $total_gastos_corrientes = 0;
         }
         $ccaa->setTotalGastosCorrientes1($elements);
