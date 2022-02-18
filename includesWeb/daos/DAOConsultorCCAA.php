@@ -8,7 +8,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         $sql = "SELECT * FROM ccaas WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
-        if(!$result){
+        if(!$result || mysqli_num_rows($result)==0){
             return false;
         }
         $ccaa = new CCAA();

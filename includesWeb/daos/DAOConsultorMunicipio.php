@@ -6,7 +6,7 @@ class DAOConsultorMunicipio{
         $db = getConexionBD();
         $sql = "SELECT * FROM municipios WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
-        if(!$result){
+        if(!$result || mysqli_num_rows($result)==0){
             return false;
         }
         $municipio = new Municipio();

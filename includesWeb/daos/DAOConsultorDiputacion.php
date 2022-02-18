@@ -8,7 +8,7 @@ class DAOConsultorDiputacion {
         $db = getConexionBD();
         $sql = "SELECT * FROM diputaciones WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
-        if(!$result){
+        if(!$result || mysqli_num_rows($result)==0){
             return false;
         }
         $diputacion = new Diputacion();
