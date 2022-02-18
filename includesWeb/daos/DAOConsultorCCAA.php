@@ -753,6 +753,356 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
+    public function getIngresosCCAA($codigo){
+        $db = getConexionBD();
+        $ccaa = new CCAA();
+        /* INGRESOS */
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR1' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par1 = mysqli_fetch_assoc($result)){
+            $key=$par1['ANHO'];
+            $value=$par1['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setImpuestosDirectos1($elements);
+        
+        //Impuestos Indirectos
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR2' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par2 = mysqli_fetch_assoc($result)){
+            $key=$par2['ANHO'];
+            $value=$par2['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setImpuestosIndirectos1($elements);
+        
+        //Tasas Precios Otros
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR3' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par3 = mysqli_fetch_assoc($result)){
+            $key=$par3['ANHO'];
+            $value=$par3['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTasasPreciosOtros1($elements);
+        
+        //Transferencias Corrientes
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR4' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par4 = mysqli_fetch_assoc($result)){
+            $key=$par4['ANHO'];
+            $value=$par4['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTransferenciasCorrientes1($elements);
+        
+        //Ingresos Patrimoniales
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR5' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par5 = mysqli_fetch_assoc($result)){
+            $key=$par5['ANHO'];
+            $value=$par5['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setIngresosPatrimoniales1($elements);
+        
+        //Total Ingresos Corrientes
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGRESOS CORRIENTES' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($parc = mysqli_fetch_assoc($result)){
+            $key=$parc['ANHO'];
+            $value=$parc['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTotalIngresosCorrientes1($elements);
+        
+        //Enajenación de Inversiones Reales
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR6' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par6 = mysqli_fetch_assoc($result)){
+            $key=$par6['ANHO'];
+            $value=$par6['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setEnajenacionInversionesReales1($elements);
+        
+        //Transferencias de Capital
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR7' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par7 = mysqli_fetch_assoc($result)){
+            $key=$par7['ANHO'];
+            $value=$par7['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTransferenciasCapital1($elements);
+
+        //Ingresos No Financieros
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS NO FINANCIEROS' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($pari = mysqli_fetch_assoc($result)){
+            $key=$pari['ANHO'];
+            $value=$pari['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTotalIngresosNoCorrientes1($elements);
+
+        //Activos Financieros
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR8' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par8 = mysqli_fetch_assoc($result)){
+            $key=$par8['ANHO'];
+            $value=$par8['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setActivosFinancieros1($elements);
+
+        //Pasivos Financieros
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR9' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($par9 = mysqli_fetch_assoc($result)){
+            $key=$par9['ANHO'];
+            $value=$par9['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setPasivosFinancieros1($elements);
+
+        //TOTAL INGRESOS
+
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS TOTALES' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['DER_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTotalIngresos1($elements);
+
+        return $ccaa;
+    }
+
+    public function getGastosCCAA($codigo) {
+        $db = getConexionBD();
+        $ccaa = new CCAA();
+
+        /* GASTOS */
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST1' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setGastosPersonal1($elements);
+        
+        //Gastos Corrientes de Bienes y Servicios
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST2' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setGastosCorrientesBienesServicios1($elements);
+        
+        //Gastos Financieros
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST3' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setGastosFinancieros1($elements);
+        
+        //Transferencias Corrientes
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST4' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTransferenciasCorrientesGastos1($elements);
+        
+        //Fondo Contingencia
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST5' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setFondoContingencia1($elements);
+        
+        //Total Gastos Corrientes
+        /*if(isset($gastos_personal1['OBLG_REC']) && isset($gastos_corrientes_bienes_servicios1['OBLG_REC']) && isset($gastos_financieros1['OBLG_REC']) && isset($transferencias_corrientes_gastos1['OBLG_REC']) && isset($fondo_contingencia1['OBLG_REC'])){
+            $total_gastos_corrientes1 = floatval($gastos_personal1['OBLG_REC']) + floatval($gastos_corrientes_bienes_servicios1['OBLG_REC']) + floatval($gastos_financieros1['OBLG_REC']) + floatval($transferencias_corrientes_gastos1['OBLG_REC']) + floatval($fondo_contingencia1['OBLG_REC']);
+            $ccaa->setTotalGastosCorrientes1($total_gastos_corrientes1);
+        }*/
+        $elements=array();
+        foreach($ccaa->getGastosPersonal1() as $clave=>$valor){
+            $total_gastos_corrientes = floatval($valor) + floatval(($ccaa->getGastosCorrientesBienesServicios1())[$clave]) + floatval(($ccaa->getGastosFinancieros1())[$clave]) + floatval(($ccaa->getTransferenciasCorrientesGastos1())[$clave]) + floatval(($ccaa->getFondoContingencia1())[$clave]);
+            array_push($elements, $total_gastos_corrientes);
+            $total_gastos_corrientes = 0;
+        }
+        $ccaa->setTotalGastosCorrientes1($elements);
+
+        //Inversiones Reales
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST6' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setInversionesReales1($elements);
+        
+        //Transferencias de Capital
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST7' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTransferenciasCapitalGastos1($elements);
+        
+        //Gastos No Financieros
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGASTOS NO FINANCIEROS' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTotalGastosNoFinancieros1($elements);
+        
+        //Activos Financieros
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST8' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setActivosFinancierosGastos1($elements);
+        
+        //Pasivos Financieros
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST9' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setPasivosFinancierosGastos1($elements);
+        
+        //TOTAL GASTOS
+
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA GASTOS TOTALES' ORDER BY ANHO ASC";
+        $result = mysqli_query($db,$sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($part = mysqli_fetch_assoc($result)){
+            $key=$part['ANHO'];
+            $value=$part['OBLG_REC'];
+            $elements[$key]=$value;
+        }
+        $ccaa->setTotalGastos1($elements);
+
+        return $ccaa;
+    }
+
     public function getDeudasCCAA($codigo){
         $db = getConexionBD();
         $ccaa = new CCAA();

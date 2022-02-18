@@ -121,6 +121,64 @@ class DAOConsultor{
         $ccaa->setDeudaVivaIngrCor($tmpCCAA->getDeudaVivaIngrCor());
         $ccaa->setTransacInmobiliarias($tmpCCAA->getTransacInmobiliarias());
 
+        $tmpCCAA = $daoccaa->getIngresosCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+        //Impuestos Directos
+        $ccaa->setImpuestosDirectos1($tmpCCAA->getImpuestosDirectos1());
+        //Impuestos Indirectos
+        $ccaa->setImpuestosIndirectos1($tmpCCAA->getImpuestosIndirectos1());
+        //Tasas Precios Otros
+        $ccaa->setTasasPreciosOtros1($tmpCCAA->getTasasPreciosOtros1());
+        //Transferencias Corrientes
+        $ccaa->setTransferenciasCorrientes1($tmpCCAA->getTransferenciasCorrientes1());
+        //Ingresos Patrimoniales
+        $ccaa->setIngresosPatrimoniales1($tmpCCAA->getIngresosPatrimoniales1());
+        //Total Ingresos Corrientes
+        $ccaa->setTotalIngresosCorrientes1($tmpCCAA->getTotalIngresosCorrientes1());
+        //Enajenación de Inversiones Reales
+        $ccaa->setEnajenacionInversionesReales1($tmpCCAA->getEnajenacionInversionesReales1());
+        //Transferencias de Capital
+        $ccaa->setTransferenciasCapital1($tmpCCAA->getTransferenciasCapital1());
+        //Ingresos No Financieros
+        $ccaa->setTotalIngresosNoCorrientes1($tmpCCAA->getTotalIngresosNoCorrientes1());
+        //Activos Financieros
+        $ccaa->setActivosFinancieros1($tmpCCAA->getActivosFinancieros1());
+        //Pasivos Financieros
+        $ccaa->setPasivosFinancieros1($tmpCCAA->getPasivosFinancieros1());
+        //TOTAL INGRESOS
+        $ccaa->setTotalIngresos1($tmpCCAA->getTotalIngresos1());
+
+        $tmpCCAA = $daoccaa->getGastosCCAA($ccaa->getCodigo());
+        if(!$tmpCCAA){
+            return false;
+        }
+        //Gastos Personal
+        $ccaa->setGastosPersonal1($tmpCCAA->getGastosPersonal1());
+        //Gastos Corrientes de Bienes y Servicios 
+        $ccaa->setGastosCorrientesBienesServicios1($tmpCCAA->getGastosCorrientesBienesServicios1());
+        //Gastos Financieros
+        $ccaa->setGastosFinancieros1($tmpCCAA->getGastosFinancieros1());
+        //Transferencias Corrientes
+        $ccaa->setTransferenciasCorrientesGastos1($tmpCCAA->getTransferenciasCorrientesGastos1());
+        //Fondo de Contingencia
+        $ccaa->setFondoContingencia1($tmpCCAA->getFondoContingencia1());
+        //Total Gastos Corrientes
+        $ccaa->setTotalGastosCorrientes1($tmpCCAA->getTotalGastosCorrientes1());
+        //Inversiones Reales
+        $ccaa->setInversionesReales1($tmpCCAA->getInversionesReales1());
+        //Transferencias de Capital
+        $ccaa->setTransferenciasCapitalGastos1($tmpCCAA->getTransferenciasCapitalGastos1());
+        //Gastos No Financieros
+        $ccaa->setTotalGastosNoFinancieros1($tmpCCAA->getTotalGastosNoFinancieros1());
+        //Activos Financieros
+        $ccaa->setActivosFinancierosGastos1($tmpCCAA->getActivosFinancierosGastos1());
+        //Pasivos Financieros
+        $ccaa->setPasivosFinancierosGastos1($tmpCCAA->getPasivosFinancierosGastos1());
+        //TOTAL GASTOS
+        $ccaa->setTotalGastos1($tmpCCAA->getTotalGastos1());
+
         return $ccaa;
     }
 

@@ -8,46 +8,177 @@ $daoccaa = new DAOConsultor();
 $ccaa = $daoccaa->getCCAA($nombre);
 $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
-$ccaa2018 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2018);
-$ccaa2019 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2019);
-$ccaa2020 = $daoccaa->getEconomiaCCAA(new CCAA(), $ccaa->getCodigo(), 2020);
-$ccaa2020 = $daoccaa->getRatingInfo($ccaa2020, $ccaa->getCodigo(), 2020);
-$ccaa2021 = $daoccaa->getRatingInfo(new CCAA(), $ccaa->getCodigo(), 2021);
-
-$ccaa2019Deudas = $daoccaa->getDeudasCCAA(new CCAA(), $ccaa->getCodigo(), 2019);
-
-$ccaa2021Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2021, 6);
-$ccaa2020Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 6);
-$ccaa2019Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 6);
-$ccaa2018Mes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2018, 6);
-
-$ccaa2021Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2021, 3);
-$ccaa2020Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 3);
-$ccaa2019Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 3);
-$ccaa2018Mes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2018, 3);
-
-$ccaa2020nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2020);
-$ccaa2019nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2019);
-$ccaa2018nac = $daoccaa->getEconomiaCCAA(new CCAA(), 20, 2018);
-
-$ccaa2021nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2021, 3);
-$ccaa2020nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 3);
-$ccaa2019nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 3);
-$ccaa2018nacMes3 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2018, 3);
-
-$ccaa2020nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 6);
-$ccaa2019nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 6);
-$ccaa2018nacMes6 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2018, 6);
-
-$ccaa2020Mes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2020, 5);
-$ccaa2019Mes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), $ccaa->getCodigo(), 2019, 5);
-$ccaa2020nacMes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2020, 5);
-$ccaa2019nacMes5 = $daoccaa->getCuentasMensualesInfo(new CCAA(), 20, 2019, 5);
-
-
 $encontrado = false;
-if($ccaa){
+if($ccaa && $ccaaNac){
     $encontrado = true;
+    /*Preparación de datos para las gráficas*/
+    /*PIB CCAA y PIB Nacional*/
+    $datosPib = array();
+    $etiquetasPib = array();
+    foreach($ccaa->getIncrPib() as $clave=>$valor){
+        array_unshift($etiquetasPib, $clave);
+        array_unshift($datosPib, $valor*100);
+    }
+    $datosPibNac = array();
+    $etiquetasPibNac = array();
+    foreach($ccaaNac->getIncrPib() as $clave=>$valor){
+        array_unshift($etiquetasPibNac, $clave);
+        array_unshift($datosPibNac, $valor*100);
+    }
+    /*Paro CCAA y paro nacional*/
+    $datosParo = array();
+    $etiquetasParo = array();
+    foreach($ccaa->getParo() as $array){
+        array_unshift($etiquetasParo, $array[0]);
+        array_unshift($datosParo, $array[2]*100);
+    }
+    $datosParoNac = array();
+    $etiquetasParoNac = array();
+    foreach($ccaaNac->getParo() as $array){
+        array_unshift($etiquetasParoNac, $array[0]);
+        array_unshift($datosParoNac, $array[2]*100);
+    }
+    /*Transacciones inmobiliarias CCAA y transacciones nacionales*/
+    $datosTransac = array();
+    $etiquetasTransac = array();
+    foreach($ccaa->getTransacInmobiliarias() as $array){
+        array_unshift($etiquetasTransac, $array[0]);
+        array_unshift($datosTransac, $array[2]*100);
+    }
+    $datosTransacNac = array();
+    $etiquetasTransacNac = array();
+    foreach($ccaaNac->getTransacInmobiliarias() as $array){
+        array_unshift($etiquetasTransacNac, $array[0]);
+        array_unshift($datosTransacNac, $array[2]*100);
+    }
+    /*Crecimiento de empresas CCAA y crecimiento de empresas a nivel nacional*/
+    $datosEmpresas = array();
+    $etiquetasEmpresas = array();
+    foreach($ccaa->getEmpresas() as $clave=>$valor){
+        array_unshift($etiquetasEmpresas, $clave);
+        array_unshift($datosEmpresas, $valor*100);
+    }
+    $datosEmpresasNac = array();
+    $etiquetasEmpresasNac = array();
+    foreach($ccaaNac->getEmpresas() as $clave=>$valor){
+        array_unshift($etiquetasEmpresasNac, $clave);
+        array_unshift($datosEmpresasNac, $valor*100);
+    }
+    /*Resultado presupuestario CCAA y nacional*/
+    $datosPresupuestario = array();
+    $etiquetasPresupuestario = array();
+    foreach($ccaa->getCCAAPib() as $clave=>$valor){
+        array_unshift($etiquetasPresupuestario, $clave);
+        array_unshift($datosPresupuestario, $valor*100);
+    }
+    $datosPresupuestarioNac = array();
+    $etiquetasPresupuestarioNac = array();
+    foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
+        array_unshift($etiquetasPresupuestarioNac, $clave);
+        array_unshift($datosPresupuestarioNac, $valor*100);
+    }
+    /*Deuda viva CCAA y nacional*/
+    $datosDeudaVivaIngrCor = array();
+    $etiquetasDeudaVivaIngrCor = array();
+    foreach($ccaa->getDeudaVivaIngrCor() as $array){
+        array_unshift($etiquetasDeudaVivaIngrCor, $array[0]);
+        array_unshift($datosDeudaVivaIngrCor, $array[2]*100);
+    }
+    $datosDeudaVivaNac = array();
+    $etiquetasDeudaVivaNac = array();
+    foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
+        array_unshift($etiquetasDeudaVivaNac, $array[0]);
+        array_unshift($datosDeudaVivaNac, $array[2]*100);
+    }
+    /*Ingresos corrientes CCAA */
+    $datosIngresosCor = array();
+    $etiquetasIngresosCor = array();
+    foreach($ccaaNac->getTotalIngresosCorrientes1() as $clave=>$valor){
+        array_unshift($etiquetasIngresosCor, $clave);
+        array_unshift($datosIngresosCor, $valor*100);
+    }
+    /*Ingresos no financieros CCAA*/
+    $datosIngresosNoFinancieros = array();
+    $etiquetasIngresosNoFinancieros = array();
+    foreach($ccaaNac->getTotalIngresosNoCorrientes1() as $clave=>$valor){
+        array_unshift($etiquetasIngresosNoFinancieros, $clave);
+        array_unshift($datosIngresosNoFinancieros, $valor*100);
+    }
+    /*Dato ingreso no financiero per cápita*/
+    $datosIngresosTotales = array();
+    $etiquetasIngresosTotales = array();
+    foreach($ccaaNac->getTotalIngresos1() as $clave=>$valor){
+        array_unshift($etiquetasIngresosTotales, $clave);
+        array_unshift($datosIngresosTotales, $valor*100);
+    }
+    /*Gastos corrientes CCAA */
+    $datosGastosCor = array();
+    $etiquetasGastosCor = array();
+    foreach($ccaaNac->getTotalGastosCorrientes1() as $clave=>$valor){
+        array_unshift($etiquetasGastosCor, $clave);
+        array_unshift($datosGastosCor, $valor*100);
+    }
+    /*Gastos no financieros CCAA*/
+    $datosGastosNoFinancieros = array();
+    $etiquetasGastosNoFinancieros = array();
+    foreach($ccaaNac->getTotalGastosNoFinancieros1() as $clave=>$valor){
+        array_unshift($etiquetasGastosNoFinancieros, $clave);
+        array_unshift($datosGastosNoFinancieros, $valor*100);
+    }
+    /*Dato gasto no financiero per cápita*/
+    $datosGastosFinancieros = array();
+    $etiquetasGastosFinancieros = array();
+    foreach($ccaaNac->getTotalGastos1() as $clave=>$valor){
+        array_unshift($etiquetasGastosFinancieros, $clave);
+        array_unshift($datosGastosFinancieros, $valor*100);
+    }
+    /*Ahorro Neto*/
+    $datos = array();
+    $etiquetas = array();
+    foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
+        array_unshift($etiquetas, $clave);
+        array_unshift($datos, $valor*100);
+    }
+    /*Apalancamiento Operativo*/ 
+    $datosApalancamiento=array();
+    $etiquetasApalancamiento=array();
+    foreach($ccaa->getRRigidez() as $clave=>$valor){
+        array_unshift($etiquetasApalancamiento, $clave);
+        array_unshift($datosApalancamiento, $valor*100);
+    }
+    /*Sostenibilidad de la deuda CCAA, y media CCAA*/ 
+    $datosSostenibilidad=array();
+    $etiquetasSostenibilidad=array();
+    foreach($ccaa->getRRigidez() as $clave=>$valor){
+        array_unshift($etiquetasSostenibilidad, $clave);
+        array_unshift($datosSostenibilidad, $valor*100);
+    }
+    /*PMP CCAA, y media PMP CCAA*/ 
+    $datosPMP=array();
+    $etiquetasPMP=array();
+    foreach($ccaa->getPMP() as $array){
+        array_unshift($etiquetasPMP, $array[0]);
+        array_unshift($datosPMP, $array[2]);
+    }
+    $datosPMPNac=array();
+    $etiquetasPMPNac=array();
+    foreach($ccaaNac->getPMP() as $array){
+        array_unshift($etiquetasPMPNac, $array[0]);
+        array_unshift($datosPMPNac, $array[2]);
+    }
+    /*Eficiencia CCAA, y media eficiencia CCAA*/ 
+    $datosEficiencia=array();
+    $etiquetasEficiencia=array();
+    foreach($ccaa->getREfic() as $clave=>$valor){
+        array_unshift($etiquetasEficiencia, $clave);
+        array_unshift($datosEficiencia, $valor*100);
+    }
+    $datosEficienciaNac=array();
+    $etiquetasEficienciaNac=array();
+    foreach($ccaaNac->getREfic() as $clave=>$valor){
+        array_unshift($etiquetasEficienciaNac, $clave);
+        array_unshift($datosEficienciaNac, $valor*100);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -197,6 +328,349 @@ if($ccaa){
                         </tr>
                     </tbody>
                 </table>
+                <!-- GRAFICAS-->
+                <script>
+                    var datosPib = <?php echo json_encode($datosPib)?>;
+                    var etiquetasPib = <?php echo json_encode($etiquetasPibNac)?>;
+                    var datosPibNac = <?php echo json_encode($datosPibNac)?>;
+                    var etiquetasPibNac = <?php echo json_encode($etiquetasPibNac)?>;
+                    
+                    var datosParo = <?php echo json_encode($datosParo)?>;
+                    var etiquetasParo = <?php echo json_encode($etiquetasParo)?>;
+                    var datosParoNac = <?php echo json_encode($datosParoNac)?>;
+                    var etiquetasParoNac = <?php echo json_encode($etiquetasParoNac)?>;
+                    
+                    var datosTransac = <?php echo json_encode($datosTransac)?>;
+                    var etiquetasTransac = <?php echo json_encode($etiquetasTransac)?>;
+                    var datosTransacNac = <?php echo json_encode($datosTransacNac)?>;
+                    var etiquetasTransacNac = <?php echo json_encode($etiquetasTransacNac)?>;
+                    
+                    var datosEmpresas = <?php echo json_encode($datosEmpresas)?>;
+                    var etiquetasEmpresas = <?php echo json_encode($etiquetasEmpresas)?>;
+                    var datosEmpresasNac = <?php echo json_encode($datosEmpresas)?>;
+                    var etiquetasEmpresasNac = <?php echo json_encode($etiquetasEmpresas)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="pibCCAA" height="300" width="500"></canvas>
+                    <canvas id="pibCCAANac" height="300" width="500"></canvas>
+                    <br><br><br>
+                    <canvas id="paro" height="300" width="500"></canvas>
+                    <canvas id="paroNac" height="300" width="500"></canvas>
+                    <br><br>
+                    <canvas id="transac" height="300" width="500"></canvas>
+                    <canvas id="transacNac" height="300" width="500"></canvas>
+                    <br><br>
+                    <canvas id="empresas" height="300" width="500"></canvas>
+                    <canvas id="empresasNac" height="300" width="500"></canvas>
+                </div>
+                <script>
+                    const chartPib = document.getElementById('pibCCAA').getContext('2d');
+                    const configChartPib = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasPib,
+                            datasets: [{
+                                label: 'Incremento del PIB en la comunidad autónoma',
+                                data: datosPib,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'PIB de la comunidad autónoma',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartPibNac = document.getElementById('pibCCAANac').getContext('2d');
+                    const configChartPibNac = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasPibNac,
+                            datasets: [{
+                                label: 'Incremento del PIB nacional',
+                                data: datosPibNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ahorro PIB nacional',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartParo = document.getElementById('paro').getContext('2d');
+                    const configChartParo = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasParo,
+                            datasets: [{
+                                label: 'Paro de la comunidad',
+                                data: datosParo,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Paro en la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartParoNac = document.getElementById('paroNac').getContext('2d');
+                    const configChartParoNac = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasParoNac,
+                            datasets: [{
+                                label: 'Paro nacional',
+                                data: datosParoNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Paro nacional',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartTransac = document.getElementById('transac').getContext('2d');
+                    const configChartTransac = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasTransac,
+                            datasets: [{
+                                label: 'Transacciones inmobiliarias de la comunidad',
+                                data: datosTransac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Transacciones inmobiliarias de la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartTransacNac = document.getElementById('transacNac').getContext('2d');
+                    const configChartTransacNac = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasTransacNac,
+                            datasets: [{
+                                label: 'Transacciones inmobiliarias nacionales',
+                                data: datosTransacNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Transacciones inmobiliarias nacionales',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartEmpresas = document.getElementById('empresas').getContext('2d');
+                    const configChartEmpresas = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasEmpresas,
+                            datasets: [{
+                                label: 'Crecimiento del número de empresas en la comunidad',
+                                data: datosEmpresas,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Crecimiento del número de empresas en la comunidad',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartEmpresasNac = document.getElementById('empresasNac').getContext('2d');
+                    const configChartEmpresasNac = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasEmpresasNac,
+                            datasets: [{
+                                label: 'Crecimiento del número de empresas a nivel nacional',
+                                data: datosEmpresasNac,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Crecimiento del número de empresas a nivel nacional',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const pib = new Chart(chartPib, configChartPib);
+                    const pibNac = new Chart(chartPibNac, configChartPibNac);
+                    
+                    const paro = new Chart(chartParo, configChartParo);
+                    const paroNac = new Chart(chartParoNac, configChartParoNac);
+                    
+                    const transac = new Chart(chartTransac, configChartTransac);
+                    const transacNac = new Chart(chartTransacNac, configChartTransacNac);
+                    
+                    const empresas = new Chart(chartEmpresas, configChartEmpresas);
+                    const empresasNac = new Chart(chartEmpresasNac, configChartEmpresasNac);
+                    
+                </script>
                 <br><br>
                 <h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
                 <?php
@@ -223,83 +697,109 @@ if($ccaa){
                         </tr>
                         <tr>
                             <th>Ingresos</th>
-                            <th>2018</th>
-                            <th>2019</th>
-                            <th>2020</th>
+                            <?php
+                            foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
+                                echo '<th>'.$clave.'</th>';
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1. Impuestos directos</td>
-                            <td><?php echo number_format($ccaa2018->getImpuestosDirectos1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getImpuestosDirectos1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getImpuestosDirectos1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>2. Impuestos indirectos</td>
-                            <td><?php echo number_format($ccaa2018->getImpuestosIndirectos1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getImpuestosIndirectos1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getImpuestosIndirectos1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getImpuestosIndirectos1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>3. Tasas, precios, públicos y otros ingresos</td>
-                            <td><?php echo number_format($ccaa2018->getTasasPreciosOtros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getTasasPreciosOtros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getTasasPreciosOtros1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getTasasPreciosOtros1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>4. Transferencias corrientes</td>
-                            <td><?php echo number_format($ccaa2018->getTransferenciasCorrientes1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getTransferenciasCorrientes1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getTransferenciasCorrientes1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getTransferenciasCorrientes1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>5. Ingresos patrimoniales</td>
-                            <td><?php echo number_format($ccaa2018->getIngresosPatrimoniales1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getIngresosPatrimoniales1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getIngresosPatrimoniales1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getIngresosPatrimoniales1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Total ingresos corrientes</th>
-                            <th><?php echo number_format($ccaa2018->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalIngresosCorrientes1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>6. Enajenación de inversiones reales</td>
-                            <td><?php echo number_format($ccaa2018->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getEnajenacionInversionesReales1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>7. Transferencias de capital</td>
-                            <td><?php echo number_format($ccaa2018->getTransferenciasCapital1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getTransferenciasCapital1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getTransferenciasCapital1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getTransferenciasCapital1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Ingresos no financieros</th>
-                            <th><?php echo number_format($ccaa2018->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalIngresosNoCorrientes1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>8. Activos financieros</td>
-                            <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getActivosFinancieros1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getActivosFinancieros1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>9. Pasivos financieros</td>
-                            <td><?php echo number_format($ccaa2018->getPasivosFinancieros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2019->getPasivosFinancieros1(), 2, ',','.');?></td>
-                            <td><?php echo number_format($ccaa2020->getPasivosFinancieros1(), 2, ',','.');?></td>
+                            <?php
+                            foreach($ccaa->getPasivosFinancieros1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Ingresos totales</th>
-                            <th><?php echo number_format($ccaa2018->getTotalIngresos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalIngresos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalIngresos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalIngresos1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                     </tbody>
                 </table>
@@ -313,88 +813,114 @@ if($ccaa){
                         </tr>
                         <tr>
                             <th>GASTOS</th>
-                            <th>2018</th>
-                            <th>2019</th>
-                            <th>2020</th>
+                            <?php
+                            foreach($ccaa->getGastosPersonal1() as $clave=>$valor){
+                                echo '<th>'.$clave.'</th>';
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1. Gastos del personal</th>
-                            <td><?php echo number_format($ccaa2018->getGastosPersonal1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getGastosPersonal1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getGastosPersonal1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getGastosPersonal1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>2. Gastos corrientes en bienes y servicios</th>
-                            <td><?php echo number_format($ccaa2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getGastosCorrientesBienesServicios1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>3. Gastos financieros</th>
-                            <td><?php echo number_format($ccaa2018->getGastosFinancieros1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getGastosFinancieros1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getGastosFinancieros1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getGastosFinancieros1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>4. Transferencias corrientes</th>
-                            <td><?php echo number_format($ccaa2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTransferenciasCorrientesGastos1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>5. Fondo de contingencia</th>
-                            <td><?php echo number_format($ccaa2018->getFondoContingencia1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getFondoContingencia1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getFondoContingencia1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getFondoContingencia1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Total gastos corrientes</th>
-                            <th><?php echo number_format($ccaa2018->getTotalGastosCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalGastosCorrientes1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalGastosCorrientes1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalGastosCorrientes1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>6. Inversiones reales</th>
-                            <td><?php echo number_format($ccaa2018->getInversionesReales1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getInversionesReales1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getInversionesReales1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getInversionesReales1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>7. Transferencias de capital</th>
-                            <td><?php echo number_format($ccaa2018->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTransferenciasCapitalGastos1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Gastos no financieros</th>
-                            <th><?php echo number_format($ccaa2018->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalGastosNoFinancieros1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>8. Activos financieros</th>
-                            <td><?php echo number_format($ccaa2018->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getActivosFinancieros1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getActivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getActivosFinancieros1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>9. Pasivos financieros</th>
-                            <td><?php echo number_format($ccaa2018->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2019->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
-                            <td><?php echo number_format($ccaa2020->getPasivosFinancierosGastos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getPasivosFinancierosGastos1() as $clave=>$valor){
+                                echo '<td>'.number_format($valor, 2, ',','.').'</td>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <th>Gasto total</th>
-                            <th><?php echo number_format($ccaa2018->getTotalGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2019->getTotalGastos1(), 2, ',','.');?></th>
-                            <th><?php echo number_format($ccaa2020->getTotalGastos1(), 2, ',','.');?></th>
+                            <?php
+                            foreach($ccaa->getTotalGastos1() as $clave=>$valor){
+                                echo '<th>'.number_format($valor, 2, ',','.').'</th>';
+                            }
+                            ?>
                         </tr>
                     </tbody>
                 </table>
                 <br><br>
-                <h3>Solvencia</h3>
+                <h3>Solvencia (en %)</h3>
                 <!--METER LOS GRAFICOS AQUI-->
                 <?php
                 foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
@@ -410,20 +936,6 @@ if($ccaa){
                 }
                 ?>
                 <!-- GRAFICAS-->
-                <?php
-                $datos = array();
-                $etiquetas = array();
-                foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
-                    array_push($etiquetas, $clave);
-                    array_push($datos, $valor*100);
-                }
-                $datosApalancamiento=array();
-                $etiquetasApalancamiento=array();
-                foreach($ccaa->getRRigidez() as $clave=>$valor){
-                    array_push($etiquetasApalancamiento, $clave);
-                    array_push($datosApalancamiento, $valor*100);
-                }
-                ?>
                 <script>
                     var datos = <?php echo json_encode($datos)?>;
                     var etiquetas = <?php echo json_encode($etiquetas)?>;
@@ -434,7 +946,7 @@ if($ccaa){
                 <!--Grafica de ahorro neto-->
                 <br><br>
                 <div class="graficos">
-                    <canvas id="ahorroNeto" height="500" width="700"></canvas>
+                    <canvas id="ahorroNeto" height="300" width="500"></canvas>
                     <br><br>
                 </div>
                 <script>
@@ -479,7 +991,7 @@ if($ccaa){
                 <!-- Grafica de apalancamiento operativo--> 
                 <br><br>
                 <div class="graficos">
-                    <canvas id="apalancamientoOperativoA" height="500" width="700"></canvas>
+                    <canvas id="apalancamientoOperativoA" height="300" width="500"></canvas>
                 </div>
                 <script>
                     const chartA = document.getElementById('apalancamientoOperativoA').getContext('2d');
@@ -531,10 +1043,13 @@ if($ccaa){
                 }
                 ?>
                 <br><br>
-                <h3>Eficiencia</h3>
+                <h3>Eficiencia (en %)</h3>
                 <?php
                 foreach($ccaa->getREfic() as $clave=>$valor){
                     echo '<p><b>Eficiencia '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaaNac->getREfic() as $clave=>$valor){
+                    echo '<p><b>Eficiencia media '.$clave.': </b>'.($valor*100).'%</p>';
                 }
                 ?>
                 <br><br>
