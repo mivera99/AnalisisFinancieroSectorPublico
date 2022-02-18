@@ -2,7 +2,7 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-$nombre = htmlspecialchars(trim(strip_tags($_GET["mun"])));
+$nombre = htmlspecialchars(trim(strip_tags(urldecode($_GET["mun"]))));
 
 $daomun = new DAOConsultor();
 $municipio = $daomun->getMunicipio($nombre);
@@ -65,7 +65,7 @@ if($municipio){
                 echo '<p><b>Teléfono:  </b>'.$municipio->getTelefono().'</p>';
                 echo '<p><b>Código Postal:  </b>'.$municipio->getCodigoPostal().'</p>';
                 echo '<p><b>Fax:  </b>'.$municipio->getFax().'</p>';
-                echo '<p><b>Sitio web:  </b>'.$municipio->getWeb().'</p>';
+                echo '<p><b>Sitio web:  </b><a href="https://'.$municipio->getWeb().'" target="_blank"'.$municipio->getWeb().'</a></p>';
                 echo '<p><b>Correo electrónico:  </b>'.$municipio->getMail().'</p>';
             ?>
             <br><br>

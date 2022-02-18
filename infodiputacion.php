@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
-$nombre = htmlspecialchars(trim(strip_tags($_GET["dip"])));
+$nombre = htmlspecialchars(trim(strip_tags(urldecode($_GET["dip"]))));
 
 $daodip = new DAOConsultor();
 $diputacion = $daodip->getDiputacion($nombre);
@@ -59,7 +59,7 @@ if($diputacion){
                 echo '<p>Teléfono: '.$diputacion->getTelefono().'</p>';
                 echo '<p>Código Postal: '.$diputacion->getCodigoPostal().'</p>';
                 echo '<p>Fax: '.$diputacion->getFax().'</p>';
-                echo '<p>Sitio web: '.$diputacion->getWeb().'</p>';
+                echo '<p><b>Sitio web:  </b><a href="https://'.$diputacion->getWeb().'" target="_blank"'.$municipio->getWeb().'</a></p>';
                 echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
             ?>
 

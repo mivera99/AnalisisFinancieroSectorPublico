@@ -50,7 +50,7 @@
         <a href="logout.php"><button>Cerrar sesión</button></a><br><br>
         <?php
             if($usuario->getrol()=='Administrador' || $usuario->getrol()=='Gestor'){
-        ?>      <br><br><br>
+        ?>      
                 <h2>Panel de control</h2><br>   
                 
                 <form action='procesarSubida.php' method='POST' enctype="multipart/form-data" onsubmit="return confirm('¿Está seguro de subir este archivo?')">
