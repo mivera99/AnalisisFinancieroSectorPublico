@@ -102,7 +102,7 @@ function autocomplete(inp) {
             
         //}
         
-        //El buscador empieza a dar autocompletados a partir de 2 caracteres, para que sea más rápido
+        //El buscador empieza a dar autocompletados a partir de 3 caracteres, para que sea más rápido
         if(val.length > 2){
             nombres.map(function(objeto){
                 if ((objeto.nombre.toUpperCase()).includes(val.toUpperCase())) { // ***cambiamos arr[i] por nombres[i].nombre ***
@@ -139,55 +139,64 @@ function autocomplete(inp) {
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
+        var scelement = document.getElementById(this.id + "autocomplete-list");
+
+        if (e.key == 'ArrowDown') {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
             currentFocus++;
             /*and and make the current item more visible:*/
             addActive(x);
-        } else if (e.keyCode == 38) { //up
+            if(currentFocus>4) scelement.scrollTop += x[0].offsetHeight;
+            else if(currentFocus==0) scelement.scrollTop = 0;
+        } else if (e.key == 'ArrowUp') { //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
             /*and and make the current item more visible:*/
             addActive(x);
-        } else if (e.keyCode == 13) {
+            if(currentFocus==x.length-1) scelement.scrollTop = scelement.scrollHeight;
+            else if(scelement.scrollTop/x[0].offsetHeight>currentFocus) scelement.scrollTop -= x[0].offsetHeight;
+        } else if (e.key == 'Enter') {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
             if (currentFocus > -1) {
             /*and simulate a click on the "active" item:*/
-            if (x) x[currentFocus].click();
+                if (x) x[currentFocus].click();
             }
         }
-});
-function addActive(x) {
-    /*a function to classify an item as "active":*/
-    if (!x) return false;
-    /*start by removing the "active" class on all items:*/
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
-    x[currentFocus].classList.add("autocomplete-active");
-}
-function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
-    for (var i = 0; i < x.length; i++) {
-    x[i].classList.remove("autocomplete-active");
+    });
+
+    function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+        x[currentFocus].style.backgroundColor = '#D8E8E9';
     }
-}
-function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-    if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
+    function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+            x[i].style.backgroundColor = 'white';
+        }
     }
+    function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
     }
-}
-/*execute a function when someone clicks in the document:*/
-document.addEventListener("click", function (e) {
-    closeAllLists(e.target);
-});
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
 }

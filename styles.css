@@ -186,6 +186,14 @@ td, th {
   padding: 8px;
 }
 
+input::placeholder {
+  color: #5287D5;
+}
+
+.autocomplete {
+  width:530px;
+}
+
 .autocomplete-items{
   margin-top: 5px;
   cursor:pointer;

@@ -42,7 +42,7 @@ require_once('includesWeb/daos/DAOConsultor.php');
             <br><br>
             
             <form autocomplete="off" action="redirect.php" method="post">
-                <div class="autocomplete" style="width:530px;">
+                <div class="autocomplete">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                     <!--<select class="year">
                         <option value="2018">2018</option>
