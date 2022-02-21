@@ -128,35 +128,37 @@ function autocomplete(inp) {
 
             });
         }
-
-
-
-
-
-
     });
+    
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         var scelement = document.getElementById(this.id + "autocomplete-list");
-
+        var limitTop = round(scelement.scrollTop/x[0].offsetHeight); //para saber el índice del item que está en la parte superior del scroll
+        var limitBottom = round(scelement.scrollTop/x[0].offsetHeight)*5; //para saber el índice del item que está en la parte inferior del scroll
         if (e.key == 'ArrowDown') {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
             currentFocus++;
             /*and and make the current item more visible:*/
             addActive(x);
-            if(currentFocus>4) scelement.scrollTop += x[0].offsetHeight;
-            else if(currentFocus==0) scelement.scrollTop = 0;
+
+            /*if(currentFocus>4) scelement.scrollTop += x[0].offsetHeight;
+            else if(currentFocus==0) scelement.scrollTop = 0;*/
+            if(currentFocus==limitBottom) scelement.scrollTop += x[0].offsetHeight;
+            else if(currentFocus==0) scelement.scrollTop=0;
         } else if (e.key == 'ArrowUp') { //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
             /*and and make the current item more visible:*/
             addActive(x);
-            if(currentFocus==x.length-1) scelement.scrollTop = scelement.scrollHeight;
-            else if(scelement.scrollTop/x[0].offsetHeight>currentFocus) scelement.scrollTop -= x[0].offsetHeight;
+
+            /*if(currentFocus==x.length-1) scelement.scrollTop = scelement.scrollHeight;
+            else if(scelement.scrollTop/x[0].offsetHeight>currentFocus) scelement.scrollTop -= x[0].offsetHeight;*/
+            if(currentFocus==limitTop) scelement.scrollTop-=x[0].offsetHeight;
+            else if(currentFocus==x.length-1) scelement.scrollTop = x[0].offsetHeight;
         } else if (e.key == 'Enter') {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
@@ -176,13 +178,11 @@ function autocomplete(inp) {
         if (currentFocus < 0) currentFocus = (x.length - 1);
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
-        x[currentFocus].style.backgroundColor = '#D8E8E9';
     }
     function removeActive(x) {
         /*a function to remove the "active" class from all autocomplete items:*/
         for (var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
-            x[i].style.backgroundColor = 'white';
         }
     }
     function closeAllLists(elmnt) {

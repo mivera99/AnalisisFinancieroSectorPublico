@@ -224,6 +224,10 @@ input::placeholder {
   transition: 0.2s;
 }
 
+.autocomplete-active{
+  background-color: #D8E8E9;
+}
+
 .elementos:hover {
   background-color: #dbe7f8;
   color: #5287D5;
