@@ -67,11 +67,11 @@ function autocomplete(inp) {
         if (!val) { return false;}
         currentFocus = -1;
         /*create a DIV element that will contain the items (values):*/
-        a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
+        /*a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "-autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");*/
         /*append the DIV element as a child of the autocomplete container:*/
-        this.parentNode.appendChild(a);
+        //this.parentNode.appendChild(a);
         /*for each item in the array...*/
 
         //for (i = 0; i < nombres.length; i++) {
@@ -103,7 +103,13 @@ function autocomplete(inp) {
         //}
         
         //El buscador empieza a dar autocompletados a partir de 3 caracteres, para que sea más rápido
-        if(val.length > 2){
+        if(val.length > 2){    
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "-autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
             nombres.map(function(objeto){
                 if ((objeto.nombre.toUpperCase()).includes(val.toUpperCase())) { // ***cambiamos arr[i] por nombres[i].nombre ***
                     /*create a DIV element for each matching element:*/
@@ -132,9 +138,9 @@ function autocomplete(inp) {
     
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
+        var x = document.getElementById(this.id + "-autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
-        var scelement = document.getElementById(this.id + "autocomplete-list");
+        var scelement = document.getElementById(this.id + "-autocomplete-list");
         var limitTop = round(scelement.scrollTop/x[0].offsetHeight); //para saber el índice del item que está en la parte superior del scroll
         var limitBottom = round(scelement.scrollTop/x[0].offsetHeight)*5; //para saber el índice del item que está en la parte inferior del scroll
         if (e.key == 'ArrowDown') {
