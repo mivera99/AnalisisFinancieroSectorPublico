@@ -119,7 +119,7 @@ function autocomplete(inp) {
                 this.parentNode.appendChild(a);
                 related_names.map(function(objeto){
                     /*create a DIV element for each matching element:*/
-                    b = document.createElement("DIV");
+                    b = document.createElement("div");
                     b.setAttribute("class", "elementos")
                     /*make the matching letters bold:*/
                     //b.innerHTML = "<strong>" + nombres[i].nombre.substr(0, val.length) + "</strong>"; // *** cambiamos arr[i] por nombres[i].nombre ***
@@ -146,36 +146,30 @@ function autocomplete(inp) {
         var x = document.getElementById(this.id + "-autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         var scelement = document.getElementById(this.id + "-autocomplete-list");
-        var limitTop = round(scelement.scrollTop/x[0].offsetHeight); //para saber el índice del item que está en la parte superior del scroll
-        var limitBottom = round(scelement.scrollTop/x[0].offsetHeight)*5; //para saber el índice del item que está en la parte inferior del scroll
+        var limitTop = Math.round(scelement.scrollTop/x[0].offsetHeight);
+        var limitBottom = Math.round(scelement.scrollTop/x[0].offsetHeight)+5;
         if (e.key == 'ArrowDown') {
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
             currentFocus++;
             /*and and make the current item more visible:*/
             addActive(x);
-
-            /*if(currentFocus>4) scelement.scrollTop += x[0].offsetHeight;
-            else if(currentFocus==0) scelement.scrollTop = 0;*/
             if(currentFocus==limitBottom) scelement.scrollTop += x[0].offsetHeight;
-            else if(currentFocus==0) scelement.scrollTop=0;
+            else if (currentFocus == 0) scelement.scrollTop = 0; 
         } else if (e.key == 'ArrowUp') { //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
             /*and and make the current item more visible:*/
             addActive(x);
-
-            /*if(currentFocus==x.length-1) scelement.scrollTop = scelement.scrollHeight;
-            else if(scelement.scrollTop/x[0].offsetHeight>currentFocus) scelement.scrollTop -= x[0].offsetHeight;*/
-            if(currentFocus==limitTop) scelement.scrollTop-=x[0].offsetHeight;
-            else if(currentFocus==x.length-1) scelement.scrollTop = x[0].offsetHeight;
+            if(currentFocus == limitTop) scelement.scrollTop -= x[0].offsetHeight;
+            else if(currentFocus == x.length-1) scelement.scrollTop = x[0].offsetHeight*(x.length-1);
         } else if (e.key == 'Enter') {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
             if (currentFocus > -1) {
             /*and simulate a click on the "active" item:*/
-                if (x) x[currentFocus].click();
+            if (x) x[currentFocus].click();
             }
         }
     });
