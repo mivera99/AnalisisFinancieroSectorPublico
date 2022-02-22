@@ -8,7 +8,7 @@ if(strpos($nombre, '(CCAA)')){
     $arr = explode('(CCAA)',$nombre);
     $facility = trim($arr[0]); // Se eliminan los espacios en balcno al inicio y al final de la cadena
     $urlcode = urlencode($facility);
-    header('Location:infoCCAA?ccaa='.$urlcode.'');
+    header('Location:infoCCAA.php?ccaa='.$urlcode.'');
     exit();
 }
 else {
@@ -16,7 +16,7 @@ else {
         $arr = explode('(MUNICIPIO)',$nombre);
         $facility = trim($arr[0]); // Se eliminan los espacios en balcno al inicio y al final de la cadena
         $urlcode = urlencode($facility);
-        header('Location:infoMunicipio?mun='.$urlcode.'');
+        header('Location:infoMunicipio.php?mun='.$urlcode.'');
         exit();
     }
     else {
@@ -24,7 +24,7 @@ else {
             $arr = explode('(DIPUTACIÓN)',$nombre);
             $facility = trim($arr[0]); // Se eliminan los espacios en balcno al inicio y al final de la cadena
             $urlcode = urlencode($facility);
-            header('Location:infoDiputacion?dip='.$urlcode.'');
+            header('Location:infoDiputacion.php?dip='.$urlcode.'');
             exit();
         }
         else {
