@@ -103,15 +103,21 @@ function autocomplete(inp) {
         //}
         
         //El buscador empieza a dar autocompletados a partir de 3 caracteres, para que sea más rápido
-        if(val.length > 2){    
-            /*create a DIV element that will contain the items (values):*/
-            a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "-autocomplete-list");
-            a.setAttribute("class", "autocomplete-items");
-            /*append the DIV element as a child of the autocomplete container:*/
-            this.parentNode.appendChild(a);
+        if(val.length > 2){ 
+            var related_names=[];
             nombres.map(function(objeto){
                 if ((objeto.nombre.toUpperCase()).includes(val.toUpperCase())) { // ***cambiamos arr[i] por nombres[i].nombre ***
+                    related_names.push(objeto);
+                }
+            });
+            if(related_names.length){
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "-autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                related_names.map(function(objeto){
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
                     b.setAttribute("class", "elementos")
@@ -130,9 +136,8 @@ function autocomplete(inp) {
                         closeAllLists();
                     });
                     a.appendChild(b);
-                }
-
-            });
+                });
+            }
         }
     });
     
