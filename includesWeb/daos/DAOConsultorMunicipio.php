@@ -50,13 +50,26 @@ class DAOConsultorMunicipio{
         $municipio->setMail($municipio_res['MAIL']);
 
         $cod = $municipio_res['CODIGO'];
-        $sql = "SELECT RATING FROM scoring_mun WHERE CODIGO = '$cod' AND ANHO = '2021'";
+        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_mun WHERE CODIGO = '$cod' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO DESC LIMIT 2";
+        $scoring = mysqli_fetch_assoc($result);
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
         }
-        $scoring = mysqli_fetch_assoc($result);
-        $municipio->setScoring($scoring['RATING']);
+        $ratings=array();
+        $tendencias=array();
+        while($scoring = mysqli_fetch_assoc($result)){
+            $key=$scoring['ANHO'];
+            $value=$scoring['RATING'];
+            $ratings[$key]=$value;
+
+            $key=$scoring['ANHO'];
+            $value=$scoring['TENDENCIA'];
+            $tendencias[$key]=$value;
+        }
+        $municipio->setScoring($ratings);
+        $municipio->setTendencia($tendencias);
+
 
         return $municipio;
     }
@@ -243,7 +256,7 @@ class DAOConsultorMunicipio{
 
         //Gastos No Financieros
         $total_gastos_no_corrientes1 = floatval($inversiones_reales1['OBLG']) + floatval($transferencias_capital_gastos1['OBLG']);
-        $mun->setTotalIngresosNoCorrientes1($total_gastos_no_corrientes1);
+        $mun->setTotalGastosNoFinancieros1($total_gastos_no_corrientes1);
 
         //Activos Financieros
         $sql = "SELECT OBLG FROM cuentas_mun_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST8'";
@@ -266,7 +279,7 @@ class DAOConsultorMunicipio{
         //TOTAL GASTOS
 
         $total_gastos1 = floatval($total_gastos_corrientes1) + floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
-        $mun->setTotalIngresos1($total_gastos1);
+        $mun->setTotalGastos1($total_gastos1);
 
 
         return $mun;

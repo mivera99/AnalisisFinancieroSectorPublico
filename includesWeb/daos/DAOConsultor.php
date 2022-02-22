@@ -352,6 +352,7 @@ class DAOConsultor{
         $municipio->setMail($tmpMunicipio->getMail());
         $municipio->setWeb($tmpMunicipio->getWeb());
         $municipio->setScoring($tmpMunicipio->getScoring());
+        $municipio->setTendencia($tmpMunicipio->getTendencia());
 
         return $municipio;
     }
@@ -559,6 +560,7 @@ class DAOConsultor{
         $diputacion->setCodigo($tmpDiputacion->getCodigo());
         $diputacion->setNombre($tmpDiputacion->getNombre());
         $diputacion->setScoring($tmpDiputacion->getScoring());
+        $diputacion->setTendencia(($tmpDiputacion->getTendencia()));
         $diputacion->setAutonomia($tmpDiputacion->getAutonomia());
         $diputacion->setProvincia($tmpDiputacion->getProvincia());
         $diputacion->setCif($tmpDiputacion->getCif());

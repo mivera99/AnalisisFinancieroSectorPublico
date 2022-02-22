@@ -46,13 +46,25 @@ class DAOConsultorDiputacion {
         $diputacion->setWeb($diputacion_res['WEB']);
 
         $cod = $diputacion_res['CODIGO'];
-        $sql = "SELECT RATING FROM scoring_dip WHERE CODIGO = '$cod' AND ANHO = '2021'";
+        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_dip WHERE CODIGO = '$cod'  AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO DESC LIMIT 2";
+        $scoring = mysqli_fetch_assoc($result);
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
         }
-        $scoring = mysqli_fetch_assoc($result);
-        $diputacion->setScoring($scoring['RATING']);
+        $ratings=array();
+        $tendencias=array();
+        while($scoring = mysqli_fetch_assoc($result)){
+            $key=$scoring['ANHO'];
+            $value=$scoring['RATING'];
+            $ratings[$key]=$value;
+
+            $key=$scoring['ANHO'];
+            $value=$scoring['TENDENCIA'];
+            $tendencias[$key]=$value;
+        }
+        $diputacion->setScoring($ratings);
+        $diputacion->setTendencia($tendencias);
         
 
         return $diputacion;
@@ -240,8 +252,8 @@ class DAOConsultorDiputacion {
         $dip->setTransferenciasCapitalGastos1($transferencias_capital_gastos1['OBLG']);
 
         //Gastos No Financieros
-        $total_gastos_no_corrientes1 = floatval($inversiones_reales1['OBLG']) + floatval($transferencias_capital_gastos1['OBLG']);
-        $dip->setTotalIngresosNoCorrientes1($total_gastos_no_corrientes1);
+        $total_gastos_no_corrientes1 = doubleval($inversiones_reales1['OBLG']) + doubleval($transferencias_capital_gastos1['OBLG']);
+        $dip->setTotalGastosNoFinancieros1($total_gastos_no_corrientes1);
 
         //Activos Financieros
         $sql = "SELECT OBLG FROM cuentas_dip_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST8'";
@@ -264,7 +276,7 @@ class DAOConsultorDiputacion {
         //TOTAL GASTOS
 
         $total_gastos1 = floatval($total_gastos_corrientes1) + floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
-        $dip->setTotalIngresos1($total_gastos1);
+        $dip->setTotalGastos1($total_gastos1);
 
 
         return $dip;

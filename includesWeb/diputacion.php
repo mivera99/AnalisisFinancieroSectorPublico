@@ -18,6 +18,7 @@ class Diputacion{
 
     /* OTROS */
     private $scoring;
+    private $tendencia;
 
     /* INGRESOS */
     private $impuestos_directos1;
@@ -227,6 +228,14 @@ class Diputacion{
 
     public function setScoring($scoring){
         $this->scoring = $scoring;
+    }
+    
+    public function getTendencia(){
+        return $this->tendencia;
+    }
+
+    public function setTendencia($tendencia){
+        $this->tendencia = $tendencia;
     }
 
     /* INGRESOS */
