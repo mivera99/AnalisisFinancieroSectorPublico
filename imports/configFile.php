@@ -1,7 +1,7 @@
 <?php
 require_once('includesWeb/config.php');
 //Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-ini_set('memory_limit', '5G');
+ini_set('memory_limit', '50G');
 ini_set("default_charset", "UTF-8");
 ini_set('max_execution_time', 7200);
 

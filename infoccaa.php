@@ -95,42 +95,42 @@ if($ccaa && $ccaaNac){
     $etiquetasIngresosCor = array();
     foreach($ccaa->getTotalIngresosCorrientes1() as $clave=>$valor){
         array_push($etiquetasIngresosCor, $clave);
-        array_push($datosIngresosCor, $valor*100);
+        array_push($datosIngresosCor, $valor);
     }
     /*Ingresos no financieros CCAA*/
     $datosIngresosNoFinancieros = array();
     $etiquetasIngresosNoFinancieros = array();
     foreach($ccaa->getTotalIngresosNoCorrientes1() as $clave=>$valor){
         array_push($etiquetasIngresosNoFinancieros, $clave);
-        array_push($datosIngresosNoFinancieros, $valor*100);
+        array_push($datosIngresosNoFinancieros, $valor);
     }
     /*Dato ingreso no financiero per cápita*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
     foreach($ccaa->getTotalIngresos1() as $clave=>$valor){
         array_push($etiquetasIngresosTotales, $clave);
-        array_push($datosIngresosTotales, $valor*100);
+        array_push($datosIngresosTotales, $valor);
     }
     /*Gastos corrientes CCAA */
     $datosGastosCor = array();
     $etiquetasGastosCor = array();
     foreach($ccaa->getTotalGastosCorrientes1() as $clave=>$valor){
         array_push($etiquetasGastosCor, $clave);
-        array_push($datosGastosCor, $valor*100);
+        array_push($datosGastosCor, $valor);
     }
     /*Gastos no financieros CCAA*/
     $datosGastosNoFinancieros = array();
     $etiquetasGastosNoFinancieros = array();
     foreach($ccaa->getTotalGastosNoFinancieros1() as $clave=>$valor){
         array_push($etiquetasGastosNoFinancieros, $clave);
-        array_push($datosGastosNoFinancieros, $valor*100);
+        array_push($datosGastosNoFinancieros, $valor);
     }
     /*Dato gasto no financiero per cápita*/
     $datosGastosFinancieros = array();
     $etiquetasGastosFinancieros = array();
     foreach($ccaa->getTotalGastos1() as $clave=>$valor){
         array_push($etiquetasGastosFinancieros, $clave);
-        array_push($datosGastosFinancieros, $valor*100);
+        array_push($datosGastosFinancieros, $valor);
     }
     /*Ahorro Neto*/
     $datos = array();
@@ -429,7 +429,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ahorro PIB nacional',
+                                    text:'Incremento PIB nacional',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -864,7 +864,7 @@ if($ccaa && $ccaaNac){
                     <thead>
                         <tr>
                             <th></th>
-                            <th colspan="3">Liquidación derechos reconocidas</th>
+                            <th colspan="3">Liquidación derechos reconocidos</th>
                         </tr>
                         <tr>
                             <th>Ingresos</th>
@@ -999,7 +999,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasI,
                             datasets: [{
-                                label: 'Ingresos corrientes de la comunidad al año',
+                                label: 'Ingresos corrientes al año',
                                 data: datosI,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1035,7 +1035,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasIN,
                             datasets: [{
-                                label: 'Ingresos no financieros de la comunidad al año',
+                                label: 'Ingresos no financieros al año',
                                 data: datosIN,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1056,7 +1056,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ingresos no financieros de la comunidad',
+                                    text:'Ingresos no financieros',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1071,7 +1071,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasIT,
                             datasets: [{
-                                label: 'Ingresos no financieros per cápita al año',
+                                label: 'Ingresos totales al año',
                                 data: datosIT,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1092,7 +1092,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ingresos no financieros per cápita',
+                                    text:'Ingresos totales',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1111,7 +1111,7 @@ if($ccaa && $ccaaNac){
                     <thead>
                         <tr>
                             <th></th>
-                            <th colspan="3" style="height:40px">Liquidación  obligaciones reconocidas</th>
+                            <th colspan="3" style="height:40px">Liquidación  obligaciones reconocidos</th>
                         </tr>
                         <tr>
                             <th>GASTOS</th>
@@ -1246,7 +1246,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels: etiquetasG,
                             datasets: [{
-                                label: 'Gastos corrientes de la comunidad al año',
+                                label: 'Gastos corrientes al año',
                                 data: datosG,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1282,7 +1282,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasGN,
                             datasets: [{
-                                label: 'Gastos no financieros de la comunidad al año',
+                                label: 'Gastos no financieros al año',
                                 data: datosGN,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1303,7 +1303,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Gastos no financieros de la comunidad',
+                                    text:'Gastos no financieros',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1318,7 +1318,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasGT,
                             datasets: [{
-                                label: 'Gastos no financieros per cápita al año',
+                                label: 'Gastos totales',
                                 data: datosGT,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1339,7 +1339,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Gastos no financieros per cápita',
+                                    text:'Gastos totales',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1505,10 +1505,10 @@ if($ccaa && $ccaaNac){
                 <h3>Liquidez</h3>
                 <?php
                 foreach($ccaa->getPMP() as $array){
-                    echo '<p>PMP '.$array[0].' (Mes '.$array[1].'): '.$array[2].'</p>';
+                    echo '<p>PMP '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
                 }
                 foreach($ccaaNac->getPMP() as $array){
-                    echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].'</p>';
+                    echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
                 }
                 ?>
                 <script>
@@ -1553,7 +1553,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'PMP de la comunidad',
+                                    text:'PMP',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1568,7 +1568,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasPMPNac,
                             datasets: [{
-                                label: 'PMP medio de la comunidad',
+                                label: 'PMP nacional',
                                 data: datosPMPNac,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1589,7 +1589,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'PMP medio de la comunidad',
+                                    text:'PMP nacional',
                                     color: '#003E99',
                                     font:{
                                         size:20
