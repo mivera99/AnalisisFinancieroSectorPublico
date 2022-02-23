@@ -8,5 +8,5 @@
     else {
         $_SESSION['mensaje'] = 'Error al cerrar sesión';
     }
-    header('Location:index');
+    header('Location:index');  
 ?>
