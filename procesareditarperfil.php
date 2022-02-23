@@ -15,6 +15,10 @@
     if((new DAOUsuario())->update($_SESSION['email'], $correo, $password, $nombre, $rol)){
         $_SESSION['email']=$correo;
         $_SESSION['password']=$password;
+        $_SESSION['mensaje']='Cambios aplicados exitosamente';
+    }
+    else {
+        $_SESSION['mensaje']='Error al aplicar los cambios';
     }
 
     header('Location:perfil');

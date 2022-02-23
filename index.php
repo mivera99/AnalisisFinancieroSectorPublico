@@ -1,6 +1,14 @@
 <?php
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
+
+$show_message = null;
+
+if (isset($_SESSION['mensaje'])) {
+    $show_message = $_SESSION['mensaje'];
+    $_SESSION['mensaje'] = null;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,8 +39,7 @@ require_once('includesWeb/daos/DAOConsultor.php');
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
 
-        <div id ="contenido"> 
-
+        <div id ="contenido">     
             <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
             <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
             <p>Provincias, diputaciones y municipios en segundos.</p>
@@ -57,6 +64,12 @@ require_once('includesWeb/daos/DAOConsultor.php');
             <script>
                 autocomplete(document.getElementById("facility"));
             </script>
+            <?php
+                if (isset($show_message)) {
+                    echo "<script>alert('{$show_message}');</script>";
+                    $show_message=null;
+                }
+            ?>
         </div>
 
         <div id = "pie">

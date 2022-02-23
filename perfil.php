@@ -2,9 +2,17 @@
     session_start();
     require('includesWeb/daos/DAOUsuario.php');
 
+    $show_message = null;
+
     if(isset($_SESSION['email'])){
         $usuario = (new DAOUsuario())->getUsuario($_SESSION['email'], $_SESSION['password']);
     }
+
+    if (isset($_SESSION['mensaje'])) {
+        $show_message = $_SESSION['mensaje'];
+        $_SESSION['mensaje'] = null;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,6 +78,11 @@
                     <a href="eliminarUsuarios.php"><button>Eliminar usuarios</button></a><br><br>
                 <?php
                 }
+            }
+
+            if (isset($show_message)) {
+                echo "<script>alert('{$show_message}');</script>";
+                $show_message=null;
             }
         ?>
     </div>
