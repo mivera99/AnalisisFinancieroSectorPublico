@@ -45,6 +45,7 @@
             <button type="submit" class="form-button">Enviar</button>
         </fieldset>
     </form>
+
 </div>
 <div id="pie">
     <?php

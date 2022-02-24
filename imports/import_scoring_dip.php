@@ -100,7 +100,7 @@ class Importer_scoring_dip{
                 for($k=1;$k<count($fields);$k++){
                     if($k>=1 && $k<53){
                         $value=$vals[$k]; //Obtenemos el dato
-                        excelDecimalTranslation($value); // transformamos en decimal
+                        $this->excelDecimalTranslation($value); // transformamos en decimal
                         $arrayStr=explode('_',$fields[$k]);
                         $tipo='';
                         $year='';

@@ -11,7 +11,7 @@ if($cargador->carga($_FILES['file_button'])){
 else {
     $_SESSION['mensaje'] = '¡Error! el archivo no se ha cargado correctamente';
 }
-header('Location:perfil');
-exit();
+//header('Location:perfil');
+//exit();
 
 ?>

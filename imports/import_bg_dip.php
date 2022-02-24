@@ -148,7 +148,7 @@ class Importer_bg_dip{
                 //evalua cada valor array de valores. 
                 for($k = 0; $k < count($fields);$k++){
                     //En este caso en particular, a partir de la posición 12, comienzan los datos pertenecientes a la tabla deudas_dip
-                    if($k > 12){
+                    if($k > 13){
                         //descompone el campo en varios strings que seran almacenados en un array
                         $arrayStr = explode('_',$fields[$k]);
                         $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings

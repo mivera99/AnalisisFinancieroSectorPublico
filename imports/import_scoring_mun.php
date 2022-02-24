@@ -100,7 +100,7 @@ class Importer_scoring_mun{
                 for($k=3;$k<count($fields);$k++){
                     if($k>=3 && $k<55){
                         $value=$vals[$k]; //Obtenemos el dato
-                        excelDecimalTranslation($value); // transformamos en decimal
+                        $this->excelDecimalTranslation($value); // transformamos en decimal
                         $arrayStr=explode('_',$fields[$k]);
                         $tipo='';
                         $year='';
