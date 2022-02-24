@@ -76,7 +76,7 @@ class Importer_cuentas_dip{
 
                 $CODIGO_DIP = $values[0];
 
-                echo "<b><h1>".$CODIGO_DIP."</h1></b>";
+                //echo "<b><h1>".$CODIGO_DIP."</h1></b>";
 
                 for($k=3;$k<165;$k+=54){ //Iteramos por años
 
@@ -86,26 +86,26 @@ class Importer_cuentas_dip{
                     //Añadimos el primer formato de datos INGRESOS
                     $q = $k;
                     $q_end = $q+27;
-                    echo "<b><h2>INGRESOS</h2></b>";
-                    echo "<b>".$q."</b><br>";
-                    echo "<b>".$q_end."</b><br><br>";
+                    //echo "<b><h2>INGRESOS</h2></b>";
+                    //echo "<b>".$q."</b><br>";
+                    //echo "<b>".$q_end."</b><br><br>";
                     for($q;$q<$q_end;$q+=3){
                         $nombre = $fields[$q];
                         $col = explode("_",$nombre);
                         $tipo = $col[0];
                         $tipo = mb_substr($tipo, 0, 12);
-                        echo "<b>".$q."</b><br>";
-                        echo "<b>".$tipo."</b><br>";
-                        echo "<b>".$year."</b><br>";
+                        //echo "<b>".$q."</b><br>";
+                        //echo "<b>".$tipo."</b><br>";
+                        //echo "<b>".$year."</b><br>";
 
                         $v1 = str_replace(',', '.', $values[$q]);      //PRES
                         $v2 = str_replace(',', '.', $values[$q+1]);    //DERE
                         $v3 = str_replace(',', '.', $values[$q+2]);    //RECA
 
-                        echo "PRES: ".$v1."<br>";
-                        echo "DERE: ".$v2."<br>";
-                        echo "RECA: ".$v3."<br>";
-                        echo "<br>";
+                        //echo "PRES: ".$v1."<br>";
+                        //echo "DERE: ".$v2."<br>";
+                        //echo "RECA: ".$v3."<br>";
+                        //echo "<br>";
 
                         // Se revisa si la fila ya existe en la tabla o no
                         $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_dip_ingresos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_DIP' AND TIPO = '$tipo'";
@@ -130,9 +130,9 @@ class Importer_cuentas_dip{
                     //Añadimos el segundo formato de datos GASTOS
                     $q_end = $q+27;
 
-                    echo "<b><h2>GASTOS</h2></b>";
-                    echo "<b>".$q."</b><br>";
-                    echo "<b>".$q_end."</b><br><br>";
+                    //echo "<b><h2>GASTOS</h2></b>";
+                    //echo "<b>".$q."</b><br>";
+                    //echo "<b>".$q_end."</b><br><br>";
 
                     for($q;$q<$q_end;$q+=3){
                         $nombre = $fields[$q];
@@ -164,7 +164,7 @@ class Importer_cuentas_dip{
                     }
                 }
 
-                echo "<b><h2>PMP</h2></b>";
+                //echo "<b><h2>PMP</h2></b>";
 
                 //PMP
                 for($k=165;$k<(165+6);$k++){
@@ -179,15 +179,15 @@ class Importer_cuentas_dip{
                     $year = (int)$year;
                     $trimestre = ($year%100)/3;
                     $year = (int)($year/100);
-                    echo "<b>".$k."</b><br>";
-                    echo "<b>".$tipo."</b><br>";
-                    echo "<b>".$year."</b><br>";
-                    echo "<b>".$trimestre."</b><br>";
+                    //echo "<b>".$k."</b><br>";
+                    //echo "<b>".$tipo."</b><br>";
+                    //echo "<b>".$year."</b><br>";
+                    //echo "<b>".$trimestre."</b><br>";
 
                     $valor = $values[$k];
 
-                    echo "PMP: ".$valor."<br>";
-                    echo "<br>";
+                    //echo "PMP: ".$valor."<br>";
+                    //echo "<br>";
 
                     // Se revisa si la fila ya existe en la tabla o no
                     $query = "SELECT CODIGO, ANHO, TRIMESTRE FROM cuentas_dip_pmp WHERE ANHO = '$year' AND CODIGO = '$CODIGO_DIP' AND TRIMESTRE = '$trimestre'";

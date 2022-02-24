@@ -184,7 +184,7 @@ class Importer_cuentas_mun{
                 $values = array();
             }
         }
-        echo "<b><h2>Terminó</h2></b>";
+        //echo "<b><h2>Terminó</h2></b>";
         //cierraConexion();
 
         return true;

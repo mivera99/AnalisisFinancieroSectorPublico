@@ -14,7 +14,6 @@ require_once('imports/import_scoring_mun.php');
 class DAOCargador {
     
     private function checkFile($file){
-        
         if(strtolower(pathinfo(basename($file['name']),PATHINFO_EXTENSION)) == "xlsx" && $file['size']<500000000){
             return true;
         }
@@ -28,7 +27,6 @@ class DAOCargador {
             $tmp_name = ($cargador->getPath())['tmp_name'];
             $realname = ($cargador->getPath())['name'];
             $filenamestr = explode('_',(explode('.',$realname))[0]);
-
             if(strtolower($filenamestr[2])=='ccaa'){
                 if($this->import_ccaas($tmp_name, $realname)){
                     return true;

@@ -1,13 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Importación de datos de Excel</title>
-</head>
-<body>
--->    
 <?php
 require_once("includesWeb/config.php");
 require_once('imports/configFile.php');
@@ -130,9 +120,9 @@ class Importer_scoring_dip{
                     }
                     if($year!='' && $tipo!=''){
                         //Consulta para averiguar si ya existe la fila 
-                        echo 'Nombre de field: '.$tipo.'<br>';
-                        echo 'Año: '.$year.'<br>';
-                        echo 'Valor de value: '.$value.'<br><br>';
+                        //echo 'Nombre de field: '.$tipo.'<br>';
+                        //echo 'Año: '.$year.'<br>';
+                        //echo 'Valor de value: '.$value.'<br><br>';
                         $query="SELECT CODIGO,ANHO FROM scoring_dip WHERE ANHO = '$year' AND CODIGO='$COD_DIP'";
                         $result= mysqli_query($conn,$query);
                         if(!$result){

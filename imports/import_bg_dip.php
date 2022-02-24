@@ -213,5 +213,4 @@ class Importer_bg_dip{
     }
 }
 ?>
-
 <?php //insertarXML(totalVariables, variables["nombres"], fichero);?>

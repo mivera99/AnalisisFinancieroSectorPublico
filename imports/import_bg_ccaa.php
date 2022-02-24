@@ -270,5 +270,4 @@ class Importer_bg_ccaa{
     }
 }
 ?>
-
 <?php //insertarXML(totalVariables, variables["nombres"], fichero);?>
