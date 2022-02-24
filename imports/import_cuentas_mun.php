@@ -90,7 +90,6 @@ class Importer_cuentas_mun{
                         $tipo = $col[0];
                         $tipo = mb_substr($tipo, 0, 12);
 
-                        echo $CODIGO_MUN . " : " . "<br>q:" . $q . "<br>nombre:" . $nombre . "<br>PRES:" . $values[$q] . "<br>DERE:" . $values[$q+1] ."<br>RECA:" . $values[$q+2] . "<br><br>";
 
                         $v1 = str_replace(',', '.', $values[$q]);      //PRES
                         $v2 = str_replace(',', '.', $values[$q+1]);    //DERE
