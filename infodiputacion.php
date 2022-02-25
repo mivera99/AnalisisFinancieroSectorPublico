@@ -63,7 +63,7 @@ if($diputacion){
                 echo '<p>Teléfono: '.$diputacion->getTelefono().'</p>';
                 echo '<p>Código Postal: '.$diputacion->getCodigoPostal().'</p>';
                 echo '<p>Fax: '.$diputacion->getFax().'</p>';
-                echo '<p><b>Sitio web:  </b><a href="https://'.$diputacion->getWeb().'" target="_blank"'.$diputacion->getWeb().'</a></p>';
+                echo '<p><b>Sitio web:  </b><a href="https://'.$diputacion->getWeb().'" target="_blank">'.$diputacion->getWeb().'</a></p>';
                 echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
             ?>
 
