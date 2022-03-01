@@ -48,6 +48,13 @@ class DAOConsultor{
         return $facilities;
     }
 
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq){
+        $ccaas = array();
+        $daoccaa = new DAOConsultorCCAA();
+
+        $daoccaa->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq);
+    }
+
     public function getCCAA($nombre){
         $ccaa = new CCAA();
         $daoccaa = new DAOConsultorCCAA();

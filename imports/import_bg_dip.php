@@ -1,48 +1,12 @@
 <?php
 require_once("includesWeb/config.php");
 require_once('imports/configFile.php');
-//Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-/*ini_set('memory_limit', '1G');
-ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 200);
-*/
-/*
-Importar libreria PHPSpreadsheet
-*/
-
-/*require "../includes/vendor/autoload.php";
-
-use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Path del archivo
-$path = "../files/BLOQUE_GENERAL_DIP_202109.xlsx";
-//Cargamos el archivo en la variable de documento "doc"
-$doc = IOFactory::load($path);
-
-//Número total de hojas
-$totalHojas = $doc->getSheetCount();
-
-$hoja = $doc->getSheet(0);
-
-//Última fila con datos
-$rows = $hoja->getHighestDataRow();//Número
-echo $rows."<br>";
-$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $cols."<br>";
-$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
-echo $cols."<br>";
-
-$conn = getConexionBD();//new mysqli("localhost", "root", "", "dbs_01");
-//$conn = new mysqli("localhost", "root", "", "dbs_01");
-$conn->set_charset("utf8");
-$values=array();
-$fields=array();
-*/
-
 require("includes/vendor/autoload.php");
+
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
+
 class Importer_bg_dip{
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
     private function excelDecimalTranslation(&$var) {
@@ -181,36 +145,7 @@ class Importer_bg_dip{
             }
         }
 
-        /*
-
-        Presentamos los datos por pantalla, en formato tabla
-
-        */
-
-        /*$sql = "SELECT * FROM diputaciones";
-
-        $result = mysqli_query($conn, $sql);
-        $columnas = mysqli_fetch_fields($result);
-        echo "<pre>";
-        echo "<table border='1'>";
-        foreach($columnas AS $value){
-            echo "<th> $value->name </th>";
-        }
-        $all = $result->fetch_all();
-        for($x = 0; $x < count($all); $x++){
-            echo "<tr>";
-
-            for ($y = 0; $y < count($columnas); $y++) {
-                echo "<td>".$all[$x][$y]."</td>";
-            }
-
-            echo "</tr>";
-        }
-        */
-        //cierraConexion();
-
         return true;
     }
 }
 ?>
-<?php //insertarXML(totalVariables, variables["nombres"], fichero);?>

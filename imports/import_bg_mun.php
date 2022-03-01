@@ -1,49 +1,12 @@
 <?php
 require_once("includesWeb/config.php");
 require_once('imports/configFile.php');
-//Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-/*ini_set('memory_limit', '2G');
-ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 1200); // tiempo de ejecucion: 7000
-*/
-/*
-Importar libreria PHPSpreadsheet
-*/
-
-/*require "../includes/vendor/autoload.php";
-
-use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Path del archivo
-$path = "../files/BLOQUE_GENERAL_MUN_202109.xlsx"; // posteriormente habria que incluir una variable en lugar de un string de un archivo fijo
-//$path = "../files/BLOQUE_GENERAL_MUN.xlsx";
-
-
-//Cargamos el archivo en la variable de documento "doc"
-$doc = IOFactory::load($path);
-
-//Número total de hojas
-$totalHojas = $doc->getSheetCount();
-
-$hoja = $doc->getSheet(0);
-
-//Última fila con datos
-$rows = $hoja->getHighestDataRow();//Número
-echo $rows."<br>";
-$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $cols."<br>";
-$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
-
-$conn = new mysqli("localhost", "root", "", "dbs_01");
-//$conn = new mysqli("localhost", "root", "", "dbs_01");
-$conn->set_charset("utf8");
-$values=array();
-$fields=array();
-*/
 require("includes/vendor/autoload.php");
+
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
+
 class Importer_bg_mun{
 
     public function import_bg_mun($filename, $realname){
@@ -62,7 +25,6 @@ class Importer_bg_mun{
         $fileMonth = intval((explode('_',(explode('.',$realname))[0]))[3])%100; // hecho para obtener el mes del titulo del archivo excel
 
         for($x = 1; $x < $rows + 1; $x++){
-            //echo "<tr>";
         
             for($y = 1; $y < $cols; $y++){
         
@@ -124,7 +86,6 @@ class Importer_bg_mun{
                     $dato_ccaa = mysqli_fetch_assoc($result_query);
                     $CODIGO_CCAA = $dato_ccaa['CODIGO'];
         
-                    //$POBLACION_2020=$values[6]; // debe de estar dividido de anhos?
                     $NOMBREALCALDE=addslashes($values[7]);
                     $APELLIDO1ALCALDE=addslashes($values[8]);
                     $APELLIDO2ALCALDE=addslashes($values[9]);
@@ -175,14 +136,6 @@ class Importer_bg_mun{
                         }
                     }
         
-                    /*$insert="INSERT INTO municipios VALUES ('$CODIGO_MUN','$CIF_MUNICIPIO','$MUNICIPIO',NULLIF('$CODIGO_PROV',''),NULLIF('$CODIGO_CCAA',''),NULLIF('$NOMBREALCALDE',''),
-                    NULLIF('$APELLIDO1ALCALDE',''),NULLIF('$APELLIDO2ALCALDE',''),NULLIF('$VIGENCIA',''),NULLIF('$PARTIDO',''),NULLIF('$TIPOVIA',''),NULLIF('$NOMBREVIA',''),NULLIF('$NUMVIA',''),
-                    NULLIF('$CODPOSTAL',''),NULLIF('$TELEFONO',''),NULLIF('$FAX',''),NULLIF('$WEB',''),NULLIF('$MAIL',''))";
-                    $result=mysqli_query($conn,$sql);
-                    if (!$result) {
-                        echo mysqli_error($conn);
-                    }*/
-        
                     //POBLACION
                     //descompone el campo en varios strings que seran almacenados en un array
                     $arrayStr = explode('_',$fields[6]);
@@ -210,24 +163,7 @@ class Importer_bg_mun{
                         echo mysqli_error($conn);
                         return false;
                     }
-                    //Como sé yo en que trimestre es esto?
-                    /*$PARO_2021=$values[20];
-                    $TRANSAC_INMOBILIARIAS_2021=$values[21];
-                    $TRANSAC_INMOBILIARIAS_2020=$values[22];
-        
-                    $arrayStr1 = explode('_',$fields[20]);
-                    $arrayStr2 = explode('_',$fields[21]);
-                    $arrayStr3 = explode('_',$fields[22]);
-        
-                    $year1 = $arrayStr1[1];
-                    $year2 = $arrayStr3[2];
-        
-                    $sql1 = "INSERT INTO cuentas_mun_pmp VALUES ('$CODIGO_MUN','$year2',4, NULL, NULL,'$TRANSAC_INMOBILIARIAS_2020')";
-                    $sql2 = "INSERT INTO cuentas_mun_pmp VALUES ('$CODIGO_MUN','$year1',4, NULL, '$PARO_2021','$TRANSAC_INMOBILIARIAS_2021')";
-        
-                    mysqli_query($conn,$sql1);
-                    mysqli_query($conn,$sql2);
-                    */
+
                     for($k = 0; $k < count($fields);$k++){
                         //En este caso en particular, a partir de la posición 23, comienzan los datos pertenecientes a la tabla deudas_mun
                         if($k>=20 && $k<23){
@@ -273,7 +209,7 @@ class Importer_bg_mun{
                             $arrayStr = explode('_',$fields[$k]);
                             $tipo = $arrayStr[0]; // obtenemos el tipo de la deuda del array de strings
                             $year = $arrayStr[1]; // obtenemos el anho de la deuda del array de strings
-                            $value = $values[$k]; // obtenemos el valor correspondiente a ese campo
+                            $value = str_replace(',', '.', $values[$k]); // obtenemos el valor correspondiente a ese campo
                             //revisamos si el valor existe previamente en la tabla 
                             $sql = "SELECT CODIGO, $year FROM deudas_mun WHERE CODIGO = '$CODIGO_MUN' AND ANHO = '$year'";
                             $result = mysqli_query($conn,$sql);
@@ -302,29 +238,6 @@ class Importer_bg_mun{
                 $values = array();
             }
         }
-        /*
-        $sql = "SELECT * FROM municipios";
-        
-        $result = mysqli_query($conn, $sql);
-        $columnas = mysqli_fetch_fields($result);
-        echo "<pre>";
-        echo "<table border='1'>";
-        foreach($columnas AS $value){
-            echo "<th> $value->name </th>";
-        }
-        $all = $result->fetch_all();
-        for($x = 0; $x < count($all); $x++){
-            echo "<tr>";
-        
-            for ($y = 0; $y < count($columnas); $y++) {
-                echo "<td>".$all[$x][$y]."</td>";
-            }
-        
-            echo "</tr>";
-        }
-        */
-        //mysqli_close($conn);
-        //cierraConexion();
 
         return true;
     }
