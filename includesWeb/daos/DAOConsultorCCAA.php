@@ -1149,7 +1149,24 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
-
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq){
+        $db = getConexionBD();
+        $sql = "SELECT NOMBRE, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO WHERE scoring_ccaa.RATING = '$scoring' AND scoring_ccaa.POBLACION = '$poblacion'";
+        
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($resultado = mysqli_fetch_assoc($result)){
+            $ccaa = new CCAA();
+            $ccaa->setNombre($resultado['NOMBRE']);
+            $ccaa->setRating($resultado['RATING']);
+            $ccaa->setPoblacion(['POBLACION']);
+            array_push($elements, $ccaa);
+        }
+        return $elements;
+    }   
 
 
 
