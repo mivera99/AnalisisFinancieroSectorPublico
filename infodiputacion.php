@@ -43,7 +43,7 @@ if($diputacion){
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
 
-        <div id ="contenido"> 
+        <div id ="contenidoDIP"> 
             <h3>Diputación</h3>
             <?php
             if($encontrado){
@@ -62,9 +62,26 @@ if($diputacion){
                 echo '<p>Via: '.$diputacion->getTipoVia().' '.$diputacion->getNombreVia().' '.$diputacion->getNumVia().'</p>';
                 echo '<p>Teléfono: '.$diputacion->getTelefono().'</p>';
                 echo '<p>Código Postal: '.$diputacion->getCodigoPostal().'</p>';
-                echo '<p>Fax: '.$diputacion->getFax().'</p>';
-                echo '<p><b>Sitio web:  </b><a href="https://'.$diputacion->getWeb().'" target="_blank">'.$diputacion->getWeb().'</a></p>';
-                echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
+                if($diputacion->getFax() == ''){
+                    echo '<p>Fax: N/A </p>';
+                }
+                else{
+                    echo '<p>Fax: '.$diputacion->getFax().'</p>';
+                }
+
+                if($diputacion->getWeb() == ''){
+                    echo '<p><b>Sitio web:  </b>N/A</p>';
+                }
+                else{
+                    echo '<p><b>Sitio web:  </b><a href="https://'.$diputacion->getWeb().'" target="_blank">'.$diputacion->getWeb().'</a></p>';
+                }
+
+                if($diputacion->getMail() == ''){
+                    echo '<p>Correo electrónico: N/A </p>';
+                }
+                else{
+                    echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
+                }
             ?>
 
 
@@ -75,7 +92,7 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="3" style="height:40px">LIQUIDACIÓN derechos reconocidas</th>
+                        <th colspan="3" style="height:40px">Liquidación derechos reconocidos</th>
                     </tr>
                     <tr>
                         <th style="height:40px">Ingresos</th>
@@ -167,7 +184,7 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="3" style="height:40px">LIQUIDACIÓN obligaciones reconocidas</th>
+                        <th colspan="3" style="height:40px">Liquidación obligaciones reconocidas</th>
                     </tr>
                     <tr>
                     <th style="height:40px">GASTOS</th>

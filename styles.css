@@ -102,6 +102,27 @@ button:hover {
   padding-top: 120px;
 }
 
+#contenidoCCAA {
+  margin-left: 108px;
+  margin-right: 108px;
+  height: 535vh;
+  padding-top: 120px;
+}
+
+#contenidoDIP {
+  margin-left: 108px;
+  margin-right: 108px;
+  height: 440vh;
+  padding-top: 120px;
+}
+
+#contenidoMUN {
+  margin-left: 108px;
+  margin-right: 108px;
+  height: 445vh;
+  padding-top: 120px;
+}
+
 .graficos {
   display: flex;
   justify-content: space-between;

@@ -209,7 +209,7 @@ if($ccaa && $ccaaNac){
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
         
-        <div id ="contenido"> 
+        <div id ="contenidoCCAA"> 
             <?php
             if($encontrado){
                 echo '<h2>'.$ccaa->getNombre().'</h2>';

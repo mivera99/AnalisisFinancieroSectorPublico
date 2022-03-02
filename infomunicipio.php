@@ -12,6 +12,8 @@ $mun2018 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 201
 $mun2019 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2019);
 $mun2020 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2020);
 
+setcookie("mun", $nombre);
+
 $encontrado = false;
 if($municipio){
     $encontrado = true;
@@ -37,6 +39,7 @@ if($municipio){
     <script src="functions.js"></script>
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
+    
 
     <title>Análisis Financiero del Sector Público - Municipio</title>
 </head>
@@ -46,7 +49,7 @@ if($municipio){
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
 
-        <div id ="contenido"> 
+        <div id ="contenidoMUN"> 
             <h3>Municipio</h3>
             <?php
             if($encontrado){
@@ -56,7 +59,12 @@ if($municipio){
                     $tend = $municipio->getTendencia();
                     echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.$tend[$clave].'</p>';
                 }
+            ?>
 
+            <br>
+            <button type="button" id="verPDFMUN" onclick="window.open('pdfMUN.php','_blank')">Ver Informe</button>
+
+            <?php
                 echo '<br><br>';
                 echo '<h3>Información general</h3>';
                 echo '<p><b>Provincia:  </b>'.$municipio->getProvincia().'</p>';
@@ -68,9 +76,30 @@ if($municipio){
                 echo '<p><b>Via:  </b>'.$municipio->getTipoVia().' '.$municipio->getNombreVia().' '.$municipio->getNumVia().'</p>';
                 echo '<p><b>Teléfono:  </b>'.$municipio->getTelefono().'</p>';
                 echo '<p><b>Código Postal:  </b>'.$municipio->getCodigoPostal().'</p>';
-                echo '<p><b>Fax:  </b>'.$municipio->getFax().'</p>';
-                echo '<p><b>Sitio web:  </b><a href="https://'.$municipio->getWeb().'" target="_blank">'.$municipio->getWeb().'</a></p>';
-                echo '<p><b>Correo electrónico:  </b>'.$municipio->getMail().'</p>';
+
+                if($municipio->getFax() == ''){
+                    echo '<p><b>Fax: </b>N/A </p>';
+                }
+                else{
+                    echo '<p><b>Fax: </b>'.$municipio->getFax().'</p>';
+                }
+
+                if($municipio->getWeb() == ''){
+                    echo '<p><b>Sitio web:  </b>N/A</p>';
+                }
+                else{
+                    echo '<p><b>Sitio web:  </b><a href="https://'.$municipio->getWeb().'" target="_blank">'.$municipio->getWeb().'</a></p>';
+                }
+
+                if($municipio->getMail() == ''){
+                    echo '<p><b>Correo electrónico: </b>N/A </p>';
+                }
+                else{
+                    echo '<p><b>Correo electrónico: </b>'.$municipio->getMail().'</p>';
+                }
+
+
+
             ?>
             <br><br>
             <h3>Ingresos (en €)</h3>
@@ -78,7 +107,7 @@ if($municipio){
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="3" style="height:40px">LIQUIDACIÓN derechos reconocidas</th>
+                        <th colspan="3" style="height:40px">Liquidación derechos reconocidos</th>
                     </tr>
                     <tr>
                         <th style="height:40px">Ingresos</th>
@@ -91,75 +120,75 @@ if($municipio){
 
                     <tr>
                         <td>1. Impuestos Directos</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getImpuestosDirectos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getImpuestosDirectos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getImpuestosDirectos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getImpuestosDirectos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getImpuestosDirectos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getImpuestosDirectos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>2. Impuestos Indirectos</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getImpuestosIndirectos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getImpuestosIndirectos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getImpuestosIndirectos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getImpuestosIndirectos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getImpuestosIndirectos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getImpuestosIndirectos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>3. Tasas, Precios Públicos y Otros Ingresos</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getTasasPreciosOtros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getTasasPreciosOtros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getTasasPreciosOtros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getTasasPreciosOtros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getTasasPreciosOtros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getTasasPreciosOtros1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>4. Transferencias Corrientes</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCorrientes1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCorrientes1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCorrientes1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCorrientes1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCorrientes1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCorrientes1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>5. Ingresos Patrimoniales</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getIngresosPatrimoniales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getIngresosPatrimoniales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getIngresosPatrimoniales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getIngresosPatrimoniales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getIngresosPatrimoniales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getIngresosPatrimoniales1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Total Ingresos Corrientes</th>
-                        <th><?php echo number_format($mun2018->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalIngresosCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalIngresosCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalIngresosCorrientes1(), 2, ",",".");?></th>
                     </tr>
                     <tr>
                         <td>6. Enajenación de Inversiones Reales</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getEnajenacionInversionesReales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEnajenacionInversionesReales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEnajenacionInversionesReales1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>7. Transferencias de Capital</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCapital1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCapital1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCapital1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCapital1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCapital1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCapital1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Ingresos No Financieros</th>
-                        <th><?php echo number_format($mun2018->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalIngresosNoCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalIngresosNoCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalIngresosNoCorrientes1(), 2, ",",".");?></th>
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getActivosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getActivosFinancieros1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>9. Pasivos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getPasivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPasivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPasivosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getPasivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPasivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPasivosFinancieros1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">TOTAL INGRESOS</th>
-                        <th><?php echo number_format($mun2018->getTotalIngresos1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalIngresos1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalIngresos1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalIngresos1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalIngresos1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalIngresos1(), 2, ",",".");?></th>
                     </tr>
                 </tbody>
                 
@@ -170,7 +199,7 @@ if($municipio){
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="3" style="height:40px">LIQUIDACIÓN obligaciones reconocidas</th>
+                        <th colspan="3" style="height:40px">Liquidación obligaciones reconocidas</th>
                     </tr>
                     <tr>
                     <th style="height:40px">GASTOS</th>
@@ -182,83 +211,83 @@ if($municipio){
                 <tbody>
                     <tr>
                         <td>1. Gastos del Personal</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getGastosPersonal1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getGastosPersonal1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getGastosPersonal1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getGastosPersonal1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getGastosPersonal1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getGastosPersonal1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>2. Gastos Corrientes en Bienes y Servicios</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getGastosCorrientesBienesServicios1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getGastosCorrientesBienesServicios1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getGastosCorrientesBienesServicios1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>3. Gastos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getGastosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getGastosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getGastosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getGastosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getGastosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getGastosFinancieros1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>4. Transferencias Corrientes</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCorrientesGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCorrientesGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCorrientesGastos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>5. Fondo de contingencia</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getFondoContingencia1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getFondoContingencia1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getFondoContingencia1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getFondoContingencia1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getFondoContingencia1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getFondoContingencia1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Total gastos corrientes</th>
-                        <th><?php echo number_format($mun2018->getTotalGastosCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalGastosCorrientes1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalGastosCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalGastosCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalGastosCorrientes1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalGastosCorrientes1(), 2, ",",".");?></th>
                     </tr>
                     <tr>
                         <td>6. Inversiones Reales</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getInversionesReales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getInversionesReales1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getInversionesReales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getInversionesReales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getInversionesReales1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getInversionesReales1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>7. Transferencias de capital</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getTransferenciasCapitalGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getTransferenciasCapitalGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getTransferenciasCapitalGastos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Gastos No financieros</th>
-                        <th><?php echo number_format($mun2018->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalGastosNoFinancieros1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalGastosNoFinancieros1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalGastosNoFinancieros1(), 2, ",",".");?></th>
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getActivosFinancierosGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getActivosFinancierosGastos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <td>9. Pasivos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getPasivosFinancierosGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPasivosFinancierosGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPasivosFinancierosGastos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">TOTAL GASTOS</th>
-                        <th><?php echo number_format($mun2018->getTotalGastos1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2019->getTotalGastos1(), 2, ',','.');?></th>
-                        <th><?php echo number_format($mun2020->getTotalGastos1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($mun2018->getTotalGastos1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2019->getTotalGastos1(), 2, ",",".");?></th>
+                        <th><?php echo number_format($mun2020->getTotalGastos1(), 2, ",",".");?></th>
                     </tr>
                 </tbody>
             </table>
             <br><br>
             <h3>Endeudamiento</h3>
             <br>
-            <p><b>Deuda Financiera 2020: </b><?php echo number_format($mun2020->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
-            <p><b>Deuda Financiera 2019: </b><?php echo number_format($mun2019->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
+            <p><b>Deuda Financiera 2020: </b><?php echo number_format($mun2020->getDeudaFinanciera(), 2, ",",".") . "€";?></p>
+            <p><b>Deuda Financiera 2019: </b><?php echo number_format($mun2019->getDeudaFinanciera(), 2, ",",".") . "€";?></p>
             <br>
             <table>
                 <thead>
@@ -271,13 +300,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Endeudamiento</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEndeudamiento()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEndeudamiento()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Endeudamiento Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Endeudamiento Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEndeudamientoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEndeudamientoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -295,13 +324,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Sostenibilidad Financiera</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadFinanciera()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadFinanciera()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Sostenibilidad Financiera Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Sostenibilidad Financiera Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -317,13 +346,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Apalancamiento Operativo</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getApalancamientoOperativo()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getApalancamientoOperativo()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Apalancamiento Operativo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Apalancamiento Operativo Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -339,13 +368,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Sostenibilidad de la Deuda</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadDeuda()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadDeuda()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Sostenibilidad de la Deuda Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Sostenibilidad de la Deuda Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -355,8 +384,8 @@ if($municipio){
             <!-- TO DO -->
             <h3>Liquidez</h3>
             <br>
-            <p><b>Fondos líquidos 2020: </b><?php echo number_format($mun2019->getFondosLiquidos(), 2, ',','.') . "€";?></p>
-            <p><b>Fondos líquidos 2019: </b><?php echo number_format($mun2020->getFondosLiquidos(), 2, ',','.') . "€";?></p>
+            <p><b>Fondos líquidos 2020: </b><?php echo number_format($mun2020->getFondosLiquidos(), 2, ",",".") . "€";?></p>
+            <p><b>Fondos líquidos 2019: </b><?php echo number_format($mun2019->getFondosLiquidos(), 2, ",",".") . "€";?></p>
             <br>
             <table>
                 <thead>
@@ -369,13 +398,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Remanente de Tesorería Gastos Generales</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Remanente de Tesorería Gastos Generales Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Remanente de Tesorería Gastos Generales Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -391,13 +420,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Liquidez Inmediata</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getLiquidezInmediata()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getLiquidezInmediata()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Solvencia Corto Plazo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Solvencia Corto Plazo Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -413,20 +442,18 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Solvencia Corto Plazo</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Solvencia Corto Plazo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
+                        <th>Solvencia Corto Plazo Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
             <br>
             <br>
-
-            <!-- TO DO -->
             <h3>Eficiencia</h3>
             <br>
             <table>
@@ -440,13 +467,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Eficiencia</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEficiencia()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEficiencia()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficiencia()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficiencia()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Eficiencia Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Eficiencia Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficienciaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficienciaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -468,13 +495,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Ejecución Ingresos corrientes</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Ejecución Ingresos Corrientes Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Ejecución Ingresos Corrientes Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -490,13 +517,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Ejecución Gastos corrientes</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Ejecución Gastos Corrientes Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Ejecución Gastos Corrientes Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -506,8 +533,8 @@ if($municipio){
             <!-- TO DO -->
             <h3>Cumplimiento de Pagos</h3>
             <br>
-            <p><b>Deuda Comercial 2020: </b><?php echo number_format($mun2019->getDeudaComercial(), 2, ',','.') . "€";?></p>
-            <p><b>Deuda Comercial 2019: </b><?php echo number_format($mun2020->getDeudaComercial(), 2, ',','.') . "€";?></p>
+            <p><b>Deuda Comercial 2020: </b><?php echo number_format($mun2020->getDeudaComercial(), 2, ",",".") . "€";?></p>
+            <p><b>Deuda Comercial 2019: </b><?php echo number_format($mun2019->getDeudaComercial(), 2, ",",".") . "€";?></p>
             <br>
             <table>
                 <thead>
@@ -520,13 +547,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Periodo Medio de Pagos</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagos(), 2, ",",".") . " días";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagos(), 2, ",",".") . " días";?></td>
                     </tr>
                     <tr>
-                        <th>Periodo Medio de Pagos Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
+                        <th>Periodo Medio de Pagos Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ",",".") . " días";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ",",".") . " días";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -542,13 +569,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Pagos sobre Obligaciones Reconocidas</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Pagos sobre Obligaciones Reconocidas Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Pagos sobre Obligaciones Reconocidas Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -558,8 +585,8 @@ if($municipio){
             <!-- TO DO -->
             <h3>Gestión Tributaria</h3>
             <br>
-            <p><b>Derechos Pendientes de Cobro 2020: </b><?php echo number_format($mun2019->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
-            <p><b>Derechos Pendientes de Cobro 2019: </b><?php echo number_format($mun2020->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
+            <p><b>Derechos Pendientes de Cobro 2020: </b><?php echo number_format($mun2020->getDerechosPendientesCobro(), 2, ",",".") . "€";?></p>
+            <p><b>Derechos Pendientes de Cobro 2019: </b><?php echo number_format($mun2019->getDerechosPendientesCobro(), 2, ",",".") . "€";?></p>
             <br>
             <table>
                 <thead>
@@ -572,13 +599,13 @@ if($municipio){
                 <tbody>
                     <tr>
                         <th>Eficacia Recaudatoria</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoria()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoria()*100, 2, ",",".") . "%";?></td>
                     </tr>
                     <tr>
-                        <th>Eficacia Recaudatoria Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <th>Eficacia Recaudatoria Media Ayuntamientos</th>
+                        <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
+                        <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ",",".") . "%";?></td>
                     </tr>
                 </tbody>
             </table>
