@@ -207,6 +207,12 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+.dataTable td {
+  width:14%;
+}
+.dataTable th{
+  height: 40px;
+}
 
 input::placeholder {
   color: #5287D5;

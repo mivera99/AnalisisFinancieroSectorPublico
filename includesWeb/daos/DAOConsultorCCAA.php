@@ -462,7 +462,7 @@ class DAOConsultorCCAA {
     
     public function getRatingCCAA($codigo){
         $db = getConexionBD();
-        $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO DESC";
+        $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO ASC";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -470,7 +470,7 @@ class DAOConsultorCCAA {
         $ccaa = new CCAA();
         $poblacion = mysqli_fetch_assoc($result);
 
-        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_ccaa WHERE CODIGO = '$codigo' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO DESC LIMIT 2";
+        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_ccaa WHERE CODIGO = '$codigo' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO ASC LIMIT 2";
         $scoring = mysqli_fetch_assoc($result);
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -503,7 +503,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         $ccaa = new CCAA();
         
-        $sql = "SELECT ANHO, INCR_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND INCR_PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, INCR_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND INCR_PIB IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -516,7 +516,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setIncrPib($elements);
         
-        $sql = "SELECT ANHO, N_EMPRESAS FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND N_EMPRESAS IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, N_EMPRESAS FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND N_EMPRESAS IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -529,7 +529,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setEmpresas($elements);
 
-        $sql = "SELECT ANHO, CCAA_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND CCAA_PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, CCAA_PIB FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND CCAA_PIB IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -542,7 +542,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setCCAAPib($elements);
 
-        $sql = "SELECT ANHO, R_SOSTE_FINANCIERA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_FINANCIERA IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_SOSTE_FINANCIERA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_FINANCIERA IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -555,7 +555,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setRSosteFinanciera($elements);
 
-        $sql = "SELECT ANHO, R_EFIC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFIC IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_EFIC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFIC IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -568,7 +568,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setREfic($elements);
 
-        $sql = "SELECT ANHO, R_RIGIDEZ FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_RIGIDEZ IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_RIGIDEZ FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_RIGIDEZ IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -581,7 +581,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setRRigidez($elements);
 
-        $sql = "SELECT ANHO, R_SOSTE_ENDEUDA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_ENDEUDA IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_SOSTE_ENDEUDA FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_SOSTE_ENDEUDA IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -594,7 +594,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setRSosteEndeuda($elements);
 
-        $sql = "SELECT ANHO, R_EJE_INGR_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_INGR_CORR IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_EJE_INGR_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_INGR_CORR IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -607,7 +607,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setREjeIngrCorr($elements);
         
-        $sql = "SELECT ANHO, R_EJE_GASTOS_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_GASTOS_CORR IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_EJE_GASTOS_CORR FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EJE_GASTOS_CORR IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -620,7 +620,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setREjeGastosCorr($elements);
 
-        $sql = "SELECT ANHO, PAGOS_OBLIGACIONES FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND PAGOS_OBLIGACIONES IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, PAGOS_OBLIGACIONES FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND PAGOS_OBLIGACIONES IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -633,7 +633,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setPagosObligaciones($elements);
 
-        $sql = "SELECT ANHO, R_EFICACIA_REC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFICACIA_REC IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, R_EFICACIA_REC FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND R_EFICACIA_REC IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -653,7 +653,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         
         $ccaa = new CCAA();
-        $sql = "SELECT DISTINCT(ANHO), MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and PARO IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and PARO IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -669,7 +669,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setParo($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -685,7 +685,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setPMP($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -701,7 +701,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setRDCPP($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -717,7 +717,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setDeudaViva($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -733,7 +733,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setDeudaVivaIngrCor($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and TRANSAC_INMOBILIARIAS IS NOT NULL ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and TRANSAC_INMOBILIARIAS IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1106,7 +1106,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         $ccaa = new CCAA();
 
-        $sql = "SELECT ANHO, PIB FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIB IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, PIB FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIB IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1119,7 +1119,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setPib($elements);
         
-        $sql = "SELECT ANHO, PIBC FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIBC IS NOT NULL ORDER BY ANHO DESC LIMIT 1";
+        $sql = "SELECT ANHO, PIBC FROM deudas_ccaa WHERE CODIGO = '$codigo' AND PIBC IS NOT NULL ORDER BY ANHO ASC LIMIT 1";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1132,7 +1132,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setPibc($elements);
         
-        $sql = "SELECT ANHO, RESULTADO FROM deudas_ccaa WHERE CODIGO = '$codigo' AND RESULTADO IS NOT NULL ORDER BY ANHO DESC LIMIT 3";
+        $sql = "SELECT ANHO, RESULTADO FROM deudas_ccaa WHERE CODIGO = '$codigo' AND RESULTADO IS NOT NULL ORDER BY ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1160,7 +1160,21 @@ class DAOConsultorCCAA {
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
-            $conditions = $conditions."scoring_ccaa.POBLACION = '$poblacion' ";
+            if($poblacion=='tramo1'){
+                $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 0 AND 750000 ";
+            }
+            else if($poblacion=='tramo2'){
+                $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 750000 AND 1500000 ";
+            }
+            else if($poblacion=='tramo3'){
+                $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 1500000 AND 3000000 ";
+            }
+            else if($poblacion=='tramo4'){
+                $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 3000000 AND 6000000 ";
+            }
+            else if($poblacion=='tramo5'){
+                $conditions = $conditions."(scoring_ccaa.POBLACION) > 6000000 ";
+            }
         }
 
         if(!empty($endeudamiento)){
@@ -1221,8 +1235,8 @@ class DAOConsultorCCAA {
             $conditions =" WHERE ".$conditions;
         }
         
-        //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO DESC";
-        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO DESC";
+        //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
+        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){

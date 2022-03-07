@@ -99,7 +99,16 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="E">E</option>
                             <option value="F">F</option>
                         </select>
-                        <p>Población </p><input type='number' min="1" name="poblacionCCAA"> <br><br>
+                        <p>Población </p>
+                        <select name="poblacionCCAA">
+                            <option value="inicio" selected>Seleccione un tramo de población</option>
+                            <option value="tramo1">0 - 750.000</option>
+                            <option value="tramo2">750.000 - 1.500.000</option>
+                            <option value="tramo3">1.500.000 - 3.000.000</option>
+                            <option value="tramo4">3.000.000 - 6.000.000</option>
+                            <option value="tramo5">> 6.000.000</option>
+                        </select>
+                        <!--<input type='number' min="1" name="poblacionCCAA">--> <br><br>
                         <!--<p>Cantidad mínima <input type="number" id="minVal" name="min" min="0" onchange="compareMin()"/> Cantidad máxima<input type="number" id="maxVal" name="max" min="1" onchange="compareMax()"/></p>-->
                         <p>Endeudamiento</p>
                         <select name="endeudamientoCCAA">
@@ -312,7 +321,21 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="E">E</option>
                             <option value="F">F</option>
                         </select>
-                        <p>Población </p><input type='number' min="1" name="poblacionMUN"> <br><br>
+                        <p>Población</p> <!--</p><input type='number' min="1" name="poblacionMUN">-->
+                        <select name="poblacionMUN">
+                            <option value="inicio" selected>Seleccione un tramo de población</option>
+                            <option value="tramo1">0 - 100</option>
+                            <option value="tramo2">100 - 500</option>
+                            <option value="tramo3">500 - 1.000</option>
+                            <option value="tramo4">1.000 - 2.000</option>
+                            <option value="tramo5">2.000 - 5.000</option>
+                            <option value="tramo6">5.000 - 10.000</option>
+                            <option value="tramo7">10.000 - 20.000</option>
+                            <option value="tramo8">20.000 - 50.000</option>
+                            <option value="tramo9">50.000 - 100.000</option>
+                            <option value="tramo10">100.000 - 500.000</option>
+                            <option value="tramo11">> 500.000</option>
+                        </select>
                         <p>Provincia</p>
                         <select name="provinciasMUN">
                             <option value="inicio" selected>Seleccione una provincia</option>

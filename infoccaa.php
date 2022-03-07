@@ -16,79 +16,79 @@ if($ccaa && $ccaaNac){
     $datosPib = array();
     $etiquetasPib = array();
     foreach($ccaa->getIncrPib() as $clave=>$valor){
-        array_unshift($etiquetasPib, $clave);
-        array_unshift($datosPib, $valor*100);
+        array_push($etiquetasPib, $clave);
+        array_push($datosPib, $valor*100);
     }
     $datosPibNac = array();
     $etiquetasPibNac = array();
     foreach($ccaaNac->getIncrPib() as $clave=>$valor){
-        array_unshift($etiquetasPibNac, $clave);
-        array_unshift($datosPibNac, $valor*100);
+        array_push($etiquetasPibNac, $clave);
+        array_push($datosPibNac, $valor*100);
     }
     /*Paro CCAA y paro nacional*/
     $datosParo = array();
     $etiquetasParo = array();
     foreach($ccaa->getParo() as $array){
-        array_unshift($etiquetasParo, $array[0]);
-        array_unshift($datosParo, $array[2]*100);
+        array_push($etiquetasParo, $array[0]);
+        array_push($datosParo, $array[2]*100);
     }
     $datosParoNac = array();
     $etiquetasParoNac = array();
     foreach($ccaaNac->getParo() as $array){
-        array_unshift($etiquetasParoNac, $array[0]);
-        array_unshift($datosParoNac, $array[2]*100);
+        array_push($etiquetasParoNac, $array[0]);
+        array_push($datosParoNac, $array[2]*100);
     }
     /*Transacciones inmobiliarias CCAA y transacciones nacionales*/
     $datosTransac = array();
     $etiquetasTransac = array();
     foreach($ccaa->getTransacInmobiliarias() as $array){
-        array_unshift($etiquetasTransac, $array[0]);
-        array_unshift($datosTransac, $array[2]*100);
+        array_push($etiquetasTransac, $array[0]);
+        array_push($datosTransac, $array[2]*100);
     }
     $datosTransacNac = array();
     $etiquetasTransacNac = array();
     foreach($ccaaNac->getTransacInmobiliarias() as $array){
-        array_unshift($etiquetasTransacNac, $array[0]);
-        array_unshift($datosTransacNac, $array[2]*100);
+        array_push($etiquetasTransacNac, $array[0]);
+        array_push($datosTransacNac, $array[2]*100);
     }
     /*Crecimiento de empresas CCAA y crecimiento de empresas a nivel nacional*/
     $datosEmpresas = array();
     $etiquetasEmpresas = array();
     foreach($ccaa->getEmpresas() as $clave=>$valor){
-        array_unshift($etiquetasEmpresas, $clave);
-        array_unshift($datosEmpresas, $valor*100);
+        array_push($etiquetasEmpresas, $clave);
+        array_push($datosEmpresas, $valor*100);
     }
     $datosEmpresasNac = array();
     $etiquetasEmpresasNac = array();
     foreach($ccaaNac->getEmpresas() as $clave=>$valor){
-        array_unshift($etiquetasEmpresasNac, $clave);
-        array_unshift($datosEmpresasNac, $valor*100);
+        array_push($etiquetasEmpresasNac, $clave);
+        array_push($datosEmpresasNac, $valor*100);
     }
     /*Resultado presupuestario CCAA y nacional*/
     $datosPresupuestario = array();
     $etiquetasPresupuestario = array();
     foreach($ccaa->getCCAAPib() as $clave=>$valor){
-        array_unshift($etiquetasPresupuestario, $clave);
-        array_unshift($datosPresupuestario, $valor*100);
+        array_push($etiquetasPresupuestario, $clave);
+        array_push($datosPresupuestario, $valor*100);
     }
     $datosPresupuestarioNac = array();
     $etiquetasPresupuestarioNac = array();
     foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
-        array_unshift($etiquetasPresupuestarioNac, $clave);
-        array_unshift($datosPresupuestarioNac, $valor*100);
+        array_push($etiquetasPresupuestarioNac, $clave);
+        array_push($datosPresupuestarioNac, $valor*100);
     }
     /*Deuda viva CCAA y nacional*/
     $datosDeudaVivaIngrCor = array();
     $etiquetasDeudaVivaIngrCor = array();
     foreach($ccaa->getDeudaVivaIngrCor() as $array){
-        array_unshift($etiquetasDeudaVivaIngrCor, $array[0]);
-        array_unshift($datosDeudaVivaIngrCor, $array[2]*100);
+        array_push($etiquetasDeudaVivaIngrCor, $array[0]);
+        array_push($datosDeudaVivaIngrCor, $array[2]*100);
     }
     $datosDeudaVivaNac = array();
     $etiquetasDeudaVivaNac = array();
     foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
-        array_unshift($etiquetasDeudaVivaNac, $array[0]);
-        array_unshift($datosDeudaVivaNac, $array[2]*100);
+        array_push($etiquetasDeudaVivaNac, $array[0]);
+        array_push($datosDeudaVivaNac, $array[2]*100);
     }
     /*Ingresos corrientes CCAA */
     $datosIngresosCor = array();
@@ -136,48 +136,48 @@ if($ccaa && $ccaaNac){
     $datos = array();
     $etiquetas = array();
     foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
-        array_unshift($etiquetas, $clave);
-        array_unshift($datos, $valor*100);
+        array_push($etiquetas, $clave);
+        array_push($datos, $valor*100);
     }
     /*Apalancamiento Operativo*/ 
     $datosApalancamiento=array();
     $etiquetasApalancamiento=array();
     foreach($ccaa->getRRigidez() as $clave=>$valor){
-        array_unshift($etiquetasApalancamiento, $clave);
-        array_unshift($datosApalancamiento, $valor*100);
+        array_push($etiquetasApalancamiento, $clave);
+        array_push($datosApalancamiento, $valor*100);
     }
     /*Sostenibilidad de la deuda CCAA, y media CCAA*/ 
     $datosSostenibilidad=array();
     $etiquetasSostenibilidad=array();
     foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
-        array_unshift($etiquetasSostenibilidad, $clave);
-        array_unshift($datosSostenibilidad, $valor*100);
+        array_push($etiquetasSostenibilidad, $clave);
+        array_push($datosSostenibilidad, $valor*100);
     }
     /*PMP CCAA, y media PMP CCAA*/ 
     $datosPMP=array();
     $etiquetasPMP=array();
     foreach($ccaa->getPMP() as $array){
-        array_unshift($etiquetasPMP, $array[0]);
-        array_unshift($datosPMP, $array[2]);
+        array_push($etiquetasPMP, $array[0]);
+        array_push($datosPMP, $array[2]);
     }
     $datosPMPNac=array();
     $etiquetasPMPNac=array();
     foreach($ccaaNac->getPMP() as $array){
-        array_unshift($etiquetasPMPNac, $array[0]);
-        array_unshift($datosPMPNac, $array[2]);
+        array_push($etiquetasPMPNac, $array[0]);
+        array_push($datosPMPNac, $array[2]);
     }
     /*Eficiencia CCAA, y media eficiencia CCAA*/ 
     $datosEficiencia=array();
     $etiquetasEficiencia=array();
     foreach($ccaa->getREfic() as $clave=>$valor){
-        array_unshift($etiquetasEficiencia, $clave);
-        array_unshift($datosEficiencia, $valor*100);
+        array_push($etiquetasEficiencia, $clave);
+        array_push($datosEficiencia, $valor*100);
     }
     $datosEficienciaNac=array();
     $etiquetasEficienciaNac=array();
     foreach($ccaaNac->getREfic() as $clave=>$valor){
-        array_unshift($etiquetasEficienciaNac, $clave);
-        array_unshift($datosEficienciaNac, $valor*100);
+        array_push($etiquetasEficienciaNac, $clave);
+        array_push($datosEficienciaNac, $valor*100);
     }
 }
 ?>
@@ -224,11 +224,21 @@ if($ccaa && $ccaaNac){
                 echo '<p><b>Partido político: </b>'.$ccaa->getPartido().'</p>';
                 echo '<p><b>CIF: </b>'.$ccaa->getCif().'</p>';
                 echo '<p><b>Via: </b>'.$ccaa->getTipoVia().' '.$ccaa->getNombreVia().', '.$ccaa->getNumVia().'</p>';
-                echo '<p><b>Teléfono: </b>'.$ccaa->getTelefono().'</p>';
-                echo '<p><b>Código Postal: </b>'.$ccaa->getCodigoPostal().'</p>';
-                echo '<p><b>Fax: </b>'.$ccaa->getFax().'</p>';
-                echo '<p><b>Sitio web: </b><a href="https://'.$ccaa->getWeb().'" target="_blank">'.$ccaa->getWeb().'</a></p>';
-                echo '<p><b>Correo electrónico: </b>'.$ccaa->getMail().'</p>';
+                echo '<p><b>Teléfono: </b>';
+                if($ccaa->getTelefono()!='') echo $ccaa->getTelefono().'</p>';
+                else echo 'N/A</p>';
+                echo '<p><b>Código Postal: </b>';
+                if($ccaa->getCodigoPostal()!='') echo $ccaa->getCodigoPostal().'</p>';
+                else echo 'N/A</p>';
+                echo '<p><b>Fax: </b>';
+                if($ccaa->getFax()!='') echo $ccaa->getFax().'</p>';
+                else echo 'N/A</p>';
+                echo '<p><b>Sitio web: </b>';
+                if($ccaa->getWeb()!='') echo '<a href="https://'.$ccaa->getWeb().'" target="_blank">'.$ccaa->getWeb().'</a></p>';
+                else echo 'N/A</p>';
+                echo '<p><b>Correo electrónico: </b>';
+                if($ccaa->getMail()!='') echo $ccaa->getMail().'</p>';
+                else echo 'N/A</p>';
             ?>
                 <br><br>
                 <h3>Datos económicos</h3>
@@ -673,18 +683,93 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
                 <?php
+                /*echo '<table>';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th></th>';
                 foreach($ccaa->getCCAAPib() as $clave=>$valor){
-                    echo '<p><b>Resultado presupuestario '.$clave.': </b>'.($valor*100).'%</p>';
+                    echo '<th>'.$clave.'</th>';
                 }
+                echo '</tr>';
+                echo'</thead>';
+                echo '<tbody>';
+                echo '<tr>';
+                echo '<th>Resultado presupuestario</th>';
+                foreach($ccaa->getCCAAPib() as $clave=>$valor){
+                    echo '<td>'.($valor*100).'%</td>';
+                }
+                echo '</tr>';
+                echo'</tbody>';
+                echo '</table>';
+
+                
+                echo '<table>';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th></th>';
                 foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
-                    echo '<p><b>Resultado presupuestario nacional '.$clave.': </b>'.($valor*100).'%</p>';
+                    echo '<th>'.$clave.'</th>';
                 }
-                foreach($ccaa->getDeudaVivaIngrCor() as $array){
+                echo '</tr>';
+                echo'</thead>';
+                echo '<tbody>';
+                echo '<tr>';
+                echo '<th>Resultado presupuestario nacional</th>';
+                foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
+                    echo '<td>'.($valor*100).'%</td>';
+                }
+                echo '</tr>';
+                echo'</tbody>';
+                echo '</table>';*/
+                for($i=0;$i<4;$i++){
+                    if($i==0) $tmp=$ccaa->getCCAAPib();
+                    else if ($i==1) $tmp=$ccaaNac->getCCAAPib();
+                    else if ($i==2) $tmp=$ccaa->getDeudaVivaIngrCor();
+                    else if ($i==3) $tmp=$ccaaNac->getDeudaVivaIngrCor();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    if($i<2){
+                        foreach($tmp as $clave=>$valor){
+                            echo '<th>'.$clave.'</th>';
+                        }
+                    }
+                    else {
+                        foreach($tmp as $array){
+                            echo '<th>'.$array[0].' (Trimestre '.$array[1].')</th>';
+                        }
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Resultado presupuestario</th>';
+                    else if ($i==1) echo '<th>Resultado presupuestario nacional</th>';
+                    else if ($i==2) echo '<th>Deuda viva sobre ingresos corrientes</th>';
+                    else if ($i==3) echo '<th>Deuda viva nacional sobre ingresos corrientes</th>';
+                    if($i<2){
+                        foreach($tmp as $clave=>$valor){
+                            echo '<td>'.($valor*100).'%</td>';
+                        }
+                    }
+                    else {
+                        foreach($tmp as $array){
+                            echo '<td>'.($array[2]*100).'%</td>';
+                        }
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
+                }
+
+                /*foreach($ccaa->getDeudaVivaIngrCor() as $array){
                     echo '<p><b>Deuda viva sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
                 }
                 foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
                     echo '<p><b>Deuda viva nacional sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
-                }
+                }*/
                 ?>
                 <!-- GRAFICAS-->
                 <script>
@@ -1356,7 +1441,7 @@ if($ccaa && $ccaaNac){
                 <h3>Solvencia (en %)</h3>
                 <!--METER LOS GRAFICOS AQUI-->
                 <?php
-                foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
+                /*foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
                     echo '<p><b>Sostenibilidad financiera año '.$clave.': </b>'.($valor*100).'%</p>';
                 }
                 echo '<br>';
@@ -1366,6 +1451,32 @@ if($ccaa && $ccaaNac){
                 echo '<br>';
                 foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
                     echo '<p><b>Sostenibilidad de la deuda año '.$clave.': </b>'.($valor*100).'%</p>';
+                }*/
+                for($i=0;$i<3;$i++){
+                    if($i==0) $tmp=$ccaa->getRSosteFinanciera();
+                    else if ($i==1) $tmp=$ccaa->getRRigidez();
+                    else if ($i==2) $tmp=$ccaa->getRSosteEndeuda();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<th>'.$clave.'</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Sostenibilidad financiera</th>';
+                    else if ($i==1) echo '<th>Apalancamiento operativo</th>';
+                    else if ($i==2) echo '<th>Sostenibilidad de la deuda</th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<td>'.($valor*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
                 }
                 ?>
                 <!-- GRAFICAS-->
@@ -1504,11 +1615,35 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3>Liquidez</h3>
                 <?php
-                foreach($ccaa->getPMP() as $array){
+                /*foreach($ccaa->getPMP() as $array){
                     echo '<p>PMP '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
                 }
                 foreach($ccaaNac->getPMP() as $array){
                     echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
+                }*/
+                for($i=0;$i<2;$i++){
+                    if($i==0) $tmp=$ccaa->getPMP();
+                    else if ($i==1) $tmp=$ccaaNac->getPMP();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $array){
+                        echo '<th>'.$array[0].' (Mes '.$array[1].')</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>PMP</th>';
+                    else if ($i==1) echo '<th>PMP medio</th>';
+                    foreach($tmp as $array){
+                        echo '<td>'.$array[2].' días</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
                 }
                 ?>
                 <script>
@@ -1604,11 +1739,35 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3>Eficiencia (en %)</h3>
                 <?php
-                foreach($ccaa->getREfic() as $clave=>$valor){
+                /*foreach($ccaa->getREfic() as $clave=>$valor){
                     echo '<p><b>Eficiencia '.$clave.': </b>'.($valor*100).'%</p>';
                 }
                 foreach($ccaaNac->getREfic() as $clave=>$valor){
                     echo '<p><b>Eficiencia media '.$clave.': </b>'.($valor*100).'%</p>';
+                }*/
+                for($i=0;$i<2;$i++){
+                    if($i==0) $tmp=$ccaa->getREfic();
+                    else if ($i==1) $tmp=$ccaaNac->getREfic();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<th>'.$clave.'</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Eficiencia</th>';
+                    else if ($i==1) echo '<th>Eficiencia media</th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<td>'.($valor*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
                 }
                 ?>
                  <script>
@@ -1703,6 +1862,141 @@ if($ccaa && $ccaaNac){
                     const eficienciaMedia = new Chart(chartEM, configChartEM);
                 </script>
                 <br><br>
+                <h3>Ratios de ejecución (en %)</h3>
+                <?php
+                /*foreach($ccaa->getREjeIngrCorr() as $clave=>$valor){
+                    echo '<p><b>Ratios de ejecución sobre ingresos corrientes: '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaaNac->getREjeIngrCorr() as $clave=>$valor){
+                    echo '<p><b>Ratios de ejecución sobre ingresos corrientes nacionales: '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                echo '<br>';
+                foreach($ccaa->getREjeGastosCorr() as $clave=>$valor){
+                    echo '<p><b>Ratios de ejecución sobre gastos corrientes: '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaaNac->getREjeGastosCorr() as $clave=>$valor){
+                    echo '<p><b>Ratios de ejecución sobre gastos corrientes nacionales: '.$clave.': </b>'.($valor*100).'%</p>';
+                }*/
+                for($i=0;$i<4;$i++){
+                    if($i==0) $tmp=$ccaa->getREjeIngrCorr();
+                    else if ($i==1) $tmp=$ccaaNac->getREjeIngrCorr();
+                    else if ($i==2) $tmp=$ccaa->getREjeGastosCorr();
+                    else if ($i==3) $tmp=$ccaaNac->getREjeGastosCorr();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<th>'.$clave.'</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Ratio de ejecución sobre ingresos corrientes</th>';
+                    else if ($i==1) echo '<th>Ratio medio de ejecución sobre ingresos corrientes</th>';
+                    else if ($i==2) echo '<th>Ratio de ejecución sobre gastos corrientes</th>';
+                    else if ($i==3) echo '<th>Ratio medio de ejecución sobre gastos corrientes</th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<td>'.($valor*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
+                }
+                ?>
+                <br>
+                <h3>Deuda comercial pendiente de pago (en %)</h3>
+                <?php
+                for($i=0;$i<2;$i++){
+                    if($i==0) $tmp=$ccaa->getRDCPP();
+                    else if ($i==1) $tmp=$ccaaNac->getRDCPP();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $array){
+                        echo '<th>'.$array[0].' (Mes '.$array[1].')</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Porcentaje de pagos pendientes de deuda comercial</th>';
+                    else if ($i==1) echo '<th>Porcentaje medio de pagos pendientes de deuda comercial</th>';
+                    foreach($tmp as $array){
+                        echo '<td>'.($array[2]*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
+                }
+                ?>
+                <br>
+                <h3>Pagos obligacionales (en %)</h3>
+                <?php
+                /*foreach($ccaa->getPagosObligaciones() as $clave=>$valor){
+                    echo '<p><b>Porcentaje de gastos pagados: '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                foreach($ccaaNac->getPagosObligaciones() as $clave=>$valor){
+                    echo '<p><b>Porcentaje de gastos pagados a nivel nacional: '.$clave.': </b>'.($valor*100).'%</p>';
+                }
+                echo '<br>';*/
+                for($i=0;$i<2;$i++){
+                    if($i==0) $tmp=$ccaa->getPagosObligaciones();
+                    else if ($i==1) $tmp=$ccaaNac->getPagosObligaciones();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<th>'.$clave.'</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Porcentaje de gastos pagados</th>';
+                    else if ($i==1) echo '<th>Porcentaje medio de gastos pagados</th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<td>'.($valor*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
+                }
+                ?>
+                <br>
+                <h3>Eficacia recaudatoria (en %)</h3>
+                <?php
+                for($i=0;$i<2;$i++){
+                    if($i==0) $tmp=$ccaa->getREficaciaRec();
+                    else if ($i==1) $tmp=$ccaaNac->getREficaciaRec();
+                    echo '<table class="dataTable">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th></th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<th>'.$clave.'</th>';
+                    }
+                    echo '</tr>';
+                    echo'</thead>';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    if($i==0) echo '<th>Porcentaje de eficacia recaudatoria</th>';
+                    else if ($i==1) echo '<th>Porcentaje medio de eficacia recaudatoria</th>';
+                    foreach($tmp as $clave=>$valor){
+                        echo '<td>'.($valor*100).'%</td>';
+                    }
+                    echo '</tr>';
+                    echo'</tbody>';
+                    echo '</table>';
+                    echo '<br>';
+                }
+                ?>
             <?php
             }
             else {

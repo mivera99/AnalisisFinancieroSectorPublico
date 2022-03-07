@@ -630,7 +630,24 @@ class DAOConsultorDiputacion {
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
-            $conditions = $conditions."scoring_dip.POBLACION = '$poblacion' ";
+            if($poblacion=='tramo1'){
+                $conditions = $conditions."(scoring_dip.POBLACION) BETWEEN 0 AND 300000 ";
+            }
+            else if($poblacion=='tramo2'){
+                $conditions = $conditions."(scoring_dip.POBLACION) BETWEEN 300000 AND 500000 ";
+            }
+            else if($poblacion=='tramo3'){
+                $conditions = $conditions."(scoring_dip.POBLACION) BETWEEN 500000 AND 800000 ";
+            }
+            else if($poblacion=='tramo4'){
+                $conditions = $conditions."(scoring_dip.POBLACION) BETWEEN 800000 AND 1200000 ";
+            }
+            else if($poblacion=='tramo5'){
+                $conditions = $conditions."(scoring_dip.POBLACION) BETWEEN 1200000 AND 2000000 ";
+            }
+            else if($poblacion=='tramo6'){
+                $conditions = $conditions."(scoring_dip.POBLACION) > 2000000 ";
+            }
         }
 
         if(!empty($endeudamiento)){

@@ -623,7 +623,39 @@ class DAOConsultorMunicipio{
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
-            $conditions = $conditions."scoring_mun.POBLACION = '$poblacion' ";
+            if($poblacion=='tramo1'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 0 AND 100 ";
+            }
+            else if($poblacion=='tramo2'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 100 AND 500 ";
+            }
+            else if($poblacion=='tramo3'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 500 AND 1000 ";
+            }
+            else if($poblacion=='tramo4'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 1000 AND 2000 ";
+            }
+            else if($poblacion=='tramo5'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 2000 AND 5000 ";
+            }
+            else if($poblacion=='tramo6'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 5000 AND 10000 ";
+            }
+            else if($poblacion=='tramo7'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 10000 AND 20000 ";
+            }
+            else if($poblacion=='tramo8'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 20000 AND 50000 ";
+            }
+            else if($poblacion=='tramo9'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 50000 AND 100000 ";
+            }
+            else if($poblacion=='tramo10'){
+                $conditions = $conditions."(scoring_mun.POBLACION) BETWEEN 100000 AND 500000 ";
+            }
+            else if($poblacion=='tramo11'){
+                $conditions = $conditions."(scoring_mun.POBLACION) > 500000 ";
+            }
         }
 
         if(!empty($endeudamiento)){
