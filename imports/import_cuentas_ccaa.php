@@ -448,54 +448,6 @@ class Importer_cuentas_ccaa{
                 $values = array();
             }
         }
-
-        /*
-
-        Presentamos los datos por pantalla, en formato tabla
-
-        */
-        /*
-        $sql = "SELECT * FROM ccaas";
-
-        $result = mysqli_query($conn, $sql);
-        $columnas = mysqli_fetch_fields($result);
-        echo "<pre>";
-        echo "<table border='1'>";
-        foreach($columnas AS $value){
-            echo "<th> $value->name </th>";
-        }
-        $all = $result->fetch_all();
-        for($x = 0; $x < count($all); $x++){
-            echo "<tr>";
-
-            for ($y = 0; $y < count($columnas); $y++) {
-                echo "<td>".$all[$x][$y]."</td>";
-            }
-
-            echo "</tr>";
-        }
-        echo '<br>';
-
-        $sql = "SELECT * FROM deudas_ccaa";
-
-        $result = mysqli_query($conn, $sql);
-        $columnas = mysqli_fetch_fields($result);
-        echo "<pre>";
-        echo "<table border='1'>";
-        foreach($columnas AS $value){
-            echo "<th> $value->name </th>";
-        }
-        $all = $result->fetch_all();
-        for($x = 0; $x < count($all); $x++){
-            echo "<tr>";
-
-            for ($y = 0; $y < count($columnas); $y++) {
-                echo "<td>".$all[$x][$y]."</td>";
-            }
-
-            echo "</tr>";
-        }
-        */
         //cierraConexion();
 
         return true;

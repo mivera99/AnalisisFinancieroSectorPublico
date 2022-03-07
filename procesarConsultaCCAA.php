@@ -2,17 +2,65 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-$scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringCCAA'])));
-$poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionCCAA'])));
-/*$endeudamiento = htmlspecialchars(trim(strip_tags($_REQUEST['endeudamientoCCAA'])));
-$ahorro_neto = htmlspecialchars(trim(strip_tags($_REQUEST['ahorro_netoCCAA'])));
-$fondliq = htmlspecialchars(trim(strip_tags($_REQUEST['fondliqCCAA'])));
-*/
-$endeudamiento = $poblacion;
-$ahorro_neto = $poblacion;
-$fondliq = $poblacion;
-$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq);
+$scoring = NULL;
+$poblacion = NULL;
+$endeudamiento = NULL;
+$ahorro_neto = NULL;
+$fondliq = NULL;
+$anho = NULL;
 
+$choice = NULL;
+$from=NULL;
+$to=NULL;
+
+if(!empty($_REQUEST['scoringCCAA']) && $_REQUEST['scoringCCAA']!='inicio'){
+    $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringCCAA'])));
+}
+
+if(!empty($_REQUEST['poblacionCCAA'])){
+    $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionCCAA'])));
+}
+
+if(!empty($_REQUEST['endeudamientoCCAA']) && $_REQUEST['endeudamientoCCAA']!='inicio'){
+    $endeudamiento = htmlspecialchars(trim(strip_tags($_REQUEST['endeudamientoCCAA'])));
+}
+
+if(!empty($_REQUEST['ahorro_netoCCAA']) && $_REQUEST['ahorro_netoCCAA']!='inicio'){
+    $ahorro_neto = htmlspecialchars(trim(strip_tags($_REQUEST['ahorro_netoCCAA'])));
+}
+
+if(!empty($_REQUEST['fondliqCCAA']) && $_REQUEST['fondliqCCAA']!='inicio'){
+    $fondliq = htmlspecialchars(trim(strip_tags($_REQUEST['fondliqCCAA'])));
+}
+
+if(isset($_REQUEST['selection'])){
+    $choice = htmlspecialchars(trim(strip_tags($_REQUEST['selection'])));
+    if($choice == 'SelectYear'){
+        //echo '<p>Radio button del año pulsado</p><br>';
+        if(!empty($_REQUEST['anhoCCAA']) && $_REQUEST['anhoCCAA']!='inicio'){
+            //echo '<p>El año tiene un valor que no es inicio</p><br>';
+            $anho = htmlspecialchars(trim(strip_tags($_REQUEST['anhoCCAA'])));
+        }
+    }
+    else {
+        //echo '<p>Radio button pulsado</p><br>';
+        if(!empty($_REQUEST['from']) && !empty($_REQUEST['to'])){
+            if($_REQUEST['from']!='inicio'){
+                //echo '<p>El año from tiene un valor que no es inicio</p><br>';
+                $from = htmlspecialchars(trim(strip_tags($_REQUEST['from'])));
+            }
+            //echo '<p>valor de from: '.$from.'</p><br>';
+            if($_REQUEST['to']!='inicio'){
+                //echo '<p>El año to tiene un valor que no es inicio</p><br>';
+                $to = htmlspecialchars(trim(strip_tags($_REQUEST['to'])));
+            }
+            //echo '<p>valor de to: '.$to.'</p><br>';
+        
+        }
+    }
+}
+
+$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,12 +96,28 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
 </div>
 <div id="contenido">
     <?php
-    
-    foreach($ccaas as $ccaa){
-        echo '<p>Nombre: '.$ccaa->getNombre().', Rating: '.$ccaa->getRating().', Poblacion: '.$ccaa->getPoblacion().'</p><br>';
+    if(count($ccaas)>0){
+        echo '<p>Se han encontrado '.count($ccaas).' resultados</p>';
+        $year=0;
+        $i=0;
+        while($i<count($ccaas)){
+            echo '<h2>'.key($ccaas[$i]).'</h2>';
+            echo '<table>';
+            $year = key($ccaas[$i]);
+            while($i < count($ccaas) && $year==key($ccaas[$i])){
+                echo '<tr>';
+                echo '<td>'.($i+1).'</td>';
+                echo '<td>Nombre: '.$ccaas[$i][$year]->getNombre().', Rating: '.$ccaas[$i][$year]->getScoring().', Poblacion: '.$ccaas[$i][$year]->getPoblacion().'</td>';
+                echo '</tr>';
+                $i+=1;
+            }
+            echo '</table>';
+        }
+    }
+    else{
+        echo '<p>No se encontraron resultados</p>';
     }
     ?>
-
 </div>
 <div id="pie">
     <?php

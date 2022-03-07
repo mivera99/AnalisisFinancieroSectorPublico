@@ -6,6 +6,7 @@ require_once('includesWeb/diputacion.php');
 require_once('includesWeb/daos/DAOConsultorCCAA.php');
 require_once('includesWeb/daos/DAOConsultorMunicipio.php');
 require_once('includesWeb/daos/DAOConsultorDiputacion.php');
+require_once('includesWeb/daos/DAOConsultorProvincia.php');
 
 class DAOConsultor{
 
@@ -48,11 +49,30 @@ class DAOConsultor{
         return $facilities;
     }
 
-    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq){
+    public function getAllProvincias(){
+        return (new DAOConsultorProvincia())->getAllProvincias();
+    }
+    public function getAllCCAAs(){
+        return (new DAOConsultorCCAA())->getAllCCAAs();
+    }
+
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
         $ccaas = array();
         $daoccaa = new DAOConsultorCCAA();
 
-        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq);
+        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
+    }
+    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
+        $dips = array();
+        $daodip = new DAOConsultorDiputacion();
+
+        return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
+    }
+    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+        $muns = array();
+        $daomun = new DAOConsultorMunicipio();
+
+        return $daomun->consultarMUNs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
     }
 
     public function getCCAA($nombre){

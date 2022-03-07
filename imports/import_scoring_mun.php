@@ -323,28 +323,6 @@ class Importer_scoring_mun{
                 $vals = array();
             }
         }
-        /*
-        $sql = "SELECT * FROM scoring_mun ORDER BY CODIGO_MUN";
-
-        $result = mysqli_query($conn, $sql);
-        $cols = mysqli_fetch_fields($result);
-        echo "<pre>";
-        echo "<table border='1'>";
-        foreach($cols AS $value){
-            echo "<th> $value->name </th>";
-        }
-        $all = $result->fetch_all();
-        for($x = 0; $x < count($all); $x++){
-            echo "<tr>";
-
-            for ($y = 0; $y < count($cols); $y++) {
-                echo "<td>".$all[$x][$y]."</td>";
-            }
-
-            echo "</tr>";
-        }
-        */
-        //mysqli_close($conn);
         //cierraConexion();
 
         return true;

@@ -51,7 +51,7 @@ if (isset($_SESSION['mensaje'])) {
             <form autocomplete="off" action="redirect.php" method="post">
                 <div class="autocomplete">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
-                    <!--<select class="year">
+                    <!--<select name="year">
                         <option value="2018">2018</option>
                         <option value="2019">2019</option>
                         <option value="2020">2020</option>

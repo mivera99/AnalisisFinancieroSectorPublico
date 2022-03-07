@@ -4,7 +4,7 @@ class DAOConsultorMunicipio{
 
     public function getGeneralInfo($nombre){
         $db = getConexionBD();
-        $sql = "SELECT * FROM municipios WHERE NOMBRE = '$nombre'";
+        $sql = "SELECT CODIGO, CIF, NOMBRE, AUTONOMIA, PROVINCIA, NOMBREALCALDE, APELLIDO1ALCALDE, APELLIDO2ALCALDE, VIGENCIA, PARTIDO, TIPOVIA, NOMBREVIA, NUMVIA, CODPOSTAL, TELEFONO, FAX, WEB, MAIL FROM municipios WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
         if(!$result || mysqli_num_rows($result)==0){
             return false;
@@ -69,7 +69,6 @@ class DAOConsultorMunicipio{
         }
         $municipio->setScoring($ratings);
         $municipio->setTendencia($tendencias);
-
 
         return $municipio;
     }
@@ -610,6 +609,155 @@ class DAOConsultorMunicipio{
 
         return $mun;
     }
+
+    /* Función para la página de consultas */
+    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+        $db = getConexionBD();
+        $conditions = "";
+
+        if(!empty($scoring)){
+            $conditions = $conditions."scoring_mun.RATING = '$scoring' ";
+        }   
+        
+        if(!empty($poblacion)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_mun.POBLACION = '$poblacion' ";
+        }
+
+        if(!empty($endeudamiento)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($endeudamiento=='tramo1'){
+                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 0 AND 20 ";
+            }
+            else if($endeudamiento=='tramo2'){
+                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 20 AND 40 ";
+            }
+            else if($endeudamiento=='tramo3'){
+                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 40 AND 80 ";
+            }
+            else if($endeudamiento=='tramo4'){
+                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 80 AND 120 ";
+            }
+            else if($endeudamiento=='tramo5'){
+                $conditions = $conditions."(scoring_mun.R1*100) > 120 ";
+            }
+        }
+        
+        if(!empty($ahorro_neto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($ahorro_neto=='tramo1'){
+                $conditions = $conditions."(scoring_mun.R2*100) < -20 ";
+            }
+            else if($ahorro_neto=='tramo2'){
+                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN -20 AND 0 ";
+            }
+            else if($ahorro_neto=='tramo3'){
+                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN 0 AND 20 ";
+            }
+            else if($ahorro_neto=='tramo4'){
+                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN 20 AND 50 ";
+            }
+            else if($ahorro_neto=='tramo5'){
+                $conditions = $conditions."(scoring_mun.R2*100) > 50 ";
+            }
+        }
+        
+        if(!empty($fondliq)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($fondliq=='tramo1'){
+                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 0 AND 1000000 ";
+            }
+            else if($fondliq=='tramo2'){
+                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 1000000 AND 5000000 ";
+            }
+            else if($fondliq=='tramo3'){
+                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 5000000 AND 50000000 ";
+            }
+            else if($fondliq=='tramo4'){
+                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) > 50000000 ";
+            }
+        }
+
+        if(!empty($choice)){
+            if($choice =='SelectYear'){
+                if(!empty($anho)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_mun.ANHO = '$anho' ";
+                }
+            }
+            else {
+                if(!empty($from) && !empty($to)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_mun.ANHO BETWEEN '$from' AND '$to' ";
+                }
+                else if(!empty($from) && empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_mun.ANHO >= '$from' ";
+                }
+                else if(empty($from) && !empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_mun.ANHO <= '$to' ";
+                }
+            }
+        }
+
+        if(!empty($autonomia)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."municipios.AUTONOMIA = '$autonomia' ";
+        }   
+        
+        if(!empty($provincia)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."municipios.PROVINCIA = '$provincia' ";
+        }
+
+        if($conditions!=""){
+            $conditions =" WHERE ".$conditions;
+        }
+
+        //$sql = "SELECT DEUDAFIN FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO, R1 FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO INNER JOIN deudas_mun ON deudas_mun.CODIGO = municipios.CODIGO $conditions ORDER BY ANHO DESC";
+        //echo $sql;
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($resultado = mysqli_fetch_assoc($result)){
+            $elements2 = array();
+            $mun = new Municipio();
+            $mun->setNombre($resultado['NOMBRE']);
+            $mun->setScoring($resultado['RATING']);
+            $mun->setPoblacion($resultado['POBLACION']);
+            //array_push($elements, $ccaa);
+            $elements2[$resultado['ANHO']]=$mun;
+            array_push($elements, $elements2);
+        }
+
+        return $elements;
+    }  
 
 }
 

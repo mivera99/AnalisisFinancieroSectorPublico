@@ -6,7 +6,7 @@ class DAOConsultorDiputacion {
 
     public function getGeneralInfo($nombre){
         $db = getConexionBD();
-        $sql = "SELECT * FROM diputaciones WHERE NOMBRE = '$nombre'";
+        $sql = "SELECT CODIGO, NOMBRE, CIF, AUTONOMIA, PROVINCIA, TIPOVIA, NUMVIA, NOMREVIA, TELEFONO, CODPOSTAL, FAX, MAIL, WEB FROM diputaciones WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
         if(!$result || mysqli_num_rows($result)==0){
             return false;
@@ -616,8 +616,153 @@ class DAOConsultorDiputacion {
 
 
         return $dip;
-
     }
+
+    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+        $db = getConexionBD();
+        $conditions = "";
+
+        if(!empty($scoring)){
+            $conditions = $conditions."scoring_dip.RATING = '$scoring' ";
+        }   
+        
+        if(!empty($poblacion)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_dip.POBLACION = '$poblacion' ";
+        }
+
+        if(!empty($endeudamiento)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($endeudamiento=='tramo1'){
+                $conditions = $conditions."(scoring_dip.R1*100) BETWEEN 0 AND 20 ";
+            }
+            else if($endeudamiento=='tramo2'){
+                $conditions = $conditions."(scoring_dip.R1*100) BETWEEN 20 AND 40 ";
+            }
+            else if($endeudamiento=='tramo3'){
+                $conditions = $conditions."(scoring_dip.R1*100) BETWEEN 40 AND 80 ";
+            }
+            else if($endeudamiento=='tramo4'){
+                $conditions = $conditions."(scoring_dip.R1*100) BETWEEN 80 AND 120 ";
+            }
+            else if($endeudamiento=='tramo5'){
+                $conditions = $conditions."(scoring_dip.R1*100) > 120 ";
+            }
+        }
+        
+        if(!empty($ahorro_neto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($ahorro_neto=='tramo1'){
+                $conditions = $conditions."(scoring_dip.R2*100) < -20 ";
+            }
+            else if($ahorro_neto=='tramo2'){
+                $conditions = $conditions."(scoring_dip.R2*100) BETWEEN -20 AND 0 ";
+            }
+            else if($ahorro_neto=='tramo3'){
+                $conditions = $conditions."(scoring_dip.R2*100) BETWEEN 0 AND 20 ";
+            }
+            else if($ahorro_neto=='tramo4'){
+                $conditions = $conditions."(scoring_dip.R2*100) BETWEEN 20 AND 50 ";
+            }
+            else if($ahorro_neto=='tramo5'){
+                $conditions = $conditions."(scoring_dip.R2*100) > 50 ";
+            }
+        }
+        
+        if(!empty($fondliq)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            if($fondliq=='tramo1'){
+                $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) BETWEEN 0 AND 1000000 ";
+            }
+            else if($fondliq=='tramo2'){
+                $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) BETWEEN 1000000 AND 5000000 ";
+            }
+            else if($fondliq=='tramo3'){
+                $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) BETWEEN 5000000 AND 50000000 ";
+            }
+            else if($fondliq=='tramo4'){
+                $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) > 50000000 ";
+            }
+        }
+
+        if(!empty($choice)){
+            if($choice =='SelectYear'){
+                if(!empty($anho)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_dip.ANHO = '$anho' ";
+                }
+            }
+            else {
+                if(!empty($from) && !empty($to)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_dip.ANHO BETWEEN '$from' AND '$to' ";
+                }
+                else if(!empty($from) && empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_dip.ANHO >= '$from' ";
+                }
+                else if(empty($from) && !empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_dip.ANHO <= '$to' ";
+                }
+            }
+        }
+
+        if(!empty($autonomia)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."diputaciones.AUTONOMIA = '$autonomia' ";
+        }   
+        
+        if(!empty($provincia)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."diputaciones.PROVINCIA = '$provincia' ";
+        }
+
+        if($conditions!=""){
+            $conditions =" WHERE ".$conditions;
+        }
+
+        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO, R1 FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY ANHO DESC";
+        //echo $sql;
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements=array();
+        while($resultado = mysqli_fetch_assoc($result)){
+            $elements2 = array();
+            $dip = new Diputacion();
+            $dip->setNombre($resultado['NOMBRE']);
+            $dip->setScoring($resultado['RATING']);
+            $dip->setPoblacion($resultado['POBLACION']);
+            //array_push($elements, $ccaa);
+            $elements2[$resultado['ANHO']]=$dip;
+            array_push($elements, $elements2);
+        }
+        return $elements;
+    }   
 
 }
 

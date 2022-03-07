@@ -1,6 +1,6 @@
 <?php
-require('includesWeb/usuario.php');
-require('includesWeb/config.php');
+require_once('includesWeb/usuario.php');
+require_once('includesWeb/config.php');
 
 /*Clase encargada de actualizar la información del objeto Usuario en la BBDD*/
 class DAOUsuario {
@@ -78,7 +78,7 @@ class DAOUsuario {
 
     public function getAllUsuarios($correo){
         $db = getConexionBD();
-        $sql = "SELECT * FROM usuarios WHERE correo != '$correo'"; //WHERE correo!='$correo'
+        $sql = "SELECT nombre, correo, contrasenia, rol FROM usuarios WHERE correo != '$correo'"; //WHERE correo!='$correo'
         $res = mysqli_query($db,$sql);
         
         if(!$res){

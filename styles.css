@@ -332,3 +332,8 @@ input#facility{
   border: 1px solid #ccc;
   border-top: none;
 }
+
+/* Hide the radio content when it is not pressed */
+.sel, .selDIP, .selMUN {
+  display:none;
+}

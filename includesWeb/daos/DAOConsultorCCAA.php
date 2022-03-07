@@ -1,12 +1,11 @@
 <?php
 require_once('includesWeb/config.php');
-require_once('includesWeb/ccaa.php');
 
 class DAOConsultorCCAA {
 
     public function getGeneralInfo($nombre){
         $db = getConexionBD();
-        $sql = "SELECT * FROM ccaas WHERE NOMBRE = '$nombre'";
+        $sql = "SELECT CODIGO, NOMBRE, NOMBRE_PRESIDENTE, APELLIDO1_PRESIDENTE, APELLIDO2_PRESIDENTE, VIGENCIA, PARTIDO, CIF, TIPO_VIA, NUM_VIA, NOMBRE_VIA, TELEFONO, COD_POSTAL, FAX, MAIL, WEB FROM ccaas WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
         if(!$result || mysqli_num_rows($result)==0){
             return false;
@@ -341,7 +340,7 @@ class DAOConsultorCCAA {
 
     public function getRatingInfo($codigo, $year){
         $db = getConexionBD();
-        $sql = "SELECT * FROM scoring_ccaa WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $sql = "SELECT RATING, TENDENCIA, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND ANHO = '$year'";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -363,7 +362,7 @@ class DAOConsultorCCAA {
 
     public function getCuentasGeneral($codigo, $year){
         $db = getConexionBD();
-        $sql = "SELECT * FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $sql = "SELECT INCR_PIB, N_EMPRESAS, CCAA_PIB, R_SOSTE_FINANCIERA, R_EFIC, R_RIGIDEZ, R_SOSTE_ENDEUDA, R_EJE_INGR_CORR, R_EJE_GASTOS_CORR, PAGOS_OLIGACIONALES, R_EFICACIA_REC  FROM cuentas_ccaa_general WHERE CODIGO = '$codigo' AND ANHO = '$year'";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -409,7 +408,7 @@ class DAOConsultorCCAA {
 
     public function getCuentasGeneralMensual($codigo, $year, $month){
         $db = getConexionBD();
-        $sql = "SELECT * FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND ANHO = '$year' AND MES = '$month'";
+        $sql = "SELECT PARO, PMP, R_DCPP, DEUDAVIVA, DEUDA_VIVA_INGR_COR, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND ANHO = '$year' AND MES = '$month'";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -439,7 +438,7 @@ class DAOConsultorCCAA {
 
     public function getDeudas($codigo, $year){
         $db = getConexionBD();
-        $sql = "SELECT * FROM deudas_ccaa WHERE CODIGO = '$codigo' AND ANHO = '$year'";
+        $sql = "SELECT PIB, PIBC, RESULTADO FROM deudas_ccaa WHERE CODIGO = '$codigo' AND ANHO = '$year'";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1149,26 +1148,120 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
-    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq){
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
         $db = getConexionBD();
-        $sql = "SELECT NOMBRE, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO WHERE scoring_ccaa.RATING = '$scoring' AND scoring_ccaa.POBLACION = '$poblacion'";
+        $conditions = "";
+
+        if(!empty($scoring)){
+            $conditions = $conditions."scoring_ccaa.RATING = '$scoring' ";
+        }   
         
+        if(!empty($poblacion)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_ccaa.POBLACION = '$poblacion' ";
+        }
+
+        if(!empty($endeudamiento)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
+        }
+        
+        if(!empty($ahorro_neto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
+        }
+        
+        if(!empty($fondliq)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+            }
+            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
+        }
+
+        if(!empty($choice)){
+            if($choice =='SelectYear'){
+                if(!empty($anho)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_ccaa.ANHO = '$anho' ";
+                }
+            }
+            else {
+                if(!empty($from) && !empty($to)){
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_ccaa.ANHO BETWEEN '$from' AND '$to' ";
+                }
+                else if(!empty($from) && empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_ccaa.ANHO >= '$from' ";
+                }
+                else if(empty($from) && !empty($to)){
+                    
+                    if($conditions!=""){
+                        $conditions = $conditions . "AND ";
+                    }
+                    $conditions = $conditions."scoring_ccaa.ANHO <= '$to' ";
+                }
+            }
+        }
+
+        if($conditions!=""){
+            $conditions =" WHERE ".$conditions;
+        }
+        
+        //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO DESC";
+        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO DESC";
+        //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
         }
         $elements=array();
         while($resultado = mysqli_fetch_assoc($result)){
+            $elements2 = array();
             $ccaa = new CCAA();
             $ccaa->setNombre($resultado['NOMBRE']);
-            $ccaa->setRating($resultado['RATING']);
-            $ccaa->setPoblacion(['POBLACION']);
-            array_push($elements, $ccaa);
+            $ccaa->setScoring($resultado['RATING']);
+            $ccaa->setPoblacion($resultado['POBLACION']);
+            //array_push($elements, $ccaa);
+            $elements2[$resultado['ANHO']]=$ccaa;
+            array_push($elements, $elements2);
         }
+        //echo '<p>'.$sql.'</p>';
+        //echo $conditions;
+        //var_dump($elements);
         return $elements;
     }   
 
+    public function getAllCCAAs(){
+        $db = getConexionBD();
+        $sql ="SELECT CODIGO, NOMBRE FROM ccaas ORDER BY CODIGO ASC";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements = array();
+        while($resultado = mysqli_fetch_assoc($result)){
+            $ccaa = new CCAA();
+            $ccaa->setCodigo($resultado['CODIGO']);
+            $ccaa->setNombre($resultado['NOMBRE']);
+            array_push($elements, $ccaa);
+        }
 
+        return $elements;
+    }
 
 }
 
