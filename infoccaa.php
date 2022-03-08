@@ -179,6 +179,71 @@ if($ccaa && $ccaaNac){
         array_push($etiquetasEficienciaNac, $clave);
         array_push($datosEficienciaNac, $valor*100);
     }
+    /*Ratios de ejecucion de ingresos CCAA */ 
+    $datosEjeIngrCorr=array();
+    $etiquetasEjeIngrCorr=array();
+    foreach($ccaa->getREjeIngrCorr() as $clave=>$valor){
+        array_push($etiquetasEjeIngrCorr, $clave);
+        array_push($datosEjeIngrCorr, $valor*100);
+    }
+    $datosEjeIngrCorrNac=array();
+    $etiquetasEjeIngrCorrNac=array();
+    foreach($ccaaNac->getREjeIngrCorr() as $clave=>$valor){
+        array_push($etiquetasEjeIngrCorrNac, $clave);
+        array_push($datosEjeIngrCorrNac, $valor*100);
+    }
+    /*Ratios de ejecucion de gastos CCAA */ 
+    $datosEjeGastosCorr=array();
+    $etiquetasEjeGastosCorr=array();
+    foreach($ccaa->getREjeGastosCorr() as $clave=>$valor){
+        array_push($etiquetasEjeGastosCorr, $clave);
+        array_push($datosEjeGastosCorr, $valor*100);
+    }
+    $datosEjeGastosCorrNac=array();
+    $etiquetasEjeGastosCorrNac=array();
+    foreach($ccaaNac->getREjeGastosCorr() as $clave=>$valor){
+        array_push($etiquetasEjeGastosCorrNac, $clave);
+        array_push($datosEjeGastosCorrNac, $valor*100);
+    }
+    /* Deuda comercial pendiente de pago */ 
+    $datosRDCPP=array();
+    $etiquetasRDCPP=array();
+    foreach($ccaa->getRDCPP() as $array){
+        array_push($etiquetasRDCPP, $array[0]);
+        array_push($datosRDCPP, $array[2]);
+    }
+    $datosRDCPPNac=array();
+    $etiquetasRDCPPNac=array();
+    foreach($ccaaNac->getRDCPP() as $array){
+        array_push($etiquetasRDCPPNac, $array[0]);
+        array_push($datosRDCPPNac, $array[2]);
+    }
+    /* Pagos obligacionales */
+    $datosPagosObligacionales=array();
+    $etiquetasPagosObligacionales=array();
+    foreach($ccaa->getPagosObligaciones() as $clave=>$valor){
+        array_push($etiquetasPagosObligacionales, $clave);
+        array_push($datosPagosObligacionales, $valor*100);
+    }
+    $datosPagosObligacionalesNac=array();
+    $etiquetasPagosObligacionalesNac=array();
+    foreach($ccaaNac->getPagosObligaciones() as $clave=>$valor){
+        array_push($etiquetasPagosObligacionalesNac, $clave);
+        array_push($datosPagosObligacionalesNac, $valor*100);
+    }
+    /* Eficacia recaudatoria */
+    $datosREficaciaRec=array();
+    $etiquetasREficaciaRec=array();
+    foreach($ccaa->getREficaciaRec() as $clave=>$valor){
+        array_push($etiquetasREficaciaRec, $clave);
+        array_push($datosREficaciaRec, $valor*100);
+    }
+    $datosREficaciaRecNac=array();
+    $etiquetasREficaciaRecNac=array();
+    foreach($ccaaNac->getREficaciaRec() as $clave=>$valor){
+        array_push($etiquetasREficaciaRecNac, $clave);
+        array_push($datosREficaciaRecNac, $valor*100);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -1864,19 +1929,6 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3>Ratios de ejecución (en %)</h3>
                 <?php
-                /*foreach($ccaa->getREjeIngrCorr() as $clave=>$valor){
-                    echo '<p><b>Ratios de ejecución sobre ingresos corrientes: '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                foreach($ccaaNac->getREjeIngrCorr() as $clave=>$valor){
-                    echo '<p><b>Ratios de ejecución sobre ingresos corrientes nacionales: '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                echo '<br>';
-                foreach($ccaa->getREjeGastosCorr() as $clave=>$valor){
-                    echo '<p><b>Ratios de ejecución sobre gastos corrientes: '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                foreach($ccaaNac->getREjeGastosCorr() as $clave=>$valor){
-                    echo '<p><b>Ratios de ejecución sobre gastos corrientes nacionales: '.$clave.': </b>'.($valor*100).'%</p>';
-                }*/
                 for($i=0;$i<4;$i++){
                     if($i==0) $tmp=$ccaa->getREjeIngrCorr();
                     else if ($i==1) $tmp=$ccaaNac->getREjeIngrCorr();
@@ -1906,6 +1958,176 @@ if($ccaa && $ccaaNac){
                     echo '<br>';
                 }
                 ?>
+                <script>
+                    var datosRI = <?php echo json_encode($datosEjeIngrCorr)?>;
+                    var etiquetasRI = <?php echo json_encode($etiquetasEjeIngrCorr)?>;
+                    var datosRIN = <?php echo json_encode($datosEjeIngrCorrNac)?>;
+                    var etiquetasRIN = <?php echo json_encode($etiquetasEjeIngrCorrNac)?>;
+                    
+                    var datosRG = <?php echo json_encode($datosEjeGastosCorr)?>;
+                    var etiquetasRG = <?php echo json_encode($etiquetasEjeGastosCorr)?>;
+                    var datosRGN = <?php echo json_encode($datosEjeGastosCorrNac)?>;
+                    var etiquetasRGN = <?php echo json_encode($etiquetasEjeGastosCorrNac)?>;
+                </script>
+                <br><br>
+                <div class="graficos">
+                    <canvas id="ratioingrcorr" height="300" width="500"></canvas>
+                    <canvas id="ratioingrcorrnac" height="300" width="500"></canvas>
+                    <canvas id="ratiogastoscorr" height="300" width="500"></canvas>
+                    <canvas id="ratiogastoscorrnac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartRI = document.getElementById('ratioingrcorr').getContext('2d');
+                    const configChartRI = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasRI,
+                            datasets: [{
+                                label: 'Ratios de ejecución sobre ingresos corrientes',
+                                data: datosRI,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ratios de ejecución sobre ingresos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartRIN = document.getElementById('ratioingrcorrnac').getContext('2d');
+                    const configChartRIN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasRIN,
+                            datasets: [{
+                                label: 'Ratios medio de ejecución sobre ingresos corrientes',
+                                data: datosRIN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ratios medios de ejecución sobre ingresos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartRG = document.getElementById('ratiogastoscorr').getContext('2d');
+                    const configChartRG = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasRG,
+                            datasets: [{
+                                label: 'Ratios de ejecución sobre gastos corrientes',
+                                data: datosRG,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ratios de ejecución sobre gastos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const chartRGN = document.getElementById('ratiogastoscorrnac').getContext('2d');
+                    const configChartRGN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasRGN,
+                            datasets: [{
+                                label: 'Ratios medio de ejecución sobre gastos corrientes',
+                                data: datosRGN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Ratios medios de ejecución sobre gastos corrientes',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const rIngrCorr = new Chart(chartRI, configChartRI);
+                    const rIngrCorrNac = new Chart(chartRIN, configChartRIN);
+                    const rGastosCorr = new Chart(chartRG, configChartRG);
+                    const rGastosCorrNac = new Chart(chartRGN, configChartRGN);
+                </script>
                 <br>
                 <h3>Deuda comercial pendiente de pago (en %)</h3>
                 <?php
@@ -1934,16 +2156,100 @@ if($ccaa && $ccaaNac){
                     echo '<br>';
                 }
                 ?>
+                <script>
+                    var datosRDCPP = <?php echo json_encode($datosRDCPP)?>;
+                    var etiquetasRDCPP = <?php echo json_encode($etiquetasRDCPP)?>;
+                    var datosRDCPPN = <?php echo json_encode($datosRDCPPNac)?>;
+                    var etiquetasRDCPPN = <?php echo json_encode($etiquetasRDCPPNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="rdcpp" height="300" width="500"></canvas>
+                    <canvas id="rdcppnac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartRDCPP = document.getElementById('rdcpp').getContext('2d');
+                    const configChartRDCPP = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasRDCPP,
+                            datasets: [{
+                                label: 'Porcentaje de deudas comerciales pendientes de pago cada año',
+                                data: datosRDCPP,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Porcentaje de deudas comerciales pendientes de pago',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartRDCPPN = document.getElementById('rdcppnac').getContext('2d');
+                    const configChartRDCPPN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasRDCPPN,
+                            datasets: [{
+                                label: 'Porcentaje medio de deudas comerciales pendientes de pago cada año',
+                                data: datosRDCPPN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Porcentaje medio de deudas comerciales pendientes de pago',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const rdcpp = new Chart(chartRDCPP, configChartRDCPP);
+                    const rdcppNac = new Chart(chartRDCPPN, configChartRDCPPN);
+                </script>
                 <br>
                 <h3>Pagos obligacionales (en %)</h3>
                 <?php
-                /*foreach($ccaa->getPagosObligaciones() as $clave=>$valor){
-                    echo '<p><b>Porcentaje de gastos pagados: '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                foreach($ccaaNac->getPagosObligaciones() as $clave=>$valor){
-                    echo '<p><b>Porcentaje de gastos pagados a nivel nacional: '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                echo '<br>';*/
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getPagosObligaciones();
                     else if ($i==1) $tmp=$ccaaNac->getPagosObligaciones();
@@ -1969,6 +2275,97 @@ if($ccaa && $ccaaNac){
                     echo '<br>';
                 }
                 ?>
+                <script>
+                    var datosPO = <?php echo json_encode($datosPagosObligacionales)?>;
+                    var etiquetasPO = <?php echo json_encode($etiquetasPagosObligacionales)?>;
+                    var datosPON = <?php echo json_encode($datosPagosObligacionalesNac)?>;
+                    var etiquetasPON = <?php echo json_encode($etiquetasPagosObligacionalesNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="pagosobligaciones" height="300" width="500"></canvas>
+                    <canvas id="pagosobligacionesnac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartPO = document.getElementById('pagosobligaciones').getContext('2d');
+                    const configChartPO = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasPO,
+                            datasets: [{
+                                label: 'Porcentaje de gastos pagados cada año',
+                                data: datosPO,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Porcentaje de gastos pagados',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartPON = document.getElementById('pagosobligacionesnac').getContext('2d');
+                    const configChartPON = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasPON,
+                            datasets: [{
+                                label: 'Porcentaje medio de gastos pagados cada año',
+                                data: datosPON,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Porcentaje medio de gastos pagados',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const pagosObligacionales = new Chart(chartPO, configChartPO);
+                    const pagosObligacionalesNac = new Chart(chartPON, configChartPON);
+                </script>
                 <br>
                 <h3>Eficacia recaudatoria (en %)</h3>
                 <?php
@@ -1997,6 +2394,97 @@ if($ccaa && $ccaaNac){
                     echo '<br>';
                 }
                 ?>
+                <script>
+                    var datosER = <?php echo json_encode($datosREficaciaRec)?>;
+                    var etiquetasER = <?php echo json_encode($etiquetasREficaciaRec)?>;
+                    var datosERN = <?php echo json_encode($datosREficaciaRecNac)?>;
+                    var etiquetasERN = <?php echo json_encode($etiquetasREficaciaRecNac)?>;
+                </script>
+
+                <!--Grafica de ahorro neto-->
+                <br><br>
+                <div class="graficos">
+                    <canvas id="eficreca" height="300" width="500"></canvas>
+                    <canvas id="eficrecanac" height="300" width="500"></canvas>
+                    <br><br>
+                </div>
+                <script>
+                    const chartER = document.getElementById('eficreca').getContext('2d');
+                    const configChartER = {
+                        type: 'bar',
+                        data: {
+                            labels: etiquetasER,
+                            datasets: [{
+                                label: 'Eficacia recaudatoria cada año',
+                                data: datosER,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Eficacia recaudatoria media',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    const chartERN = document.getElementById('eficrecanac').getContext('2d');
+                    const configChartERN = {
+                        type: 'bar',
+                        data: {
+                            labels:etiquetasERN,
+                            datasets: [{
+                                label: 'Porcentaje medio de deudas comerciales pendientes de pago cada año',
+                                data: datosERN,
+                                backgroundColor: [
+                                    'rgba(0, 62, 153, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(0, 62, 153, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: false,
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text:'Porcentaje medio de deudas comerciales pendientes de pago',
+                                    color: '#003E99',
+                                    font:{
+                                        size:20
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    const eficrecaudatoria = new Chart(chartER, configChartER);
+                    const eficrecaudatoriaNac = new Chart(chartERN, configChartERN);
+                </script>
             <?php
             }
             else {
