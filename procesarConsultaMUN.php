@@ -70,12 +70,12 @@ if(!empty($_REQUEST['provinciasMUN']) && $_REQUEST['provinciasMUN']!='inicio'){
     $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasMUN'])));
 }
 
-echo '<p>Scoring: '.$scoring.'</p><br>';
+/*echo '<p>Scoring: '.$scoring.'</p><br>';
 echo '<p>Año: '.$anho.'</p><br>';
 echo '<p>From: '.$from.'</p><br>';
 echo '<p>To: '.$to.'</p><br>';
 echo '<p>Endeudamiento: '.$endeudamiento.'</p><br>';
-
+*/
 $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
 ?>
 <!DOCTYPE html>

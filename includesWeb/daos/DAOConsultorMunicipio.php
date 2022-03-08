@@ -770,7 +770,7 @@ class DAOConsultorMunicipio{
         }
 
         //$sql = "SELECT DEUDAFIN FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $sql = "SELECT DISTINCT(municipios.CODIGO), municipios.NOMBRE, scoring_mun.ANHO, scoring_mun.RATING FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO INNER JOIN deudas_mun ON deudas_mun.CODIGO = municipios.CODIGO $conditions ORDER BY ANHO DESC";
+        $sql = "SELECT DISTINCT(municipios.CODIGO), municipios.NOMBRE, scoring_mun.ANHO, scoring_mun.RATING FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO INNER JOIN deudas_mun ON deudas_mun.CODIGO = municipios.CODIGO $conditions ORDER BY scoring_mun.ANHO DESC, municipios.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){

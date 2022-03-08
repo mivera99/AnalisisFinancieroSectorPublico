@@ -68,10 +68,10 @@ if(!empty($_REQUEST['provinciasDIP']) && $_REQUEST['provinciasDIP']!='inicio'){
     $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasDIP'])));
 }
 
-echo '<p>Scoring: '.$scoring.'</p><br>';
+/*echo '<p>Scoring: '.$scoring.'</p><br>';
 echo '<p>Año: '.$anho.'</p><br>';
 echo '<p>From: '.$from.'</p><br>';
-echo '<p>To: '.$to.'</p><br>';
+echo '<p>To: '.$to.'</p><br>';*/
 /*echo '<p>'.$scoring.'</p><br>';
 echo '<p>'.$scoring.'</p><br>';
 echo '<p>'.$scoring.'</p><br>';*/

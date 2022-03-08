@@ -1236,7 +1236,7 @@ class DAOConsultorCCAA {
         }
         
         //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
-        $sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.RATING, scoring_ccaa.POBLACION, scoring_ccaa.ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY scoring_ccaa.ANHO DESC";
+        $sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.RATING, scoring_ccaa.POBLACION, scoring_ccaa.ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY scoring_ccaa.ANHO DESC, ccaas.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
