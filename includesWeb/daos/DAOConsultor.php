@@ -62,11 +62,11 @@ class DAOConsultor{
 
         return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
     }
-    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
+    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
         $dips = array();
         $daodip = new DAOConsultorDiputacion();
 
-        return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
+        return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
     }
     public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
         $muns = array();

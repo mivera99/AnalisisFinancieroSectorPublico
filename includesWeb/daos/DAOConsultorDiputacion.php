@@ -761,7 +761,7 @@ class DAOConsultorDiputacion {
             $conditions =" WHERE ".$conditions;
         }
 
-        $sql = "SELECT NOMBRE, RATING, POBLACION, ANHO, R1 FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY ANHO DESC";
+        $sql = "SELECT DISTINCT(diputaciones.CODIGO), diputaciones.NOMBRE, scoring_dip.ANHO, scoring_dip.RATING FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY ANHO DESC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -773,7 +773,6 @@ class DAOConsultorDiputacion {
             $dip = new Diputacion();
             $dip->setNombre($resultado['NOMBRE']);
             $dip->setScoring($resultado['RATING']);
-            $dip->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$dip;
             array_push($elements, $elements2);

@@ -25,6 +25,7 @@ class Municipio{
     /* OTROS */
     private $scoring;
     private $tendencia;
+    private $poblacion;
 
     /* INGRESOS */
     private $impuestos_directos1;
@@ -977,6 +978,15 @@ class Municipio{
         $this->solvencia_corto_plazo_media_diputaciones2 = $solvencia_corto_plazo_media_diputaciones2;
 
         return $this;
+    }
+
+    
+    public function getPoblacion(){
+        return $this->poblacion;
+    }
+
+    public function setPoblacion($poblacion){
+        $this->poblacion = $poblacion;
     }
 }
 
