@@ -107,7 +107,8 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
             while($i < count($ccaas) && $year==key($ccaas[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
-                echo '<td>Nombre: '.$ccaas[$i][$year]->getNombre().', Rating: '.$ccaas[$i][$year]->getScoring().', Poblacion: '.$ccaas[$i][$year]->getPoblacion().'</td>';
+                echo '<th>Nombre: '.$ccaas[$i][$year]->getNombre().', Poblacion: '.$ccaas[$i][$year]->getPoblacion().'</th>';
+                echo '<td class="ratingCell">'.$ccaas[$i][$year]->getScoring().'</td>';
                 echo '</tr>';
                 $i+=1;
             }

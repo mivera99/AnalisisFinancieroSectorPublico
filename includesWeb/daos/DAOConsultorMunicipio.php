@@ -781,7 +781,8 @@ class DAOConsultorMunicipio{
             $elements2 = array();
             $mun = new Municipio();
             $mun->setNombre($resultado['NOMBRE']);
-            $mun->setScoring($resultado['RATING']);
+            if(empty($resultado['RATING'])) $mun->setScoring('N/A');
+            else $mun->setScoring($resultado['RATING']);
             $mun->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$mun;

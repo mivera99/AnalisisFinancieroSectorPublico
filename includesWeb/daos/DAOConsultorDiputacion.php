@@ -772,7 +772,8 @@ class DAOConsultorDiputacion {
             $elements2 = array();
             $dip = new Diputacion();
             $dip->setNombre($resultado['NOMBRE']);
-            $dip->setScoring($resultado['RATING']);
+            if(empty($resultado['RATING'])) $dip->setScoring('N/A');
+            else $dip->setScoring($resultado['RATING']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$dip;
             array_push($elements, $elements2);

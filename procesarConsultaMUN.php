@@ -123,7 +123,8 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
             while($i < count($muns) && $year==key($muns[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
-                echo '<td>Nombre: '.$muns[$i][$year]->getNombre().', Rating: '.$muns[$i][$year]->getScoring().', Poblacion: '.$muns[$i][$year]->getPoblacion().'</td>';
+                echo '<td>Nombre: '.$muns[$i][$year]->getNombre().', Poblacion: '.$muns[$i][$year]->getPoblacion().'</td>';
+                echo '<td>'.$muns[$i][$year]->getScoring().'</td>';
                 echo '</tr>';
                 $i+=1;
             }

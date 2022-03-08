@@ -214,6 +214,11 @@ td, th {
   height: 40px;
 }
 
+.ratingCell {
+  width:6%;
+  text-align: center;
+}
+
 input::placeholder {
   color: #5287D5;
 }

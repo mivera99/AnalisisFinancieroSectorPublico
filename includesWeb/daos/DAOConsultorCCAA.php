@@ -1247,7 +1247,8 @@ class DAOConsultorCCAA {
             $elements2 = array();
             $ccaa = new CCAA();
             $ccaa->setNombre($resultado['NOMBRE']);
-            $ccaa->setScoring($resultado['RATING']);
+            if(empty($resultado['RATING'])) $ccaa->setScoring('N/A');
+            else $ccaa->setScoring($resultado['RATING']);
             $ccaa->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$ccaa;

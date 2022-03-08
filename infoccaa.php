@@ -266,6 +266,8 @@ if($ccaa && $ccaaNac){
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
     <!--<script src="graphics.js"></script>-->
+    <!--  ====== ICONOS ====== -->
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
     <title>Análisis Financiero del Sector Público - Comunidad Autónoma</title>
 </head>
@@ -274,7 +276,7 @@ if($ccaa && $ccaaNac){
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
         
-        <div id ="contenidoCCAA"> 
+        <div id ="contenidoCCAA">
             <?php
             if($encontrado){
                 echo '<h2>'.$ccaa->getNombre().'</h2>';
@@ -748,44 +750,6 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
                 <?php
-                /*echo '<table>';
-                echo '<thead>';
-                echo '<tr>';
-                echo '<th></th>';
-                foreach($ccaa->getCCAAPib() as $clave=>$valor){
-                    echo '<th>'.$clave.'</th>';
-                }
-                echo '</tr>';
-                echo'</thead>';
-                echo '<tbody>';
-                echo '<tr>';
-                echo '<th>Resultado presupuestario</th>';
-                foreach($ccaa->getCCAAPib() as $clave=>$valor){
-                    echo '<td>'.($valor*100).'%</td>';
-                }
-                echo '</tr>';
-                echo'</tbody>';
-                echo '</table>';
-
-                
-                echo '<table>';
-                echo '<thead>';
-                echo '<tr>';
-                echo '<th></th>';
-                foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
-                    echo '<th>'.$clave.'</th>';
-                }
-                echo '</tr>';
-                echo'</thead>';
-                echo '<tbody>';
-                echo '<tr>';
-                echo '<th>Resultado presupuestario nacional</th>';
-                foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
-                    echo '<td>'.($valor*100).'%</td>';
-                }
-                echo '</tr>';
-                echo'</tbody>';
-                echo '</table>';*/
                 for($i=0;$i<4;$i++){
                     if($i==0) $tmp=$ccaa->getCCAAPib();
                     else if ($i==1) $tmp=$ccaaNac->getCCAAPib();
@@ -1027,7 +991,8 @@ if($ccaa && $ccaaNac){
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1. Impuestos directos</td>
+                            <td>1. Impuestos directos 
+                            <!--<ion-icon name="information-circle-outline" onclick="showDialog()"></ion-icon></td>-->
                             <?php
                             foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
                                 echo '<td>'.number_format($valor, 2, ',','.').'</td>';

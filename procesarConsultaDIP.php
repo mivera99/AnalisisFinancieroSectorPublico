@@ -123,7 +123,8 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
             while($i < count($dips) && $year==key($dips[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
-                echo '<td>Nombre: '.$dips[$i][$year]->getNombre().', Rating: '.$dips[$i][$year]->getScoring().'</td>';
+                echo '<td>Nombre: '.$dips[$i][$year]->getNombre().'</td>';
+                echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
                 echo '</tr>';
                 $i+=1;
             }
