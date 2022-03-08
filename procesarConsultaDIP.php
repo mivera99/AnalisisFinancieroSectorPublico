@@ -17,7 +17,7 @@ if(!empty($_REQUEST['scoringDIP']) && $_REQUEST['scoringDIP']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringDIP'])));
 }
 
-if(!empty($_REQUEST['poblacionDIP'])){
+if(!empty($_REQUEST['poblacionDIP'])&& $_REQUEST['poblacionDIP']!='inicio'){
     $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionDIP'])));
 }
 

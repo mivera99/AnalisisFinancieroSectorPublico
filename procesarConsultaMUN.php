@@ -19,7 +19,7 @@ if(!empty($_REQUEST['scoringMUN']) && $_REQUEST['scoringMUN']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringMUN'])));
 }
 
-if(!empty($_REQUEST['poblacionMUN'])){
+if(!empty($_REQUEST['poblacionMUN'])&& $_REQUEST['poblacionMUN']!='inicio'){
     $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionMUN'])));
 }
 

@@ -17,7 +17,7 @@ if(!empty($_REQUEST['scoringCCAA']) && $_REQUEST['scoringCCAA']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringCCAA'])));
 }
 
-if(!empty($_REQUEST['poblacionCCAA'])){
+if(!empty($_REQUEST['poblacionCCAA']) && $_REQUEST['poblacionCCAA']!='inicio'){
     $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionCCAA'])));
 }
 
