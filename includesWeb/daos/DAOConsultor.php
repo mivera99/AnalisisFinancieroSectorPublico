@@ -599,6 +599,7 @@ class DAOConsultor{
         $diputacion->setFax($tmpDiputacion->getFax());
         $diputacion->setMail($tmpDiputacion->getMail());
         $diputacion->setWeb($tmpDiputacion->getWeb());
+        
 
         return $diputacion;
     }

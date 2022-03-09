@@ -1,14 +1,18 @@
 <?php
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
+
 $nombre = htmlspecialchars(trim(strip_tags(urldecode($_GET["dip"]))));
 
 $daodip = new DAOConsultor();
 $diputacion = $daodip->getDiputacion($nombre);
 
+
 $dip2018 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2018);
 $dip2019 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2019);
 $dip2020 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2020);
+
+setcookie("dip", $nombre);
 
 $encontrado = false;
 if($diputacion){
@@ -53,6 +57,12 @@ if($diputacion){
                     $tend = $diputacion->getTendencia();
                     echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.$tend[$clave].'</p>';
                 }
+            ?>
+
+            <br>
+            <button type="button" id="verPDFDIP" onclick="window.open('pdfDIP.php','_blank')">Ver Informe</button>
+
+            <?php
 
                 echo '<br><br>';
                 echo '<h2>Información general</h2>';

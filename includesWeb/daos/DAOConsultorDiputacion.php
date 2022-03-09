@@ -6,7 +6,7 @@ class DAOConsultorDiputacion {
 
     public function getGeneralInfo($nombre){
         $db = getConexionBD();
-        $sql = "SELECT CODIGO, NOMBRE, CIF, AUTONOMIA, PROVINCIA, TIPOVIA, NUMVIA, NOMREVIA, TELEFONO, CODPOSTAL, FAX, MAIL, WEB FROM diputaciones WHERE NOMBRE = '$nombre'";
+        $sql = "SELECT CODIGO, NOMBRE, CIF, AUTONOMIA, PROVINCIA, TIPOVIA, NUMVIA, NOMBREVIA, TELEFONO, CODPOSTAL, FAX, MAIL, WEB FROM diputaciones WHERE NOMBRE = '$nombre'";
         $result = mysqli_query($db, $sql);
         if(!$result || mysqli_num_rows($result)==0){
             return false;
