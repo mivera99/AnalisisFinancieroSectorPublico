@@ -110,7 +110,7 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
         require('includesWeb/comun/cabecera.php');
     ?>
 </div>
-<div id="contenido">
+<div id="consultaDIP">
     <?php
     if(count($dips)>0){
         echo '<p>Se han encontrado '.count($dips).' resultados</p>';

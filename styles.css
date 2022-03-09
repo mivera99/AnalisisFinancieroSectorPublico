@@ -128,8 +128,17 @@ button:hover {
   justify-content: space-between;
 }
 
-#pie {
+#consultaCCAA,
+#consultaDIP,
+#consultaMUN {
+  height: 180vh;
+  padding-top: 100px;
   margin-left: 108px;
+  margin-right: 108px;
+}
+
+#pie {
+  padding-left: 108px;
 }
 
 .scoring{

@@ -110,7 +110,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
         require('includesWeb/comun/cabecera.php');
     ?>
 </div>
-<div id="contenido">
+<div id="consultaMUN">
     <?php
     if(count($muns)>0){
         echo '<p>Se han encontrado '.count($muns).' resultados</p>';

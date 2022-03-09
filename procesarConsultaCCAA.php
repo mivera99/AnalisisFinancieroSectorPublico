@@ -94,7 +94,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
         require('includesWeb/comun/cabecera.php');
     ?>
 </div>
-<div id="contenido">
+<div id="consultaCCAA">
     <?php
     if(count($ccaas)>0){
         echo '<p>Se han encontrado '.count($ccaas).' resultados</p>';
