@@ -1628,7 +1628,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Sostenibilidad financiera',
+                                    text:'Sostenibilidad de la deuda',
                                     color: '#003E99',
                                     font:{
                                         size:20

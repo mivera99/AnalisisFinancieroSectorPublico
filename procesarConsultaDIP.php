@@ -124,7 +124,13 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
                 echo '<td>Nombre: '.$dips[$i][$year]->getNombre().'</td>';
-                echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
+                if(!empty($dips[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getPoblacion(), 0, '','.').'</td>';
+                if(!empty($dips[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
+                if(!empty($dips[$i][$year]->getRSosteFinanciera())) echo '<td class="ratingCell">'.($dips[$i][$year]->getRSosteFinanciera()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($dips[$i][$year]->getEndeudamiento()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getSostenibilidad())) echo '<td class="ratingCell">'.($dips[$i][$year]->getSostenibilidad()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($dips[$i][$year]->getAutonomia()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($dips[$i][$year]->getProvincia()*100).'%</td>';
                 echo '</tr>';
                 $i+=1;
             }

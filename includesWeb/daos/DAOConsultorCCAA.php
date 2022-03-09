@@ -1151,14 +1151,21 @@ class DAOConsultorCCAA {
     public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
         $db = getConexionBD();
         $conditions = "";
+        $returning_values = "";
 
         if(!empty($scoring)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND ";
+                //$returning_values = $returning_values.",";
+            }
             $conditions = $conditions."scoring_ccaa.RATING = '$scoring' ";
+            $returning_values = $returning_values.",scoring_ccaa.RATING";
         }   
         
         if(!empty($poblacion)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
+                //$returning_values = $returning_values.",";
             }
             if($poblacion=='tramo1'){
                 $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 0 AND 750000 ";
@@ -1175,28 +1182,45 @@ class DAOConsultorCCAA {
             else if($poblacion=='tramo5'){
                 $conditions = $conditions."(scoring_ccaa.POBLACION) > 6000000 ";
             }
+            $returning_values = $returning_values.",scoring_ccaa.POBLACION";
         }
 
-        if(!empty($endeudamiento)){
+        /*if(!empty($endeudamiento)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
-        }
+        }*/
         
         if(!empty($ahorro_neto)){
             if($conditions!=""){
-                $conditions = $conditions . "AND ";
+                $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO AND ";
+                //$returning_values = $returning_values.",";
             }
-            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
+            if($ahorro_neto=='tramo1'){
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) < -20 ";
+            }
+            else if($ahorro_neto=='tramo2'){
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN -20 AND 0 AND cuentas_ccaa_general.R_SOSTE_FINANCIERA IS NOT NULL ";
+            }
+            else if($ahorro_neto=='tramo3'){
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN 0 AND 20 ";
+            }
+            else if($ahorro_neto=='tramo4'){
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN 20 AND 50 ";
+            }
+            else if($ahorro_neto=='tramo5'){
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) > 50 ";
+            }
+            $returning_values = $returning_values.",cuentas_ccaa_general.R_SOSTE_FINANCIERA";
         }
         
-        if(!empty($fondliq)){
+        /*if(!empty($fondliq)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
-        }
+        }*/
 
         if(!empty($choice)){
             if($choice =='SelectYear'){
@@ -1236,7 +1260,7 @@ class DAOConsultorCCAA {
         }
         
         //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
-        $sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.RATING, scoring_ccaa.POBLACION, scoring_ccaa.ANHO FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY scoring_ccaa.ANHO DESC, ccaas.CODIGO ASC";
+        $sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general.CODIGO = ccaas.CODIGO $conditions ORDER BY scoring_ccaa.ANHO DESC, cuentas_ccaa_general.ANHO DESC, ccaas.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -1247,9 +1271,13 @@ class DAOConsultorCCAA {
             $elements2 = array();
             $ccaa = new CCAA();
             $ccaa->setNombre($resultado['NOMBRE']);
-            if(empty($resultado['RATING'])) $ccaa->setScoring('N/A');
-            else $ccaa->setScoring($resultado['RATING']);
-            $ccaa->setPoblacion($resultado['POBLACION']);
+            if(!empty($resultado['RATING'])) $ccaa->setScoring($resultado['RATING']);
+            //else $ccaa->setScoring($resultado['RATING']);
+            if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['POBLACION']);
+            //else $ccaa->setScoring($resultado['RATING']);
+            if(!empty($resultado['R_SOSTE_FINANCIERA']))$ccaa->setRSosteFinanciera($resultado['R_SOSTE_FINANCIERA']);
+            //if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['R_SOSTE_FINANCIERA']);
+            //$ccaa->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$ccaa;
             array_push($elements, $elements2);

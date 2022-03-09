@@ -621,9 +621,11 @@ class DAOConsultorDiputacion {
     public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
         $db = getConexionBD();
         $conditions = "";
+        $returning_values="";
 
         if(!empty($scoring)){
             $conditions = $conditions."scoring_dip.RATING = '$scoring' ";
+            $returning_values = $returning_values.",scoring_dip.RATING";
         }   
         
         if(!empty($poblacion)){
@@ -648,6 +650,7 @@ class DAOConsultorDiputacion {
             else if($poblacion=='tramo6'){
                 $conditions = $conditions."(scoring_dip.POBLACION) > 2000000 ";
             }
+            $returning_values = $returning_values.",scoring_dip.POBLACION";
         }
 
         if(!empty($endeudamiento)){
@@ -669,6 +672,7 @@ class DAOConsultorDiputacion {
             else if($endeudamiento=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R1*100) > 120 ";
             }
+            $returning_values = $returning_values.",scoring_dip.R2";
         }
         
         if(!empty($ahorro_neto)){
@@ -690,11 +694,12 @@ class DAOConsultorDiputacion {
             else if($ahorro_neto=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R2*100) > 50 ";
             }
+            $returning_values = $returning_values.",scoring_dip.R1";
         }
         
         if(!empty($fondliq)){
             if($conditions!=""){
-                $conditions = $conditions . "AND ";
+                $conditions = $conditions . "AND deudas_dip.ANHO = scoring_dip.ANHO AND ";
             }
             if($fondliq=='tramo1'){
                 $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) BETWEEN 0 AND 1000000 ";
@@ -708,6 +713,7 @@ class DAOConsultorDiputacion {
             else if($fondliq=='tramo4'){
                 $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) > 50000000 ";
             }
+            $returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
         }
 
         if(!empty($choice)){
@@ -748,6 +754,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."diputaciones.AUTONOMIA = '$autonomia' ";
+            $returning_values = $returning_values.",diputaciones.AUTONOMIA";
         }   
         
         if(!empty($provincia)){
@@ -755,13 +762,14 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."diputaciones.PROVINCIA = '$provincia' ";
+            $returning_values = $returning_values.",diputaciones.AUTONOMIA";
         }
 
         if($conditions!=""){
             $conditions =" WHERE ".$conditions;
         }
 
-        $sql = "SELECT DISTINCT(diputaciones.CODIGO), diputaciones.NOMBRE, scoring_dip.ANHO, scoring_dip.RATING FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY scoring_dip.ANHO DESC, diputaciones.CODIGO ASC";
+        $sql = "SELECT DISTINCT(diputaciones.CODIGO), diputaciones.NOMBRE, scoring_dip.ANHO $returning_values FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY scoring_dip.ANHO DESC, diputaciones.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -772,8 +780,26 @@ class DAOConsultorDiputacion {
             $elements2 = array();
             $dip = new Diputacion();
             $dip->setNombre($resultado['NOMBRE']);
-            if(empty($resultado['RATING'])) $dip->setScoring('N/A');
-            else $dip->setScoring($resultado['RATING']);
+            if(!empty($resultado['RATING'])) $dip->setScoring($resultado['RATING']);
+            //else $ccaa->setScoring($resultado['RATING']);
+            if(!empty($resultado['POBLACION']))$dip->setPoblacion($resultado['POBLACION']);
+            //else $ccaa->setScoring($resultado['RATING']);
+            if(!empty($resultado['R1']))$dip->setEndeudamiento($resultado['R1']);
+            if(!empty($resultado['R2']))$dip->setSostenibilidadFinanciera($resultado['R2']);
+            
+            if(!empty($resultado['AUTONOMIA'])) {    
+                $ccaaCode = $resultado['AUTONOMIA'];
+                $sql = "SELECT NOMBRE FROM ccaas WHERE CODIGO = '$ccaaCode'";
+                $result = mysqli_query($db,$sql);
+                if(!$result){
+                    return false;
+                }
+                $autonomia = mysqli_fetch_assoc($result);
+                $dip->setAutonomia($autonomia['NOMBRE']);
+            }
+            if(!empty($resultado['PROVINCIA'])) $dip->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
+            //if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['R_SOSTE_FINANCIERA']);
+            //$ccaa->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$dip;
             array_push($elements, $elements2);

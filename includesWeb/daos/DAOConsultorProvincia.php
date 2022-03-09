@@ -22,6 +22,22 @@ class DAOConsultorProvincia {
 
             return $elements;
         }
+
+        public function getProvinciaById($id){
+            $db = getConexionBD();
+            $sql ="SELECT CODIGO, NOMBRE FROM provincias WHERE CODIGO = '$id'";
+            $result = mysqli_query($db, $sql);
+            if(!$result){
+                return false;
+            }
+            $elements = array();
+            $resultado = mysqli_fetch_assoc($result);
+            $provincia = new Provincia();
+            $provincia->setCodigo($resultado['CODIGO']);
+            $provincia->setNombre($resultado['NOMBRE']);
+
+            return $provincia;
+        }
     
 }
 ?>
