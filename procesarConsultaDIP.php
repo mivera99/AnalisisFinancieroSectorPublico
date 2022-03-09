@@ -8,6 +8,8 @@ $endeudamiento = NULL;
 $ahorro_neto = NULL;
 $fondliq = NULL;
 $anho = NULL;
+$autonomia = NULL;
+$provincia = NULL;
 
 $choice = NULL;
 $from=NULL;
@@ -61,7 +63,7 @@ if(isset($_REQUEST['selectionDIP'])){
 }
 
 if(!empty($_REQUEST['autonomiasDIP']) && $_REQUEST['autonomiasDIP']!='inicio'){
-    $autonomia = htmlspecialchars(trim(strip_tags($_REQUEST['autonomiasMUN'])));
+    $autonomia = htmlspecialchars(trim(strip_tags($_REQUEST['autonomiasDIP'])));
 }
 
 if(!empty($_REQUEST['provinciasDIP']) && $_REQUEST['provinciasDIP']!='inicio'){
@@ -124,13 +126,13 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
                 echo '<td>Nombre: '.$dips[$i][$year]->getNombre().'</td>';
-                if(!empty($dips[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getPoblacion(), 0, '','.').'</td>';
+                //if(!empty($dips[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getPoblacion(), 0, '','.').'</td>';
                 if(!empty($dips[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
-                if(!empty($dips[$i][$year]->getRSosteFinanciera())) echo '<td class="ratingCell">'.($dips[$i][$year]->getRSosteFinanciera()*100).'%</td>';
                 if(!empty($dips[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($dips[$i][$year]->getEndeudamiento()*100).'%</td>';
-                if(!empty($dips[$i][$year]->getSostenibilidad())) echo '<td class="ratingCell">'.($dips[$i][$year]->getSostenibilidad()*100).'%</td>';
-                if(!empty($dips[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($dips[$i][$year]->getAutonomia()*100).'%</td>';
-                if(!empty($dips[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($dips[$i][$year]->getProvincia()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">'.($dips[$i][$year]->getSostenibilidadFinanciera()*100).'%</td>';
+                if(!empty($dips[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getLiquidezInmediata(), 0, '','.').'</td>';
+                if(!empty($dips[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.$dips[$i][$year]->getAutonomia().'</td>';
+                if(!empty($dips[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.$dips[$i][$year]->getProvincia().'</td>';
                 echo '</tr>';
                 $i+=1;
             }

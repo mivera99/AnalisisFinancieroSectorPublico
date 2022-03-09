@@ -127,9 +127,10 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                 if(!empty($muns[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getPoblacion(), 0, '','.').'</td>';
                 if(!empty($muns[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$muns[$i][$year]->getScoring().'</td>';
                 if(!empty($muns[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($muns[$i][$year]->getEndeudamiento()*100).'%</td>';
-                if(!empty($muns[$i][$year]->getSostenibilidad())) echo '<td class="ratingCell">'.($muns[$i][$year]->getSostenibilidad()*100).'%</td>';
-                if(!empty($muns[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getAutonomia()*100).'%</td>';
-                if(!empty($muns[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getProvincia()*100).'%</td>';
+                if(!empty($muns[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">'.($muns[$i][$year]->getSostenibilidadFinanciera()*100).'%</td>';
+                if(!empty($muns[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getLiquidezInmediata(), 0, '','.').'</td>';
+                if(!empty($muns[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getAutonomia()).'</td>';
+                if(!empty($muns[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getProvincia()).'</td>';
                 echo '</tr>';
                 $i+=1;
             }

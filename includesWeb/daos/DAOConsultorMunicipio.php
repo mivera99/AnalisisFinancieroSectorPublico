@@ -800,6 +800,7 @@ class DAOConsultorMunicipio{
             //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['R1']))$mun->setEndeudamiento($resultado['R1']);
             if(!empty($resultado['R2']))$mun->setSostenibilidadFinanciera($resultado['R2']);
+            if(!empty($resultado['FONDLIQUIDOS']))$mun->setLiquidezInmediata($resultado['FONDLIQUIDOS']);
             if(!empty($resultado['AUTONOMIA'])) {    
                 $ccaaCode = $resultado['AUTONOMIA'];
                 $sql = "SELECT NOMBRE FROM ccaas WHERE CODIGO = '$ccaaCode'";

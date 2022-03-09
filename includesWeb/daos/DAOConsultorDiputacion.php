@@ -672,7 +672,7 @@ class DAOConsultorDiputacion {
             else if($endeudamiento=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R1*100) > 120 ";
             }
-            $returning_values = $returning_values.",scoring_dip.R2";
+            $returning_values = $returning_values.",scoring_dip.R1";
         }
         
         if(!empty($ahorro_neto)){
@@ -694,7 +694,7 @@ class DAOConsultorDiputacion {
             else if($ahorro_neto=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R2*100) > 50 ";
             }
-            $returning_values = $returning_values.",scoring_dip.R1";
+            $returning_values = $returning_values.",scoring_dip.R2";
         }
         
         if(!empty($fondliq)){
@@ -762,7 +762,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."diputaciones.PROVINCIA = '$provincia' ";
-            $returning_values = $returning_values.",diputaciones.AUTONOMIA";
+            $returning_values = $returning_values.",diputaciones.PROVINCIA";
         }
 
         if($conditions!=""){
@@ -782,10 +782,11 @@ class DAOConsultorDiputacion {
             $dip->setNombre($resultado['NOMBRE']);
             if(!empty($resultado['RATING'])) $dip->setScoring($resultado['RATING']);
             //else $ccaa->setScoring($resultado['RATING']);
-            if(!empty($resultado['POBLACION']))$dip->setPoblacion($resultado['POBLACION']);
+            //if(!empty($resultado['POBLACION']))$dip->setPoblacion($resultado['POBLACION']);
             //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['R1']))$dip->setEndeudamiento($resultado['R1']);
             if(!empty($resultado['R2']))$dip->setSostenibilidadFinanciera($resultado['R2']);
+            if(!empty($resultado['FONDLIQUIDOS']))$dip->setLiquidezInmediata($resultado['FONDLIQUIDOS']);
             
             if(!empty($resultado['AUTONOMIA'])) {    
                 $ccaaCode = $resultado['AUTONOMIA'];
