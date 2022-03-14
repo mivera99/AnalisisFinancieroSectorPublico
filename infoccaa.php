@@ -263,6 +263,8 @@ if($ccaa && $ccaaNac){
     
     <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
     <script src="functions.js"></script>
+    
+    <script src="functions2.js"></script>
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
     <!--<script src="graphics.js"></script>-->
@@ -1766,15 +1768,18 @@ if($ccaa && $ccaaNac){
                     const pmp = new Chart(chartPMP, configChartPMP);
                     const pmpNac = new Chart(chartPMPNac, configChartPMPNac);
                 </script>
+                <input type="radio" id="selectBar" name="selectionChart" value="SelectBar" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
+                <label for="selectBar">Barras</label>
+                <input type="radio" id="selectLine" name="selectionChart" value="SelectLine" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
+                <label for="selectLine">Líneas</label>
+                <br><br>
+                <input type="radio" id="selectBarPmpNac" name="selectionPMPNac" value="SelectBar" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
+                <label for="selectBarPmpNac">Barras</label>
+                <input type="radio" id="selectLinePmpNac" name="selectionPMPNac" value="SelectLine" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
+                <label for="selectLinePmpNac">Líneas</label>
                 <br><br>
                 <h3>Eficiencia (en %)</h3>
                 <?php
-                /*foreach($ccaa->getREfic() as $clave=>$valor){
-                    echo '<p><b>Eficiencia '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                foreach($ccaaNac->getREfic() as $clave=>$valor){
-                    echo '<p><b>Eficiencia media '.$clave.': </b>'.($valor*100).'%</p>';
-                }*/
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getREfic();
                     else if ($i==1) $tmp=$ccaaNac->getREfic();
@@ -1892,7 +1897,7 @@ if($ccaa && $ccaaNac){
                     const eficienciaMedia = new Chart(chartEM, configChartEM);
                 </script>
                 <br><br>
-                <h3>Ratios de ejecución (en %)</h3>
+                <h3>Ejecución presupuestaria (en %)</h3>
                 <?php
                 for($i=0;$i<4;$i++){
                     if($i==0) $tmp=$ccaa->getREjeIngrCorr();
@@ -1910,10 +1915,10 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Ratio de ejecución sobre ingresos corrientes</th>';
-                    else if ($i==1) echo '<th>Ratio medio de ejecución sobre ingresos corrientes</th>';
-                    else if ($i==2) echo '<th>Ratio de ejecución sobre gastos corrientes</th>';
-                    else if ($i==3) echo '<th>Ratio medio de ejecución sobre gastos corrientes</th>';
+                    if($i==0) echo '<th>Ejecución sobre ingresos corrientes</th>';
+                    else if ($i==1) echo '<th>Ejecución media sobre ingresos corrientes</th>';
+                    else if ($i==2) echo '<th>Ejecución sobre gastos corrientes</th>';
+                    else if ($i==3) echo '<th>Ejecución media sobre gastos corrientes</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
                     }
@@ -1949,7 +1954,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels: etiquetasRI,
                             datasets: [{
-                                label: 'Ratios de ejecución sobre ingresos corrientes',
+                                label: 'Ejecución sobre ingresos corrientes',
                                 data: datosRI,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -1970,7 +1975,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ratios de ejecución sobre ingresos corrientes',
+                                    text:'Ejecución sobre ingresos corrientes',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1986,7 +1991,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasRIN,
                             datasets: [{
-                                label: 'Ratios medio de ejecución sobre ingresos corrientes',
+                                label: 'Ejecución media sobre ingresos corrientes',
                                 data: datosRIN,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -2007,7 +2012,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ratios medios de ejecución sobre ingresos corrientes',
+                                    text:'Ejecución media sobre ingresos corrientes',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -2022,7 +2027,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasRG,
                             datasets: [{
-                                label: 'Ratios de ejecución sobre gastos corrientes',
+                                label: 'Ejecución sobre gastos corrientes',
                                 data: datosRG,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -2043,7 +2048,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ratios de ejecución sobre gastos corrientes',
+                                    text:'Ejecución sobre gastos corrientes',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -2058,7 +2063,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasRGN,
                             datasets: [{
-                                label: 'Ratios medio de ejecución sobre gastos corrientes',
+                                label: 'Ejecución media sobre gastos corrientes',
                                 data: datosRGN,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -2079,7 +2084,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ratios medios de ejecución sobre gastos corrientes',
+                                    text:'Ejecución media sobre gastos corrientes',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -2348,8 +2353,8 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Porcentaje de eficacia recaudatoria</th>';
-                    else if ($i==1) echo '<th>Porcentaje medio de eficacia recaudatoria</th>';
+                    if($i==0) echo '<th>Eficacia recaudatoria</th>';
+                    else if ($i==1) echo '<th>Eficacia media recaudatoria</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
                     }
@@ -2401,7 +2406,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Eficacia recaudatoria media',
+                                    text:'Eficacia recaudatoria',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -2417,7 +2422,7 @@ if($ccaa && $ccaaNac){
                         data: {
                             labels:etiquetasERN,
                             datasets: [{
-                                label: 'Porcentaje medio de deudas comerciales pendientes de pago cada año',
+                                label: 'Eficacia recaudatoria media cada año',
                                 data: datosERN,
                                 backgroundColor: [
                                     'rgba(0, 62, 153, 0.2)'
@@ -2438,7 +2443,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Porcentaje medio de deudas comerciales pendientes de pago',
+                                    text:'Eficacia recaudatoria media',
                                     color: '#003E99',
                                     font:{
                                         size:20

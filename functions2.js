@@ -1,4 +1,3 @@
-
 // Función para mostrar u ocultar la contraseña 
 function showPassword(){
     var tipo = document.getElementById("password");
@@ -22,36 +21,8 @@ function showFacility(evt, facilityName) {
   document.getElementById(facilityName).style.display = "block";
   evt.currentTarget.className += " active";
 }
-/*
-function compareMax(){
-  var minVal = document.getElementById("minVal");
-  var maxVal = document.getElementById("maxVal");
 
-  if(parseFloat(minVal.value) >= parseFloat(maxVal.value)){
-    minVal.value = parseFloat(maxVal.value)-1; 
-  }
-
-}
-
-function compareMin(){
-  var minVal = document.getElementById("minVal");
-  var maxVal = document.getElementById("maxVal");
-
-  if(parseFloat(maxVal.value) <= parseFloat(minVal.value)){
-    maxVal.value = parseFloat(minVal.value)+1; 
-  }
-
-}
-*/
 function resetFields(){
-  /*var inps = document.getElementsByTagName("input");
-  var options = document.getElementsByName("selection");
-  for(i=0;i<inps.length;i++){
-    inps[i].value="";
-  }
-  for(i=0;i<options.length;i++){
-    options.checked=false;
-  }*/
   var forms = document.getElementsByTagName("form");
   for(i=0;i<forms.length;i++){
     forms[i].reset();
@@ -87,4 +58,18 @@ function hideOption(radioName, selectName){
   else {
     forms[1].style.display="block";
   }
+}
+function changeChart(chart, configChart, radioButtonName){
+
+  var radiobuttons = document.getElementsByName(radioButtonName);
+  if(radiobuttons[0].checked){
+    configChart.type = "bar";
+  }
+  else if(radiobuttons[1].checked){
+    configChart.type = "line";
+  }
+  else {
+    configChart.type = "bar";
+  }
+  chart.update();
 }

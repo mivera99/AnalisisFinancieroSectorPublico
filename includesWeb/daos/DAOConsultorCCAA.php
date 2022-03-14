@@ -653,7 +653,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         
         $ccaa = new CCAA();
-        $sql = "SELECT DISTINCT(ANHO), MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and PARO IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and PARO IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -661,15 +661,17 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($paro = mysqli_fetch_assoc($result)){
-            array_push($elements2, $paro['ANHO']);
-            array_push($elements2, $paro['MES']/3);
-            array_push($elements2, $paro['PARO']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($paro['ANHO'], $elements)){
+                array_push($elements2, $paro['ANHO']);
+                array_push($elements2, $paro['MES']/3);
+                array_push($elements2, $paro['PARO']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setParo($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -677,15 +679,17 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($pmp = mysqli_fetch_assoc($result)){
-            array_push($elements2, $pmp['ANHO']);
-            array_push($elements2, $pmp['MES']);
-            array_push($elements2, $pmp['PMP']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($pmp['ANHO'], $elements)){
+                array_push($elements2, $pmp['ANHO']);
+                array_push($elements2, $pmp['MES']);
+                array_push($elements2, $pmp['PMP']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setPMP($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -693,15 +697,17 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($rdcpp = mysqli_fetch_assoc($result)){
-            array_push($elements2, $rdcpp['ANHO']);
-            array_push($elements2, $rdcpp['MES']);
-            array_push($elements2, $rdcpp['R_DCPP']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($rdcpp['ANHO'], $elements)){
+                array_push($elements2, $rdcpp['ANHO']);
+                array_push($elements2, $rdcpp['MES']);
+                array_push($elements2, $rdcpp['R_DCPP']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setRDCPP($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -709,15 +715,17 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($deudaviva = mysqli_fetch_assoc($result)){
-            array_push($elements2, $deudaviva['ANHO']);
-            array_push($elements2, $deudaviva['MES']/3);
-            array_push($elements2, $deudaviva['DEUDAVIVA']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($deudaviva['ANHO'], $elements)){
+                array_push($elements2, $deudaviva['ANHO']);
+                array_push($elements2, $deudaviva['MES']/3);
+                array_push($elements2, $deudaviva['DEUDAVIVA']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setDeudaViva($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -725,15 +733,17 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($deudavivaingrcor = mysqli_fetch_assoc($result)){
-            array_push($elements2, $deudavivaingrcor['ANHO']);
-            array_push($elements2, $deudavivaingrcor['MES']/3);
-            array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($deudavivaingrcor['ANHO'], $elements)){
+                array_push($elements2, $deudavivaingrcor['ANHO']);
+                array_push($elements2, $deudavivaingrcor['MES']/3);
+                array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setDeudaVivaIngrCor($elements);
 
-        $sql = "SELECT DISTINCT(ANHO), MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and TRANSAC_INMOBILIARIAS IS NOT NULL ORDER BY ANHO ASC, MES ASC LIMIT 3";
+        $sql = "SELECT DISTINCT(ANHO), MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' and TRANSAC_INMOBILIARIAS IS NOT NULL ORDER BY MES DESC, ANHO ASC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -741,11 +751,13 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($transac = mysqli_fetch_assoc($result)){
-            array_push($elements2, $transac['ANHO']);
-            array_push($elements2, $transac['MES']/3);
-            array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
-            array_push($elements, $elements2);
-            $elements2 = array();
+            if(!$this->in_multi_array($transac['ANHO'], $elements)){
+                array_push($elements2, $transac['ANHO']);
+                array_push($elements2, $transac['MES']/3);
+                array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
+                array_push($elements, $elements2);
+                $elements2 = array();
+            }
         }
         $ccaa->setTransacInmobiliarias($elements);
 
@@ -1304,6 +1316,15 @@ class DAOConsultorCCAA {
         }
 
         return $elements;
+    }
+
+    private function in_multi_array($element, $multiarray) {
+        foreach($multiarray as $array){
+            if (in_array($element, $array)) {
+               return true;
+            }
+         }
+        return false;
     }
 
 }
