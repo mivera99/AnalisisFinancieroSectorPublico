@@ -299,7 +299,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Endeudamiento</th>
+                        <th>
+                            <div class="celda-endeudamiento">
+                                Endeudamiento
+                                <div class="info">
+                                    <img src="info.svg" alt="información" height="14px">
+                                    <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
+                                </div>
+                            </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getEndeudamiento()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getEndeudamiento()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -323,7 +331,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Sostenibilidad Financiera</th>
+                        <th>
+                        <div class="celda-sostenibilidad-financiera">
+                            Sostenibilidad Financiera
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el ahorro sobre ingresos corrientes. Mejor cuanto más alto</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadFinanciera()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadFinanciera()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -345,7 +361,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Apalancamiento Operativo</th>
+                        <th>
+                        <div class="celda-apalancamiento">
+                            Apalancamiento
+                            <div class="info-apalancamiento">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide gastos de difícil ajuste (personal, amortización e intereses) sobre ingresos corrientes</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getApalancamientoOperativo()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getApalancamientoOperativo()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -367,7 +391,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Sostenibilidad de la Deuda</th>
+                        <th>
+                        <div class="celda-sostenibilidad-deuda">
+                            Sostenibilidad de la Deuda
+                            <div class="info-sostenibilidad-deuda">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide la carga financiera entre ingresos corrientes</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getSostenibilidadDeuda()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getSostenibilidadDeuda()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -397,7 +429,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Remanente de Tesorería Gastos Generales</th>
+                        <th>
+                        <div class="celda-remanente">
+                            Remanente de Tesorería Gastos Generales
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el remanente de tesorería entre ingresos corrientes</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -419,7 +459,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Liquidez Inmediata</th>
+                        <th>
+                        <div class="celda-liquidez-inmediata">
+                            Liquidez Inmediata
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide los fondos líquidos entre obligaciones pendientes de pago</span>
+                            </div>
+                        </div>
+                       </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getLiquidezInmediata()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getLiquidezInmediata()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -441,7 +489,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Solvencia Corto Plazo</th>
+                        <th>
+                        <div class="celda-solvencia-corto">
+                            Solvencia Corto Plazo
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide fondos líquidos + derechos pendientes de cobro entre obligaciones pendientes de pago</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -466,7 +522,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Eficiencia</th>
+                        <th>
+                        <div class="celda-eficiencia">
+                            Eficiencia
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide gastos de personal + bienes y servicios entre ingresos corrientes propios recurrentes</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getEficiencia()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getEficiencia()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -494,7 +558,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Ejecución Ingresos corrientes</th>
+                        <th>
+                        <div class="celda-ejecucion-ingresos">
+                            Ejecución Ingresos corrientes
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de derechos reconocidos sobre los ingresos presupuestados</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -516,7 +588,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Ejecución Gastos corrientes</th>
+                        <th>
+                        <div class="celda-ejecucion-gastos">
+                            Ejecución Gastos corrientes
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de obligaciones reconocidas sobre los gastos presupuestados</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -546,7 +626,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Periodo Medio de Pagos</th>
+                        <th>
+                        <div class="celda-pmp">
+                            Periodo Medio de Pagos
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el número de días teórico que se tarda en pagar a terceros</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getPeriodoMedioPagos(), 2, ",",".") . " días";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getPeriodoMedioPagos(), 2, ",",".") . " días";?></td>
                     </tr>
@@ -568,7 +656,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Pagos sobre Obligaciones Reconocidas</th>
+                        <th>
+                        <div class="celda-pagos-obligaciones">
+                            Pagos sobre Obligaciones Reconocidas
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de pagos sobre las obligaciones reconocidas</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%";?></td>
                     </tr>
@@ -598,7 +694,15 @@ if($municipio){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Eficacia Recaudatoria</th>
+                        <th>
+                        <div class="celda-eficacia-recaudatoria">
+                            Eficacia Recaudatoria
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide los ingresos cobrados sobre los ingresos devengados</span>
+                            </div>
+                        </div>
+                        </th>
                         <td style="width:14%"><?php echo number_format($mun2019->getEficaciaRecaudatoria()*100, 2, ",",".") . "%";?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getEficaciaRecaudatoria()*100, 2, ",",".") . "%";?></td>
                     </tr>

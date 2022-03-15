@@ -2,6 +2,7 @@
     font-family: 'Lato', sans-serif;
     margin: 0rem;
     color: #003E99;
+    transition: all .2s ease;
 }
 
 body h1 {
@@ -226,6 +227,117 @@ td, th {
 .ratingCell {
   width:6%;
   text-align: center;
+}
+
+/* BOTÓN INFO*/
+.celda-endeudamiento{
+  display: grid;
+  grid-template-columns: 120px auto auto;
+}
+
+.celda-sostenibilidad-financiera{
+  display: grid;
+  grid-template-columns: 185px auto auto;
+}
+
+.celda-apalancamiento{
+  display: grid;
+  grid-template-columns: 120px auto auto;
+}
+
+.celda-sostenibilidad-deuda{
+  display: grid;
+  grid-template-columns: 190px auto auto;
+}
+
+.celda-remanente{
+  display: grid;
+  grid-template-columns: 310px auto auto;
+}
+
+.celda-liquidez-inmediata{
+  display: grid;
+  grid-template-columns: 140px auto auto;
+}
+
+.celda-solvencia-corto{
+  display: grid;
+  grid-template-columns: 160px auto auto;
+}
+
+.celda-eficiencia{
+  display: grid;
+  grid-template-columns: 75px auto auto;
+}
+
+.celda-ejecucion-ingresos{
+  display: grid;
+  grid-template-columns: 215px auto auto;
+}
+
+.celda-ejecucion-gastos{
+  display: grid;
+  grid-template-columns: 205px auto auto;
+}
+
+.celda-pmp{
+  display: grid;
+  grid-template-columns: 180px auto auto;
+}
+
+.celda-pagos-obligaciones{
+  display: grid;
+  grid-template-columns: 285px auto auto;
+}
+
+.celda-eficacia-recaudatoria{
+  display: grid;
+  grid-template-columns: 165px auto auto;
+}
+
+.extra-info {
+  display: none;
+  font-size: 12px;
+	position: relative;
+  top: -18px;
+  left: 20px;
+  color: white;
+}
+
+.info:hover .extra-info{
+  display: block;
+}
+
+.info-apalancamiento:hover .extra-info{
+  display: block;
+}
+
+.info-sostenibilidad-deuda .extra-info{
+  display: block;
+}
+
+.info, .info-apalancamiento, .info-sostenibilidad-deuda{
+  position:relative;
+  font-size: 20px;
+  padding-left: 5px;
+  height: 25px;
+  width: 600px;
+  border-radius: 15px;
+}
+
+.info-apalancamiento {
+  width: 520px;
+}
+
+.info-sostenibilidad-deuda{
+  width: 300px;
+}
+
+.info:hover, .info-apalancamiento:hover, .info-sostenibilidad-deuda:hover{
+  position:relative;
+  background-color: #003E99;
+  padding: 0 0 0 5px;
+  text-align: left !important;
 }
 
 input::placeholder {
