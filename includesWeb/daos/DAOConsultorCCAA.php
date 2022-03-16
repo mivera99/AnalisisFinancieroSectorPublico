@@ -68,7 +68,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         $ccaa = new CCAA();
         /* INGRESOS */
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR1'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR1' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -79,7 +79,7 @@ class DAOConsultorCCAA {
             $ccaa->setImpuestosDirectos1($impuestos_directos1['DER_REC']);
 
         //Impuestos Indirectos
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR2'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR2' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -90,7 +90,7 @@ class DAOConsultorCCAA {
             $ccaa->setImpuestosIndirectos1($impuestos_indirectos1['DER_REC']);
 
         //Tasas Precios Otros
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR3'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR3' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -101,7 +101,7 @@ class DAOConsultorCCAA {
             $ccaa->setTasasPreciosOtros1($tasas_precios_otros1['DER_REC']);
 
         //Transferencias Corrientes
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR4'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR4' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -112,7 +112,7 @@ class DAOConsultorCCAA {
             $ccaa->setTransferenciasCorrientes1($transferencias_corrientes1['DER_REC']);
 
         //Ingresos Patrimoniales
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR5'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR5' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -123,7 +123,7 @@ class DAOConsultorCCAA {
             $ccaa->setIngresosPatrimoniales1($ingresos_patrimoniales1['DER_REC']);
 
         //Total Ingresos Corrientes
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGRESOS CORRIENTES'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGRESOS CORRIENTES' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -134,7 +134,7 @@ class DAOConsultorCCAA {
             $ccaa->setTotalIngresosCorrientes1($total_ingresos_corrientes['DER_REC']);
 
         //Enajenación de Inversiones Reales
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR6'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR6' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -145,7 +145,7 @@ class DAOConsultorCCAA {
             $ccaa->setEnajenacionInversionesReales1($enajenacion_inversiones_reales1['DER_REC']);
 
         //Transferencias de Capital
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR7'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR7' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -156,7 +156,7 @@ class DAOConsultorCCAA {
             $ccaa->setTransferenciasCapital1($transferencias_capital1['DER_REC']);
 
         //Ingresos No Financieros
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA INGRESOS NO FINANCIEROS'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA INGRESOS NO FINANCIEROS' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -167,7 +167,7 @@ class DAOConsultorCCAA {
             $ccaa->setTotalIngresosNoCorrientes1($total_ingresos_no_corrientes1['DER_REC']);
 
         //Activos Financieros
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR8'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR8' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -178,7 +178,7 @@ class DAOConsultorCCAA {
             $ccaa->setActivosFinancieros1($activos_financieros1['DER_REC']);
 
         //Pasivos Financieros
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR9'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAINGR9' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -190,7 +190,7 @@ class DAOConsultorCCAA {
 
         //TOTAL INGRESOS
 
-        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA INGRESOS TOTALES'";
+        $sql = "SELECT DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA INGRESOS TOTALES' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -208,7 +208,7 @@ class DAOConsultorCCAA {
         $ccaa = new CCAA();
 
         /* GASTOS */
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST1'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST1' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -219,7 +219,7 @@ class DAOConsultorCCAA {
             $ccaa->setGastosPersonal1($gastos_personal1['OBLG_REC']);
 
         //Gastos Corrientes de Bienes y Servicios
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST2'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST2' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -230,7 +230,7 @@ class DAOConsultorCCAA {
             $ccaa->setGastosCorrientesBienesServicios1($gastos_corrientes_bienes_servicios1['OBLG_REC']);
 
         //Gastos Financieros
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST3'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST3' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -241,7 +241,7 @@ class DAOConsultorCCAA {
             $ccaa->setGastosFinancieros1($gastos_financieros1['OBLG_REC']);
 
         //Transferencias Corrientes
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST4'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST4' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -252,7 +252,7 @@ class DAOConsultorCCAA {
             $ccaa->setTransferenciasCorrientesGastos1($transferencias_corrientes_gastos1['OBLG_REC']);
 
         //Fondo Contingencia
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST5'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST5' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -268,7 +268,7 @@ class DAOConsultorCCAA {
             $ccaa->setTotalGastosCorrientes1($total_gastos_corrientes1);
         }
         //Inversiones Reales
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST6'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST6' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -279,7 +279,7 @@ class DAOConsultorCCAA {
             $ccaa->setInversionesReales1($inversiones_reales1['OBLG_REC']);
 
         //Transferencias de Capital
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST7'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST7' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -290,7 +290,7 @@ class DAOConsultorCCAA {
             $ccaa->setTransferenciasCapitalGastos1($transferencias_capital_gastos1['OBLG_REC']);
 
         //Gastos No Financieros
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGASTOS NO FINANCIEROS'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGASTOS NO FINANCIEROS' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -301,7 +301,7 @@ class DAOConsultorCCAA {
             $ccaa->setTotalGastosNoFinancieros1($total_gastos_no_financieros1['OBLG_REC']);
 
         //Activos Financieros
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST8'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST8' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -312,7 +312,7 @@ class DAOConsultorCCAA {
             $ccaa->setActivosFinancierosGastos1($activos_financieros_gastos1['OBLG_REC']);
 
         //Pasivos Financieros
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST9'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDAGAST9' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -324,7 +324,7 @@ class DAOConsultorCCAA {
 
         //TOTAL GASTOS
 
-        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA GASTOS TOTALES'";
+        $sql = "SELECT OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND ANHO = '$year' AND TIPO = 'PARTIDA GASTOS TOTALES' LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -457,9 +457,6 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
-
-
-    
     public function getRatingCCAA($codigo){
         $db = getConexionBD();
         $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO ASC";
@@ -768,7 +765,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         $ccaa = new CCAA();
         /* INGRESOS */
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR1' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR1' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -782,7 +779,7 @@ class DAOConsultorCCAA {
         $ccaa->setImpuestosDirectos1($elements);
         
         //Impuestos Indirectos
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR2' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR2' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -796,7 +793,7 @@ class DAOConsultorCCAA {
         $ccaa->setImpuestosIndirectos1($elements);
         
         //Tasas Precios Otros
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR3' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR3' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -810,7 +807,7 @@ class DAOConsultorCCAA {
         $ccaa->setTasasPreciosOtros1($elements);
         
         //Transferencias Corrientes
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR4' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR4' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -824,7 +821,7 @@ class DAOConsultorCCAA {
         $ccaa->setTransferenciasCorrientes1($elements);
         
         //Ingresos Patrimoniales
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR5' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR5' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -838,7 +835,7 @@ class DAOConsultorCCAA {
         $ccaa->setIngresosPatrimoniales1($elements);
         
         //Total Ingresos Corrientes
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGRESOS CORRIENTES' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGRESOS CORRIENTES' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -852,7 +849,7 @@ class DAOConsultorCCAA {
         $ccaa->setTotalIngresosCorrientes1($elements);
         
         //Enajenación de Inversiones Reales
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR6' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR6' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -866,7 +863,7 @@ class DAOConsultorCCAA {
         $ccaa->setEnajenacionInversionesReales1($elements);
         
         //Transferencias de Capital
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR7' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR7' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -880,7 +877,7 @@ class DAOConsultorCCAA {
         $ccaa->setTransferenciasCapital1($elements);
 
         //Ingresos No Financieros
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS NO FINANCIEROS' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS NO FINANCIEROS' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -894,7 +891,7 @@ class DAOConsultorCCAA {
         $ccaa->setTotalIngresosNoCorrientes1($elements);
 
         //Activos Financieros
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR8' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR8' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -908,7 +905,7 @@ class DAOConsultorCCAA {
         $ccaa->setActivosFinancieros1($elements);
 
         //Pasivos Financieros
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR9' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAINGR9' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -923,7 +920,7 @@ class DAOConsultorCCAA {
 
         //TOTAL INGRESOS
 
-        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS TOTALES' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, DER_REC FROM cuentas_ccaa_ingresos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA INGRESOS TOTALES' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -944,7 +941,7 @@ class DAOConsultorCCAA {
         $ccaa = new CCAA();
 
         /* GASTOS */
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST1' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST1' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -958,7 +955,7 @@ class DAOConsultorCCAA {
         $ccaa->setGastosPersonal1($elements);
         
         //Gastos Corrientes de Bienes y Servicios
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST2' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST2' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -972,7 +969,7 @@ class DAOConsultorCCAA {
         $ccaa->setGastosCorrientesBienesServicios1($elements);
         
         //Gastos Financieros
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST3' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST3' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -986,7 +983,7 @@ class DAOConsultorCCAA {
         $ccaa->setGastosFinancieros1($elements);
         
         //Transferencias Corrientes
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST4' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST4' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1000,7 +997,7 @@ class DAOConsultorCCAA {
         $ccaa->setTransferenciasCorrientesGastos1($elements);
         
         //Fondo Contingencia
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST5' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST5' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1027,7 +1024,7 @@ class DAOConsultorCCAA {
         $ccaa->setTotalGastosCorrientes1($elements);
 
         //Inversiones Reales
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST6' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST6' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1041,7 +1038,7 @@ class DAOConsultorCCAA {
         $ccaa->setInversionesReales1($elements);
         
         //Transferencias de Capital
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST7' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST7' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1055,7 +1052,7 @@ class DAOConsultorCCAA {
         $ccaa->setTransferenciasCapitalGastos1($elements);
         
         //Gastos No Financieros
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGASTOS NO FINANCIEROS' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGASTOS NO FINANCIEROS' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1069,7 +1066,7 @@ class DAOConsultorCCAA {
         $ccaa->setTotalGastosNoFinancieros1($elements);
         
         //Activos Financieros
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST8' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST8' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1083,7 +1080,7 @@ class DAOConsultorCCAA {
         $ccaa->setActivosFinancierosGastos1($elements);
         
         //Pasivos Financieros
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST9' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDAGAST9' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1098,7 +1095,7 @@ class DAOConsultorCCAA {
         
         //TOTAL GASTOS
 
-        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA GASTOS TOTALES' ORDER BY ANHO ASC";
+        $sql = "SELECT ANHO, OBLG_REC FROM cuentas_ccaa_gastos WHERE CODIGO = '$codigo' AND TIPO = 'PARTIDA GASTOS TOTALES' ORDER BY ANHO DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         if(!$result){
             return false;
@@ -1200,6 +1197,31 @@ class DAOConsultorCCAA {
             $returning_values = $returning_values.",scoring_ccaa.POBLACION";
             //if(!strpos($order_by, 'scoring_ccaa.ANHO DESC, ')) $order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
             //if(!strpos($group_by, 'scoring_ccaa.ANHO, ')) $order_by = $order_by . "scoring_ccaa.ANHO, ";
+        }
+
+        if(!empty($endeudamiento)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
+            }
+            if($endeudamiento=='tramo1'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) BETWEEN 0 AND 20 ";
+            }
+            else if($endeudamiento=='tramo2'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) BETWEEN 20 AND 40 ";
+            }
+            else if($endeudamiento=='tramo3'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) BETWEEN 40 AND 80 ";
+            }
+            else if($endeudamiento=='tramo4'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) BETWEEN 80 AND 120 ";
+            }
+            else if($endeudamiento=='tramo5'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) > 120 ";
+            }
+            if(!strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            $returning_values = $returning_values.",cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
+            
         }
         
         if(!empty($ahorro_neto)){
@@ -1382,6 +1404,7 @@ class DAOConsultorCCAA {
             $ccaa->setNombre($resultado['NOMBRE']);
             if(!empty($resultado['RATING'])) $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['POBLACION']);
+            if(!empty($resultado['DEUDA_VIVA_INGR_COR']))$ccaa->setDeudaVivaIngrCor($resultado['DEUDA_VIVA_INGR_COR']);
             if(!empty($resultado['R_SOSTE_FINANCIERA']))$ccaa->setRSosteFinanciera($resultado['R_SOSTE_FINANCIERA']);
             if(!empty($resultado['PMP']))$ccaa->setPMP($resultado['PMP']);
             if(!empty($resultado['R_DCPP']))$ccaa->setRDCPP($resultado['R_DCPP']);

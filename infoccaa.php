@@ -96,43 +96,43 @@ if($ccaa && $ccaaNac){
     $datosIngresosCor = array();
     $etiquetasIngresosCor = array();
     foreach($ccaa->getTotalIngresosCorrientes1() as $clave=>$valor){
-        array_push($etiquetasIngresosCor, $clave);
-        array_push($datosIngresosCor, $valor);
+        array_unshift($etiquetasIngresosCor, $clave);
+        array_unshift($datosIngresosCor, $valor);
     }
     /*Ingresos no financieros CCAA*/
     $datosIngresosNoFinancieros = array();
     $etiquetasIngresosNoFinancieros = array();
     foreach($ccaa->getTotalIngresosNoCorrientes1() as $clave=>$valor){
-        array_push($etiquetasIngresosNoFinancieros, $clave);
-        array_push($datosIngresosNoFinancieros, $valor);
+        array_unshift($etiquetasIngresosNoFinancieros, $clave);
+        array_unshift($datosIngresosNoFinancieros, $valor);
     }
     /*Dato ingreso no financiero per cápita*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
     foreach($ccaa->getTotalIngresos1() as $clave=>$valor){
-        array_push($etiquetasIngresosTotales, $clave);
-        array_push($datosIngresosTotales, $valor);
+        array_unshift($etiquetasIngresosTotales, $clave);
+        array_unshift($datosIngresosTotales, $valor);
     }
     /*Gastos corrientes CCAA */
     $datosGastosCor = array();
     $etiquetasGastosCor = array();
     foreach($ccaa->getTotalGastosCorrientes1() as $clave=>$valor){
-        array_push($etiquetasGastosCor, $clave);
-        array_push($datosGastosCor, $valor);
+        array_unshift($etiquetasGastosCor, $clave);
+        array_unshift($datosGastosCor, $valor);
     }
     /*Gastos no financieros CCAA*/
     $datosGastosNoFinancieros = array();
     $etiquetasGastosNoFinancieros = array();
     foreach($ccaa->getTotalGastosNoFinancieros1() as $clave=>$valor){
-        array_push($etiquetasGastosNoFinancieros, $clave);
-        array_push($datosGastosNoFinancieros, $valor);
+        array_unshift($etiquetasGastosNoFinancieros, $clave);
+        array_unshift($datosGastosNoFinancieros, $valor);
     }
     /*Dato gasto no financiero per cápita*/
     $datosGastosFinancieros = array();
     $etiquetasGastosFinancieros = array();
     foreach($ccaa->getTotalGastos1() as $clave=>$valor){
-        array_push($etiquetasGastosFinancieros, $clave);
-        array_push($datosGastosFinancieros, $valor);
+        array_unshift($etiquetasGastosFinancieros, $clave);
+        array_unshift($datosGastosFinancieros, $valor);
     }
     /*Ahorro Neto*/
     $datos = array();

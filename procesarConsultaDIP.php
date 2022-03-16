@@ -85,14 +85,6 @@ if(!empty($_REQUEST['autonomiasDIP']) && $_REQUEST['autonomiasDIP']!='inicio'){
     $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasDIP'])));
 }*/
 
-/*echo '<p>Scoring: '.$scoring.'</p><br>';
-echo '<p>Año: '.$anho.'</p><br>';
-echo '<p>From: '.$from.'</p><br>';
-echo '<p>To: '.$to.'</p><br>';*/
-/*echo '<p>'.$scoring.'</p><br>';
-echo '<p>'.$scoring.'</p><br>';
-echo '<p>'.$scoring.'</p><br>';*/
-
 $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto);
 ?>
 <!DOCTYPE html>
@@ -139,35 +131,42 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
             $year = key($dips[$i]);
             echo '<tr>';
             echo '<td></td>';
-            echo '<td></td>';
-            //if(!empty($dips[$i][$year]->getPoblacion())) echo '<td class="ratingCell">Población</td>';
-            if(!empty($dips[$i][$year]->getScoring())) echo '<td class="ratingCell">Scoring</td>';
-            if(!empty($dips[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">Endeudamiento</td>';
-            if(!empty($dips[$i][$year]->getPeriodoMedioPagos())) echo '<td class="ratingCell">PMP</td>';
-            if(!empty($dips[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
-            if(!empty($dips[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">Fondos líquidos</td>';
-            if(!empty($dips[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">Gastos de personal</td>';
-            if(!empty($dips[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
-            if(!empty($dips[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">Gastos financieros</td>';
-            if(!empty($dips[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">Inversiones</td>';
+            echo '<td>Nombre</td>';
+            if(!empty($scoring)) echo '<td class="ratingCell">Scoring</td>';
+            if(!empty($autonomia)) echo '<td class="ratingCell">Comunidad Autónoma</td>';
+            if(!empty($endeudamiento)) echo '<td class="ratingCell">Endeudamiento</td>';
+            if(!empty($ahorro_neto)) echo '<td class="ratingCell">Ahorro neto</td>';
+            if(!empty($fondliq)) echo '<td class="ratingCell">Fondos líquidos</td>';
+            if(!empty($pmp)) echo '<td class="ratingCell">PMP</td>';
+            if(!empty($ingrnofin)) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+            if(!empty($gasto) && $_REQUEST['gastoDIP']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
+            if(!empty($gasto) && $_REQUEST['gastoDIP']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
+            if(!empty($gasto) && $_REQUEST['gastoDIP']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
+            if(!empty($gasto) && $_REQUEST['gastoDIP']=='inversiones') echo '<td class="ratingCell">Inversiones</td>';
             echo '</tr>';
             while($i < count($dips) && $year==key($dips[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
-                echo '<td>Nombre: '.$dips[$i][$year]->getNombre().'</td>';
-                //if(!empty($dips[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getPoblacion(), 0, '','.').'</td>';
+                echo '<td>'.$dips[$i][$year]->getNombre().'</td>';
                 if(!empty($dips[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
-                if(!empty($dips[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($dips[$i][$year]->getEndeudamiento()*100).'%</td>';
-                if(!empty($dips[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">'.($dips[$i][$year]->getSostenibilidadFinanciera()*100).'%</td>';
-                if(!empty($dips[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getLiquidezInmediata(), 0, '','.').'€</td>';
+                else if(!empty($scoring)) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.$dips[$i][$year]->getAutonomia().'</td>';
+                else if(!empty($autonomia)) echo '<td class="ratingCell">N/A</td>';
+                if(!empty($dips[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($dips[$i][$year]->getEndeudamiento()*100).'%</td>';
+                else if(!empty($endeudamiento)) echo '<td class="ratingCell">N/A</td>';
+                if(!empty($dips[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">'.($dips[$i][$year]->getSostenibilidadFinanciera()*100).'%</td>';
+                else if(!empty($ahorro_neto)) echo '<td class="ratingCell">N/A</td>';
+                if(!empty($dips[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getLiquidezInmediata(), 0, '','.').'€</td>';
+                else if(!empty($fondliq)) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getPeriodoMedioPagos())) echo '<td class="ratingCell">'.($dips[$i][$year]->getPeriodoMedioPagos()).' días</td>';
+                else if(!empty($pmp)) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
+                else if(!empty($ingrnofin)) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
-                if(!empty($dips[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
-                if(!empty($dips[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
-                if(!empty($dips[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
-                
+                else if(!empty($dips[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
+                else if(!empty($dips[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
+                else if(!empty($dips[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($dips[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
+                else if(!empty($gasto)) echo '<td class="ratingCell">N/A</td>';
                 echo '</tr>';
                 $i+=1;
             }
