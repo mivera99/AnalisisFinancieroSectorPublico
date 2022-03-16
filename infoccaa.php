@@ -8,6 +8,8 @@ $daoccaa = new DAOConsultor();
 $ccaa = $daoccaa->getCCAA($nombre);
 $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
+setcookie("ccaa", $nombre);
+
 $encontrado = false;
 if($ccaa && $ccaaNac){
     $encontrado = true;
@@ -286,6 +288,11 @@ if($ccaa && $ccaaNac){
                     echo '<h2>Rating '.$clave.'</h2>';
                     echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.($ccaa->getTendencia())[$clave].'</p>';
                 }
+            ?>
+                <br>
+                <button type="button" id="verPDFCCAA" onclick="window.open('pdfCCAA.php','_blank')">Ver Informe</button>
+            <?php
+
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';
                 echo '<p><b>Presidente de la comunidad: </b>'.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
