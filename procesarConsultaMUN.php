@@ -8,6 +8,9 @@ $endeudamiento = NULL;
 $ahorro_neto = NULL;
 $fondliq = NULL;
 $anho = NULL;
+$pmp=NULL;
+$ingrnofin=NULL;
+$gasto=NULL;
 
 $choice = NULL;
 $from=NULL;
@@ -33,6 +36,18 @@ if(!empty($_REQUEST['ahorro_netoMUN']) && $_REQUEST['ahorro_netoMUN']!='inicio')
 
 if(!empty($_REQUEST['fondliqMUN']) && $_REQUEST['fondliqMUN']!='inicio'){
     $fondliq = htmlspecialchars(trim(strip_tags($_REQUEST['fondliqMUN'])));
+}
+
+if(!empty($_REQUEST['pmpMUN']) && $_REQUEST['pmpMUN']!='inicio'){
+    $pmp = htmlspecialchars(trim(strip_tags($_REQUEST['pmpMUN'])));
+}
+
+if(!empty($_REQUEST['ingrnofinMUN']) && $_REQUEST['ingrnofinMUN']!='inicio'){
+    $ingrnofin = htmlspecialchars(trim(strip_tags($_REQUEST['ingrnofinMUN'])));
+}
+
+if(!empty($_REQUEST['gastoMUN']) && $_REQUEST['gastoMUN']!='inicio'){
+    $gasto = htmlspecialchars(trim(strip_tags($_REQUEST['gastoMUN'])));
 }
 
 if(isset($_REQUEST['selectionMUN'])){
@@ -70,13 +85,7 @@ if(!empty($_REQUEST['provinciasMUN']) && $_REQUEST['provinciasMUN']!='inicio'){
     $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasMUN'])));
 }
 
-/*echo '<p>Scoring: '.$scoring.'</p><br>';
-echo '<p>Año: '.$anho.'</p><br>';
-echo '<p>From: '.$from.'</p><br>';
-echo '<p>To: '.$to.'</p><br>';
-echo '<p>Endeudamiento: '.$endeudamiento.'</p><br>';
-*/
-$muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
+$muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -120,6 +129,20 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
             echo '<h2>'.key($muns[$i]).'</h2>';
             echo '<table>';
             $year = key($muns[$i]);
+            echo '<tr>';
+            echo '<td></td>';
+            echo '<td></td>';
+            if(!empty($muns[$i][$year]->getPoblacion())) echo '<td class="ratingCell">Población</td>';
+            if(!empty($muns[$i][$year]->getScoring())) echo '<td class="ratingCell">Scoring</td>';
+            if(!empty($muns[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">Endeudamiento</td>';
+            if(!empty($muns[$i][$year]->getPeriodoMedioPagos())) echo '<td class="ratingCell">PMP</td>';
+            if(!empty($muns[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+            if(!empty($muns[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">Fondos líquidos</td>';
+            if(!empty($muns[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">Gastos de personal</td>';
+            if(!empty($muns[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
+            if(!empty($muns[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">Gastos financieros</td>';
+            if(!empty($muns[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">Inversiones</td>';
+            echo '</tr>';
             while($i < count($muns) && $year==key($muns[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
@@ -131,6 +154,13 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                 if(!empty($muns[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getLiquidezInmediata(), 0, '','.').'</td>';
                 if(!empty($muns[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getAutonomia()).'</td>';
                 if(!empty($muns[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getProvincia()).'</td>';
+                if(!empty($muns[$i][$year]->getPeriodoMedioPagos())) echo '<td class="ratingCell">'.($muns[$i][$year]->getPeriodoMedioPagos()).' días</td>';
+                if(!empty($muns[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
+                if(!empty($muns[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
+                if(!empty($muns[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
+                if(!empty($muns[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
+                if(!empty($muns[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
+                
                 echo '</tr>';
                 $i+=1;
             }

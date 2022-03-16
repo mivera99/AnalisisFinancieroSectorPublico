@@ -611,15 +611,16 @@ class DAOConsultorMunicipio{
     }
 
     /* Función para la página de consultas */
-    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto){
         $db = getConexionBD();
         $conditions = "";
         $returning_values="";
+        $joins="";
+        $having="";
 
         if(!empty($scoring)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
-                //$returning_values = $returning_values.",";
             }
             $conditions = $conditions."scoring_mun.RATING = '$scoring' ";
             $returning_values = $returning_values.",scoring_mun.RATING";
@@ -707,7 +708,6 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions."(scoring_mun.R2*100) > 50 ";
             }
             $returning_values = $returning_values.",scoring_mun.R2";
-
         }
         
         if(!empty($fondliq)){
@@ -727,6 +727,75 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) > 50000000 ";
             }
             $returning_values = $returning_values.",deudas_mun.FONDLIQUIDOS";
+            if(!strpos($joins, 'INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ";
+        }
+
+        if(!empty($pmp)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_mun_general_pmp.ANHO = scoring_mun.ANHO AND ";
+            }
+            if($pmp=='tramo1'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 0 AND 10 ";
+            }
+            else if($pmp=='tramo2'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 10 AND 20 ";
+            }
+            else if($pmp=='tramo3'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 20 AND 30 ";
+            }
+            else if($pmp=='tramo4'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 30 AND 40 ";
+            }
+            else if($pmp=='tramo5'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 40 AND 50 ";
+            }
+            else if($pmp=='tramo6'){
+                $conditions = $conditions."(cuentas_mun_pmp.PMP) > 50 ";
+            }
+            if(!strpos($returning_values, ', MAX(cuentas_mun_pmp.TRIMESTRE) as MAX_TRIMESTRE ')) $returning_values = $returning_values . ", MAX(cuentas_mun_pmp.TRIMESTRE)";
+            $returning_values = $returning_values.",cuentas_mun_pmp.PMP";
+            if(!strpos($joins, 'INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ";
+        }
+
+        if(!empty($ingrnofin)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_mun_ingresos.ANHO = scoring_mun.ANHO AND ";
+            }
+            $conditions = $conditions."cuentas_mun_ingresos.TIPO='PARTIDAINGR1' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR2' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR3' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR4' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR5' ";
+            if($ingrnofin=='tramo1'){
+                $having = $having."SUMA_INGR BETWEEN 0 AND 1000000 ";
+            }
+            else if($ingrnofin=='tramo2'){
+                $having = $having."SUMA_INGR BETWEEN 1000000 AND 5000000 ";
+            }
+            else if($ingrnofin=='tramo3'){
+                $having = $having."SUMA_INGR BETWEEN 5000000 AND 50000000 ";
+            }
+            else if($ingrnofin=='tramo4'){
+                $having = $having."SUMA_INGR > 50000000 ";
+            }
+            $returning_values = $returning_values.",SUM(cuentas_mun_ingresos.DERE) AS SUMA_INGR";
+            if(!strpos($joins, 'INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ";
+        }
+        
+        if(!empty($gasto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_mun_gastos.ANHO = scoring_mun.ANHO AND ";
+            }
+            if($gasto=='personal'){
+                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST1' ";
+            }
+            else if($gasto=='bienesservicios'){
+                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST2' ";
+            }
+            else if($gasto=='financieros'){
+                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST3' ";
+            }
+            else if($gasto=='inversiones'){
+                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST6' ";
+            }
+            $returning_values = $returning_values.",cuentas_mun_gastos.TIPO, cuentas_mun_gastos.OBLG";
+            if(!strpos($joins, 'INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO ";
         }
 
         if(!empty($choice)){
@@ -781,10 +850,16 @@ class DAOConsultorMunicipio{
         if($conditions!=""){
             $conditions =" WHERE ".$conditions;
         }
+        
+        if($having!=""){
+            $having =" HAVING ".$having;
+        }
 
         //$sql = "SELECT DEUDAFIN FROM deudas_mun WHERE CODIGO = '$codigo' AND ANHO = '$year'";
-        $sql = "SELECT DISTINCT(municipios.CODIGO), municipios.NOMBRE, scoring_mun.ANHO $returning_values FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO INNER JOIN deudas_mun ON deudas_mun.CODIGO = municipios.CODIGO $conditions ORDER BY scoring_mun.ANHO DESC, municipios.CODIGO ASC";
+        //$sql = "SELECT DISTINCT(municipios.CODIGO), municipios.NOMBRE, scoring_mun.ANHO $returning_values FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO INNER JOIN deudas_mun ON deudas_mun.CODIGO = municipios.CODIGO $conditions ORDER BY scoring_mun.ANHO DESC, municipios.CODIGO ASC";
+        $sql = "SELECT municipios.CODIGO, municipios.NOMBRE, scoring_mun.ANHO $returning_values FROM municipios INNER JOIN scoring_mun ON municipios.CODIGO = scoring_mun.CODIGO $joins $conditions GROUP BY municipios.CODIGO, scoring_mun.ANHO $having ORDER BY scoring_mun.ANHO DESC, municipios.CODIGO ASC";
         //echo $sql;
+        //$elements=array();
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -795,12 +870,18 @@ class DAOConsultorMunicipio{
             $mun = new Municipio();
             $mun->setNombre($resultado['NOMBRE']);
             if(!empty($resultado['RATING'])) $mun->setScoring($resultado['RATING']);
-            //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['POBLACION']))$mun->setPoblacion($resultado['POBLACION']);
-            //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['R1']))$mun->setEndeudamiento($resultado['R1']);
             if(!empty($resultado['R2']))$mun->setSostenibilidadFinanciera($resultado['R2']);
             if(!empty($resultado['FONDLIQUIDOS']))$mun->setLiquidezInmediata($resultado['FONDLIQUIDOS']);
+            if(!empty($resultado['PMP']))$mun->setPeriodoMedioPagos($resultado['PMP']);
+            if(!empty($resultado['SUMA_INGR']))$mun->setTotalIngresosNoCorrientes1($resultado['SUMA_INGR']);
+            if(!empty($resultado['OBLG'])) {
+                if($resultado['TIPO']=='PARTIDAGAST1') $mun->setGastosPersonal1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST2') $mun->setGastosCorrientesBienesServicios1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST3') $mun->setTransferenciasCorrientesGastos1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST6') $mun->setInversionesReales1($resultado['OBLG']);
+            }
             if(!empty($resultado['AUTONOMIA'])) {    
                 $ccaaCode = $resultado['AUTONOMIA'];
                 $sql = "SELECT NOMBRE FROM ccaas WHERE CODIGO = '$ccaaCode'";
@@ -812,9 +893,6 @@ class DAOConsultorMunicipio{
                 $mun->setAutonomia($autonomia['NOMBRE']);
             }
             if(!empty($resultado['PROVINCIA'])) $mun->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
-            //if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['R_SOSTE_FINANCIERA']);
-            //$ccaa->setPoblacion($resultado['POBLACION']);
-            //array_push($elements, $ccaa);
             $elements2[$resultado['ANHO']]=$mun;
             array_push($elements, $elements2);
         }

@@ -6,8 +6,11 @@ $scoring = NULL;
 $poblacion = NULL;
 $endeudamiento = NULL;
 $ahorro_neto = NULL;
-$fondliq = NULL;
+$pmp = NULL;
 $anho = NULL;
+$dcpp = NULL;
+$ingrnofin = NULL;
+$gasto = NULL;
 
 $choice = NULL;
 $from=NULL;
@@ -29,8 +32,20 @@ if(!empty($_REQUEST['ahorro_netoCCAA']) && $_REQUEST['ahorro_netoCCAA']!='inicio
     $ahorro_neto = htmlspecialchars(trim(strip_tags($_REQUEST['ahorro_netoCCAA'])));
 }
 
-if(!empty($_REQUEST['fondliqCCAA']) && $_REQUEST['fondliqCCAA']!='inicio'){
-    $fondliq = htmlspecialchars(trim(strip_tags($_REQUEST['fondliqCCAA'])));
+if(!empty($_REQUEST['pmpCCAA']) && $_REQUEST['pmpCCAA']!='inicio'){
+    $pmp = htmlspecialchars(trim(strip_tags($_REQUEST['pmpCCAA'])));
+}
+
+if(!empty($_REQUEST['dcppCCAA']) && $_REQUEST['dcppCCAA']!='inicio'){
+    $dcpp = htmlspecialchars(trim(strip_tags($_REQUEST['dcppCCAA'])));
+}
+
+if(!empty($_REQUEST['ingrnofinCCAA']) && $_REQUEST['ingrnofinCCAA']!='inicio'){
+    $ingrnofin = htmlspecialchars(trim(strip_tags($_REQUEST['ingrnofinCCAA'])));
+}
+
+if(!empty($_REQUEST['gastoCCAA']) && $_REQUEST['gastoCCAA']!='inicio'){
+    $gasto = htmlspecialchars(trim(strip_tags($_REQUEST['gastoCCAA'])));
 }
 
 if(isset($_REQUEST['selection'])){
@@ -55,12 +70,11 @@ if(isset($_REQUEST['selection'])){
                 $to = htmlspecialchars(trim(strip_tags($_REQUEST['to'])));
             }
             //echo '<p>valor de to: '.$to.'</p><br>';
-        
         }
     }
 }
 
-$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
+$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,14 +90,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    
-    <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
-    <script src="functions.js"></script>
 
-    <script src="node_modules/chart.js/dist/chart.js"></script>
-
-    <!-- ====== FUNCIÓN PARA MOSTRAR LA CONTRASEÑA SI PULSAMOS UN BOTÓN ==== -->
-    <script src="functions2.js"></script>
     <title>Análisis Financiero Sector Público - Consulta CCAAs</title>
 </head>
 <body>
@@ -104,6 +111,20 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
             echo '<h2>'.key($ccaas[$i]).'</h2>';
             echo '<table>';
             $year = key($ccaas[$i]);
+            echo '<tr>';
+            echo '<td></td>';
+            echo '<td></td>';
+            if(!empty($ccaas[$i][$year]->getPoblacion())) echo '<td class="ratingCell">Población</td>';
+            if(!empty($ccaas[$i][$year]->getScoring())) echo '<td class="ratingCell">Scoring</td>';
+            if(!empty($ccaas[$i][$year]->getRSosteFinanciera())) echo '<td class="ratingCell">Endeudamiento</td>';
+            if(!empty($ccaas[$i][$year]->getPMP())) echo '<td class="ratingCell">PMP</td>';
+            if(!empty($ccaas[$i][$year]->getRDCPP())) echo '<td class="ratingCell">Deuda comercial pendiente de pago</td>';
+            if(!empty($ccaas[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+            if(!empty($ccaas[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">Gastos de personal</td>';
+            if(!empty($ccaas[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
+            if(!empty($ccaas[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">Gastos financieros</td>';
+            if(!empty($ccaas[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">Inversiones</td>';
+            echo '</tr>';
             while($i < count($ccaas) && $year==key($ccaas[$i])){
                 echo '<tr>';
                 echo '<td>'.($i+1).'</td>';
@@ -111,6 +132,13 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
                 if(!empty($ccaas[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getPoblacion(), 0, '','.').'</td>';
                 if(!empty($ccaas[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$ccaas[$i][$year]->getScoring().'</td>';
                 if(!empty($ccaas[$i][$year]->getRSosteFinanciera())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getRSosteFinanciera()*100).'%</td>';
+                if(!empty($ccaas[$i][$year]->getPMP())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getPMP()).' días</td>';
+                if(!empty($ccaas[$i][$year]->getRDCPP())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getRDCPP()*100).'%</td>';
+                if(!empty($ccaas[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
                 echo '</tr>';
                 $i+=1;
             }

@@ -128,13 +128,41 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo4">20% - 50%</option>
                             <option value="tramo5">> 50%</option>
                         </select>
-                        <p>Fondos líquidos</p>
-                        <select name="fondliqCCAA">
+                        <p>PMP</p>
+                        <select name="pmpCCAA">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0 - 10 días</option>
+                            <option value="tramo2">10 - 20 días</option>
+                            <option value="tramo3">20 - 30 días</option>
+                            <option value="tramo4">30 - 40 días</option>
+                            <option value="tramo5">40 - 50 días</option>
+                            <option value="tramo6">> 50 días</option>
+                        </select>
+                        <p>Deuda comercial pendiente de pago</p>
+                        <select name="dcppCCAA">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0% - 4%</option>
+                            <option value="tramo2">4% - 8%</option>
+                            <option value="tramo3">8% - 12%</option>
+                            <option value="tramo4">12% - 16%</option>
+                            <option value="tramo5">16% - 20%</option>
+                            <option value="tramo6">> 20%</option>
+                        </select>
+                        <p>Nivel de ingresos no financieros</p>
+                        <select name="ingrnofinCCAA">
                             <option value="inicio" selected>Seleccione un tramo</option>
                             <option value="tramo1">0 - 1M</option>
                             <option value="tramo2">1M - 5M</option>
                             <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">< 50M</option>
+                            <option value="tramo4">> 50M</option>
+                        </select>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoCCAA">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
                         </select>
                         <br>
                         <button type="submit" class="form-button">Consultar</button>
@@ -186,17 +214,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             </select>
                             </p>
                         </div>
-                        <!--<p>Año</p>
-                        <select name="anhoDIP">
-                            <option value="inicio" selected>Seleccione un año</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                        </select>-->
-                        <p>Scoring </p><!--<input type="text" maxlength="1" name="scoringDIP"/>-->
+                        <p>Scoring </p>
                         <select name="scoringDIP">
                             <option value="inicio" selected>Seleccione un rating</option>
                             <option value="A">A</option>
@@ -206,17 +224,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="E">E</option>
                             <option value="F">F</option>
                         </select>
-                        <!--<p>Cantidad mínima <input type="number" id="minVal" name="min" min="0" onchange="compareMin()"/> Cantidad máxima<input type="number" id="maxVal" name="max" min="1" onchange="compareMax()"/></p>-->
-                        <p>Provincia</p>
-                        <select name="provinciasDIP">
-                            <option value="inicio" selected>Seleccione una provincia</option>
-                            <?php
-                            foreach($provCombobox as $prov){
-                                echo '<option value="'.$prov->getCodigo().'">'.$prov->getNombre().'</option>';
-                            }
-                            ?>
-                        </select>
-                        <p>Autonomía</p>
+                        <p>Comunidad Autónoma</p>
                         <select name="autonomiasDIP">
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
@@ -249,7 +257,33 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo1">0 - 1M</option>
                             <option value="tramo2">1M - 5M</option>
                             <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">< 50M</option>
+                            <option value="tramo4">> 50M</option>
+                        </select>
+                        <p>PMP</p>
+                        <select name="pmpDIP">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0 - 10 días</option>
+                            <option value="tramo2">10 - 20 días</option>
+                            <option value="tramo3">20 - 30 días</option>
+                            <option value="tramo4">30 - 40 días</option>
+                            <option value="tramo5">40 - 50 días</option>
+                            <option value="tramo6">> 50 días</option>
+                        </select>
+                        <p>Ingresos no financieros</p>
+                        <select name="ingrnofinDIP">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0 - 1M</option>
+                            <option value="tramo2">1M - 5M</option>
+                            <option value="tramo3">5M - 50M</option>
+                            <option value="tramo4">> 50M</option>
+                        </select>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoDIP">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
                         </select>
                         <br>
                         <button type="submit" class="form-button">Consultar</button>
@@ -301,17 +335,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             </select>
                             </p>
                         </div>
-                        <!--<p>Año</p>
-                        <select name="anhoMUN">
-                            <option value="inicio" selected>Seleccione un año</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                        </select>-->
-                        <p>Scoring </p><!--<input type="text" maxlength="1" name="scoringMUN"/>-->
+                        <p>Scoring </p>
                         <select name="scoringMUN">
                             <option value="inicio" selected>Seleccione un rating</option>
                             <option value="A">A</option>
@@ -321,7 +345,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="E">E</option>
                             <option value="F">F</option>
                         </select>
-                        <p>Población</p> <!--</p><input type='number' min="1" name="poblacionMUN">-->
+                        <p>Población</p>
                         <select name="poblacionMUN">
                             <option value="inicio" selected>Seleccione un tramo de población</option>
                             <option value="tramo1">0 - 100</option>
@@ -345,7 +369,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             }
                             ?>
                         </select>
-                        <p>Autonomía</p>
+                        <p>Comunidad Autónoma</p>
                         <select name="autonomiasMUN">
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
@@ -354,7 +378,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             }
                             ?>
                         </select>
-                        <!--<p>Cantidad mínima <input type="number" id="minVal" name="min" min="0" onchange="compareMin()"/> Cantidad máxima<input type="number" id="maxVal" name="max" min="1" onchange="compareMax()"/></p>-->
                         <p>Endeudamiento</p>
                         <select name="endeudamientoMUN">
                             <option value="inicio" selected>Seleccione un tramo</option>
@@ -379,9 +402,34 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo1">0 - 1M</option>
                             <option value="tramo2">1M - 5M</option>
                             <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">< 50M</option>
+                            <option value="tramo4">> 50M</option>
                         </select>
-                        
+                        <p>PMP</p>
+                        <select name="pmpMUN">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0 - 10 días</option>
+                            <option value="tramo2">10 - 20 días</option>
+                            <option value="tramo3">20 - 30 días</option>
+                            <option value="tramo4">30 - 40 días</option>
+                            <option value="tramo5">40 - 50 días</option>
+                            <option value="tramo6">> 50 días</option>
+                        </select>
+                        <p>Ingresos no financieros</p>
+                        <select name="ingrnofinMUN">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="tramo1">0 - 1M</option>
+                            <option value="tramo2">1M - 5M</option>
+                            <option value="tramo3">5M - 50M</option>
+                            <option value="tramo4">> 50M</option>
+                        </select>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoMUN">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
                         <br> 
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>

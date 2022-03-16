@@ -1160,24 +1160,27 @@ class DAOConsultorCCAA {
         return $ccaa;
     }
 
-    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto){
         $db = getConexionBD();
         $conditions = "";
         $returning_values = "";
+        $group_by = "";
+        $order_by = "";
+        $joins="";
 
         if(!empty($scoring)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
-                //$returning_values = $returning_values.",";
             }
             $conditions = $conditions."scoring_ccaa.RATING = '$scoring' ";
             $returning_values = $returning_values.",scoring_ccaa.RATING";
+            //$order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
+            //$group_by = $group_by."scoring_ccaa.ANHO, ";
         }   
         
         if(!empty($poblacion)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
-                //$returning_values = $returning_values.",";
             }
             if($poblacion=='tramo1'){
                 $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 0 AND 750000 ";
@@ -1195,25 +1198,20 @@ class DAOConsultorCCAA {
                 $conditions = $conditions."(scoring_ccaa.POBLACION) > 6000000 ";
             }
             $returning_values = $returning_values.",scoring_ccaa.POBLACION";
+            //if(!strpos($order_by, 'scoring_ccaa.ANHO DESC, ')) $order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
+            //if(!strpos($group_by, 'scoring_ccaa.ANHO, ')) $order_by = $order_by . "scoring_ccaa.ANHO, ";
         }
-
-        /*if(!empty($endeudamiento)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND ";
-            }
-            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
-        }*/
         
         if(!empty($ahorro_neto)){
             if($conditions!=""){
                 $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO AND ";
-                //$returning_values = $returning_values.",";
             }
+            
             if($ahorro_neto=='tramo1'){
                 $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) < -20 ";
             }
             else if($ahorro_neto=='tramo2'){
-                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN -20 AND 0 AND cuentas_ccaa_general.R_SOSTE_FINANCIERA IS NOT NULL ";
+                $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN -20 AND 0 ";
             }
             else if($ahorro_neto=='tramo3'){
                 $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) BETWEEN 0 AND 20 ";
@@ -1225,14 +1223,112 @@ class DAOConsultorCCAA {
                 $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) > 50 ";
             }
             $returning_values = $returning_values.",cuentas_ccaa_general.R_SOSTE_FINANCIERA";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO=ccaas.CODIGO ";
+            //if(!strpos($group_by, 'cuentas_ccaa_general.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general.ANHO, ";
         }
         
-        /*if(!empty($fondliq)){
+        if(!empty($pmp)){
             if($conditions!=""){
-                $conditions = $conditions . "AND ";
+                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
             }
-            $conditions = $conditions."scoring_ccaa.POBLACION = '$scoring' ";
-        }*/
+            if($pmp=='tramo1'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 0 AND 10 ";
+            }
+            else if($pmp=='tramo2'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 10 AND 20 ";
+            }
+            else if($pmp=='tramo3'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 20 AND 30 ";
+            }
+            else if($pmp=='tramo4'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 30 AND 40 ";
+            }
+            else if($pmp=='tramo5'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 40 AND 50 ";
+            }
+            else if($pmp=='tramo6'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) > 50 ";
+            }
+            if(!strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            $returning_values = $returning_values.",cuentas_ccaa_general_mensual.PMP";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
+            //if(!strpos($order_by, 'cuentas_ccaa_general_mensual.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
+            //if(!strpos($group_by, 'cuentas_ccaa_general_mensual.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general_mensual.ANHO, ";
+        }
+
+        if(!empty($dcpp)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
+            }
+            if($dcpp=='tramo1'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 0 AND 4 ";
+            }
+            else if($dcpp=='tramo2'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 4 AND 8 ";
+            }
+            else if($dcpp=='tramo3'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 8 AND 12 ";
+            }
+            else if($dcpp=='tramo4'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 12 AND 16 ";
+            }
+            else if($dcpp=='tramo5'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 16 AND 20 ";
+            }
+            else if($dcpp=='tramo6'){
+                $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) > 20 ";
+            }
+            if(!strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            $returning_values = $returning_values.", cuentas_ccaa_general_mensual.R_DCPP";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
+            //if(!strpos($order_by, 'cuentas_ccaa_general_mensual.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
+            //if(!strpos($group_by, 'cuentas_ccaa_general_mensual.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general_mensual.ANHO, ";
+        }
+
+        if(!empty($ingrnofin)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = scoring_ccaa.ANHO AND ";
+            }
+            $conditions = $conditions."cuentas_ccaa_ingresos.TIPO='PARTIDA INGRESOS NO FINANCIEROS' AND ";
+            if($ingrnofin=='tramo1'){
+                $conditions = $conditions."(cuentas_ccaa_ingresos.DER_REC) BETWEEN 0 AND 1000000 ";
+            }
+            else if($ingrnofin=='tramo2'){
+                $conditions = $conditions."(cuentas_ccaa_ingresos.DER_REC) BETWEEN 1000000 AND 5000000 ";
+            }
+            else if($ingrnofin=='tramo3'){
+                $conditions = $conditions."(cuentas_ccaa_ingresos.DER_REC) BETWEEN 5000000 AND 50000000 ";
+            }
+            else if($ingrnofin=='tramo4'){
+                $conditions = $conditions."(cuentas_ccaa_ingresos.DER_REC) > 50000000 ";
+            }
+            $returning_values = $returning_values.",cuentas_ccaa_ingresos.DER_REC";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO ";
+            //if(!strpos($order_by, 'cuentas_ccaa_ingresos.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_ingresos.ANHO DESC, ";
+            //if(!strpos($group_by, 'cuentas_ccaa_ingresos.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_ingresos.ANHO, ";
+        }
+
+        if(!empty($gasto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = scoring_ccaa.ANHO AND ";
+            }
+            if($gasto=='personal'){
+                $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST1' ";
+            }
+            else if($gasto=='bienesservicios'){
+                $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST2' ";
+            }
+            else if($gasto=='financieros'){
+                $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST3' ";
+            }
+            else if($gasto=='inversiones'){
+                $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST6' ";
+            }
+            $returning_values = $returning_values.",cuentas_ccaa_gastos.TIPO, cuentas_ccaa_gastos.OBLG_REC";
+            if(!strpos($joins, 'INNER JOIN cuentas_ccaa_gastos ON cuentas_ccaa_gastos.CODIGO=ccaas.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_ccaa_gastos ON cuentas_ccaa_gastos.CODIGO=ccaas.CODIGO ";
+            //if(!strpos($order_by, 'cuentas_ccaa_gastos.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_gastos.ANHO DESC, ";
+            //if(!strpos($group_by, 'cuentas_ccaa_gastos.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_gastos.ANHO, ";
+        }
 
         if(!empty($choice)){
             if($choice =='SelectYear'){
@@ -1272,7 +1368,8 @@ class DAOConsultorCCAA {
         }
         
         //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
-        $sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general.CODIGO = ccaas.CODIGO $conditions ORDER BY scoring_ccaa.ANHO DESC, cuentas_ccaa_general.ANHO DESC, ccaas.CODIGO ASC";
+        //$sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general.CODIGO = ccaas.CODIGO INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general_mensual.CODIGO = scoring_ccaa.CODIGO AND cuentas_ccaa_general_mensual.CODIGO = cuentas_ccaa_general.CODIGO $conditions ORDER BY cuentas_ccaa_general_mensual.MES, scoring_ccaa.ANHO DESC, cuentas_ccaa_general.ANHO DESC, ccaas.CODIGO ASC";
+        $sql = "SELECT ccaas.CODIGO, ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $joins $conditions GROUP BY ccaas.CODIGO, scoring_ccaa.ANHO ORDER BY scoring_ccaa.ANHO DESC, ccaas.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -1284,13 +1381,17 @@ class DAOConsultorCCAA {
             $ccaa = new CCAA();
             $ccaa->setNombre($resultado['NOMBRE']);
             if(!empty($resultado['RATING'])) $ccaa->setScoring($resultado['RATING']);
-            //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['POBLACION']);
-            //else $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['R_SOSTE_FINANCIERA']))$ccaa->setRSosteFinanciera($resultado['R_SOSTE_FINANCIERA']);
-            //if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['R_SOSTE_FINANCIERA']);
-            //$ccaa->setPoblacion($resultado['POBLACION']);
-            //array_push($elements, $ccaa);
+            if(!empty($resultado['PMP']))$ccaa->setPMP($resultado['PMP']);
+            if(!empty($resultado['R_DCPP']))$ccaa->setRDCPP($resultado['R_DCPP']);
+            if(!empty($resultado['DER_REC']))$ccaa->setTotalIngresosNoCorrientes1($resultado['DER_REC']);
+            if(!empty($resultado['OBLG_REC'])) {
+                if($resultado['TIPO']=='PARTIDAGAST1') $ccaa->setGastosPersonal1($resultado['OBLG_REC']);
+                else if($resultado['TIPO']=='PARTIDAGAST2') $ccaa->setGastosCorrientesBienesServicios1($resultado['OBLG_REC']);
+                else if($resultado['TIPO']=='PARTIDAGAST3') $ccaa->setTransferenciasCorrientesGastos1($resultado['OBLG_REC']);
+                else if($resultado['TIPO']=='PARTIDAGAST6') $ccaa->setInversionesReales1($resultado['OBLG_REC']);
+            }
             $elements2[$resultado['ANHO']]=$ccaa;
             array_push($elements, $elements2);
         }

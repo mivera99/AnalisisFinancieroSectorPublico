@@ -56,23 +56,23 @@ class DAOConsultor{
         return (new DAOConsultorCCAA())->getAllCCAAs();
     }
 
-    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to){
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto){
         $ccaas = array();
         $daoccaa = new DAOConsultorCCAA();
 
-        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to);
+        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto);
     }
-    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto){
         $dips = array();
         $daodip = new DAOConsultorDiputacion();
 
-        return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
+        return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto);
     }
-    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto){
         $muns = array();
         $daomun = new DAOConsultorMunicipio();
 
-        return $daomun->consultarMUNs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia);
+        return $daomun->consultarMUNs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto);
     }
 
     public function getCCAA($nombre){

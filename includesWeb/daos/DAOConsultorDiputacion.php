@@ -618,10 +618,11 @@ class DAOConsultorDiputacion {
         return $dip;
     }
 
-    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia){
+    public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto){
         $db = getConexionBD();
         $conditions = "";
         $returning_values="";
+        $joins="";
 
         if(!empty($scoring)){
             $conditions = $conditions."scoring_dip.RATING = '$scoring' ";
@@ -714,6 +715,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) > 50000000 ";
             }
             $returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
+            if(!strpos($joins, 'INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ";
         }
 
         if(!empty($choice)){
@@ -749,6 +751,74 @@ class DAOConsultorDiputacion {
             }
         }
 
+        if(!empty($pmp)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_dip_pmp.ANHO = scoring_dip.ANHO AND ";
+            }
+            if($pmp=='tramo1'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) BETWEEN 0 AND 10 ";
+            }
+            else if($pmp=='tramo2'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) BETWEEN 10 AND 20 ";
+            }
+            else if($pmp=='tramo3'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) BETWEEN 20 AND 30 ";
+            }
+            else if($pmp=='tramo4'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) BETWEEN 30 AND 40 ";
+            }
+            else if($pmp=='tramo5'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) BETWEEN 40 AND 50 ";
+            }
+            else if($pmp=='tramo6'){
+                $conditions = $conditions."(cuentas_dip_pmp.PMP) > 50 ";
+            }
+            if(!strpos($returning_values, ', MAX(cuentas_dip_pmp.TRIMESTRE) as MAX_TRIMESTRE ')) $returning_values = $returning_values . ", MAX(cuentas_dip_pmp.TRIMESTRE)";
+            $returning_values = $returning_values.",cuentas_dip_pmp.PMP";
+            if(!strpos($joins, 'INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ";
+        }
+
+        if(!empty($ingrnofin)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_dip_ingresos.ANHO = scoring_dip.ANHO AND ";
+            }
+            $conditions = $conditions."cuentas_dip_ingresos.TIPO='PARTIDA INGRESOS NO FINANCIEROS' AND ";
+            if($ingrnofin=='tramo1'){
+                $conditions = $conditions."(cuentas_dip_ingresos.DERE) BETWEEN 0 AND 1000000 ";
+            }
+            else if($ingrnofin=='tramo2'){
+                $conditions = $conditions."(cuentas_dip_ingresos.DERE) BETWEEN 1000000 AND 5000000 ";
+            }
+            else if($ingrnofin=='tramo3'){
+                $conditions = $conditions."(cuentas_dip_ingresos.DERE) BETWEEN 5000000 AND 50000000 ";
+            }
+            else if($ingrnofin=='tramo4'){
+                $conditions = $conditions."(cuentas_dip_ingresos.DERE) > 50000000 ";
+            }
+            $returning_values = $returning_values.",cuentas_dip_ingresos.DERE";
+            if(!strpos($joins, 'INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ";
+        }
+
+        if(!empty($gasto)){
+            if($conditions!=""){
+                $conditions = $conditions . "AND cuentas_dip_gastos.ANHO = scoring_dip.ANHO AND ";
+            }
+            if($gasto=='personal'){
+                $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST1' ";
+            }
+            else if($gasto=='bienesservicios'){
+                $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST2' ";
+            }
+            else if($gasto=='financieros'){
+                $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST3' ";
+            }
+            else if($gasto=='inversiones'){
+                $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST6' ";
+            }
+            $returning_values = $returning_values.",cuentas_dip_gastos.TIPO, cuentas_dip_gastos.OBLG";
+            if(!strpos($joins, 'INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ";
+        }
+
         if(!empty($autonomia)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
@@ -757,19 +827,21 @@ class DAOConsultorDiputacion {
             $returning_values = $returning_values.",diputaciones.AUTONOMIA";
         }   
         
-        if(!empty($provincia)){
+        /*if(!empty($provincia)){
             if($conditions!=""){
                 $conditions = $conditions . "AND ";
             }
             $conditions = $conditions."diputaciones.PROVINCIA = '$provincia' ";
             $returning_values = $returning_values.",diputaciones.PROVINCIA";
-        }
+        }*/
 
         if($conditions!=""){
             $conditions =" WHERE ".$conditions;
         }
 
-        $sql = "SELECT DISTINCT(diputaciones.CODIGO), diputaciones.NOMBRE, scoring_dip.ANHO $returning_values FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY scoring_dip.ANHO DESC, diputaciones.CODIGO ASC";
+        //$sql = "SELECT DISTINCT(diputaciones.CODIGO), diputaciones.NOMBRE, scoring_dip.ANHO $returning_values FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO INNER JOIN deudas_dip ON deudas_dip.CODIGO = diputaciones.CODIGO $conditions ORDER BY scoring_dip.ANHO DESC, diputaciones.CODIGO ASC";
+        $sql = "SELECT diputaciones.CODIGO, diputaciones.NOMBRE, scoring_dip.ANHO $returning_values FROM diputaciones INNER JOIN scoring_dip ON diputaciones.CODIGO = scoring_dip.CODIGO $joins $conditions GROUP BY diputaciones.CODIGO, scoring_dip.ANHO ORDER BY scoring_dip.ANHO DESC, diputaciones.CODIGO ASC";
+
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
@@ -787,7 +859,14 @@ class DAOConsultorDiputacion {
             if(!empty($resultado['R1']))$dip->setEndeudamiento($resultado['R1']);
             if(!empty($resultado['R2']))$dip->setSostenibilidadFinanciera($resultado['R2']);
             if(!empty($resultado['FONDLIQUIDOS']))$dip->setLiquidezInmediata($resultado['FONDLIQUIDOS']);
-            
+            if(!empty($resultado['PMP']))$dip->setPeriodoMedioPagos($resultado['PMP']);
+            if(!empty($resultado['DERE']))$dip->setTotalIngresosNoCorrientes1($resultado['DERE']);
+            if(!empty($resultado['OBLG'])) {
+                if($resultado['TIPO']=='PARTIDAGAST1') $dip->setGastosPersonal1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST2') $dip->setGastosCorrientesBienesServicios1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST3') $dip->setTransferenciasCorrientesGastos1($resultado['OBLG']);
+                else if($resultado['TIPO']=='PARTIDAGAST6') $dip->setInversionesReales1($resultado['OBLG']);
+            }
             if(!empty($resultado['AUTONOMIA'])) {    
                 $ccaaCode = $resultado['AUTONOMIA'];
                 $sql = "SELECT NOMBRE FROM ccaas WHERE CODIGO = '$ccaaCode'";
@@ -798,7 +877,7 @@ class DAOConsultorDiputacion {
                 $autonomia = mysqli_fetch_assoc($result);
                 $dip->setAutonomia($autonomia['NOMBRE']);
             }
-            if(!empty($resultado['PROVINCIA'])) $dip->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
+            //if(!empty($resultado['PROVINCIA'])) $dip->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
             //if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['R_SOSTE_FINANCIERA']);
             //$ccaa->setPoblacion($resultado['POBLACION']);
             //array_push($elements, $ccaa);
