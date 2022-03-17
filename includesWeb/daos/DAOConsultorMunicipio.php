@@ -727,7 +727,7 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) > 50000000 ";
             }
             $returning_values = $returning_values.",deudas_mun.FONDLIQUIDOS";
-            if(!strpos($joins, 'INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ";
+            if(strpos($joins, 'INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ";
         }
 
         if(!empty($pmp)){
@@ -752,9 +752,9 @@ class DAOConsultorMunicipio{
             else if($pmp=='tramo6'){
                 $conditions = $conditions."(cuentas_mun_pmp.PMP) > 50 ";
             }
-            if(!strpos($returning_values, ', MAX(cuentas_mun_pmp.TRIMESTRE) as MAX_TRIMESTRE ')) $returning_values = $returning_values . ", MAX(cuentas_mun_pmp.TRIMESTRE)";
+            if(strpos($returning_values, ', MAX(cuentas_mun_pmp.TRIMESTRE) as MAX_TRIMESTRE')===false) $returning_values = $returning_values . ", MAX(cuentas_mun_pmp.TRIMESTRE)";
             $returning_values = $returning_values.",cuentas_mun_pmp.PMP";
-            if(!strpos($joins, 'INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ";
         }
 
         if(!empty($ingrnofin)){
@@ -775,7 +775,7 @@ class DAOConsultorMunicipio{
                 $having = $having."SUMA_INGR > 50000000 ";
             }
             $returning_values = $returning_values.",SUM(cuentas_mun_ingresos.DERE) AS SUMA_INGR";
-            if(!strpos($joins, 'INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ";
         }
         
         if(!empty($gasto)){
@@ -795,7 +795,7 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST6' ";
             }
             $returning_values = $returning_values.",cuentas_mun_gastos.TIPO, cuentas_mun_gastos.OBLG";
-            if(!strpos($joins, 'INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_mun_gastos ON cuentas_mun_gastos.CODIGO=municipios.CODIGO ";
         }
 
         if(!empty($choice)){

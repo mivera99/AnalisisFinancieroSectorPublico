@@ -715,7 +715,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) > 50000000 ";
             }
             $returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
-            if(!strpos($joins, 'INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ";
+            if(strpos($joins, 'INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ";
         }
 
         if(!empty($choice)){
@@ -773,9 +773,9 @@ class DAOConsultorDiputacion {
             else if($pmp=='tramo6'){
                 $conditions = $conditions."(cuentas_dip_pmp.PMP) > 50 ";
             }
-            if(!strpos($returning_values, ', MAX(cuentas_dip_pmp.TRIMESTRE) as MAX_TRIMESTRE ')) $returning_values = $returning_values . ", MAX(cuentas_dip_pmp.TRIMESTRE)";
+            if(strpos($returning_values, ', MAX(cuentas_dip_pmp.TRIMESTRE) as MAX_TRIMESTRE')===false) $returning_values = $returning_values . ", MAX(cuentas_dip_pmp.TRIMESTRE)";
             $returning_values = $returning_values.",cuentas_dip_pmp.PMP";
-            if(!strpos($joins, 'INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ";
         }
 
         if(!empty($ingrnofin)){
@@ -796,7 +796,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions."(cuentas_dip_ingresos.DERE) > 50000000 ";
             }
             $returning_values = $returning_values.",cuentas_dip_ingresos.DERE";
-            if(!strpos($joins, 'INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ";
         }
 
         if(!empty($gasto)){
@@ -816,7 +816,7 @@ class DAOConsultorDiputacion {
                 $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST6' ";
             }
             $returning_values = $returning_values.",cuentas_dip_gastos.TIPO, cuentas_dip_gastos.OBLG";
-            if(!strpos($joins, 'INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ')) $joins = $joins . "INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ";
+            if(strpos($joins, 'INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ";
         }
 
         if(!empty($autonomia)){
