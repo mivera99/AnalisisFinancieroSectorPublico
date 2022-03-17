@@ -39,7 +39,7 @@ $conn->set_charset("utf8");
 $values=array();
 $fields=array();
 */
-require("includes/vendor/autoload.php");
+require_once("includes/vendor/autoload.php");
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 class Importer_cuentas_dip{
