@@ -870,11 +870,11 @@ class DAOConsultorDiputacion {
             if(!empty($resultado['AUTONOMIA'])) {    
                 $ccaaCode = $resultado['AUTONOMIA'];
                 $sql = "SELECT NOMBRE FROM ccaas WHERE CODIGO = '$ccaaCode'";
-                $result = mysqli_query($db,$sql);
-                if(!$result){
+                $resultCode = mysqli_query($db,$sql);
+                if(!$resultCode){
                     return false;
                 }
-                $autonomia = mysqli_fetch_assoc($result);
+                $autonomia = mysqli_fetch_assoc($resultCode);
                 $dip->setAutonomia($autonomia['NOMBRE']);
             }
             //if(!empty($resultado['PROVINCIA'])) $dip->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
