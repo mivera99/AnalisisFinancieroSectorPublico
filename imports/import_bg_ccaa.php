@@ -118,7 +118,7 @@ class Importer_bg_ccaa{
                 }
 
                 // Se espera poder añadir el resto de campos previos al 16 dentro de este loop
-                for($k=0;$k<count($fields);$k++){
+                for($k=0;$k<count($fields) && $k<=24;$k++){
                     // En este caso en particular, a partir de la posicion 16 comienzan los datos correspondientes a la tabla deudas_ccaa
                     if($k > 16){
                         // Inicializacion de los valores año, valor y tipo
