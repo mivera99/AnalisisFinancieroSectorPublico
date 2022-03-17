@@ -18,79 +18,79 @@ if($ccaa && $ccaaNac){
     $datosPib = array();
     $etiquetasPib = array();
     foreach($ccaa->getIncrPib() as $clave=>$valor){
-        array_push($etiquetasPib, $clave);
-        array_push($datosPib, $valor*100);
+        array_unshift($etiquetasPib, $clave);
+        array_unshift($datosPib, $valor*100);
     }
     $datosPibNac = array();
     $etiquetasPibNac = array();
     foreach($ccaaNac->getIncrPib() as $clave=>$valor){
-        array_push($etiquetasPibNac, $clave);
-        array_push($datosPibNac, $valor*100);
+        array_unshift($etiquetasPibNac, $clave);
+        array_unshift($datosPibNac, $valor*100);
     }
     /*Paro CCAA y paro nacional*/
     $datosParo = array();
     $etiquetasParo = array();
     foreach($ccaa->getParo() as $array){
-        array_push($etiquetasParo, $array[0]);
-        array_push($datosParo, $array[2]*100);
+        array_unshift($etiquetasParo, $array[0]);
+        array_unshift($datosParo, $array[2]*100);
     }
     $datosParoNac = array();
     $etiquetasParoNac = array();
     foreach($ccaaNac->getParo() as $array){
-        array_push($etiquetasParoNac, $array[0]);
-        array_push($datosParoNac, $array[2]*100);
+        array_unshift($etiquetasParoNac, $array[0]);
+        array_unshift($datosParoNac, $array[2]*100);
     }
     /*Transacciones inmobiliarias CCAA y transacciones nacionales*/
     $datosTransac = array();
     $etiquetasTransac = array();
     foreach($ccaa->getTransacInmobiliarias() as $array){
-        array_push($etiquetasTransac, $array[0]);
-        array_push($datosTransac, $array[2]*100);
+        array_unshift($etiquetasTransac, $array[0]);
+        array_unshift($datosTransac, $array[2]*100);
     }
     $datosTransacNac = array();
     $etiquetasTransacNac = array();
     foreach($ccaaNac->getTransacInmobiliarias() as $array){
-        array_push($etiquetasTransacNac, $array[0]);
-        array_push($datosTransacNac, $array[2]*100);
+        array_unshift($etiquetasTransacNac, $array[0]);
+        array_unshift($datosTransacNac, $array[2]*100);
     }
     /*Crecimiento de empresas CCAA y crecimiento de empresas a nivel nacional*/
     $datosEmpresas = array();
     $etiquetasEmpresas = array();
     foreach($ccaa->getEmpresas() as $clave=>$valor){
-        array_push($etiquetasEmpresas, $clave);
-        array_push($datosEmpresas, $valor*100);
+        array_unshift($etiquetasEmpresas, $clave);
+        array_unshift($datosEmpresas, $valor*100);
     }
     $datosEmpresasNac = array();
     $etiquetasEmpresasNac = array();
     foreach($ccaaNac->getEmpresas() as $clave=>$valor){
-        array_push($etiquetasEmpresasNac, $clave);
-        array_push($datosEmpresasNac, $valor*100);
+        array_unshift($etiquetasEmpresasNac, $clave);
+        array_unshift($datosEmpresasNac, $valor*100);
     }
     /*Resultado presupuestario CCAA y nacional*/
     $datosPresupuestario = array();
     $etiquetasPresupuestario = array();
     foreach($ccaa->getCCAAPib() as $clave=>$valor){
-        array_push($etiquetasPresupuestario, $clave);
-        array_push($datosPresupuestario, $valor*100);
+        array_unshift($etiquetasPresupuestario, $clave);
+        array_unshift($datosPresupuestario, $valor*100);
     }
     $datosPresupuestarioNac = array();
     $etiquetasPresupuestarioNac = array();
     foreach($ccaaNac->getCCAAPib() as $clave=>$valor){
-        array_push($etiquetasPresupuestarioNac, $clave);
-        array_push($datosPresupuestarioNac, $valor*100);
+        array_unshift($etiquetasPresupuestarioNac, $clave);
+        array_unshift($datosPresupuestarioNac, $valor*100);
     }
     /*Deuda viva CCAA y nacional*/
     $datosDeudaVivaIngrCor = array();
     $etiquetasDeudaVivaIngrCor = array();
     foreach($ccaa->getDeudaVivaIngrCor() as $array){
-        array_push($etiquetasDeudaVivaIngrCor, $array[0]);
-        array_push($datosDeudaVivaIngrCor, $array[2]*100);
+        array_unshift($etiquetasDeudaVivaIngrCor, $array[0]);
+        array_unshift($datosDeudaVivaIngrCor, $array[2]*100);
     }
     $datosDeudaVivaNac = array();
     $etiquetasDeudaVivaNac = array();
     foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
-        array_push($etiquetasDeudaVivaNac, $array[0]);
-        array_push($datosDeudaVivaNac, $array[2]*100);
+        array_unshift($etiquetasDeudaVivaNac, $array[0]);
+        array_unshift($datosDeudaVivaNac, $array[2]*100);
     }
     /*Ingresos corrientes CCAA */
     $datosIngresosCor = array();
@@ -138,113 +138,113 @@ if($ccaa && $ccaaNac){
     $datos = array();
     $etiquetas = array();
     foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
-        array_push($etiquetas, $clave);
-        array_push($datos, $valor*100);
+        array_unshift($etiquetas, $clave);
+        array_unshift($datos, $valor*100);
     }
     /*Apalancamiento Operativo*/ 
     $datosApalancamiento=array();
     $etiquetasApalancamiento=array();
     foreach($ccaa->getRRigidez() as $clave=>$valor){
-        array_push($etiquetasApalancamiento, $clave);
-        array_push($datosApalancamiento, $valor*100);
+        array_unshift($etiquetasApalancamiento, $clave);
+        array_unshift($datosApalancamiento, $valor*100);
     }
     /*Sostenibilidad de la deuda CCAA, y media CCAA*/ 
     $datosSostenibilidad=array();
     $etiquetasSostenibilidad=array();
     foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
-        array_push($etiquetasSostenibilidad, $clave);
-        array_push($datosSostenibilidad, $valor*100);
+        array_unshift($etiquetasSostenibilidad, $clave);
+        array_unshift($datosSostenibilidad, $valor*100);
     }
     /*PMP CCAA, y media PMP CCAA*/ 
     $datosPMP=array();
     $etiquetasPMP=array();
     foreach($ccaa->getPMP() as $array){
-        array_push($etiquetasPMP, $array[0]);
-        array_push($datosPMP, $array[2]);
+        array_unshift($etiquetasPMP, $array[0]);
+        array_unshift($datosPMP, $array[2]);
     }
     $datosPMPNac=array();
     $etiquetasPMPNac=array();
     foreach($ccaaNac->getPMP() as $array){
-        array_push($etiquetasPMPNac, $array[0]);
-        array_push($datosPMPNac, $array[2]);
+        array_unshift($etiquetasPMPNac, $array[0]);
+        array_unshift($datosPMPNac, $array[2]);
     }
     /*Eficiencia CCAA, y media eficiencia CCAA*/ 
     $datosEficiencia=array();
     $etiquetasEficiencia=array();
     foreach($ccaa->getREfic() as $clave=>$valor){
-        array_push($etiquetasEficiencia, $clave);
-        array_push($datosEficiencia, $valor*100);
+        array_unshift($etiquetasEficiencia, $clave);
+        array_unshift($datosEficiencia, $valor*100);
     }
     $datosEficienciaNac=array();
     $etiquetasEficienciaNac=array();
     foreach($ccaaNac->getREfic() as $clave=>$valor){
-        array_push($etiquetasEficienciaNac, $clave);
-        array_push($datosEficienciaNac, $valor*100);
+        array_unshift($etiquetasEficienciaNac, $clave);
+        array_unshift($datosEficienciaNac, $valor*100);
     }
     /*Ratios de ejecucion de ingresos CCAA */ 
     $datosEjeIngrCorr=array();
     $etiquetasEjeIngrCorr=array();
     foreach($ccaa->getREjeIngrCorr() as $clave=>$valor){
-        array_push($etiquetasEjeIngrCorr, $clave);
-        array_push($datosEjeIngrCorr, $valor*100);
+        array_unshift($etiquetasEjeIngrCorr, $clave);
+        array_unshift($datosEjeIngrCorr, $valor*100);
     }
     $datosEjeIngrCorrNac=array();
     $etiquetasEjeIngrCorrNac=array();
     foreach($ccaaNac->getREjeIngrCorr() as $clave=>$valor){
-        array_push($etiquetasEjeIngrCorrNac, $clave);
-        array_push($datosEjeIngrCorrNac, $valor*100);
+        array_unshift($etiquetasEjeIngrCorrNac, $clave);
+        array_unshift($datosEjeIngrCorrNac, $valor*100);
     }
     /*Ratios de ejecucion de gastos CCAA */ 
     $datosEjeGastosCorr=array();
     $etiquetasEjeGastosCorr=array();
     foreach($ccaa->getREjeGastosCorr() as $clave=>$valor){
-        array_push($etiquetasEjeGastosCorr, $clave);
-        array_push($datosEjeGastosCorr, $valor*100);
+        array_unshift($etiquetasEjeGastosCorr, $clave);
+        array_unshift($datosEjeGastosCorr, $valor*100);
     }
     $datosEjeGastosCorrNac=array();
     $etiquetasEjeGastosCorrNac=array();
     foreach($ccaaNac->getREjeGastosCorr() as $clave=>$valor){
-        array_push($etiquetasEjeGastosCorrNac, $clave);
-        array_push($datosEjeGastosCorrNac, $valor*100);
+        array_unshift($etiquetasEjeGastosCorrNac, $clave);
+        array_unshift($datosEjeGastosCorrNac, $valor*100);
     }
     /* Deuda comercial pendiente de pago */ 
     $datosRDCPP=array();
     $etiquetasRDCPP=array();
     foreach($ccaa->getRDCPP() as $array){
-        array_push($etiquetasRDCPP, $array[0]);
-        array_push($datosRDCPP, $array[2]);
+        array_unshift($etiquetasRDCPP, $array[0]);
+        array_unshift($datosRDCPP, $array[2]);
     }
     $datosRDCPPNac=array();
     $etiquetasRDCPPNac=array();
     foreach($ccaaNac->getRDCPP() as $array){
-        array_push($etiquetasRDCPPNac, $array[0]);
-        array_push($datosRDCPPNac, $array[2]);
+        array_unshift($etiquetasRDCPPNac, $array[0]);
+        array_unshift($datosRDCPPNac, $array[2]);
     }
     /* Pagos obligacionales */
     $datosPagosObligacionales=array();
     $etiquetasPagosObligacionales=array();
     foreach($ccaa->getPagosObligaciones() as $clave=>$valor){
-        array_push($etiquetasPagosObligacionales, $clave);
-        array_push($datosPagosObligacionales, $valor*100);
+        array_unshift($etiquetasPagosObligacionales, $clave);
+        array_unshift($datosPagosObligacionales, $valor*100);
     }
     $datosPagosObligacionalesNac=array();
     $etiquetasPagosObligacionalesNac=array();
     foreach($ccaaNac->getPagosObligaciones() as $clave=>$valor){
-        array_push($etiquetasPagosObligacionalesNac, $clave);
-        array_push($datosPagosObligacionalesNac, $valor*100);
+        array_unshift($etiquetasPagosObligacionalesNac, $clave);
+        array_unshift($datosPagosObligacionalesNac, $valor*100);
     }
     /* Eficacia recaudatoria */
     $datosREficaciaRec=array();
     $etiquetasREficaciaRec=array();
     foreach($ccaa->getREficaciaRec() as $clave=>$valor){
-        array_push($etiquetasREficaciaRec, $clave);
-        array_push($datosREficaciaRec, $valor*100);
+        array_unshift($etiquetasREficaciaRec, $clave);
+        array_unshift($datosREficaciaRec, $valor*100);
     }
     $datosREficaciaRecNac=array();
     $etiquetasREficaciaRecNac=array();
     foreach($ccaaNac->getREficaciaRec() as $clave=>$valor){
-        array_push($etiquetasREficaciaRecNac, $clave);
-        array_push($datosREficaciaRecNac, $valor*100);
+        array_unshift($etiquetasREficaciaRecNac, $clave);
+        array_unshift($datosREficaciaRecNac, $valor*100);
     }
 }
 ?>
