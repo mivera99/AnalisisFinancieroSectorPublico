@@ -459,7 +459,7 @@ class DAOConsultorCCAA {
 
     public function getRatingCCAA($codigo){
         $db = getConexionBD();
-        $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO ASC";
+        $sql = "SELECT DISTINCT ANHO, POBLACION FROM scoring_ccaa WHERE CODIGO = '$codigo' AND POBLACION IS NOT NULL ORDER BY ANHO DESC";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -467,7 +467,7 @@ class DAOConsultorCCAA {
         $ccaa = new CCAA();
         $poblacion = mysqli_fetch_assoc($result);
 
-        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_ccaa WHERE CODIGO = '$codigo' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO ASC LIMIT 2";
+        $sql = "SELECT DISTINCT ANHO, RATING, TENDENCIA FROM scoring_ccaa WHERE CODIGO = '$codigo' AND RATING IS NOT NULL AND TENDENCIA IS NOT NULL ORDER BY ANHO DESC LIMIT 2";
         $scoring = mysqli_fetch_assoc($result);
         $result = mysqli_query($db, $sql);
         if(!$result){
