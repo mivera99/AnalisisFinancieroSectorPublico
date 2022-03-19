@@ -650,7 +650,7 @@ class DAOConsultorCCAA {
         $db = getConexionBD();
         
         $ccaa = new CCAA();
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, PARO FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PARO IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.PARO FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.PARO IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -660,7 +660,7 @@ class DAOConsultorCCAA {
         while($paro = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($paro['ANHO'], $elements)){
                 array_push($elements2, $paro['ANHO']);
-                array_push($elements2, $paro['MAX_MES']/3);
+                array_push($elements2, $paro['MES']/3);
                 array_push($elements2, $paro['PARO']);
                 array_push($elements, $elements2);
                 $elements2 = array();
@@ -668,7 +668,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setParo($elements);
 
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, PMP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND PMP IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.PMP FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.PMP IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -678,7 +678,7 @@ class DAOConsultorCCAA {
         while($pmp = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($pmp['ANHO'], $elements)){
                 array_push($elements2, $pmp['ANHO']);
-                array_push($elements2, $pmp['MAX_MES']);
+                array_push($elements2, $pmp['MES']);
                 array_push($elements2, $pmp['PMP']);
                 array_push($elements, $elements2);
                 $elements2 = array();
@@ -686,7 +686,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setPMP($elements);
 
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, R_DCPP FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND R_DCPP IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.R_DCPP FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.R_DCPP IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -696,7 +696,7 @@ class DAOConsultorCCAA {
         while($rdcpp = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($rdcpp['ANHO'], $elements)){
                 array_push($elements2, $rdcpp['ANHO']);
-                array_push($elements2, $rdcpp['MAX_MES']);
+                array_push($elements2, $rdcpp['MES']);
                 array_push($elements2, $rdcpp['R_DCPP']);
                 array_push($elements, $elements2);
                 $elements2 = array();
@@ -704,7 +704,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setRDCPP($elements);
 
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, DEUDAVIVA FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDAVIVA IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.DEUDAVIVA FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.DEUDAVIVA IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -714,7 +714,7 @@ class DAOConsultorCCAA {
         while($deudaviva = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($deudaviva['ANHO'], $elements)){
                 array_push($elements2, $deudaviva['ANHO']);
-                array_push($elements2, $deudaviva['MAX_MES']/3);
+                array_push($elements2, $deudaviva['MES']/3);
                 array_push($elements2, $deudaviva['DEUDAVIVA']);
                 array_push($elements, $elements2);
                 $elements2 = array();
@@ -722,7 +722,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setDeudaViva($elements);
 
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND DEUDA_VIVA_INGR_COR IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.DEUDA_VIVA_INGR_COR FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.DEUDA_VIVA_INGR_COR IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -732,7 +732,7 @@ class DAOConsultorCCAA {
         while($deudavivaingrcor = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($deudavivaingrcor['ANHO'], $elements)){
                 array_push($elements2, $deudavivaingrcor['ANHO']);
-                array_push($elements2, $deudavivaingrcor['MAX_MES']/3);
+                array_push($elements2, $deudavivaingrcor['MES']/3);
                 array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
                 array_push($elements, $elements2);
                 $elements2 = array();
@@ -740,7 +740,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setDeudaVivaIngrCor($elements);
 
-        $sql = "SELECT ANHO, MAX(MES) AS MAX_MES, TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual WHERE CODIGO = '$codigo' AND TRANSAC_INMOBILIARIAS IS NOT NULL GROUP BY CODIGO, ANHO ORDER BY ANHO DESC, MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.PARO FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.PARO IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -1166,18 +1166,30 @@ class DAOConsultorCCAA {
         $joins="";
 
         if(!empty($scoring)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND ";
+            if($joins!=""){
+                if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false) $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_general_mensual.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
             }
             $conditions = $conditions."scoring_ccaa.RATING = '$scoring' ";
-            $returning_values = $returning_values.",scoring_ccaa.RATING";
-            //$order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
-            //$group_by = $group_by."scoring_ccaa.ANHO, ";
+            $returning_values = $returning_values.",scoring_ccaa.ANHO, scoring_ccaa.RATING";
+            if(strpos($joins, 'INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO ";
+            $order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
+            $group_by = $group_by.",scoring_ccaa.ANHO";
         }   
         
         if(!empty($poblacion)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND ";
+            if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
+                if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false) $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_general_mensual.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND scoring_ccaa.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
+
             }
             if($poblacion=='tramo1'){
                 $conditions = $conditions."(scoring_ccaa.POBLACION) BETWEEN 0 AND 750000 ";
@@ -1194,14 +1206,22 @@ class DAOConsultorCCAA {
             else if($poblacion=='tramo5'){
                 $conditions = $conditions."(scoring_ccaa.POBLACION) > 6000000 ";
             }
-            $returning_values = $returning_values.",scoring_ccaa.POBLACION";
-            //if(!strpos($order_by, 'scoring_ccaa.ANHO DESC, ')) $order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
-            //if(!strpos($group_by, 'scoring_ccaa.ANHO, ')) $order_by = $order_by . "scoring_ccaa.ANHO, ";
+            
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_ccaa.ANHO";
+            $returning_values = $returning_values.", scoring_ccaa.POBLACION";
+            if(strpos($joins, 'INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_ccaa.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_ccaa.ANHO ";
         }
 
         if(!empty($endeudamiento)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
+            if($joins!=""){
+                if(strpos($joins, ' scoring_ccaa ')!==false) $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
             }
             if($endeudamiento=='tramo1'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) BETWEEN 0 AND 20 ";
@@ -1218,15 +1238,23 @@ class DAOConsultorCCAA {
             else if($endeudamiento=='tramo5'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR*100) > 120 ";
             }
-            if(strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')===false) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
+            if(strpos($returning_values, ', cuentas_ccaa_general_mensual.MES ')===false) $returning_values = $returning_values . ", cuentas_ccaa_general_mensual.MES";
             $returning_values = $returning_values.",cuentas_ccaa_general_mensual.DEUDA_VIVA_INGR_COR";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
-            
+            if(strpos($joins, 'INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.DEUDA_VIVA_INGR_COR IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c2.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c2.MAX_MES')===false) $joins = $joins . "INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.DEUDA_VIVA_INGR_COR IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c2.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c2.MAX_MES ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_general_mensual.ANHO ";
         }
         
         if(!empty($ahorro_neto)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO AND ";
+            if($joins!=""){
+                if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = cuentas_ccaa_general_mensual.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions . " AND ";
             }
             
             if($ahorro_neto=='tramo1'){
@@ -1244,14 +1272,22 @@ class DAOConsultorCCAA {
             else if($ahorro_neto=='tramo5'){
                 $conditions = $conditions."(cuentas_ccaa_general.R_SOSTE_FINANCIERA*100) > 50 ";
             }
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general.ANHO";
             $returning_values = $returning_values.",cuentas_ccaa_general.R_SOSTE_FINANCIERA";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO=ccaas.CODIGO ";
             //if(!strpos($group_by, 'cuentas_ccaa_general.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general.ANHO, ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_general.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_general.ANHO ";
         }
         
         if(!empty($pmp)){
             if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
+                if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
             }
             if($pmp=='tramo1'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) BETWEEN 0 AND 10 ";
@@ -1271,16 +1307,23 @@ class DAOConsultorCCAA {
             else if($pmp=='tramo6'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.PMP) > 50 ";
             }
-            if(strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')===false) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
+            if(strpos($returning_values, ', cuentas_ccaa_general_mensual.MES ')===false) $returning_values = $returning_values . ", cuentas_ccaa_general_mensual.MES";
             $returning_values = $returning_values.",cuentas_ccaa_general_mensual.PMP";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
-            //if(!strpos($order_by, 'cuentas_ccaa_general_mensual.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
-            //if(!strpos($group_by, 'cuentas_ccaa_general_mensual.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general_mensual.ANHO, ";
+            if(strpos($joins, 'INNER JOIN (SELECT c3.CODIGO, c3.ANHO, MAX(c3.MES) MAX_MES FROM cuentas_ccaa_general_mensual c3 WHERE c3.PMP IS NOT NULL GROUP BY c3.CODIGO, c3.ANHO) c3 ON c3.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c3.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c3.MAX_MES')===false) $joins = $joins . "INNER JOIN (SELECT c3.CODIGO, c3.ANHO, MAX(c3.MES) MAX_MES FROM cuentas_ccaa_general_mensual c3 WHERE c3.PMP IS NOT NULL GROUP BY c3.CODIGO, c3.ANHO) c3 ON c3.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c3.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c3.MAX_MES ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_general_mensual.ANHO ";
         }
 
         if(!empty($dcpp)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO AND ";
+            if($joins!=""){
+                if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";    
             }
             if($dcpp=='tramo1'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) BETWEEN 0 AND 4 ";
@@ -1300,16 +1343,23 @@ class DAOConsultorCCAA {
             else if($dcpp=='tramo6'){
                 $conditions = $conditions."(cuentas_ccaa_general_mensual.R_DCPP*100) > 20 ";
             }
-            if(strpos($returning_values, ', MAX(cuentas_ccaa_general_mensual.MES) as MAX_MES ')===false) $returning_values = $returning_values . ", MAX(cuentas_ccaa_general_mensual.MES)";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
+            if(strpos($returning_values, ', cuentas_ccaa_general_mensual.MES ')===false) $returning_values = $returning_values . ", cuentas_ccaa_general_mensual.MES";
             $returning_values = $returning_values.", cuentas_ccaa_general_mensual.R_DCPP";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO=ccaas.CODIGO ";
-            //if(!strpos($order_by, 'cuentas_ccaa_general_mensual.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
-            //if(!strpos($group_by, 'cuentas_ccaa_general_mensual.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_general_mensual.ANHO, ";
+            if(strpos($joins, 'INNER JOIN (SELECT c4.CODIGO, c4.ANHO, MAX(c4.MES) MAX_MES FROM cuentas_ccaa_general_mensual c4 WHERE c4.R_DCPP IS NOT NULL GROUP BY c4.CODIGO, c4.ANHO) c4 ON c4.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c4.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c4.MAX_MES')===false) $joins = $joins . "INNER JOIN (SELECT c4.CODIGO, c4.ANHO, MAX(c4.MES) MAX_MES FROM cuentas_ccaa_general_mensual c4 WHERE c4.R_DCPP IS NOT NULL GROUP BY c4.CODIGO, c4.ANHO) c4 ON c4.CODIGO=cuentas_ccaa_general_mensual.CODIGO AND c4.ANHO = cuentas_ccaa_general_mensual.ANHO AND cuentas_ccaa_general_mensual.MES=c4.MAX_MES ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_general_mensual.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_general_mensual.ANHO ";
         }
 
         if(!empty($ingrnofin)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = scoring_ccaa.ANHO AND ";
+            if($joins!=""){
+                if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_general_mensual.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_ingresos.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
             }
             $conditions = $conditions."cuentas_ccaa_ingresos.TIPO='PARTIDA INGRESOS NO FINANCIEROS' AND ";
             if($ingrnofin=='tramo1'){
@@ -1324,15 +1374,21 @@ class DAOConsultorCCAA {
             else if($ingrnofin=='tramo4'){
                 $conditions = $conditions."(cuentas_ccaa_ingresos.DER_REC) > 50000000 ";
             }
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_ingresos.ANHO";
             $returning_values = $returning_values.",cuentas_ccaa_ingresos.DER_REC";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO ";
-            //if(!strpos($order_by, 'cuentas_ccaa_ingresos.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_ingresos.ANHO DESC, ";
-            //if(!strpos($group_by, 'cuentas_ccaa_ingresos.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_ingresos.ANHO, ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_ingresos.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_ingresos.ANHO ";
         }
 
         if(!empty($gasto)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = scoring_ccaa.ANHO AND ";
+            if($joins!=""){
+                if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = scoring_ccaa.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = cuentas_ccaa_general.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = cuentas_ccaa_general_mensual.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = cuentas_ccaa_ingresos.ANHO";
+                else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "AND cuentas_ccaa_gastos.ANHO = deudas_ccaa.ANHO";
+                $conditions = $conditions." AND ";
             }
             if($gasto=='personal'){
                 $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST1' ";
@@ -1346,19 +1402,34 @@ class DAOConsultorCCAA {
             else if($gasto=='inversiones'){
                 $conditions = $conditions."(cuentas_ccaa_gastos.TIPO) ='PARTIDAGAST6' ";
             }
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_gastos.ANHO";
             $returning_values = $returning_values.",cuentas_ccaa_gastos.TIPO, cuentas_ccaa_gastos.OBLG_REC";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_gastos ON cuentas_ccaa_gastos.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_gastos ON cuentas_ccaa_gastos.CODIGO=ccaas.CODIGO ";
             //if(!strpos($order_by, 'cuentas_ccaa_gastos.ANHO DESC, ')) $order_by = $order_by . "cuentas_ccaa_gastos.ANHO DESC, ";
             //if(!strpos($group_by, 'cuentas_ccaa_gastos.ANHO, ')) $group_by = $group_by . "cuentas_ccaa_gastos.ANHO, ";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_ccaa_gastos.ANHO DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_gastos.ANHO ";
         }
 
         if(!empty($choice)){
+            $anhoref='';
+            if(strpos($joins, ' scoring_ccaa ')!==false)  $anhoref="scoring_ccaa.ANHO";
+            else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $anhoref="cuentas_ccaa_general.ANHO";
+            else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $anhoref="cuentas_ccaa_general_mensual.ANHO";
+            else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $anhoref="cuentas_ccaa_ingresos.ANHO";
+            else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false) $anhoref="cuentas_ccaa_gastos.ANHO";
+            else if(strpos($joins, ' deudas_ccaa ')!==false)  $anhoref="deudas_ccaa.ANHO";
+            else {
+                $anhoref="scoring_ccaa.ANHO";
+                $joins=$joins."INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO";
+            }
+
             if($choice =='SelectYear'){
                 if(!empty($anho)){
                     if($conditions!=""){
                         $conditions = $conditions . "AND ";
                     }
-                    $conditions = $conditions."scoring_ccaa.ANHO = '$anho' ";
+                    $conditions = $conditions."$anhoref = '$anho' ";
                 }
             }
             else {
@@ -1366,23 +1437,26 @@ class DAOConsultorCCAA {
                     if($conditions!=""){
                         $conditions = $conditions . "AND ";
                     }
-                    $conditions = $conditions."scoring_ccaa.ANHO BETWEEN '$from' AND '$to' ";
+                    $conditions = $conditions."$anhoref BETWEEN '$from' AND '$to' ";
                 }
                 else if(!empty($from) && empty($to)){
                     
                     if($conditions!=""){
                         $conditions = $conditions . "AND ";
                     }
-                    $conditions = $conditions."scoring_ccaa.ANHO >= '$from' ";
+                    $conditions = $conditions."$anhoref >= '$from' ";
                 }
                 else if(empty($from) && !empty($to)){
                     
                     if($conditions!=""){
                         $conditions = $conditions . "AND ";
                     }
-                    $conditions = $conditions."scoring_ccaa.ANHO <= '$to' ";
+                    $conditions = $conditions."$anhoref <= '$to' ";
                 }
             }
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",$anhoref";
+            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "$anhoref DESC, ";
+            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",$anhoref ";
         }
 
         if($conditions!=""){
@@ -1391,16 +1465,19 @@ class DAOConsultorCCAA {
         
         //$sql = "SELECT DISTINCT(NOMBRE), ANHO, RATING, POBLACION FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $conditions ORDER BY ANHO ASC";
         //$sql = "SELECT DISTINCT(ccaas.CODIGO), ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO INNER JOIN cuentas_ccaa_general ON cuentas_ccaa_general.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general.CODIGO = ccaas.CODIGO INNER JOIN cuentas_ccaa_general_mensual ON cuentas_ccaa_general_mensual.CODIGO = ccaas.CODIGO AND cuentas_ccaa_general_mensual.CODIGO = scoring_ccaa.CODIGO AND cuentas_ccaa_general_mensual.CODIGO = cuentas_ccaa_general.CODIGO $conditions ORDER BY cuentas_ccaa_general_mensual.MES, scoring_ccaa.ANHO DESC, cuentas_ccaa_general.ANHO DESC, ccaas.CODIGO ASC";
-        $sql = "SELECT ccaas.CODIGO, ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $joins $conditions GROUP BY ccaas.CODIGO, scoring_ccaa.ANHO ORDER BY scoring_ccaa.ANHO DESC, ccaas.CODIGO ASC";
+        //$sql = "SELECT ccaas.CODIGO, ccaas.NOMBRE, scoring_ccaa.ANHO $returning_values FROM ccaas INNER JOIN scoring_ccaa ON ccaas.CODIGO = scoring_ccaa.CODIGO $joins $conditions GROUP BY ccaas.CODIGO, scoring_ccaa.ANHO ORDER BY scoring_ccaa.ANHO DESC, ccaas.CODIGO ASC";
+        $sql = "SELECT ccaas.CODIGO, ccaas.NOMBRE $returning_values FROM ccaas $joins $conditions GROUP BY ccaas.CODIGO $group_by ORDER BY $order_by ccaas.CODIGO ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
         }
+        //echo '<br>exito';
         $elements=array();
         while($resultado = mysqli_fetch_assoc($result)){
             $elements2 = array();
             $ccaa = new CCAA();
+            $ccaa->setCodigo($resultado['CODIGO']);
             $ccaa->setNombre($resultado['NOMBRE']);
             if(!empty($resultado['RATING'])) $ccaa->setScoring($resultado['RATING']);
             if(!empty($resultado['POBLACION']))$ccaa->setPoblacion($resultado['POBLACION']);
