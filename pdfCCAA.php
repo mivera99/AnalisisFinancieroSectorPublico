@@ -19,6 +19,7 @@ $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
 
 /* AÑADIMOS LA LIBRERÍA TCPDF */
+
 require_once('includes/tcpdf/tcpdf_import.php');
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -60,10 +61,93 @@ $html = '
 ';
 
 /* DATOS GENERALES*/
+$quote1 = "";
+$quote2 = "";
+$quoteNum = 1;
 
 foreach($ccaa->getScoring() as $clave => $valor){
     $tend = $ccaa->getTendencia();
-    $html .='<i><b>Rating ' . $clave . ': ' . $valor . '</b><br>Tendencia: ' . $tend[$clave] . '</i><br><br>';
+    $html .='<i><b>Rating ' . $clave . ': ' . $valor . '</b><br>Tendencia: ' . $tend[$clave];
+
+    switch($valor){
+        case "A":
+            switch($tend[$clave]){
+                case "Positiva":
+                    $infoRating = "La entidad muestra una elevada fortaleza financiera, lo que supone los niveles comparativos más bajos de riesgo, y una evolución positiva en los últimos años.";
+                    break;
+                case "Estable":
+                    $infoRating = "La entidad muestra una elevada fortaleza financiera, lo que supone los niveles comparativos más bajos de riesgo, y una evolución estable en los últimos años.";
+                    break;
+                case "Negativa":
+                    $infoRating = "La entidad muestra una elevada fortaleza financiera, lo que supone los niveles comparativos más bajos de riesgo, a pesar de la evolución negativa de los últimos años.";
+                    break;
+            }
+            break;
+        case "B":
+            switch($tend[$clave]){
+                case "Positiva":
+                    $infoRating = "La entidad muestra una situación financiera holgada, con un nivel relativamente bajo de riesgo, y una evolución positiva en los últimos años.";
+                    break;
+                case "Estable":
+                    $infoRating = "La entidad muestra una situación financiera holgada, con un nivel relativamente bajo de riesgo, que se ha comportado de forma estable durante los últimos años.";
+                    break;
+                case "Negativa":
+                    $infoRating = "La entidad muestra una situación financiera holgada, con un nivel relativamente bajo de riesgo, a pesar del empeoramiento de los últimos años.";
+                    break;
+            }
+            break;
+        case "C":
+            switch($tend[$clave]){
+                case "Positiva":
+                    $infoRating = "La entidad muestra una situación financiera media lo que supone un nivel medio-alto de riesgo, a pesar de la evolución positiva de los últimos años.";
+                    break;
+                case "Estable":
+                    $infoRating = "La entidad muestra una situación financiera media lo que supone un nivel medio-alto de riesgo, con un comportamiento similar durante los últimos años.";
+                    break;
+                case "Negativa":
+                    $infoRating = "La entidad muestra una situación financiera media lo que supone un nivel medio-alto de riesgo tras una evolución negativa en los últimos años.";
+                    break;
+            }
+            break;
+        case "D":
+            switch($tend[$clave]){
+                case "Positiva":
+                    $infoRating = "La entidad muestra una situación financiera complicada lo que supone un nivel alto de riesgo, a pesar de la evolución positiva de los últimos años.";
+                    break;
+                case "Estable":
+                    $infoRating = "La entidad muestra una situación financiera complicada lo que supone un nivel alto de riesgo, con un comportamiento similar durante los últimos años.";
+                    break;
+                case "Negativa":
+                    $infoRating = "La entidad muestra una situación financiera complicada lo que supone un nivel alto de riesgo, tras una evolución negativa en los últimos años.";
+                    break;
+            }
+            break;
+        case "E":
+            switch($tend[$clave]){
+                case "Positiva":
+                    $infoRating = "La entidad muestra una situación financiera muy deteriorada lo que supone un nivel muy elevado de riesgo, a pesar de la la evolución positiva de los últimos años.";
+                    break;
+                case "Estable":
+                    $infoRating = "La entidad muestra una situación financiera muy deteriorada lo que supone un nivel muy elevado de riesgo, con un comportamiento similar durante los últimos años.";
+                    break;
+                case "Negativa":
+                    $infoRating = "La entidad muestra una situación financiera muy deteriorada lo que supone un nivel muy elevado de riesgo, y una evolución negativa en los últimos años.";
+                    break;
+            }
+            break;
+    }
+
+    if($quoteNum == 1){
+        $quote1 = $infoRating;
+    }
+    else if ($quoteNum == 2){
+        $quote2 = $infoRating;
+    }
+
+    $html .= '<sup>'.$quoteNum.'</sup></i><br><br>';
+
+    $quoteNum++;
+
 }
 
 $html .= '
