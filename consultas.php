@@ -24,8 +24,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
     <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
     <script src="functions2.js"></script>
 
-    <script src="node_modules/chart.js/dist/chart.js"></script>
-
     <title>Análisis Financiero del Sector Público</title>
 </head>
     <body>
@@ -47,7 +45,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaCCAA.php' method='POST'>
                     <h3 class="form-name">Consultas de comunidades autónomas</h3>
                     <fieldset>
-                        <!--<script> hideOption(); </script>-->
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
                         <input type="radio" id="selectinterval" name="selection" value="SelectInterval" onclick="hideOption('selection','sel')">
@@ -95,7 +92,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             </p>
                         </div>
                         <br><br>
-                        <p>Scoring </p><!--<input type="text" maxlength="1" name="scoringCCAA"/>-->
+                        <p>Scoring </p>
                         <select name="scoringCCAA">
                             <option value="inicio" selected>Seleccione un rating</option>
                             <option value="A">A</option>
@@ -113,8 +110,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo4">3.000.000 - 6.000.000</option>
                             <option value="tramo5">> 6.000.000</option>
                         </select>
-                        <!--<input type='number' min="1" name="poblacionCCAA">--> <br><br>
-                        <!--<p>Cantidad mínima <input type="number" id="minVal" name="min" min="0" onchange="compareMin()"/> Cantidad máxima<input type="number" id="maxVal" name="max" min="1" onchange="compareMax()"/></p>-->
                         <p>Endeudamiento</p>
                         <select name="endeudamientoCCAA">
                             <option value="inicio" selected>Seleccione un tramo</option>
@@ -375,21 +370,21 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo10">100.000 - 500.000</option>
                             <option value="tramo11">> 500.000</option>
                         </select>
-                        <p>Provincia</p>
-                        <select name="provinciasMUN">
-                            <option value="inicio" selected>Seleccione una provincia</option>
-                            <?php
-                            foreach($provCombobox as $prov){
-                                echo '<option value="'.$prov->getCodigo().'">'.$prov->getNombre().'</option>';
-                            }
-                            ?>
-                        </select>
                         <p>Comunidad Autónoma</p>
                         <select name="autonomiasMUN">
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
                             foreach($ccaaCombobox as $ccaa){
                                 echo '<option value="'.$ccaa->getCodigo().'">'.$ccaa->getNombre().'</option>';
+                            }
+                            ?>
+                        </select>
+                        <p>Provincia</p>
+                        <select name="provinciasMUN">
+                            <option value="inicio" selected>Seleccione una provincia</option>
+                            <?php
+                            foreach($provCombobox as $prov){
+                                echo '<option value="'.$prov->getCodigo().'">'.$prov->getNombre().'</option>';
                             }
                             ?>
                         </select>
