@@ -217,8 +217,9 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+
 .dataTable td {
-  width:14%;
+  width:12%;
 }
 .dataTable th{
   height: 40px;
@@ -291,6 +292,11 @@ td, th {
 }
 
 .celda-eficacia-recaudatoria{
+  display: grid;
+  grid-template-columns: 165px auto auto;
+}
+
+.celda-presupuesto{
   display: grid;
   grid-template-columns: 165px auto auto;
 }

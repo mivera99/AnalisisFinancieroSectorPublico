@@ -740,7 +740,7 @@ class DAOConsultorCCAA {
         }
         $ccaa->setDeudaVivaIngrCor($elements);
 
-        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.PARO FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.PARO IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
+        $sql = "SELECT c1.CODIGO, c1.ANHO, c1.MES, c1.TRANSAC_INMOBILIARIAS FROM cuentas_ccaa_general_mensual c1 INNER JOIN (SELECT c2.CODIGO, c2.ANHO, MAX(c2.MES) MAX_MES FROM cuentas_ccaa_general_mensual c2 WHERE c2.TRANSAC_INMOBILIARIAS IS NOT NULL GROUP BY c2.CODIGO, c2.ANHO) c2 ON c2.CODIGO=c1.CODIGO AND c2.ANHO = c1.ANHO AND c1.MES=c2.MAX_MES WHERE c1.CODIGO = '$codigo' ORDER BY c1.CODIGO ASC, c1.ANHO DESC, c1.MES DESC LIMIT 3";
         $result = mysqli_query($db, $sql);
         if(!$result){
             return false;
@@ -750,7 +750,7 @@ class DAOConsultorCCAA {
         while($transac = mysqli_fetch_assoc($result)){
             //if(!$this->in_multi_array($transac['ANHO'], $elements)){
                 array_push($elements2, $transac['ANHO']);
-                array_push($elements2, $transac['MAX_MES']/3);
+                array_push($elements2, $transac['MES']/3);
                 array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
                 array_push($elements, $elements2);
                 $elements2 = array();

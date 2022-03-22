@@ -852,10 +852,36 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Resultado presupuestario</th>';
+                    if($i==0){ 
+                        ?>
+                        <th>
+                            <div class="celda-presupuesto">
+                                Resultado presupuestario
+                                <div class="info">
+                                    <img src="info.svg" alt="información" height="14px">
+                                    <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
+                                </div>
+                            </div>
+                        </th>
+                        <?php
+                        //echo '<th>Resultado presupuestario</th>';
+                    }
                     else if ($i==1) echo '<th>Resultado presupuestario nacional</th>';
-                    else if ($i==2) echo '<th>Deuda viva sobre ingresos corrientes</th>';
-                    else if ($i==3) echo '<th>Deuda viva nacional sobre ingresos corrientes</th>';
+                    else if ($i==2) {
+                        ?> 
+                        <th>
+                            <div class="celda-endeudamiento">
+                                Endeudamiento
+                                <div class="info">
+                                    <img src="info.svg" alt="información" height="14px">
+                                    <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
+                                </div>
+                            </div>
+                        </th>
+                        <?php
+                        //echo '<th>Deuda viva sobre ingresos corrientes</th>';
+                    }
+                    else if ($i==3) echo '<th>Endeudamiento media nacional</th>';
                     if($i<2){
                         foreach($tmp as $clave=>$valor){
                             echo '<td>'.($valor*100).'%</td>';
@@ -1576,9 +1602,48 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Sostenibilidad financiera</th>';
-                    else if ($i==1) echo '<th>Apalancamiento operativo</th>';
-                    else if ($i==2) echo '<th>Sostenibilidad de la deuda</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-sostenibilidad-financiera">
+                            Sostenibilidad financiera
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el ahorro sobre ingresos corrientes. Mejor cuanto más alto</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Sostenibilidad financiera</th>';
+                    }
+                    else if ($i==1){ 
+                        ?>
+                        <th>
+                        <div class="celda-apalancamiento">
+                            Apalancamiento
+                            <div class="info-apalancamiento">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide gastos de difícil ajuste (personal, amortización e intereses) sobre ingresos corrientes</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Apalancamiento operativo</th>';
+                    }
+                    else if ($i==2) {
+                        ?>
+                        <th>
+                        <div class="celda-sostenibilidad-deuda">
+                            Sostenibilidad de la deuda
+                            <div class="info-sostenibilidad-deuda">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide la carga financiera entre ingresos corrientes</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Sostenibilidad de la deuda</th>';
+                    }
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
                     }
@@ -1744,7 +1809,20 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>PMP</th>';
+                    if($i==0) {
+                        //echo '<th>PMP</th>';
+                        ?>
+                        <th>
+                        <div class="celda-pmp">
+                            Periodo medio de pago (PMP)
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el número de días teórico que se tarda en pagar a terceros</span>
+                            </div>
+                        </th>
+                        </div>
+                        <?php
+                    }
                     else if ($i==1) echo '<th>PMP medio</th>';
                     foreach($tmp as $array){
                         echo '<td>'.$array[2].' días</td>';
@@ -1871,7 +1949,20 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Eficiencia</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-eficiencia">
+                            Eficiencia
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide gastos de personal + bienes y servicios entre ingresos corrientes propios recurrentes</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Eficiencia</th>';
+                    }
                     else if ($i==1) echo '<th>Eficiencia media</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
@@ -1992,9 +2083,35 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Ejecución sobre ingresos corrientes</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-ejecucion-ingresos">
+                            Ejecución sobre ingresos corrientes
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de derechos reconocidos sobre los ingresos presupuestados</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Ejecución sobre ingresos corrientes</th>';
+                    }
                     else if ($i==1) echo '<th>Ejecución media sobre ingresos corrientes</th>';
-                    else if ($i==2) echo '<th>Ejecución sobre gastos corrientes</th>';
+                    else if ($i==2) {
+                        ?>
+                        <th>
+                        <div class="celda-ejecucion-gastos">
+                            Ejecución sobre gastos corrientes
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de obligaciones reconocidas sobre los gastos presupuestados</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Ejecución sobre gastos corrientes</th>';
+                    }
                     else if ($i==3) echo '<th>Ejecución media sobre gastos corrientes</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
@@ -2192,7 +2309,19 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Porcentaje de pagos pendientes de deuda comercial</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-pmp">
+                            Porcentaje de pagos pendientes de deuda comercial
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide los pagos pendientes de la deuda comercial</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php //echo '<th>Porcentaje de pagos pendientes de deuda comercial</th>';
+                    }
                     else if ($i==1) echo '<th>Porcentaje medio de pagos pendientes de deuda comercial</th>';
                     foreach($tmp as $array){
                         echo '<td>'.($array[2]*100).'%</td>';
@@ -2311,7 +2440,20 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Porcentaje de gastos pagados</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-pagos-obligaciones">
+                            Pagos sobre obligaciones reconocidas
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide el porcentaje de pagos sobre las obligaciones reconocidas</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Porcentaje de gastos pagados</th>';
+                    }
                     else if ($i==1) echo '<th>Porcentaje medio de gastos pagados</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';
@@ -2430,7 +2572,20 @@ if($ccaa && $ccaaNac){
                     echo'</thead>';
                     echo '<tbody>';
                     echo '<tr>';
-                    if($i==0) echo '<th>Eficacia recaudatoria</th>';
+                    if($i==0) {
+                        ?>
+                        <th>
+                        <div class="celda-eficacia-recaudatoria">
+                            Eficacia recaudatoria
+                            <div class="info">
+                                <img src="info.svg" alt="información" height="14px">
+                                <span class="extra-info">Mide los ingresos cobrados sobre los ingresos devengados</span>
+                            </div>
+                        </div>
+                        </th>
+                        <?php
+                        //echo '<th>Eficacia recaudatoria</th>';
+                    }
                     else if ($i==1) echo '<th>Eficacia media recaudatoria</th>';
                     foreach($tmp as $clave=>$valor){
                         echo '<td>'.($valor*100).'%</td>';

@@ -56,6 +56,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Año</p>
                             <select name="anhoCCAA">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -69,6 +71,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Desde 
                             <select name="from">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -79,6 +83,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             hasta 
                             <select name="to">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -97,7 +103,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="C">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
-                            <option value="F">F</option>
                         </select>
                         <p>Población </p>
                         <select name="poblacionCCAA">
@@ -182,6 +187,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Año</p>
                             <select name="anhoDIP">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -195,6 +202,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Desde 
                             <select name="from">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -205,6 +214,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             hasta 
                             <select name="to">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -222,7 +233,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="C">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
-                            <option value="F">F</option>
                         </select>
                         <p>Comunidad Autónoma</p>
                         <select name="autonomiasDIP">
@@ -303,6 +313,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Año</p>
                             <select name="anhoMUN">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -316,6 +328,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <p>Desde 
                             <select name="from">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -326,6 +340,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             hasta 
                             <select name="to">
                                 <option value="inicio" selected>Seleccione un año</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -343,7 +359,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="C">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
-                            <option value="F">F</option>
                         </select>
                         <p>Población</p>
                         <select name="poblacionMUN">
