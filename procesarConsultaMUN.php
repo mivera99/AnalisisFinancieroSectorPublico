@@ -148,7 +148,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
             echo '</tr>';
             while($i < count($muns) && $year==key($muns[$i])){
                 echo '<tr>';
-                echo '<td>'.($i+1).'</td>';
+                echo '<td class="ratingCell">'.($i+1).'</td>';
                 echo '<td>'.$muns[$i][$year]->getNombre().'</td>';
                 if(!empty($muns[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$muns[$i][$year]->getScoring().'</td>';
                 else if(!empty($scoring)) echo '<td class="ratingCell">N/A</td>';
