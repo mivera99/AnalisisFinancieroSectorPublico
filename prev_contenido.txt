@@ -412,3 +412,13 @@
                 const lineChart = new Chart(document.getElementById('lineChart'), configLineChart);
                 const pieChart = new Chart(document.getElementById('pieChart'), configPieChart);
             </script>
+
+            onchange="changeCCAA('ccaaMUN', 'provMUN')"
+ onchange="changeProv('provMUN', 'ccaaMUN', echo(json_encode($ccaaCombobox)))"
+
+
+
+
+ccaaMUN
+ onchange="changeProv('provMUN', 'ccaaMUN', <?php echo(json_encode($ccaaCombobox))?>, <?php echo(json_encode($provCombobox))?>)"
+ onchange="changeCCAA('ccaaMUN', 'provMUN', <?php echo(json_encode($ccaaCombobox))?>, <?php echo(json_encode($provCombobox))?>)"

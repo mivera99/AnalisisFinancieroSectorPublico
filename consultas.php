@@ -66,7 +66,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <div class="sel" id="interval">
                             <p><b>Rango de años</b></p>
                             <p>Desde 
-                            <select name="from">
+                            <select id="fromCCAA" name="from" onchange="changeTo('toCCAA','fromCCAA')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -78,7 +78,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                                 <option value="2022">2022</option> 
                             </select>
                             hasta 
-                            <select name="to">
+                            <select id="toCCAA" name="to" onchange="changeFrom('fromCCAA', 'toCCAA')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -195,7 +195,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <div class="selDIP" id="interval">
                             <p><b>Rango de años</b></p>
                             <p>Desde 
-                            <select name="from">
+                            <select id="fromDIP" name="from" onchange="changeTo('toDIP', 'fromDIP')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -207,7 +207,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                                 <option value="2022">2022</option> 
                             </select>
                             hasta 
-                            <select name="to">
+                            <select id="toDIP" name="to" onchange="changeFrom('fromDIP', 'toDIP')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -321,7 +321,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <div class="selMUN" id="interval">
                             <p><b>Rango de años</b></p>
                             <p>Desde 
-                            <select name="from">
+                            <select id="fromMUN" name="from" onchange="changeTo('toMUN','fromMUN')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -333,7 +333,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                                 <option value="2022">2022</option> 
                             </select>
                             hasta 
-                            <select name="to">
+                            <select id="toMUN" name="to" onchange="changeFrom('fromMUN','toMUN')">
                                 <option value="inicio" selected>Seleccione un año</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -371,7 +371,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo11">> 500.000</option>
                         </select>
                         <p>Comunidad Autónoma</p>
-                        <select name="autonomiasMUN">
+                        <select id="ccaaMUN" name="autonomiasMUN">
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
                             foreach($ccaaCombobox as $ccaa){
@@ -380,7 +380,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             ?>
                         </select>
                         <p>Provincia</p>
-                        <select name="provinciasMUN">
+                        <select id="provMUN" name="provinciasMUN">
                             <option value="inicio" selected>Seleccione una provincia</option>
                             <?php
                             foreach($provCombobox as $prov){

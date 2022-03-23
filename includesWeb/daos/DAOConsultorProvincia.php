@@ -14,9 +14,17 @@ class DAOConsultorProvincia {
             }
             $elements = array();
             while($resultado = mysqli_fetch_assoc($result)){
+                $provCode = $resultado['CODIGO'];
+                $sql2 = "SELECT AUTONOMIA FROM municipios WHERE AUTONOMIA = '$provCode' LIMIT 1 ";
+                $result2 = mysqli_query($db, $sql2);
+                if(!$result2){
+                    return false;
+                }
+                $resultado2 = mysqli_fetch_assoc($result2);
                 $provincia = new Provincia();
                 $provincia->setCodigo($resultado['CODIGO']);
                 $provincia->setNombre($resultado['NOMBRE']);
+                $provincia->setCCAACode($resultado2['AUTONOMIA']);
                 array_push($elements, $provincia);
             }
 

@@ -73,3 +73,63 @@ function changeChart(chart, configChart, radioButtonName){
   }
   chart.update();
 }
+
+function changeTo(toId, fromId){
+  var to = document.getElementById(toId);
+  var from = document.getElementById(fromId);
+  
+  for(i=0;i<to.options.length;i++){
+    var option = to.options[i];
+    option.style.display="block";
+  }
+
+  if(from.selectedIndex!=0){
+    for(i=1;i<from.selectedIndex;i++){
+      var option = to.options[i];
+      option.style.display="none";
+    }
+  }
+}
+
+function changeFrom(fromId,toId){
+  var from = document.getElementById(fromId);
+  var to = document.getElementById(toId);
+  
+  for(i=0;i<from.options.length;i++){
+    var option = from.options[i];
+    option.style.display="block";
+  }
+
+  if(to.selectedIndex!=0){
+    for(i=to.selectedIndex+1;i<from.options.length;i++){
+      var option = from.options[i];
+      option.style.display="none";
+    }
+  }
+}
+
+function changeProv(provId, ccaaId, ccaaArray, provArray){
+  var provTag = document.getElementById(provId);
+  var ccaaTag = document.getElementById(ccaaId);
+  
+  for(i=0;i<provTag.options.length;i++){
+    var option = provTag.options[i];
+    option.style.display="block";
+  }
+  if(ccaaTag.selectedIndex!=0){
+    
+  }
+}
+
+function changeCCAA(ccaaId, provId, ccaaArray, provArray){
+  var ccaaTag = document.getElementById(ccaaId);
+  var provTag = document.getElementById(provId);
+  
+  for(i=0;i<ccaaTag.options.length;i++){
+    var option = ccaaTag.options[i];
+    option.style.display="block";
+  }
+  if(provTag.selectedIndex!=0){
+
+  }
+}

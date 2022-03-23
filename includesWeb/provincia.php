@@ -4,6 +4,7 @@ class Provincia{
 
     private $codigo=0;
     private $nombre="";
+    private $ccaaCode=0;
 
     public function getCodigo(){
         return $this->codigo;
@@ -17,7 +18,12 @@ class Provincia{
     public function setNombre($nombre){
         return $this->nombre=$nombre;
     }
-
+    public function getCCAACode(){
+        return $this->ccaaCode;
+    }
+    public function setCCAACode($ccaaCode){
+        return $this->ccaaCode=$ccaaCode;
+    }
 }
 
 ?>
