@@ -884,12 +884,28 @@ if($ccaa && $ccaaNac){
                     else if ($i==3) echo '<th>Endeudamiento media nacional</th>';
                     if($i<2){
                         foreach($tmp as $clave=>$valor){
-                            echo '<td>'.($valor*100).'%</td>';
+                            $porcentaje = $valor*100;
+                            $color = "";
+                            if($porcentaje<=0) $color="darkgreenCell";
+                            else if ($porcentaje>0 && $porcentaje<=1) $color="greenCell";
+                            else if ($porcentaje>1 && $porcentaje<=2) $color="lightgreenCell";
+                            else if ($porcentaje>2 && $porcentaje<=5) $color="orangeCell";
+                            else if ($porcentaje>5) $color="redCell";
+                            else $color="greyCell";
+                            echo '<td class="'.$color.'">'.$porcentaje.'%</td>';
                         }
                     }
                     else {
                         foreach($tmp as $array){
-                            echo '<td>'.($array[2]*100).'%</td>';
+                            $porcentaje = ($array[2]*100);
+                            $color="";
+                            if($porcentaje>=0 && $porcentaje<50) $color="darkgreenCell";
+                            else if ($porcentaje>=50 && $porcentaje<75) $color="greenCell";
+                            else if ($porcentaje>=75 && $porcentaje<100) $color="lightgreenCell";
+                            else if ($porcentaje>=100 && $porcentaje<150) $color="orangeCell";
+                            else if ($porcentaje>=150) $color="redCell";
+                            else $color="greyCell";
+                            echo '<td class="'.$color.'">'.$porcentaje.'%</td>';
                         }
                     }
                     echo '</tr>';
@@ -1645,7 +1661,33 @@ if($ccaa && $ccaaNac){
                         //echo '<th>Sostenibilidad de la deuda</th>';
                     }
                     foreach($tmp as $clave=>$valor){
-                        echo '<td>'.($valor*100).'%</td>';
+                        $porcentaje = ($valor*100);
+                        $color="";
+                        if($i==0) {
+                            if($porcentaje>=0) $color="darkgreenCell";
+                            else if ($porcentaje>=-5 && $porcentaje<0) $color="greenCell";
+                            else if ($porcentaje>=-10 && $porcentaje<-5) $color="lightgreenCell";
+                            else if ($porcentaje>=-20 && $porcentaje<-10) $color="orangeCell";
+                            else if ($porcentaje<=-20) $color="redCell";
+                            else $color="greyCell";
+                        }
+                        else if($i==1){
+                            if($porcentaje<=50) $color="darkgreenCell";
+                            else if ($porcentaje>=50 && $porcentaje<60) $color="greenCell";
+                            else if ($porcentaje>=60 && $porcentaje<75) $color="lightgreenCell";
+                            else if ($porcentaje>=75 && $porcentaje<90) $color="orangeCell";
+                            else if ($porcentaje>=90) $color="redCell";
+                            else $color="greyCell";
+                        }
+                        else if($i==2){
+                            if($porcentaje>=0 && $porcentaje<10) $color="darkgreenCell";
+                            else if ($porcentaje>=10 && $porcentaje<20) $color="greenCell";
+                            else if ($porcentaje>=20 && $porcentaje<30) $color="lightgreenCell";
+                            else if ($porcentaje>=30 && $porcentaje<50) $color="orangeCell";
+                            else if ($porcentaje>=50) $color="redCell";
+                            else $color="greyCell";
+                        }
+                        echo '<td class="'.$color.'">'.$porcentaje.'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -1825,7 +1867,15 @@ if($ccaa && $ccaaNac){
                     }
                     else if ($i==1) echo '<th>PMP medio</th>';
                     foreach($tmp as $array){
-                        echo '<td>'.$array[2].' días</td>';
+                        $dias=$array[2];
+                        $color="";
+                        if($dias>=0 && $dias<30) $color="darkgreenCell";
+                        else if ($dias>=30 && $dias<60) $color="greenCell";
+                        else if ($dias>=60 && $dias<90) $color="lightgreenCell";
+                        else if ($dias>=90 && $dias<120) $color="orangeCell";
+                        else if ($dias>=120) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.$dias.' días</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -1965,7 +2015,15 @@ if($ccaa && $ccaaNac){
                     }
                     else if ($i==1) echo '<th>Eficiencia media</th>';
                     foreach($tmp as $clave=>$valor){
-                        echo '<td>'.($valor*100).'%</td>';
+                        $porcentaje = ($valor*100);
+                        $color="";
+                        if($porcentaje<=80) $color="darkgreenCell";
+                        else if ($porcentaje>=80 && $porcentaje<100) $color="greenCell";
+                        else if ($porcentaje>=100 && $porcentaje<125) $color="lightgreenCell";
+                        else if ($porcentaje>=125 && $porcentaje<150) $color="orangeCell";
+                        else if ($porcentaje>=150) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -2114,7 +2172,15 @@ if($ccaa && $ccaaNac){
                     }
                     else if ($i==3) echo '<th>Ejecución media sobre gastos corrientes</th>';
                     foreach($tmp as $clave=>$valor){
-                        echo '<td>'.($valor*100).'%</td>';
+                        $porcentaje = ($valor*100);
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if ($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if ($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
+                        else if ($porcentaje>=90 && $porcentaje<95) $color="orangeCell";
+                        else if ($porcentaje<=90) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -2313,18 +2379,26 @@ if($ccaa && $ccaaNac){
                         ?>
                         <th>
                         <div class="celda-pmp">
-                            Porcentaje de pagos pendientes de deuda comercial
+                            Deuda comercial sobre obligaciones reconocidas
                             <div class="info">
                                 <img src="info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide los pagos pendientes de la deuda comercial</span>
                             </div>
                         </div>
                         </th>
-                        <?php //echo '<th>Porcentaje de pagos pendientes de deuda comercial</th>';
+                        <?php
                     }
-                    else if ($i==1) echo '<th>Porcentaje medio de pagos pendientes de deuda comercial</th>';
+                    else if ($i==1) echo '<th>Deuda comercial media sobre obligaciones reconocidas</th>';
                     foreach($tmp as $array){
-                        echo '<td>'.($array[2]*100).'%</td>';
+                        $porcentaje=($array[2]*100);
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if ($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if ($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
+                        else if ($porcentaje>=90 && $porcentaje<95) $color="orangeCell";
+                        else if ($porcentaje<=90) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -2456,7 +2530,15 @@ if($ccaa && $ccaaNac){
                     }
                     else if ($i==1) echo '<th>Porcentaje medio de gastos pagados</th>';
                     foreach($tmp as $clave=>$valor){
-                        echo '<td>'.($valor*100).'%</td>';
+                        $porcentaje = ($valor*100);
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if ($porcentaje>=95 && $porcentaje<99) $color="greenCell";
+                        else if ($porcentaje>=90 && $porcentaje<95) $color="lightgreenCell";
+                        else if ($porcentaje>=85 && $porcentaje<90) $color="orangeCell";
+                        else if ($porcentaje<=85) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';
@@ -2588,7 +2670,15 @@ if($ccaa && $ccaaNac){
                     }
                     else if ($i==1) echo '<th>Eficacia media recaudatoria</th>';
                     foreach($tmp as $clave=>$valor){
-                        echo '<td>'.($valor*100).'%</td>';
+                        $porcentaje=($valor*100);
+                        $color="";
+                        if($porcentaje>=95) $color="darkgreenCell";
+                        else if ($porcentaje>=90 && $porcentaje<95) $color="greenCell";
+                        else if ($porcentaje>=85 && $porcentaje<90) $color="lightgreenCell";
+                        else if ($porcentaje>=80 && $porcentaje<85) $color="orangeCell";
+                        else if ($porcentaje<=80) $color="redCell";
+                        else $color="greyCell";
+                        echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
                     echo '</tr>';
                     echo'</tbody>';

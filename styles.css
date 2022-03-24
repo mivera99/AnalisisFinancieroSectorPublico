@@ -225,6 +225,30 @@ td, th {
   height: 40px;
 }
 
+.dataTable .darkgreenCell {
+  background-color:rgb(22, 163, 22);
+}
+
+.dataTable .greenCell {
+  background-color:rgb(0, 255, 0);
+}
+
+.dataTable .lightgreenCell {
+  background-color:rgb(153, 197, 64);
+}
+
+.dataTable .orangeCell {
+  background-color:rgb(240, 129, 2);
+}
+
+.dataTable .redCell {
+  background-color:rgb(255, 0, 0);
+}
+
+.dataTable .greyCell {
+  background-color:grey;
+}
+
 .ratingCell {
   width:6%;
   text-align: center;
@@ -323,7 +347,6 @@ td, th {
 }
 
 .info, .info-apalancamiento, .info-sostenibilidad-deuda{
-  position:relative;
   font-size: 20px;
   padding-left: 5px;
   height: 25px;

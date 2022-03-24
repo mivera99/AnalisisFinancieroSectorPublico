@@ -784,13 +784,51 @@ if($diputacion){
                                 </div>
                             </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEndeudamiento()*100;
+                        $color="";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
+                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
+                        else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
+                        else if($porcentaje>75) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEndeudamiento()*100;
+                        $color2="";
+                        if($porcentaje2==0) $color="darkgreenCell";
+                        else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
+                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
+                        else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
+                        else if($porcentaje2>75) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Endeudamiento Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEndeudamientoMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
+                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
+                        else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
+                        else if($porcentaje>75) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEndeudamientoMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2==0) $color="darkgreenCell";
+                        else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
+                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
+                        else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
+                        else if($porcentaje2>75) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -910,11 +948,49 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSostenibilidadFinanciera()*100;
+                        $color="";
+                        if($porcentaje>15) $color="darkgreenCell";
+                        else if($porcentaje>5 && $porcentaje<=15) $color="greenCell";
+                        else if($porcentaje>-5 && $porcentaje<=5) $color="lightgreeCell";
+                        else if($porcentaje>-15 && $porcentaje<=-5) $color="orangeCell"; 
+                        else if($porcentaje<-15) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSostenibilidadFinanciera()*100;
+                        $color2="";
+                        if($porcentaje2>15) $color="darkgreenCell";
+                        else if($porcentaje2>5 && $porcentaje2<=15) $color2="greenCell";
+                        else if($porcentaje2>-5 && $porcentaje2<=5) $color2="lightgreeCell";
+                        else if($porcentaje2>-15 && $porcentaje2<=-5) $color2="orangeCell"; 
+                        else if($porcentaje2<-15) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Sostenibilidad Financiera Media Diputaciones</th>
+                        <?php
+                        $porcentaje = $dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
+                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
+                        else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
+                        else if($porcentaje>75) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2==0) $color="darkgreenCell";
+                        else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
+                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
+                        else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
+                        else if($porcentaje2>75) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
                         <td style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
@@ -940,13 +1016,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getApalancamientoOperativo()*100;
+                        $color="";
+                        if($porcentaje<30) $color="darkgreenCell";
+                        else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
+                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=50 && $porcentaje<60) $color="orangeCell"; 
+                        else if($porcentaje>=60) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getApalancamientoOperativo()*100;
+                        $color2="";
+                        if($porcentaje2<30) $color="darkgreenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
+                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=50 && $porcentaje2<60) $color2="orangeCell"; 
+                        else if($porcentaje2>=60) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Apalancamiento Operativo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getApalancamientoOperativoMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje<30) $color="darkgreenCell";
+                        else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
+                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=50 && $porcentaje<60) $color="orangeCell"; 
+                        else if($porcentaje>=60) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getApalancamientoOperativoMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2<30) $color="darkgreenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
+                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=50 && $porcentaje2<60) $color2="orangeCell"; 
+                        else if($porcentaje2>=60) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -970,13 +1084,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSostenibilidadDeuda()*100;
+                        $color="";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
+                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreeCell";
+                        else if($porcentaje>=15 && $porcentaje<25) $color="orangeCell"; 
+                        else if($porcentaje>=25) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSostenibilidadDeuda()*100;
+                        $color2="";
+                        if($porcentaje2==0) $color="darkgreenCell";
+                        else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
+                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreeCell";
+                        else if($porcentaje2>=15 && $porcentaje2<25) $color2="orangeCell"; 
+                        else if($porcentaje2>=25) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Sostenibilidad de la Deuda Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSostenibilidadDeudaMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
+                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreeCell";
+                        else if($porcentaje>=15 && $porcentaje<25) $color="orangeCell"; 
+                        else if($porcentaje>=25) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSostenibilidadDeudaMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2==0) $color="darkgreenCell";
+                        else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
+                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreeCell";
+                        else if($porcentaje2>=15 && $porcentaje2<25) $color2="orangeCell"; 
+                        else if($porcentaje2>=25) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1273,13 +1425,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getRemanenteTesoreriaGastosGenerales()*100;
+                        $color="";
+                        if($porcentaje>=25) $color="darkgreenCell";
+                        else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
+                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreeCell";
+                        else if($porcentaje>=-25 && $porcentaje<-5) $color="orangeCell"; 
+                        else if($porcentaje<-25) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
+                        $color2="";
+                        if($porcentaje2>=25) $color="darkgreenCell";
+                        else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
+                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreeCell";
+                        else if($porcentaje2>=-25 && $porcentaje2<-5) $color2="orangeCell"; 
+                        else if($porcentaje2<-25) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Remanente de Tesorería Gastos Generales Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=25) $color="darkgreenCell";
+                        else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
+                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreeCell";
+                        else if($porcentaje>=-25 && $porcentaje<-5) $color="orangeCell"; 
+                        else if($porcentaje<-25) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=25) $color="darkgreenCell";
+                        else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
+                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreeCell";
+                        else if($porcentaje2>=-25 && $porcentaje2<-5) $color2="orangeCell"; 
+                        else if($porcentaje2<-25) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1303,13 +1493,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getLiquidezInmediata()*100;
+                        $color="";
+                        if($porcentaje>=100) $color="darkgreenCell";
+                        else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
+                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=20 && $porcentaje<30) $color="orangeCell"; 
+                        else if($porcentaje<20) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getLiquidezInmediata()*100;
+                        $color2="";
+                        if($porcentaje2>=100) $color="darkgreenCell";
+                        else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=20 && $porcentaje2<30) $color2="orangeCell"; 
+                        else if($porcentaje2<20) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Solvencia Corto Plazo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=100) $color="darkgreenCell";
+                        else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
+                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=20 && $porcentaje<30) $color="orangeCell"; 
+                        else if($porcentaje<20) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=100) $color="darkgreenCell";
+                        else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=20 && $porcentaje2<30) $color2="orangeCell"; 
+                        else if($porcentaje2<20) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1333,13 +1561,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSolvenciaCortoPlazo()*100;
+                        $color="";
+                        if($porcentaje>=300) $color="darkgreenCell";
+                        else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
+                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreeCell";
+                        else if($porcentaje>=100 && $porcentaje<150) $color="orangeCell"; 
+                        else if($porcentaje<100) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazo()*100;
+                        $color2="";
+                        if($porcentaje2>=300) $color="darkgreenCell";
+                        else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
+                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreeCell";
+                        else if($porcentaje2>=100 && $porcentaje2<150) $color2="orangeCell"; 
+                        else if($porcentaje2<100) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Solvencia Corto Plazo Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
+                        $color="";
+                        if($porcentaje>=300) $color="darkgreenCell";
+                        else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
+                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreeCell";
+                        else if($porcentaje>=100 && $porcentaje<150) $color="orangeCell"; 
+                        else if($porcentaje<100) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
+                        $color2="";
+                        if($porcentaje2>=300) $color="darkgreenCell";
+                        else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
+                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreeCell";
+                        else if($porcentaje2>=100 && $porcentaje2<150) $color2="orangeCell"; 
+                        else if($porcentaje2<100) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1632,13 +1898,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEficiencia()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEficiencia()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEficiencia()*100;
+                        $color="";
+                        if($porcentaje<=80) $color="darkgreenCell";
+                        else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
+                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreeCell";
+                        else if($porcentaje>=125 && $porcentaje<150) $color="orangeCell"; 
+                        else if($porcentaje<150) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEficiencia()*100;
+                        $color2="";
+                        if($porcentaje2>=80) $color="darkgreenCell";
+                        else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
+                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreeCell";
+                        else if($porcentaje2>=125 && $porcentaje2<150) $color2="orangeCell"; 
+                        else if($porcentaje2<150) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficiencia()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficiencia()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Eficiencia Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEficienciaMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje<=80) $color="darkgreenCell";
+                        else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
+                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreeCell";
+                        else if($porcentaje>=125 && $porcentaje<150) $color="orangeCell"; 
+                        else if($porcentaje<150) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEficienciaMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=80) $color="darkgreenCell";
+                        else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
+                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreeCell";
+                        else if($porcentaje2>=125 && $porcentaje2<150) $color2="orangeCell"; 
+                        else if($porcentaje2<150) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1758,13 +2062,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEjecucionIngresosCorrientes()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
+                        else if($porcentaje<90) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEjecucionIngresosCorrientes()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
+                        else if($porcentaje2<90) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Ejecución Ingresos Corrientes Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
+                        else if($porcentaje<90) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
+                        else if($porcentaje2<90) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1788,13 +2130,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEjecucionGastosCorrientes()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
+                        else if($porcentaje<90) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEjecucionGastosCorrientes()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
+                        else if($porcentaje2<90) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Ejecución Gastos Corrientes Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
+                        else if($porcentaje<90) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
+                        else if($porcentaje2<90) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2003,13 +2383,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getPeriodoMedioPagos()*100;
+                        $color="";
+                        if($porcentaje<=30) $color="darkgreenCell";
+                        else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
+                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreeCell";
+                        else if($porcentaje>=120 && $porcentaje<180) $color="orangeCell"; 
+                        else if($porcentaje>=180) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getPeriodoMedioPagos()*100;
+                        $color2="";
+                        if($porcentaje2<=30) $color="darkgreenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreeCell";
+                        else if($porcentaje2>=120 && $porcentaje2<180) $color2="orangeCell"; 
+                        else if($porcentaje2>=180) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
                     </tr>
                     <tr>
                         <th>Periodo Medio de Pagos Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getPeriodoMedioPagosMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje<=30) $color="darkgreenCell";
+                        else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
+                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreeCell";
+                        else if($porcentaje>=120 && $porcentaje<180) $color="orangeCell"; 
+                        else if($porcentaje>=180) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getPeriodoMedioPagosMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2<=30) $color="darkgreenCell";
+                        else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreeCell";
+                        else if($porcentaje2>=120 && $porcentaje2<180) $color2="orangeCell"; 
+                        else if($porcentaje2>=180) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2033,13 +2451,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getPagosSobreObligacionesReconocidas()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreeCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="orangeCell"; 
+                        else if($porcentaje<85) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidas()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreeCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="orangeCell"; 
+                        else if($porcentaje2<85) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?>style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Pagos sobre Obligaciones Reconocidas Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=99) $color="darkgreenCell";
+                        else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreeCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="orangeCell"; 
+                        else if($porcentaje<85) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=99) $color="darkgreenCell";
+                        else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreeCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="orangeCell"; 
+                        else if($porcentaje2<85) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2246,13 +2702,51 @@ if($diputacion){
                             </div>
                         </div>
                         </th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEficaciaRecaudatoria()*100;
+                        $color="";
+                        if($porcentaje>=95) $color="darkgreenCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreeCell";
+                        else if($porcentaje>=80 && $porcentaje<85) $color="orangeCell"; 
+                        else if($porcentaje<80) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEficaciaRecaudatoria()*100;
+                        $color2="";
+                        if($porcentaje2>=95) $color="darkgreenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreeCell";
+                        else if($porcentaje2>=80 && $porcentaje2<85) $color2="orangeCell"; 
+                        else if($porcentaje2<80) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Eficacia Recaudatoria Media Diputaciones</th>
-                        <td style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <?php
+                        $porcentaje = $dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100;
+                        $color="";
+                        if($porcentaje>=95) $color="darkgreenCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreeCell";
+                        else if($porcentaje>=80 && $porcentaje<85) $color="orangeCell"; 
+                        else if($porcentaje<80) $color="redCell"; 
+                        else $color="greyCell";
+
+                        $porcentaje2 = $dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100;
+                        $color2="";
+                        if($porcentaje2>=95) $color="darkgreenCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreeCell";
+                        else if($porcentaje2>=80 && $porcentaje2<85) $color2="orangeCell"; 
+                        else if($porcentaje2<80) $color2="redCell";
+                        else $color2="greyCell";
+                        ?>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
