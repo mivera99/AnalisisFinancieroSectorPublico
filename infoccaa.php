@@ -2392,11 +2392,11 @@ if($ccaa && $ccaaNac){
                     foreach($tmp as $array){
                         $porcentaje=($array[2]*100);
                         $color="";
-                        if($porcentaje>=99) $color="darkgreenCell";
-                        else if ($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
-                        else if ($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
-                        else if ($porcentaje>=90 && $porcentaje<95) $color="orangeCell";
-                        else if ($porcentaje<=90) $color="redCell";
+                        if($porcentaje==0) $color="darkgreenCell";
+                        else if ($porcentaje>0 && $porcentaje<=5) $color="greenCell";
+                        else if ($porcentaje>5 && $porcentaje<=10) $color="lightgreenCell";
+                        else if ($porcentaje>10 && $porcentaje<=20) $color="orangeCell";
+                        else if ($porcentaje>20) $color="redCell";
                         else $color="greyCell";
                         echo '<td class="'.$color.'">'.($porcentaje).'%</td>';
                     }
