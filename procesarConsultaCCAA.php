@@ -15,66 +15,66 @@ $gasto = NULL;
 $choice = NULL;
 $from=NULL;
 $to=NULL;
+$checked_boxes=array();
 
-if(!empty($_REQUEST['scoringCCAA']) && $_REQUEST['scoringCCAA']!='inicio'){
+if(!empty($_REQUEST['scoringCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['poblacionCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['endeudamientoCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['ahorronetoCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['pmpCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['dcppCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['ingrnofinCCAA_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+
+if(!empty($_REQUEST['scoringCCAA']) && $_REQUEST['scoringCCAA']!='inicio') 
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringCCAA'])));
-}
 
-if(!empty($_REQUEST['poblacionCCAA']) && $_REQUEST['poblacionCCAA']!='inicio'){
+if(!empty($_REQUEST['poblacionCCAA']) && $_REQUEST['poblacionCCAA']!='inicio')
     $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionCCAA'])));
-}
 
-if(!empty($_REQUEST['endeudamientoCCAA']) && $_REQUEST['endeudamientoCCAA']!='inicio'){
+if(!empty($_REQUEST['endeudamientoCCAA']) && $_REQUEST['endeudamientoCCAA']!='inicio')
     $endeudamiento = htmlspecialchars(trim(strip_tags($_REQUEST['endeudamientoCCAA'])));
-}
 
-if(!empty($_REQUEST['ahorro_netoCCAA']) && $_REQUEST['ahorro_netoCCAA']!='inicio'){
+if(!empty($_REQUEST['ahorro_netoCCAA']) && $_REQUEST['ahorro_netoCCAA']!='inicio')
     $ahorro_neto = htmlspecialchars(trim(strip_tags($_REQUEST['ahorro_netoCCAA'])));
-}
 
-if(!empty($_REQUEST['pmpCCAA']) && $_REQUEST['pmpCCAA']!='inicio'){
+if(!empty($_REQUEST['pmpCCAA']) && $_REQUEST['pmpCCAA']!='inicio')
     $pmp = htmlspecialchars(trim(strip_tags($_REQUEST['pmpCCAA'])));
-}
 
-if(!empty($_REQUEST['dcppCCAA']) && $_REQUEST['dcppCCAA']!='inicio'){
+if(!empty($_REQUEST['dcppCCAA']) && $_REQUEST['dcppCCAA']!='inicio')
     $dcpp = htmlspecialchars(trim(strip_tags($_REQUEST['dcppCCAA'])));
-}
 
-if(!empty($_REQUEST['ingrnofinCCAA']) && $_REQUEST['ingrnofinCCAA']!='inicio'){
+if(!empty($_REQUEST['ingrnofinCCAA']) && $_REQUEST['ingrnofinCCAA']!='inicio')
     $ingrnofin = htmlspecialchars(trim(strip_tags($_REQUEST['ingrnofinCCAA'])));
-}
 
-if(!empty($_REQUEST['gastoCCAA']) && $_REQUEST['gastoCCAA']!='inicio'){
+if(!empty($_REQUEST['gastoCCAA']) && $_REQUEST['gastoCCAA']!='inicio')
     $gasto = htmlspecialchars(trim(strip_tags($_REQUEST['gastoCCAA'])));
-}
 
 if(isset($_REQUEST['selection'])){
     $choice = htmlspecialchars(trim(strip_tags($_REQUEST['selection'])));
     if($choice == 'SelectYear'){
-        //echo '<p>Radio button del año pulsado</p><br>';
-        if(!empty($_REQUEST['anhoCCAA']) && $_REQUEST['anhoCCAA']!='inicio'){
-            //echo '<p>El año tiene un valor que no es inicio</p><br>';
+        if(!empty($_REQUEST['anhoCCAA']) && $_REQUEST['anhoCCAA']!='inicio')
             $anho = htmlspecialchars(trim(strip_tags($_REQUEST['anhoCCAA'])));
-        }
     }
     else {
-        //echo '<p>Radio button pulsado</p><br>';
         if(!empty($_REQUEST['from']) && !empty($_REQUEST['to'])){
-            if($_REQUEST['from']!='inicio'){
-                //echo '<p>El año from tiene un valor que no es inicio</p><br>';
+            if($_REQUEST['from']!='inicio')
                 $from = htmlspecialchars(trim(strip_tags($_REQUEST['from'])));
-            }
-            //echo '<p>valor de from: '.$from.'</p><br>';
-            if($_REQUEST['to']!='inicio'){
-                //echo '<p>El año to tiene un valor que no es inicio</p><br>';
+
+            if($_REQUEST['to']!='inicio')
                 $to = htmlspecialchars(trim(strip_tags($_REQUEST['to'])));
-            }
-            //echo '<p>valor de to: '.$to.'</p><br>';
+
         }
     }
 }
 
-$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto);
+$ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto, $checked_boxes);
 ?>
 <!DOCTYPE html>
 <html lang="es">

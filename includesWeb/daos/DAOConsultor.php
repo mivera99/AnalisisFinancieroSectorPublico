@@ -56,11 +56,11 @@ class DAOConsultor{
         return (new DAOConsultorCCAA())->getAllCCAAs();
     }
 
-    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto){
+    public function consultarCCAAs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto,$checked_boxes){
         $ccaas = array();
         $daoccaa = new DAOConsultorCCAA();
 
-        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto);
+        return $daoccaa->consultarCCAAs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $pmp, $choice, $anho, $from, $to, $dcpp, $ingrnofin, $gasto, $checked_boxes);
     }
     public function consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto){
         $dips = array();

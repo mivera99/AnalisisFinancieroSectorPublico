@@ -1,6 +1,6 @@
 // Función para mostrar u ocultar la contraseña 
 function showPassword(){
-    var tipo = document.getElementById("password");
+    let tipo = document.getElementById("password");
     if(tipo.type == "password"){
         tipo.type = "text";
     }else{
@@ -9,7 +9,7 @@ function showPassword(){
 }
 
 function showFacility(evt, facilityName) {
-  var i, tabcontent, tablinks;
+  let i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
@@ -46,8 +46,8 @@ function resetFields(){
 }
 
 function hideOption(radioName, selectName){
-  var selectionOptions = document.getElementsByName(radioName);
-  var forms = document.getElementsByClassName(selectName); 
+  let selectionOptions = document.getElementsByName(radioName);
+  let forms = document.getElementsByClassName(selectName); 
   for(i=0;i<selectionOptions.length;i++){
     forms[i].style.display = "none";
   }
@@ -61,7 +61,7 @@ function hideOption(radioName, selectName){
 }
 function changeChart(chart, configChart, radioButtonName){
 
-  var radiobuttons = document.getElementsByName(radioButtonName);
+  let radiobuttons = document.getElementsByName(radioButtonName);
   if(radiobuttons[0].checked){
     configChart.type = "bar";
   }
@@ -75,34 +75,34 @@ function changeChart(chart, configChart, radioButtonName){
 }
 
 function changeTo(toId, fromId){
-  var to = document.getElementById(toId);
-  var from = document.getElementById(fromId);
+  let to = document.getElementById(toId);
+  let from = document.getElementById(fromId);
   
   for(i=0;i<to.options.length;i++){
-    var option = to.options[i];
+    let option = to.options[i];
     option.style.display="block";
   }
 
   if(from.selectedIndex!=0){
     for(i=1;i<from.selectedIndex;i++){
-      var option = to.options[i];
+      let option = to.options[i];
       option.style.display="none";
     }
   }
 }
 
 function changeFrom(fromId,toId){
-  var from = document.getElementById(fromId);
-  var to = document.getElementById(toId);
+  let from = document.getElementById(fromId);
+  let to = document.getElementById(toId);
   
   for(i=0;i<from.options.length;i++){
-    var option = from.options[i];
+    let option = from.options[i];
     option.style.display="block";
   }
 
   if(to.selectedIndex!=0){
     for(i=to.selectedIndex+1;i<from.options.length;i++){
-      var option = from.options[i];
+      let option = from.options[i];
       option.style.display="none";
     }
   }
@@ -131,5 +131,44 @@ function changeCCAA(ccaaId, provId, ccaaArray, provArray){
   }
   if(provTag.selectedIndex!=0){
 
+  }
+}
+
+function enableAll(selectButton, allButton){
+  let checkboxes = document.getElementsByClassName(selectButton);
+  let selectAll = document.getElementById(allButton);
+
+  if(!selectAll.checked){
+    for(i=0;i<checkboxes.length;i++){
+      checkboxes[i].checked=false;
+    }
+  }
+  else {
+    for(i=0;i<checkboxes.length;i++){
+      checkboxes[i].checked=true;
+    }
+  }
+}
+
+function checkAllButton(selectButton, allButton){
+  let checkboxes = document.getElementsByClassName(selectButton);
+  let selectAll = document.getElementById(allButton);
+
+  checked_boxes=0;
+  for(i=0;i<checkboxes.length;i++){
+    if(checkboxes[i].checked){
+      checked_boxes++;
+    }
+  }
+
+  if(selectAll.checked){
+    if(checked_boxes!=checkboxes.length){
+      selectAll.checked=false;
+    }
+  }
+  else{
+    if(checked_boxes==checkboxes.length){
+      selectAll.checked=true;
+    }
   }
 }

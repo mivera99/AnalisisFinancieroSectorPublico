@@ -45,6 +45,24 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaCCAA.php' method='POST'>
                     <h3 class="form-name">Consultas de comunidades autónomas</h3>
                     <fieldset>
+                        <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
+                        <label for="allCCAA"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoring" class="selectCCAA" name="scoringCCAA_C" value="Scoring" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="scoring"> Scoring </label>
+                        <input type="checkbox" id="poblacion" class="selectCCAA" name="poblacionCCAA_C" value="Poblacion" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="poblacion"> Poblacion </label>
+                        <input type="checkbox" id="endeudamiento" class="selectCCAA" name="endeudamientoCCAA_C" value="Endeudamiento" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="endeudamiento"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_neto" class="selectCCAA" name="ahorronetoCCAA_C" value="AhorroNeto" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="ahorro_neto"> Ahorro neto </label>
+                        <input type="checkbox" id="pmp" class="selectCCAA" name="pmpCCAA_C" value="PMP" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="pmp"> PMP </label>
+                        <input type="checkbox" id="dcpp" class="selectCCAA" name="dcppCCAA_C" value="DCPP" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="dcpp"> Deuda comercial pendiente de pago </label>
+                        <input type="checkbox" id="ingrnofin" class="selectCCAA" name="ingrnofinCCAA_C" value="Ingrnofin" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="ingrnofin"> Nivel de ingresos no financieros </label>
+                        <br>
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
                         <input type="radio" id="selectinterval" name="selection" value="SelectInterval" onclick="hideOption('selection','sel')">
@@ -174,10 +192,29 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaDIP.php' method='POST'>
                 <h3 class="form-name">Consultas de diputaciones</h3>
                     <fieldset>
+                        <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
+                        <label for="allDIP"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoringDIP" class="selectDIP" name="scoringDIP_C" value="Scoring" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="scoringDIP"> Scoring </label>
+                        <input type="checkbox" id="autonomiaDIP" class="selectDIP" name="autonomiaDIP_C" value="Autonomia" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="autonomiaDIP"> Comunidad Autónoma </label>
+                        <input type="checkbox" id="endeudamientoDIP" class="selectDIP" name="endeudamientoDIP_C" value="Endeudamiento" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="endeudamientoDIP"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_netoDIP" class="selectDIP" name="ahorronetoDIP_C" value="AhorroNeto" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="ahorro_netoDIP"> Ahorro neto </label>
+                        <input type="checkbox" id="fondliqDIP" class="selectDIP" name="fondliqDIP_C" value="FondLiq" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="fondliqDIP"> Fondos líquidos </label>
+                        <input type="checkbox" id="pmpDIP" class="selectDIP" name="pmpDIP_C" value="PMP" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="pmpDIP"> PMP </label>
+                        <input type="checkbox" id="ingrnofinDIP" class="selectDIP" name="ingrnofinDIP_C" value="Ingrnofin" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="ingrnofinDIP"> Nivel de ingresos no financieros </label>
+                        <br>
                         <input type="radio" id="selectyearDIP" name="selectionDIP" value="SelectYear" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectyearDIP">Consultar por año</label>
                         <input type="radio" id="selectintervalDIP" name="selectionDIP" value="SelectInterval" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectintervalDIP">Consultar por intervalo de años</label>
+
                         <div class="selDIP" id="indyear">
                             <p>Año</p>
                             <select name="anhoDIP">
@@ -300,6 +337,30 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaMUN.php' method='POST'>
                 <h3 class="form-name">Consultas de municipios</h3>
                     <fieldset>
+                        <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
+                        <label for="allMUN"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoringMUN" class="selectMUN" name="scoringMUN_C" value="Scoring" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="scoringMUN"> Scoring </label>
+                        <input type="checkbox" id="poblacionMUN" class="selectMUN" name="poblacionMUN_C" value="Poblacion" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="poblacionMUN"> Poblacion </label>
+                        <input type="checkbox" id="autonomiaMUN" class="selectMUN" name="autonomiaMUN_C" value="Autonomia" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="autonomiaMUN"> Comunidad Autónoma </label>
+                        <input type="checkbox" id="provinciaMUN" class="selectMUN" name="provinciaMUN_C" value="Provincia" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="provinciaMUN"> Provincia </label>
+                        <input type="checkbox" id="endeudamientoMUN" class="selectMUN" name="endeudamientoMUN_C" value="Endeudamiento" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="endeudamientoMUN"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_netoMUN" class="selectMUN" name="ahorronetoMUN_C" value="AhorroNeto" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="ahorro_netoMUN"> Ahorro neto </label>
+                        <input type="checkbox" id="fondliqMUN" class="selectMUN" name="fondliqMUN_C" value="FondLiq" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="fondliqMUN"> Fondos líquidos </label>
+                        <input type="checkbox" id="pmpMUN" class="selectMUN" name="pmpMUN_C" value="PMP" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="pmpMUN"> PMP </label>
+                        <input type="checkbox" id="dcppMUN" class="selectMUN" name="dcppMUN_C" value="DCPP" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="dcppMUN"> Deuda comercial pendiente de pago </label>
+                        <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="ingrnofinMUN"> Nivel de ingresos no financieros </label>
+                        <br>
                         <input type="radio" id="selectyearMUN" name="selectionMUN" value="SelectYear" onclick="hideOption('selectionMUN','selMUN')">
                         <label for="selectyearMUN">Consultar por año</label>
                         <input type="radio" id="selectintervalMUN" name="selectionMUN" value="SelectInterval" onclick="hideOption('selectionMUN','selMUN')">
