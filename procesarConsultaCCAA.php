@@ -142,12 +142,12 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
                 else if(!empty($pmp)) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($ccaas[$i][$year]->getRDCPP())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getRDCPP()*100).'%</td>';
                 else if(!empty($dcpp)) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').' miles de €</td>';
                 else if(!empty($ingrnofin)) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
+                if(!empty($ccaas[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosPersonal1(), 0, '','.').' miles de €</td>';
+                else if(!empty($ccaas[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').' miles de €</td>';
+                else if(!empty($ccaas[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').' miles de €</td>';
+                else if(!empty($ccaas[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getInversionesReales1(), 0, '','.').' miles de €</td>';
                 else if(!empty($gasto)) echo '<td class="ratingCell">N/A</td>';
                 echo '</tr>';
                 $i+=1;
