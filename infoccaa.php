@@ -827,7 +827,7 @@ if($ccaa && $ccaaNac){
                     
                 </script>
                 <br><br>
-                <h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
+                <h3><b>Resultado presupuestario y endeudamiento</b></h3>
                 <?php
                 for($i=0;$i<4;$i++){
                     if($i==0) $tmp=$ccaa->getCCAAPib();
@@ -1589,7 +1589,7 @@ if($ccaa && $ccaaNac){
                     const gastosT = new Chart(chartGastosT, configChartGastosT);
                 </script>
                 <br><br>
-                <h3>Solvencia (en %)</h3>
+                <h3>Solvencia</h3>
                 <!--METER LOS GRAFICOS AQUI-->
                 <?php
                 /*foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
@@ -1741,7 +1741,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Ahorro Neto',
+                                    text:'Sostenibilidad financiera',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1777,7 +1777,7 @@ if($ccaa && $ccaaNac){
                             plugins:{
                                 title:{
                                     display: true,
-                                    text:'Apalancamiento Operativo',
+                                    text:'Apalancamiento operativo',
                                     color: '#003E99',
                                     font:{
                                         size:20
@@ -1856,7 +1856,7 @@ if($ccaa && $ccaaNac){
                         ?>
                         <th>
                         <div class="celda-pmp">
-                            Periodo medio de pago (PMP)
+                            Periodo medio de pago
                             <div class="info">
                                 <img src="info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el número de días teórico que se tarda en pagar a terceros</span>
@@ -1865,7 +1865,7 @@ if($ccaa && $ccaaNac){
                         </div>
                         <?php
                     }
-                    else if ($i==1) echo '<th>PMP medio</th>';
+                    else if ($i==1) echo '<th>Periodo medio de pago nacional</th>';
                     foreach($tmp as $array){
                         $dias=$array[2];
                         $color="";
@@ -1983,7 +1983,7 @@ if($ccaa && $ccaaNac){
                 <input type="radio" id="selectLinePmpNac" name="selectionPMPNac" value="SelectLine" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
                 <label for="selectLinePmpNac">Líneas</label>
                 <br><br>
-                <h3>Eficiencia (en %)</h3>
+                <h3>Eficiencia</h3>
                 <?php
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getREfic();
@@ -2123,7 +2123,7 @@ if($ccaa && $ccaaNac){
                     const eficienciaMedia = new Chart(chartEM, configChartEM);
                 </script>
                 <br><br>
-                <h3>Ejecución presupuestaria (en %)</h3>
+                <h3>Gestión presupuestaria</h3>
                 <?php
                 for($i=0;$i<4;$i++){
                     if($i==0) $tmp=$ccaa->getREjeIngrCorr();
@@ -2359,7 +2359,7 @@ if($ccaa && $ccaaNac){
                     const rGastosCorrNac = new Chart(chartRGN, configChartRGN);
                 </script>
                 <br>
-                <h3>Deuda comercial pendiente de pago (en %)</h3>
+                <h3>Deuda comercial pendiente de pago</h3>
                 <?php
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getRDCPP();
@@ -2498,7 +2498,7 @@ if($ccaa && $ccaaNac){
                     const rdcppNac = new Chart(chartRDCPPN, configChartRDCPPN);
                 </script>
                 <br>
-                <h3>Pagos obligacionales (en %)</h3>
+                <h3>Cumplimiento de pagos</h3>
                 <?php
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getPagosObligaciones();
@@ -2638,7 +2638,7 @@ if($ccaa && $ccaaNac){
                     const pagosObligacionalesNac = new Chart(chartPON, configChartPON);
                 </script>
                 <br>
-                <h3>Eficacia recaudatoria (en %)</h3>
+                <h3>Gestión Tributaria</h3>
                 <?php
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getREficaciaRec();
