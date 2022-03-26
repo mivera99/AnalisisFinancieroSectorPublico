@@ -10,6 +10,7 @@ require_once('imports/import_cuentas_mun.php');
 require_once('imports/import_scoring_ccaa.php');
 require_once('imports/import_scoring_dip.php');
 require_once('imports/import_scoring_mun.php');
+require_once('imports/import_prog_mun.php');
 
 class DAOCargador {
     
@@ -38,10 +39,16 @@ class DAOCargador {
                 }
             }
             else if(strtolower($filenamestr[2])=='mun'){
-                if($this->import_muns($tmp_name, $realname)){
+                if(strtolower($filenamestr[4])=='prog'){
+                    if($this->import_prog($tmp_name, $realname)){
+                        return true;
+                    }
+                }
+                else if($this->import_muns($tmp_name, $realname)){
                     return true;
                 }
             }
+
         }
         return false;
     }
@@ -62,6 +69,13 @@ class DAOCargador {
 
     private function import_muns($tmp_name,$realname){
         if((new Importer_bg_mun())->import_bg_mun($tmp_name, $realname) && (new Importer_cuentas_mun())->import_cuentas_mun($tmp_name)&&(new Importer_scoring_mun())->import_scoring_mun($tmp_name, $realname)){
+            return true;
+        }
+        return false;
+    }
+
+    private function import_prog($tmp_name,$realname){
+        if((new Importer_prog_mun())->import_prog_mun($tmp_name, $realname)){
             return true;
         }
         return false;
