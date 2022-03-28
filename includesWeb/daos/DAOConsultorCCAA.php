@@ -1263,7 +1263,7 @@ class DAOConsultorCCAA {
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_general.ANHO ";
         }
         if($checked_boxes[4]){ //pmp
-            if($conditions!=""){
+            if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
                 }
@@ -1467,7 +1467,7 @@ class DAOConsultorCCAA {
             if($conditions!=""){
                 $conditions = $conditions." AND ";
             }
-            if($conditions!=""){
+            if($joins!=""){
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
