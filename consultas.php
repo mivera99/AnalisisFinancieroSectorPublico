@@ -356,8 +356,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <label for="fondliqMUN"> Fondos líquidos </label>
                         <input type="checkbox" id="pmpMUN" class="selectMUN" name="pmpMUN_C" value="PMP" onclick="checkAllButton('selectMUN','allMUN')">
                         <label for="pmpMUN"> PMP </label>
-                        <input type="checkbox" id="dcppMUN" class="selectMUN" name="dcppMUN_C" value="DCPP" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="dcppMUN"> Deuda comercial pendiente de pago </label>
                         <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
                         <label for="ingrnofinMUN"> Nivel de ingresos no financieros </label>
                         <br>

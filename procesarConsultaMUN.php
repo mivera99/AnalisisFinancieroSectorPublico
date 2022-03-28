@@ -18,6 +18,28 @@ $to=NULL;
 $autonomia=NULL;
 $provincia=NULL;
 
+$checked_boxes=array();
+
+if(!empty($_REQUEST['scoringMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['poblacionMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['autonomiaMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['provinciaMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['endeudamientoMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['ahorronetoMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['fondliqMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['pmpMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+if(!empty($_REQUEST['ingrnofinMUN_C'])) array_push($checked_boxes, true);
+else array_push($checked_boxes,false);
+
+
 if(!empty($_REQUEST['scoringMUN']) && $_REQUEST['scoringMUN']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringMUN'])));
 }
@@ -85,7 +107,7 @@ if(!empty($_REQUEST['provinciasMUN']) && $_REQUEST['provinciasMUN']!='inicio'){
     $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasMUN'])));
 }
 
-$muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto);
+$muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $checked_boxes);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -132,15 +154,15 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
             echo '<tr>';
             echo '<td></td>';
             echo '<td>Nombre</td>';
-            if(!empty($scoring)) echo '<td class="ratingCell">Scoring</td>';
-            if(!empty($poblacion)) echo '<td class="ratingCell">Población</td>';
-            if(!empty($autonomia)) echo '<td class="ratingCell">Comunidad Autónoma</td>';
-            if(!empty($provincia)) echo '<td class="ratingCell">Provincia</td>';
-            if(!empty($endeudamiento)) echo '<td class="ratingCell">Endeudamiento</td>';
-            if(!empty($ahorro_neto)) echo '<td class="ratingCell">Ahorro neto</td>';
-            if(!empty($pmp)) echo '<td class="ratingCell">PMP</td>';
-            if(!empty($fondliq)) echo '<td class="ratingCell">Fondos líquidos</td>';
-            if(!empty($ingrnofin)) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+            if(!empty($scoring)|| $checked_boxes[0]) echo '<td class="ratingCell">Scoring</td>';
+            if(!empty($poblacion)|| $checked_boxes[1]) echo '<td class="ratingCell">Población</td>';
+            if(!empty($autonomia)|| $checked_boxes[2]) echo '<td class="ratingCell">Comunidad Autónoma</td>';
+            if(!empty($provincia)|| $checked_boxes[3]) echo '<td class="ratingCell">Provincia</td>';
+            if(!empty($endeudamiento)|| $checked_boxes[4]) echo '<td class="ratingCell">Endeudamiento</td>';
+            if(!empty($ahorro_neto)|| $checked_boxes[5]) echo '<td class="ratingCell">Ahorro neto</td>';
+            if(!empty($pmp)|| $checked_boxes[6]) echo '<td class="ratingCell">PMP</td>';
+            if(!empty($fondliq)|| $checked_boxes[7]) echo '<td class="ratingCell">Fondos líquidos</td>';
+            if(!empty($ingrnofin)|| $checked_boxes[8]) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
             if(!empty($gasto) && $_REQUEST['gastoMUN']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
             else if(!empty($gasto) && $_REQUEST['gastoMUN']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
             else if(!empty($gasto) && $_REQUEST['gastoMUN']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
@@ -151,23 +173,23 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                 echo '<td class="ratingCell">'.($i+1).'</td>';
                 echo '<td>'.$muns[$i][$year]->getNombre().'</td>';
                 if(!empty($muns[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$muns[$i][$year]->getScoring().'</td>';
-                else if(!empty($scoring)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($scoring)|| $checked_boxes[0]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getPoblacion())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getPoblacion(), 0, '','.').'</td>';
-                else if(!empty($poblacion)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($poblacion)|| $checked_boxes[1]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getAutonomia()).'</td>';
-                else if(!empty($autonomia)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($autonomia)|| $checked_boxes[2]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getProvincia())) echo '<td class="ratingCell">'.($muns[$i][$year]->getProvincia()).'</td>';
-                else if(!empty($provincia)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($provincia)|| $checked_boxes[3]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($muns[$i][$year]->getEndeudamiento()*100).'%</td>';
-                else if(!empty($endeudamiento)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($endeudamiento)|| $checked_boxes[4]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getSostenibilidadFinanciera())) echo '<td class="ratingCell">'.($muns[$i][$year]->getSostenibilidadFinanciera()*100).'%</td>';
-                else if(!empty($ahorro_neto)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($ahorro_neto)|| $checked_boxes[5]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getLiquidezInmediata())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getLiquidezInmediata(), 0, '','.').'</td>';
-                else if(!empty($fondliq)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($fondliq)|| $checked_boxes[6]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getPeriodoMedioPagos())) echo '<td class="ratingCell">'.($muns[$i][$year]->getPeriodoMedioPagos()).' días</td>';
-                else if(!empty($pmp)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($pmp)|| $checked_boxes[7]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
-                else if(!empty($ingrnofin)) echo '<td class="ratingCell">N/A</td>';
+                else if(!empty($ingrnofin)|| $checked_boxes[8]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($muns[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
                 else if(!empty($muns[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
                 else if(!empty($muns[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($muns[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';

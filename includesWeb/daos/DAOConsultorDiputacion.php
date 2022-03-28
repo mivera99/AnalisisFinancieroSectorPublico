@@ -949,9 +949,8 @@ class DAOConsultorDiputacion {
             else if($gasto=='inversiones'){
                 $conditions = $conditions."(cuentas_dip_gastos.TIPO) ='PARTIDAGAST6' ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_gastos.ANHO";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_gastos.ANHO";
             $returning_values = $returning_values.",cuentas_dip_gastos.TIPO, cuentas_dip_gastos.OBLG";
-            */
             if(strpos($joins, 'INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_gastos ON cuentas_dip_gastos.CODIGO=diputaciones.CODIGO ";
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_dip_gastos.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_dip_gastos.ANHO ";
