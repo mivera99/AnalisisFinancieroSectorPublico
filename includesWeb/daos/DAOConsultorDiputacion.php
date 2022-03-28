@@ -669,7 +669,7 @@ class DAOConsultorDiputacion {
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_dip.ANHO ";    
         }
         if($checked_boxes[4]){ //fondos liquidos (pendiente de cambiar)
-            if($conditions!=""){
+            if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
                 }
@@ -686,7 +686,7 @@ class DAOConsultorDiputacion {
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",deudas_dip.ANHO ";
         }
         if($checked_boxes[5]){ //pmp
-            if($conditions!=""){
+            if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
                 }
