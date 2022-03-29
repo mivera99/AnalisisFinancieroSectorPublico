@@ -787,7 +787,7 @@ class DAOConsultorCCAA {
         while($par1 = mysqli_fetch_assoc($result)){
             $key=$par1['ANHO'];
             $value=$par1['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setImpuestosDirectos1($elements);
@@ -802,7 +802,7 @@ class DAOConsultorCCAA {
         while($par2 = mysqli_fetch_assoc($result)){
             $key=$par2['ANHO'];
             $value=$par2['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setImpuestosIndirectos1($elements);
@@ -817,7 +817,7 @@ class DAOConsultorCCAA {
         while($par3 = mysqli_fetch_assoc($result)){
             $key=$par3['ANHO'];
             $value=$par3['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTasasPreciosOtros1($elements);
@@ -832,7 +832,7 @@ class DAOConsultorCCAA {
         while($par4 = mysqli_fetch_assoc($result)){
             $key=$par4['ANHO'];
             $value=$par4['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTransferenciasCorrientes1($elements);
@@ -847,7 +847,7 @@ class DAOConsultorCCAA {
         while($par5 = mysqli_fetch_assoc($result)){
             $key=$par5['ANHO'];
             $value=$par5['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setIngresosPatrimoniales1($elements);
@@ -862,7 +862,7 @@ class DAOConsultorCCAA {
         while($parc = mysqli_fetch_assoc($result)){
             $key=$parc['ANHO'];
             $value=$parc['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTotalIngresosCorrientes1($elements);
@@ -877,7 +877,7 @@ class DAOConsultorCCAA {
         while($par6 = mysqli_fetch_assoc($result)){
             $key=$par6['ANHO'];
             $value=$par6['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setEnajenacionInversionesReales1($elements);
@@ -892,7 +892,7 @@ class DAOConsultorCCAA {
         while($par7 = mysqli_fetch_assoc($result)){
             $key=$par7['ANHO'];
             $value=$par7['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTransferenciasCapital1($elements);
@@ -907,7 +907,7 @@ class DAOConsultorCCAA {
         while($pari = mysqli_fetch_assoc($result)){
             $key=$pari['ANHO'];
             $value=$pari['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTotalIngresosNoCorrientes1($elements);
@@ -922,7 +922,7 @@ class DAOConsultorCCAA {
         while($par8 = mysqli_fetch_assoc($result)){
             $key=$par8['ANHO'];
             $value=$par8['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setActivosFinancieros1($elements);
@@ -937,7 +937,7 @@ class DAOConsultorCCAA {
         while($par9 = mysqli_fetch_assoc($result)){
             $key=$par9['ANHO'];
             $value=$par9['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setPasivosFinancieros1($elements);
@@ -953,7 +953,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['DER_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTotalIngresos1($elements);
@@ -975,7 +975,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setGastosPersonal1($elements);
@@ -990,7 +990,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setGastosCorrientesBienesServicios1($elements);
@@ -1005,7 +1005,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setGastosFinancieros1($elements);
@@ -1020,7 +1020,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTransferenciasCorrientesGastos1($elements);
@@ -1035,7 +1035,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setFondoContingencia1($elements);
@@ -1063,7 +1063,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setInversionesReales1($elements);
@@ -1078,7 +1078,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTransferenciasCapitalGastos1($elements);
@@ -1093,7 +1093,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTotalGastosNoFinancieros1($elements);
@@ -1108,7 +1108,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setActivosFinancierosGastos1($elements);
@@ -1123,7 +1123,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setPasivosFinancierosGastos1($elements);
@@ -1139,7 +1139,7 @@ class DAOConsultorCCAA {
         while($part = mysqli_fetch_assoc($result)){
             $key=$part['ANHO'];
             $value=$part['OBLG_REC'];
-            $elements[$key]=$value;
+            $elements[$key]=$value*1000;
         }
         $elements = array_reverse($elements, true);
         $ccaa->setTotalGastos1($elements);
@@ -1315,7 +1315,9 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_ingresos.ANHO = deudas_ccaa.ANHO ";
                 //$conditions = $conditions." AND ";
-            }            
+            }
+            if($conditions!="") $conditions=$conditions." AND ";
+            $conditions = $conditions."cuentas_ccaa_ingresos.TIPO='PARTIDA INGRESOS NO FINANCIEROS' ";            
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_ingresos.ANHO";
             $returning_values = $returning_values.",cuentas_ccaa_ingresos.DER_REC";
             if(strpos($joins, 'INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_ccaa_ingresos ON cuentas_ccaa_ingresos.CODIGO=ccaas.CODIGO ";
@@ -1697,12 +1699,12 @@ class DAOConsultorCCAA {
             if(!empty($resultado['R_SOSTE_FINANCIERA']))$ccaa->setRSosteFinanciera($resultado['R_SOSTE_FINANCIERA']);
             if(!empty($resultado['PMP']))$ccaa->setPMP($resultado['PMP']);
             if(!empty($resultado['R_DCPP']))$ccaa->setRDCPP($resultado['R_DCPP']);
-            if(!empty($resultado['DER_REC']))$ccaa->setTotalIngresosNoCorrientes1($resultado['DER_REC']);
+            if(!empty($resultado['DER_REC']))$ccaa->setTotalIngresosNoCorrientes1(($resultado['DER_REC']*1000));
             if(!empty($resultado['OBLG_REC'])) {
-                if($resultado['TIPO']=='PARTIDAGAST1') $ccaa->setGastosPersonal1($resultado['OBLG_REC']);
-                else if($resultado['TIPO']=='PARTIDAGAST2') $ccaa->setGastosCorrientesBienesServicios1($resultado['OBLG_REC']);
-                else if($resultado['TIPO']=='PARTIDAGAST3') $ccaa->setTransferenciasCorrientesGastos1($resultado['OBLG_REC']);
-                else if($resultado['TIPO']=='PARTIDAGAST6') $ccaa->setInversionesReales1($resultado['OBLG_REC']);
+                if($resultado['TIPO']=='PARTIDAGAST1') $ccaa->setGastosPersonal1($resultado['OBLG_REC']*1000);
+                else if($resultado['TIPO']=='PARTIDAGAST2') $ccaa->setGastosCorrientesBienesServicios1(($resultado['OBLG_REC']*1000));
+                else if($resultado['TIPO']=='PARTIDAGAST3') $ccaa->setTransferenciasCorrientesGastos1(($resultado['OBLG_REC']*1000));
+                else if($resultado['TIPO']=='PARTIDAGAST6') $ccaa->setInversionesReales1(($resultado['OBLG_REC']*1000));
             }
             $elements2[$resultado['ANHO']]=$ccaa;
             array_push($elements, $elements2);
