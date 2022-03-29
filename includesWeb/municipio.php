@@ -125,6 +125,39 @@ class Municipio{
     private $eficacia_recaudatoria;
     private $eficacia_recaudatoria_media_diputaciones;
 
+    /* PROG */
+    private $agspc;
+    private $sop;
+    private $ote;
+    private $mu;
+    private $pc;
+    private $spei;
+    private $pgvpp;
+    private $cre;
+    private $pvp;
+    private $a;
+    private $rgtr;
+    private $rr;
+    private $grsu;
+    private $tr;
+    private $lv;
+    private $csf;
+    private $ap;
+    private $pj;
+    private $p;
+    private $ssps;
+    private $fe;
+    private $s;
+    private $e;
+    private $c;
+    private $d;
+    private $agp;
+    private $ie;
+    private $com;
+    private $tp;
+    private $it;
+    private $idi;
+
 
 
     public function getCodigo(){
@@ -987,6 +1020,627 @@ class Municipio{
 
     public function setPoblacion($poblacion){
         $this->poblacion = $poblacion;
+    }
+
+    /**
+     * Get the value of agspc
+     */ 
+    public function getAgspc()
+    {
+        return $this->agspc;
+    }
+
+    /**
+     * Set the value of agspc
+     *
+     * @return  self
+     */ 
+    public function setAgspc($agspc)
+    {
+        $this->agspc = $agspc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sop
+     */ 
+    public function getSop()
+    {
+        return $this->sop;
+    }
+
+    /**
+     * Set the value of sop
+     *
+     * @return  self
+     */ 
+    public function setSop($sop)
+    {
+        $this->sop = $sop;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ote
+     */ 
+    public function getOte()
+    {
+        return $this->ote;
+    }
+
+    /**
+     * Set the value of ote
+     *
+     * @return  self
+     */ 
+    public function setOte($ote)
+    {
+        $this->ote = $ote;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mu
+     */ 
+    public function getMu()
+    {
+        return $this->mu;
+    }
+
+    /**
+     * Set the value of mu
+     *
+     * @return  self
+     */ 
+    public function setMu($mu)
+    {
+        $this->mu = $mu;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pc
+     */ 
+    public function getPc()
+    {
+        return $this->pc;
+    }
+
+    /**
+     * Set the value of pc
+     *
+     * @return  self
+     */ 
+    public function setPc($pc)
+    {
+        $this->pc = $pc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of spei
+     */ 
+    public function getSpei()
+    {
+        return $this->spei;
+    }
+
+    /**
+     * Set the value of spei
+     *
+     * @return  self
+     */ 
+    public function setSpei($spei)
+    {
+        $this->spei = $spei;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pgvpp
+     */ 
+    public function getPgvpp()
+    {
+        return $this->pgvpp;
+    }
+
+    /**
+     * Set the value of pgvpp
+     *
+     * @return  self
+     */ 
+    public function setPgvpp($pgvpp)
+    {
+        $this->pgvpp = $pgvpp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cre
+     */ 
+    public function getCre()
+    {
+        return $this->cre;
+    }
+
+    /**
+     * Set the value of cre
+     *
+     * @return  self
+     */ 
+    public function setCre($cre)
+    {
+        $this->cre = $cre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pvp
+     */ 
+    public function getPvp()
+    {
+        return $this->pvp;
+    }
+
+    /**
+     * Set the value of pvp
+     *
+     * @return  self
+     */ 
+    public function setPvp($pvp)
+    {
+        $this->pvp = $pvp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of a
+     */ 
+    public function getA()
+    {
+        return $this->a;
+    }
+
+    /**
+     * Set the value of a
+     *
+     * @return  self
+     */ 
+    public function setA($a)
+    {
+        $this->a = $a;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rgtr
+     */ 
+    public function getRgtr()
+    {
+        return $this->rgtr;
+    }
+
+    /**
+     * Set the value of rgtr
+     *
+     * @return  self
+     */ 
+    public function setRgtr($rgtr)
+    {
+        $this->rgtr = $rgtr;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rr
+     */ 
+    public function getRr()
+    {
+        return $this->rr;
+    }
+
+    /**
+     * Set the value of rr
+     *
+     * @return  self
+     */ 
+    public function setRr($rr)
+    {
+        $this->rr = $rr;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of grsu
+     */ 
+    public function getGrsu()
+    {
+        return $this->grsu;
+    }
+
+    /**
+     * Set the value of grsu
+     *
+     * @return  self
+     */ 
+    public function setGrsu($grsu)
+    {
+        $this->grsu = $grsu;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tr
+     */ 
+    public function getTr()
+    {
+        return $this->tr;
+    }
+
+    /**
+     * Set the value of tr
+     *
+     * @return  self
+     */ 
+    public function setTr($tr)
+    {
+        $this->tr = $tr;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lv
+     */ 
+    public function getLv()
+    {
+        return $this->lv;
+    }
+
+    /**
+     * Set the value of lv
+     *
+     * @return  self
+     */ 
+    public function setLv($lv)
+    {
+        $this->lv = $lv;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of csf
+     */ 
+    public function getCsf()
+    {
+        return $this->csf;
+    }
+
+    /**
+     * Set the value of csf
+     *
+     * @return  self
+     */ 
+    public function setCsf($csf)
+    {
+        $this->csf = $csf;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ap
+     */ 
+    public function getAp()
+    {
+        return $this->ap;
+    }
+
+    /**
+     * Set the value of ap
+     *
+     * @return  self
+     */ 
+    public function setAp($ap)
+    {
+        $this->ap = $ap;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pj
+     */ 
+    public function getPj()
+    {
+        return $this->pj;
+    }
+
+    /**
+     * Set the value of pj
+     *
+     * @return  self
+     */ 
+    public function setPj($pj)
+    {
+        $this->pj = $pj;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of p
+     */ 
+    public function getP()
+    {
+        return $this->p;
+    }
+
+    /**
+     * Set the value of p
+     *
+     * @return  self
+     */ 
+    public function setP($p)
+    {
+        $this->p = $p;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ssps
+     */ 
+    public function getSsps()
+    {
+        return $this->ssps;
+    }
+
+    /**
+     * Set the value of ssps
+     *
+     * @return  self
+     */ 
+    public function setSsps($ssps)
+    {
+        $this->ssps = $ssps;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of fe
+     */ 
+    public function getFe()
+    {
+        return $this->fe;
+    }
+
+    /**
+     * Set the value of fe
+     *
+     * @return  self
+     */ 
+    public function setFe($fe)
+    {
+        $this->fe = $fe;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of s
+     */ 
+    public function getS()
+    {
+        return $this->s;
+    }
+
+    /**
+     * Set the value of s
+     *
+     * @return  self
+     */ 
+    public function setS($s)
+    {
+        $this->s = $s;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of e
+     */ 
+    public function getE()
+    {
+        return $this->e;
+    }
+
+    /**
+     * Set the value of e
+     *
+     * @return  self
+     */ 
+    public function setE($e)
+    {
+        $this->e = $e;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of c
+     */ 
+    public function getC()
+    {
+        return $this->c;
+    }
+
+    /**
+     * Set the value of c
+     *
+     * @return  self
+     */ 
+    public function setC($c)
+    {
+        $this->c = $c;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of d
+     */ 
+    public function getD()
+    {
+        return $this->d;
+    }
+
+    /**
+     * Set the value of d
+     *
+     * @return  self
+     */ 
+    public function setD($d)
+    {
+        $this->d = $d;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of agp
+     */ 
+    public function getAgp()
+    {
+        return $this->agp;
+    }
+
+    /**
+     * Set the value of agp
+     *
+     * @return  self
+     */ 
+    public function setAgp($agp)
+    {
+        $this->agp = $agp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ie
+     */ 
+    public function getIe()
+    {
+        return $this->ie;
+    }
+
+    /**
+     * Set the value of ie
+     *
+     * @return  self
+     */ 
+    public function setIe($ie)
+    {
+        $this->ie = $ie;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of com
+     */ 
+    public function getCom()
+    {
+        return $this->com;
+    }
+
+    /**
+     * Set the value of com
+     *
+     * @return  self
+     */ 
+    public function setCom($com)
+    {
+        $this->com = $com;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tp
+     */ 
+    public function getTp()
+    {
+        return $this->tp;
+    }
+
+    /**
+     * Set the value of tp
+     *
+     * @return  self
+     */ 
+    public function setTp($tp)
+    {
+        $this->tp = $tp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of it
+     */ 
+    public function getIt()
+    {
+        return $this->it;
+    }
+
+    /**
+     * Set the value of it
+     *
+     * @return  self
+     */ 
+    public function setIt($it)
+    {
+        $this->it = $it;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idi
+     */ 
+    public function getIdi()
+    {
+        return $this->idi;
+    }
+
+    /**
+     * Set the value of idi
+     *
+     * @return  self
+     */ 
+    public function setIdi($idi)
+    {
+        $this->idi = $idi;
+
+        return $this;
     }
 }
 

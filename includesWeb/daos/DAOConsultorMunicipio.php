@@ -1123,7 +1123,57 @@ class DAOConsultorMunicipio{
         }
         
         return $elements;
-    }  
+    }
+
+    public function getProgMun($codigo){
+        $db = getConexionBD();
+
+        $sql = "SELECT AGSPC, SOP, OTE, MU, PC, SPEI, PGVPP, CRE, PVP, A,
+        RGTR, RR, GRSU, TR, LV, CSF, AP, PJ, P, SSPS, FE, S, E, C, D, AGP,
+        IE, COM, TP, IT, IDI FROM prog_mun WHERE CODIGO = '$codigo'";
+        $result = mysqli_query($db, $sql);
+        if(!$result || mysqli_num_rows($result)==0){
+            return false;
+        }
+        
+        $mun = new Municipio();
+        $mun2 = mysqli_fetch_assoc($result);
+
+        $mun->setAgspc($mun2["AGSPC"]);
+        $mun->setSop($mun2["SOP"]);
+        $mun->setOte($mun2["OTE"]);
+        $mun->setMu($mun2["MU"]);
+        $mun->setPc($mun2["PC"]);
+        $mun->setSpei($mun2["SPEI"]);
+        $mun->setPgvpp($mun2["PGVPP"]);
+        $mun->setCre($mun2["CRE"]);
+        $mun->setPvp($mun2["PVP"]);
+        $mun->setA($mun2["A"]);
+        $mun->setRgtr($mun2["RGTR"]);
+        $mun->setRr($mun2["RR"]);
+        $mun->setGrsu($mun2["GRSU"]);
+        $mun->setTr($mun2["TR"]);
+        $mun->setLv($mun2["LV"]);
+        $mun->setCsf($mun2["CSF"]);
+        $mun->setAp($mun2["AP"]);
+        $mun->setPj($mun2["PJ"]);
+        $mun->setP($mun2["P"]);
+        $mun->setSsps($mun2["SSPS"]);
+        $mun->setFe($mun2["FE"]);
+        $mun->setS($mun2["S"]);
+        $mun->setE($mun2["E"]);
+        $mun->setC($mun2["C"]);
+        $mun->setD($mun2["D"]);
+        $mun->setAgp($mun2["AGP"]);
+        $mun->setIe($mun2["IE"]);
+        $mun->setCom($mun2["COM"]);
+        $mun->setTp($mun2["TP"]);
+        $mun->setIt($mun2["IT"]);
+        $mun->setIdi($mun2["IDI"]);
+
+
+        return $mun;
+    }
 
 }
 

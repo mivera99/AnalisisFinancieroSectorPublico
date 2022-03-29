@@ -765,7 +765,7 @@ if($diputacion){
             <p><b>Deuda Financiera 2020: </b><?php echo number_format($dip2020->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
             <p><b>Deuda Financiera 2019: </b><?php echo number_format($dip2019->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -785,23 +785,23 @@ if($diputacion){
                             </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getEndeudamiento()*100;
-                        $color="";
-                        if($porcentaje==0) $color="darkgreenCell";
-                        else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
-                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
-                        else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
-                        else if($porcentaje>75) $color="redCell"; 
-                        else $color="greyCell";
+                            $porcentaje = $dip2019->getEndeudamiento()*100;
+                            $color="";
+                            if($porcentaje==0) $color="darkgreenCell";
+                            else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
+                            else if($porcentaje>25 && $porcentaje<=50) $color="lightgreenCell";
+                            else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
+                            else if($porcentaje>75) $color="redCell"; 
+                            else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEndeudamiento()*100;
-                        $color2="";
-                        if($porcentaje2==0) $color="darkgreenCell";
-                        else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
-                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
-                        else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
-                        else if($porcentaje2>75) $color2="redCell";
-                        else $color2="greyCell";
+                            $porcentaje2 = $dip2020->getEndeudamiento()*100;
+                            $color2="";
+                            if($porcentaje2==0) $color2="darkgreenCell";
+                            else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
+                            else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreenCell";
+                            else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
+                            else if($porcentaje2>75) $color2="redCell";
+                            else $color2="greyCell";
                         ?>
                         <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
                         <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
@@ -813,16 +813,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
-                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
+                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreenCell";
                         else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
                         else if($porcentaje>75) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEndeudamientoMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2==0) $color="darkgreenCell";
+                        if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
-                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
+                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreenCell";
                         else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
                         else if($porcentaje2>75) $color2="redCell";
                         else $color2="greyCell";
@@ -929,7 +929,7 @@ if($diputacion){
 
             <h3>Solvencia</h3>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -953,16 +953,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>15) $color="darkgreenCell";
                         else if($porcentaje>5 && $porcentaje<=15) $color="greenCell";
-                        else if($porcentaje>-5 && $porcentaje<=5) $color="lightgreeCell";
+                        else if($porcentaje>-5 && $porcentaje<=5) $color="lightgreenCell";
                         else if($porcentaje>-15 && $porcentaje<=-5) $color="orangeCell"; 
                         else if($porcentaje<-15) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSostenibilidadFinanciera()*100;
                         $color2="";
-                        if($porcentaje2>15) $color="darkgreenCell";
+                        if($porcentaje2>15) $color2="darkgreenCell";
                         else if($porcentaje2>5 && $porcentaje2<=15) $color2="greenCell";
-                        else if($porcentaje2>-5 && $porcentaje2<=5) $color2="lightgreeCell";
+                        else if($porcentaje2>-5 && $porcentaje2<=5) $color2="lightgreenCell";
                         else if($porcentaje2>-15 && $porcentaje2<=-5) $color2="orangeCell"; 
                         else if($porcentaje2<-15) $color2="redCell";
                         else $color2="greyCell";
@@ -977,27 +977,27 @@ if($diputacion){
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
-                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreeCell";
+                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreenCell";
                         else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
                         else if($porcentaje>75) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2==0) $color="darkgreenCell";
+                        if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
-                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreeCell";
+                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreenCell";
                         else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
                         else if($porcentaje2>75) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1021,16 +1021,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje<30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
-                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreenCell";
                         else if($porcentaje>=50 && $porcentaje<60) $color="orangeCell"; 
                         else if($porcentaje>=60) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getApalancamientoOperativo()*100;
                         $color2="";
-                        if($porcentaje2<30) $color="darkgreenCell";
+                        if($porcentaje2<30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
-                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<60) $color2="orangeCell"; 
                         else if($porcentaje2>=60) $color2="redCell";
                         else $color2="greyCell";
@@ -1045,16 +1045,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje<30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
-                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=40 && $porcentaje<50) $color="lightgreenCell";
                         else if($porcentaje>=50 && $porcentaje<60) $color="orangeCell"; 
                         else if($porcentaje>=60) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getApalancamientoOperativoMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2<30) $color="darkgreenCell";
+                        if($porcentaje2<30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
-                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=40 && $porcentaje2<50) $color2="lightgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<60) $color2="orangeCell"; 
                         else if($porcentaje2>=60) $color2="redCell";
                         else $color2="greyCell";
@@ -1065,7 +1065,7 @@ if($diputacion){
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1089,16 +1089,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
-                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreeCell";
+                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreenCell";
                         else if($porcentaje>=15 && $porcentaje<25) $color="orangeCell"; 
                         else if($porcentaje>=25) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSostenibilidadDeuda()*100;
                         $color2="";
-                        if($porcentaje2==0) $color="darkgreenCell";
+                        if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
-                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreeCell";
+                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreenCell";
                         else if($porcentaje2>=15 && $porcentaje2<25) $color2="orangeCell"; 
                         else if($porcentaje2>=25) $color2="redCell";
                         else $color2="greyCell";
@@ -1113,16 +1113,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
-                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreeCell";
+                        else if($porcentaje>=5 && $porcentaje<15) $color="lightgreenCell";
                         else if($porcentaje>=15 && $porcentaje<25) $color="orangeCell"; 
                         else if($porcentaje>=25) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSostenibilidadDeudaMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2==0) $color="darkgreenCell";
+                        if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
-                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreeCell";
+                        else if($porcentaje2>=5 && $porcentaje2<15) $color2="lightgreenCell";
                         else if($porcentaje2>=15 && $porcentaje2<25) $color2="orangeCell"; 
                         else if($porcentaje2>=25) $color2="redCell";
                         else $color2="greyCell";
@@ -1406,7 +1406,7 @@ if($diputacion){
             <p><b>Fondos líquidos 2020: </b><?php echo number_format($dip2020->getFondosLiquidos(), 2, ',','.') . "€";?></p>
             <p><b>Fondos líquidos 2019: </b><?php echo number_format($dip2019->getFondosLiquidos(), 2, ',','.') . "€";?></p>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1430,16 +1430,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=25) $color="darkgreenCell";
                         else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
-                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreeCell";
+                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreenCell";
                         else if($porcentaje>=-25 && $porcentaje<-5) $color="orangeCell"; 
                         else if($porcentaje<-25) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
                         $color2="";
-                        if($porcentaje2>=25) $color="darkgreenCell";
+                        if($porcentaje2>=25) $color2="darkgreenCell";
                         else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
-                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreeCell";
+                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreenCell";
                         else if($porcentaje2>=-25 && $porcentaje2<-5) $color2="orangeCell"; 
                         else if($porcentaje2<-25) $color2="redCell";
                         else $color2="greyCell";
@@ -1454,16 +1454,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=25) $color="darkgreenCell";
                         else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
-                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreeCell";
+                        else if($porcentaje>=-5 && $porcentaje<5) $color="lightgreenCell";
                         else if($porcentaje>=-25 && $porcentaje<-5) $color="orangeCell"; 
                         else if($porcentaje<-25) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=25) $color="darkgreenCell";
+                        if($porcentaje2>=25) $color2="darkgreenCell";
                         else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
-                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreeCell";
+                        else if($porcentaje2>=-5 && $porcentaje2<5) $color2="lightgreenCell";
                         else if($porcentaje2>=-25 && $porcentaje2<-5) $color2="orangeCell"; 
                         else if($porcentaje2<-25) $color2="redCell";
                         else $color2="greyCell";
@@ -1474,7 +1474,7 @@ if($diputacion){
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1498,16 +1498,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=100) $color="darkgreenCell";
                         else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
-                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreenCell";
                         else if($porcentaje>=20 && $porcentaje<30) $color="orangeCell"; 
                         else if($porcentaje<20) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getLiquidezInmediata()*100;
                         $color2="";
-                        if($porcentaje2>=100) $color="darkgreenCell";
+                        if($porcentaje2>=100) $color2="darkgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
-                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreenCell";
                         else if($porcentaje2>=20 && $porcentaje2<30) $color2="orangeCell"; 
                         else if($porcentaje2<20) $color2="redCell";
                         else $color2="greyCell";
@@ -1522,16 +1522,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=100) $color="darkgreenCell";
                         else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
-                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreeCell";
+                        else if($porcentaje>=30 && $porcentaje<50) $color="lightgreenCell";
                         else if($porcentaje>=20 && $porcentaje<30) $color="orangeCell"; 
                         else if($porcentaje<20) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=100) $color="darkgreenCell";
+                        if($porcentaje2>=100) $color2="darkgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
-                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreeCell";
+                        else if($porcentaje2>=30 && $porcentaje2<50) $color2="lightgreenCell";
                         else if($porcentaje2>=20 && $porcentaje2<30) $color2="orangeCell"; 
                         else if($porcentaje2<20) $color2="redCell";
                         else $color2="greyCell";
@@ -1542,7 +1542,7 @@ if($diputacion){
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1566,16 +1566,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=300) $color="darkgreenCell";
                         else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
-                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreeCell";
+                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreenCell";
                         else if($porcentaje>=100 && $porcentaje<150) $color="orangeCell"; 
                         else if($porcentaje<100) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSolvenciaCortoPlazo()*100;
                         $color2="";
-                        if($porcentaje2>=300) $color="darkgreenCell";
+                        if($porcentaje2>=300) $color2="darkgreenCell";
                         else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
-                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreeCell";
+                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreenCell";
                         else if($porcentaje2>=100 && $porcentaje2<150) $color2="orangeCell"; 
                         else if($porcentaje2<100) $color2="redCell";
                         else $color2="greyCell";
@@ -1590,16 +1590,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=300) $color="darkgreenCell";
                         else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
-                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreeCell";
+                        else if($porcentaje>=150 && $porcentaje<200) $color="lightgreenCell";
                         else if($porcentaje>=100 && $porcentaje<150) $color="orangeCell"; 
                         else if($porcentaje<100) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
                         $color2="";
-                        if($porcentaje2>=300) $color="darkgreenCell";
+                        if($porcentaje2>=300) $color2="darkgreenCell";
                         else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
-                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreeCell";
+                        else if($porcentaje2>=150 && $porcentaje2<200) $color2="lightgreenCell";
                         else if($porcentaje2>=100 && $porcentaje2<150) $color2="orangeCell"; 
                         else if($porcentaje2<100) $color2="redCell";
                         else $color2="greyCell";
@@ -1879,7 +1879,7 @@ if($diputacion){
             <!-- TO DO -->
             <h3>Eficiencia</h3>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -1903,18 +1903,18 @@ if($diputacion){
                         $color="";
                         if($porcentaje<=80) $color="darkgreenCell";
                         else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
-                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreeCell";
+                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreenCell";
                         else if($porcentaje>=125 && $porcentaje<150) $color="orangeCell"; 
-                        else if($porcentaje<150) $color="redCell"; 
+                        else if($porcentaje>=150) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEficiencia()*100;
                         $color2="";
-                        if($porcentaje2>=80) $color="darkgreenCell";
+                        if($porcentaje2<=80) $color2="darkgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
-                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreeCell";
+                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreenCell";
                         else if($porcentaje2>=125 && $porcentaje2<150) $color2="orangeCell"; 
-                        else if($porcentaje2<150) $color2="redCell";
+                        else if($porcentaje2>=150) $color2="redCell";
                         else $color2="greyCell";
                         ?>
                         <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficiencia()*100, 2, ',','.') . "%";?></td>
@@ -1927,18 +1927,18 @@ if($diputacion){
                         $color="";
                         if($porcentaje<=80) $color="darkgreenCell";
                         else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
-                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreeCell";
+                        else if($porcentaje>=100 && $porcentaje<125) $color="lightgreenCell";
                         else if($porcentaje>=125 && $porcentaje<150) $color="orangeCell"; 
-                        else if($porcentaje<150) $color="redCell"; 
+                        else if($porcentaje>=150) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEficienciaMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=80) $color="darkgreenCell";
+                        if($porcentaje2<=80) $color2="darkgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
-                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreeCell";
+                        else if($porcentaje2>=100 && $porcentaje2<125) $color2="lightgreenCell";
                         else if($porcentaje2>=125 && $porcentaje2<150) $color2="orangeCell"; 
-                        else if($porcentaje2<150) $color2="redCell";
+                        else if($porcentaje2>=150) $color2="redCell";
                         else $color2="greyCell";
                         ?>
                         <td <?php echo'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
@@ -2043,7 +2043,7 @@ if($diputacion){
             <!-- TO DO -->
             <h3>Gestión Presupuestaria</h3>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -2067,16 +2067,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEjecucionIngresosCorrientes()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
@@ -2091,16 +2091,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
@@ -2111,7 +2111,7 @@ if($diputacion){
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -2135,16 +2135,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEjecucionGastosCorrientes()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
@@ -2159,16 +2159,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreeCell";
+                        else if($porcentaje>=95 && $porcentaje<97.5) $color="lightgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="orangeCell"; 
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreeCell";
+                        else if($porcentaje2>=95 && $porcentaje2<97.5) $color2="lightgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="orangeCell"; 
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
@@ -2364,7 +2364,7 @@ if($diputacion){
             <p><b>Deuda Comercial 2020: </b><?php echo number_format($dip2020->getDeudaComercial(), 2, ',','.') . "€";?></p>
             <p><b>Deuda Comercial 2019: </b><?php echo number_format($dip2019->getDeudaComercial(), 2, ',','.') . "€";?></p>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -2388,16 +2388,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje<=30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
-                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreenCell";
                         else if($porcentaje>=120 && $porcentaje<180) $color="orangeCell"; 
                         else if($porcentaje>=180) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getPeriodoMedioPagos()*100;
                         $color2="";
-                        if($porcentaje2<=30) $color="darkgreenCell";
+                        if($porcentaje2<=30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
-                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreenCell";
                         else if($porcentaje2>=120 && $porcentaje2<180) $color2="orangeCell"; 
                         else if($porcentaje2>=180) $color2="redCell";
                         else $color2="greyCell";
@@ -2412,16 +2412,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje<=30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
-                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<120) $color="lightgreenCell";
                         else if($porcentaje>=120 && $porcentaje<180) $color="orangeCell"; 
                         else if($porcentaje>=180) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getPeriodoMedioPagosMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2<=30) $color="darkgreenCell";
+                        if($porcentaje2<=30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
-                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<120) $color2="lightgreenCell";
                         else if($porcentaje2>=120 && $porcentaje2<180) $color2="orangeCell"; 
                         else if($porcentaje2>=180) $color2="redCell";
                         else $color2="greyCell";
@@ -2432,7 +2432,7 @@ if($diputacion){
                 </tbody>
             </table>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -2456,16 +2456,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreenCell";
                         else if($porcentaje>=85 && $porcentaje<90) $color="orangeCell"; 
                         else if($porcentaje<85) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidas()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreenCell";
                         else if($porcentaje2>=85 && $porcentaje2<90) $color2="orangeCell"; 
                         else if($porcentaje2<85) $color2="redCell";
                         else $color2="greyCell";
@@ -2480,16 +2480,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
-                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreeCell";
+                        else if($porcentaje>=90 && $porcentaje<95) $color="lightgreenCell";
                         else if($porcentaje>=85 && $porcentaje<90) $color="orangeCell"; 
                         else if($porcentaje<85) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=99) $color="darkgreenCell";
+                        if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
-                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreeCell";
+                        else if($porcentaje2>=90 && $porcentaje2<95) $color2="lightgreenCell";
                         else if($porcentaje2>=85 && $porcentaje2<90) $color2="orangeCell"; 
                         else if($porcentaje2<85) $color2="redCell";
                         else $color2="greyCell";
@@ -2683,7 +2683,7 @@ if($diputacion){
             <p><b>Derechos Pendientes de Cobro 2020: </b><?php echo number_format($dip2020->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
             <p><b>Derechos Pendientes de Cobro 2019: </b><?php echo number_format($dip2019->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
             <br>
-            <table>
+            <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
@@ -2707,16 +2707,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=95) $color="darkgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
-                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreeCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreenCell";
                         else if($porcentaje>=80 && $porcentaje<85) $color="orangeCell"; 
                         else if($porcentaje<80) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEficaciaRecaudatoria()*100;
                         $color2="";
-                        if($porcentaje2>=95) $color="darkgreenCell";
+                        if($porcentaje2>=95) $color2="darkgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
-                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreeCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<85) $color2="orangeCell"; 
                         else if($porcentaje2<80) $color2="redCell";
                         else $color2="greyCell";
@@ -2731,16 +2731,16 @@ if($diputacion){
                         $color="";
                         if($porcentaje>=95) $color="darkgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
-                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreeCell";
+                        else if($porcentaje>=85 && $porcentaje<90) $color="lightgreenCell";
                         else if($porcentaje>=80 && $porcentaje<85) $color="orangeCell"; 
                         else if($porcentaje<80) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2>=95) $color="darkgreenCell";
+                        if($porcentaje2>=95) $color2="darkgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
-                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreeCell";
+                        else if($porcentaje2>=85 && $porcentaje2<90) $color2="lightgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<85) $color2="orangeCell"; 
                         else if($porcentaje2<80) $color2="redCell";
                         else $color2="greyCell";

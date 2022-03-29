@@ -15,7 +15,7 @@ class DAOConsultorProvincia {
             $elements = array();
             while($resultado = mysqli_fetch_assoc($result)){
                 $provCode = $resultado['CODIGO'];
-                $sql2 = "SELECT AUTONOMIA FROM municipios WHERE AUTONOMIA = '$provCode' LIMIT 1 ";
+                $sql2 = "SELECT AUTONOMIA FROM municipios WHERE PROVINCIA = '$provCode' LIMIT 1 ";
                 $result2 = mysqli_query($db, $sql2);
                 if(!$result2){
                     return false;

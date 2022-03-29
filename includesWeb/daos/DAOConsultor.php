@@ -795,5 +795,52 @@ class DAOConsultor{
 
     }
 
+    public function getProgMun($mun, $codigo){
+        if(get_class($mun)!='Municipio'){
+            return false;
+        }
+
+        $daomun = new DAOConsultorMunicipio();
+
+        $mun2 = $daomun->getProgMun($codigo);
+        if(!$mun2){
+            return false;
+        }
+
+        $mun->setAgspc($mun2->getAgp());
+        $mun->setSop($mun2->getSop());
+        $mun->setOte($mun2->getOte());
+        $mun->setMu($mun2->getMu());
+        $mun->setPc($mun2->getPc());
+        $mun->setSpei($mun2->getSpei());
+        $mun->setPgvpp($mun2->getPgvpp());
+        $mun->setCre($mun2->getCre());
+        $mun->setPvp($mun2->getPvp());
+        $mun->setA($mun2->getA());
+        $mun->setRgtr($mun2->getRgtr());
+        $mun->setRr($mun2->getRr());
+        $mun->setGrsu($mun2->getGrsu());
+        $mun->setTr($mun2->getTr());
+        $mun->setLv($mun2->getLv());
+        $mun->setCsf($mun2->getCsf());
+        $mun->setAp($mun2->getAp());
+        $mun->setPj($mun2->getPj());
+        $mun->setP($mun2->getP());
+        $mun->setSsps($mun2->getSsps());
+        $mun->setFe($mun2->getFe());
+        $mun->setS($mun2->getS());
+        $mun->setE($mun2->getE());
+        $mun->setC($mun2->getC());
+        $mun->setD($mun2->getD());
+        $mun->setAgp($mun2->getAgp());
+        $mun->setIe($mun2->getIe());
+        $mun->setCom($mun2->getCom());
+        $mun->setTp($mun2->getTp());
+        $mun->setIt($mun2->getIt());
+        $mun->setIdi($mun2->getIdi());
+
+        return $mun2;
+    }
+
 }
 ?>
