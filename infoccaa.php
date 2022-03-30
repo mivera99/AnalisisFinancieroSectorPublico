@@ -362,7 +362,6 @@ if($ccaa && $ccaaNac){
                 <br>
                 <button type="button" id="verPDFCCAA" onclick="window.open('pdfCCAA.php','_blank')">Ver Informe</button>
             <?php
-
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';
                 echo '<p><b>Presidente de la comunidad: </b>'.$ccaa->getNombrePresidente().' '.$ccaa->getApellido1().' '.$ccaa->getApellido2().'</p>';
@@ -390,7 +389,7 @@ if($ccaa && $ccaaNac){
                 <h3>Datos económicos</h3>
                 <table>
                     <thead>
-                     <tr>
+                        <tr>
                             <th colspan="2">Población (Año <?php echo key($ccaa->getPoblacion()).'): '. number_format(($ccaa->getPoblacion())[key($ccaa->getPoblacion())], 0, '','.');?></th>
                             <th colspan="2">PIB per cápita (Año <?php echo key($ccaa->getPibc()).'): '. number_format(($ccaa->getPibc())[key($ccaa->getPibc())]*1000, 0, '','.');?></th>
                         </tr>
