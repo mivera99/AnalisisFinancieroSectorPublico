@@ -667,13 +667,11 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($paro = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($paro['ANHO'], $elements)){
-                array_push($elements2, $paro['ANHO']);
-                array_push($elements2, $paro['MES']/3);
-                array_push($elements2, $paro['PARO']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
+            array_push($elements2, $paro['ANHO']);
+            array_push($elements2, $paro['MES']/3);
+            array_push($elements2, $paro['PARO']);
+            array_push($elements, $elements2);
+            $elements2 = array();
         }
         $ccaa->setParo($elements);
 
@@ -685,14 +683,12 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($pmp = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($pmp['ANHO'], $elements)){
-                array_push($elements2, $pmp['ANHO']);
-                array_push($elements2, $pmp['MES']);
-                array_push($elements2, $pmp['PMP']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
-        } // modificado en el ionos lineas 687 y 618
+            array_push($elements2, $pmp['ANHO']);
+            array_push($elements2, $pmp['MES']);
+            array_push($elements2, $pmp['PMP']);
+            array_push($elements, $elements2);
+            $elements2 = array();
+        } 
         $elements= array_reverse($elements, false);
         $ccaa->setPMP($elements);
 
@@ -704,13 +700,11 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($rdcpp = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($rdcpp['ANHO'], $elements)){
-                array_push($elements2, $rdcpp['ANHO']);
-                array_push($elements2, $rdcpp['MES']);
-                array_push($elements2, $rdcpp['R_DCPP']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
+            array_push($elements2, $rdcpp['ANHO']);
+            array_push($elements2, $rdcpp['MES']);
+            array_push($elements2, $rdcpp['R_DCPP']);
+            array_push($elements, $elements2);
+            $elements2 = array();
         }
         $elements= array_reverse($elements, false);
         $ccaa->setRDCPP($elements);
@@ -723,13 +717,11 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($deudaviva = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($deudaviva['ANHO'], $elements)){
-                array_push($elements2, $deudaviva['ANHO']);
-                array_push($elements2, $deudaviva['MES']/3);
-                array_push($elements2, $deudaviva['DEUDAVIVA']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
+            array_push($elements2, $deudaviva['ANHO']);
+            array_push($elements2, $deudaviva['MES']/3);
+            array_push($elements2, $deudaviva['DEUDAVIVA']);
+            array_push($elements, $elements2);
+            $elements2 = array();
         }
         $elements = array_reverse($elements, false);
         $ccaa->setDeudaViva($elements);
@@ -742,13 +734,11 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($deudavivaingrcor = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($deudavivaingrcor['ANHO'], $elements)){
-                array_push($elements2, $deudavivaingrcor['ANHO']);
-                array_push($elements2, $deudavivaingrcor['MES']/3);
-                array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
+            array_push($elements2, $deudavivaingrcor['ANHO']);
+            array_push($elements2, $deudavivaingrcor['MES']/3);
+            array_push($elements2, $deudavivaingrcor['DEUDA_VIVA_INGR_COR']);
+            array_push($elements, $elements2);
+            $elements2 = array();
         }
         $elements = array_reverse($elements, false);
         $ccaa->setDeudaVivaIngrCor($elements);
@@ -761,13 +751,11 @@ class DAOConsultorCCAA {
         $elements=array();
         $elements2=array();
         while($transac = mysqli_fetch_assoc($result)){
-            //if(!$this->in_multi_array($transac['ANHO'], $elements)){
-                array_push($elements2, $transac['ANHO']);
-                array_push($elements2, $transac['MES']/3);
-                array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
-                array_push($elements, $elements2);
-                $elements2 = array();
-            //}
+            array_push($elements2, $transac['ANHO']);
+            array_push($elements2, $transac['MES']/3);
+            array_push($elements2, $transac['TRANSAC_INMOBILIARIAS']);
+            array_push($elements, $elements2);
+            $elements2 = array();
         }
         $ccaa->setTransacInmobiliarias($elements);
 
@@ -1041,10 +1029,6 @@ class DAOConsultorCCAA {
         $ccaa->setFondoContingencia1($elements);
         
         //Total Gastos Corrientes
-        /*if(isset($gastos_personal1['OBLG_REC']) && isset($gastos_corrientes_bienes_servicios1['OBLG_REC']) && isset($gastos_financieros1['OBLG_REC']) && isset($transferencias_corrientes_gastos1['OBLG_REC']) && isset($fondo_contingencia1['OBLG_REC'])){
-            $total_gastos_corrientes1 = floatval($gastos_personal1['OBLG_REC']) + floatval($gastos_corrientes_bienes_servicios1['OBLG_REC']) + floatval($gastos_financieros1['OBLG_REC']) + floatval($transferencias_corrientes_gastos1['OBLG_REC']) + floatval($fondo_contingencia1['OBLG_REC']);
-            $ccaa->setTotalGastosCorrientes1($total_gastos_corrientes1);
-        }*/
         $elements=array();
         foreach($ccaa->getGastosPersonal1() as $clave=>$valor){
             $total_gastos_corrientes = floatval($valor) + floatval(($ccaa->getGastosCorrientesBienesServicios1())[$clave]) + floatval(($ccaa->getGastosFinancieros1())[$clave]) + floatval(($ccaa->getTransferenciasCorrientesGastos1())[$clave]) + floatval(($ccaa->getFondoContingencia1())[$clave]);
@@ -1216,7 +1200,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = deudas_ccaa.ANHO ";
-                //$conditions = $conditions." AND "; //<- aqui está el problema
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_ccaa.ANHO";
             $returning_values = $returning_values.", scoring_ccaa.POBLACION";
@@ -1234,7 +1217,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
-                //$conditions = $conditions." AND ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
             if(strpos($returning_values, ', c2.MES ')===false) $returning_values = $returning_values . ", c2.MES";
@@ -1254,7 +1236,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = deudas_ccaa.ANHO" ;
-                //$conditions = $conditions . " AND ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general.ANHO";
             $returning_values = $returning_values.",cuentas_ccaa_general.R_SOSTE_FINANCIERA";
@@ -1272,7 +1253,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
-                //$conditions = $conditions." AND ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
             if(strpos($returning_values, ', c3.MES ')===false) $returning_values = $returning_values . ", c3.MES";
@@ -1293,7 +1273,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
-                //$conditions = $conditions." AND ";    
             }
             
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
@@ -1314,7 +1293,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_general_mensual.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_ingresos.ANHO = cuentas_ccaa_gastos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_ingresos.ANHO = deudas_ccaa.ANHO ";
-                //$conditions = $conditions." AND ";
             }
             if($conditions!="") $conditions=$conditions." AND ";
             $conditions = $conditions."cuentas_ccaa_ingresos.TIPO='PARTIDA INGRESOS NO FINANCIEROS' ";            
@@ -1360,7 +1338,6 @@ class DAOConsultorCCAA {
                 else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = deudas_ccaa.ANHO";
-                //$conditions = $conditions." AND ";
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
             }
             if($poblacion=='tramo1'){
