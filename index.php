@@ -29,7 +29,6 @@ if (isset($_SESSION['mensaje'])) {
     <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
     <script src="functions.js"></script>
     <script src="functions2.js"></script>
-    <script src="node_modules/chart.js/dist/chart.js"></script>
 
     <title>Análisis Financiero del Sector Público - Inicio</title>
 </head>
@@ -43,21 +42,15 @@ if (isset($_SESSION['mensaje'])) {
             <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
             <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
             <p>Provincias, diputaciones y municipios en segundos.</p>
-            <script>
-                cargarNombres();
-            </script>
+            <script>cargarNombres();</script>
             <br><br>
-            
             <form autocomplete="off" action="redirect.php" method="post">
                 <div class="autocomplete">
                     <input id="facility" type="text" name="facilities" placeholder="Escribir aquí...">
                     <button>Consultar</button>
                 </div>
             </form>
-
-            <script>
-                autocomplete(document.getElementById("facility"));
-            </script>
+            <script>autocomplete(document.getElementById("facility"));</script>
             <?php
                 if (isset($show_message)) {
                     echo "<script>alert('{$show_message}');</script>";
