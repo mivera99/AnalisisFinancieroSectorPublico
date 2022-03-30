@@ -28,6 +28,7 @@ else {
             exit();
         }
         else {
+            $_SESSION['mensaje']='Disculpe, pero la institución no se ha encontrado. Inténtelo de nuevo';
             header('Location:index');
             exit();
         }
