@@ -356,7 +356,7 @@ if($ccaa && $ccaaNac){
                             break;
                     }
 
-                    echo "<i>" . $infoRating . "</i><sup>1</sup><br><br>";
+                    echo "<i>" . $infoRating . "</i><br><br>";
                 }
             ?>
                 <br>
