@@ -70,26 +70,18 @@ if(!empty($_REQUEST['gastoDIP']) && $_REQUEST['gastoDIP']!='inicio'){
 if(isset($_REQUEST['selectionDIP'])){
     $choice = htmlspecialchars(trim(strip_tags($_REQUEST['selectionDIP'])));
     if($choice == 'SelectYear'){
-        //echo '<p>Radio button del año pulsado</p><br>';
         if(!empty($_REQUEST['anhoDIP']) && $_REQUEST['anhoDIP']!='inicio'){
-            //echo '<p>El año tiene un valor que no es inicio</p><br>';
             $anho = htmlspecialchars(trim(strip_tags($_REQUEST['anhoDIP'])));
         }
     }
     else {
-        //echo '<p>Radio button pulsado</p><br>';
         if(!empty($_REQUEST['from']) && !empty($_REQUEST['to'])){
             if($_REQUEST['from']!='inicio'){
-                //echo '<p>El año from tiene un valor que no es inicio</p><br>';
                 $from = htmlspecialchars(trim(strip_tags($_REQUEST['from'])));
             }
-            //echo '<p>valor de from: '.$from.'</p><br>';
             if($_REQUEST['to']!='inicio'){
-                //echo '<p>El año to tiene un valor que no es inicio</p><br>';
                 $to = htmlspecialchars(trim(strip_tags($_REQUEST['to'])));
             }
-            //echo '<p>valor de to: '.$to.'</p><br>';
-        
         }
     }
 }
@@ -97,10 +89,6 @@ if(isset($_REQUEST['selectionDIP'])){
 if(!empty($_REQUEST['autonomiasDIP']) && $_REQUEST['autonomiasDIP']!='inicio'){
     $autonomia = htmlspecialchars(trim(strip_tags($_REQUEST['autonomiasDIP'])));
 }
-
-/*if(!empty($_REQUEST['provinciasDIP']) && $_REQUEST['provinciasDIP']!='inicio'){
-    $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasDIP'])));
-}*/
 
 $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto, $checked_boxes);
 ?>
@@ -118,13 +106,8 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    
-    <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
-    <script src="functions.js"></script>
 
-    <script src="node_modules/chart.js/dist/chart.js"></script>
-
-    <!-- ====== FUNCIÓN PARA MOSTRAR LA CONTRASEÑA SI PULSAMOS UN BOTÓN ==== -->
+    <!-- ====== FUNCIONES JAVASCRIPT ==== -->
     <script src="functions2.js"></script>
     <title>Análisis Financiero Sector Público - Consulta DIPs</title>
 </head>
