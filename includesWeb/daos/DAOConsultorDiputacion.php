@@ -151,7 +151,7 @@ class DAOConsultorDiputacion {
         $diputacion->setTransferenciasCapital1($transferencias_capital1['DERE']);
 
         //Ingresos No Financieros
-        $total_ingresos_no_corrientes1 = floatval($enajenacion_inversiones_reales1['DERE']) + floatval($transferencias_capital1['DERE']);
+        $total_ingresos_no_corrientes1 = floatval($enajenacion_inversiones_reales1['DERE']) + floatval($transferencias_capital1['DERE']) + $totalIngresosCorrientes1;
         $diputacion->setTotalIngresosNoCorrientes1($total_ingresos_no_corrientes1);
 
 
@@ -175,7 +175,7 @@ class DAOConsultorDiputacion {
 
 
         //TOTAL INGRESOS
-        $total_ingresos1 = $totalIngresosCorrientes1 + $total_ingresos_no_corrientes1 + $activos_financieros1['DERE'] + $pasivos_financieros1['DERE'];
+        $total_ingresos1 = $total_ingresos_no_corrientes1 + $activos_financieros1['DERE'] + $pasivos_financieros1['DERE'];
         $diputacion->setTotalIngresos1($total_ingresos1);
 
         return $diputacion;
@@ -252,7 +252,7 @@ class DAOConsultorDiputacion {
         $dip->setTransferenciasCapitalGastos1($transferencias_capital_gastos1['OBLG']);
 
         //Gastos No Financieros
-        $total_gastos_no_corrientes1 = doubleval($inversiones_reales1['OBLG']) + doubleval($transferencias_capital_gastos1['OBLG']);
+        $total_gastos_no_corrientes1 = doubleval($inversiones_reales1['OBLG']) + doubleval($transferencias_capital_gastos1['OBLG']) + $total_gastos_corrientes1;
         $dip->setTotalGastosNoFinancieros1($total_gastos_no_corrientes1);
 
         //Activos Financieros
@@ -275,7 +275,7 @@ class DAOConsultorDiputacion {
 
         //TOTAL GASTOS
 
-        $total_gastos1 = floatval($total_gastos_corrientes1) + floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
+        $total_gastos1 = floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
         $dip->setTotalGastos1($total_gastos1);
 
 

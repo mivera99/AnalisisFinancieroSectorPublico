@@ -153,7 +153,7 @@ class DAOConsultorMunicipio{
         $municipio->setTransferenciasCapital1($transferencias_capital1['DERE']);
 
         //Ingresos No Financieros
-        $total_ingresos_no_corrientes1 = floatval($enajenacion_inversiones_reales1['DERE']) + floatval($transferencias_capital1['DERE']);
+        $total_ingresos_no_corrientes1 = floatval($enajenacion_inversiones_reales1['DERE']) + floatval($transferencias_capital1['DERE']) + $totalIngresosCorrientes1;
         $municipio->setTotalIngresosNoCorrientes1($total_ingresos_no_corrientes1);
 
 
@@ -177,7 +177,7 @@ class DAOConsultorMunicipio{
 
 
         //TOTAL INGRESOS
-        $total_ingresos1 = $totalIngresosCorrientes1 + $total_ingresos_no_corrientes1 + $activos_financieros1['DERE'] + $pasivos_financieros1['DERE'];
+        $total_ingresos1 = $total_ingresos_no_corrientes1 + $activos_financieros1['DERE'] + $pasivos_financieros1['DERE'];
         $municipio->setTotalIngresos1($total_ingresos1);
 
         return $municipio;
@@ -254,7 +254,7 @@ class DAOConsultorMunicipio{
         $mun->setTransferenciasCapitalGastos1($transferencias_capital_gastos1['OBLG']);
 
         //Gastos No Financieros
-        $total_gastos_no_corrientes1 = floatval($inversiones_reales1['OBLG']) + floatval($transferencias_capital_gastos1['OBLG']);
+        $total_gastos_no_corrientes1 = floatval($inversiones_reales1['OBLG']) + floatval($transferencias_capital_gastos1['OBLG']) + $total_gastos_corrientes1;
         $mun->setTotalGastosNoFinancieros1($total_gastos_no_corrientes1);
 
         //Activos Financieros
@@ -277,7 +277,7 @@ class DAOConsultorMunicipio{
 
         //TOTAL GASTOS
 
-        $total_gastos1 = floatval($total_gastos_corrientes1) + floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
+        $total_gastos1 = floatval($total_gastos_no_corrientes1) + floatval($activos_financieros_gastos1['OBLG']) + floatval($pasivos_financieros_gastos1['OBLG']);
         $mun->setTotalGastos1($total_gastos1);
 
 
