@@ -35,8 +35,8 @@ if($municipio){
     /*Ingresos Totales*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
-    array_push($datosIngresosTotales,"2018","2019","2020");
-    array_push($etiquetasIngresosTotales,$mun2018->getTotalIngresos1(),$mun2019->getTotalIngresos1(),$mun2020->getTotalIngresos1());
+    array_push($etiquetasIngresosTotales,"2018","2019","2020");
+    array_push($datosIngresosTotales,$mun2018->getTotalIngresos1(),$mun2019->getTotalIngresos1(),$mun2020->getTotalIngresos1());
     
     /*Gastos Corrientes*/
     $datosGastosCor = array();
@@ -53,8 +53,8 @@ if($municipio){
     /*Gastos Totales*/
     $datosGastosTotales = array();
     $etiquetasGastosTotales = array();
-    array_push($datosGastosTotales,"2018","2019","2020");
-    array_push($etiquetasGastosTotales,$mun2018->getTotalGastos1(),$mun2019->getTotalGastos1(),$mun2020->getTotalGastos1());
+    array_push($etiquetasGastosTotales,"2018","2019","2020");
+    array_push($datosGastosTotales,$mun2018->getTotalGastos1(),$mun2019->getTotalGastos1(),$mun2020->getTotalGastos1());
 
     /*Endeudamiento*/
     $datosEndeudamiento = array();

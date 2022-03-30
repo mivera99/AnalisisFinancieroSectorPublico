@@ -33,8 +33,8 @@ if($diputacion){
     /*Ingresos Totales*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
-    array_push($datosIngresosTotales,"2018","2019","2020");
-    array_push($etiquetasIngresosTotales,$dip2018->getTotalIngresos1(),$dip2019->getTotalIngresos1(),$dip2020->getTotalIngresos1());
+    array_push($etiquetasIngresosTotales,"2018","2019","2020");
+    array_push($datosIngresosTotales,$dip2018->getTotalIngresos1(),$dip2019->getTotalIngresos1(),$dip2020->getTotalIngresos1());
     
     /*Gastos Corrientes*/
     $datosGastosCor = array();
@@ -51,8 +51,8 @@ if($diputacion){
     /*Gastos Totales*/
     $datosGastosTotales = array();
     $etiquetasGastosTotales = array();
-    array_push($datosGastosTotales,"2018","2019","2020");
-    array_push($etiquetasGastosTotales,$dip2018->getTotalGastos1(),$dip2019->getTotalGastos1(),$dip2020->getTotalGastos1());
+    array_push($etiquetasGastosTotales,"2018","2019","2020");
+    array_push($datosGastosTotales,$dip2018->getTotalGastos1(),$dip2019->getTotalGastos1(),$dip2020->getTotalGastos1());
 
     /*Endeudamiento*/
     $datosEndeudamiento = array();
