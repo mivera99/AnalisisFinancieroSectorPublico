@@ -1,4 +1,5 @@
 <?php
+session_start();
 $nombre = htmlspecialchars(trim(strip_tags($_REQUEST["facilities"])));
 
 $facility = '';
