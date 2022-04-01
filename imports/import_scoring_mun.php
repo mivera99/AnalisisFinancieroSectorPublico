@@ -102,7 +102,7 @@ class Importer_scoring_mun{
                             $tipo = $arrayStr[0];
                             $year = $arrayStr[1];
                         }
-                        /*if($year!='' && $tipo!=''){
+                        if($year!='' && $tipo!=''){
                             //Consulta para averiguar si ya existe la fila 
                             $query="SELECT CODIGO,ANHO FROM scoring_mun WHERE ANHO = '$year' AND CODIGO='$COD_MUN'";
                             $result= mysqli_query($conn,$query);
@@ -123,7 +123,7 @@ class Importer_scoring_mun{
                             if(!$result){
                                 echo mysqli_error($conn);
                             }
-                        }*/
+                        }
                     }
                     else if($k>=55){
                         $value = addslashes($vals[$k]); // Guardamos el valor de la columna
@@ -139,7 +139,7 @@ class Importer_scoring_mun{
                             en la variable. El año se encuentra en la tercera posición del sarray strArray*/
                             $year=$year-1;
                         }
-                        /*
+                        
                         //Consulta para averiguar si ya existe la fila 
                         $query="SELECT CODIGO,ANHO FROM scoring_mun WHERE ANHO = '$year' AND CODIGO='$COD_MUN'";
                         $result= mysqli_query($conn,$query);
@@ -159,7 +159,7 @@ class Importer_scoring_mun{
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){
                             echo mysqli_error($conn);
-                        }*/
+                        }
                     }
                     if($year!='' && $tipo!=''){
                         //Consulta para averiguar si ya existe la fila 
