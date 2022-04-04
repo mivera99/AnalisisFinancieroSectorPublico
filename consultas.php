@@ -493,11 +493,46 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         </select>
                         <p>Tipo de gasto</p>
                         <select name="gastoMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="inicio" selected>Seleccione un tipo</option>
                             <option value="personal">Por gastos de personal</option>
                             <option value="bienesservicios">Por gastos de bienes y servicios</option>
                             <option value="financieros">Por gastos financieros</option>
                             <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <p>Programa de gasto</p>
+                        <select name="progMUN">
+                            <option value="inicio" selected>Seleccione un tipo</option>
+                            <option value="agspc">Administración general de la seguridad y protección civil</option>
+                            <option value="sop">Seguridad y orden público</option>
+                            <option value="ote">Ordenación del tráfico y del estacionamiento</option>
+                            <option value="mu">Movilidad urbana</option>
+                            <option value="pc">Protección civil</option>
+                            <option value="spei">Servicio de prevención y extinción de incendios</option>
+                            <option value="pgvpp">Promoción y gestión de vivienda de protección pública</option>
+                            <option value="cre">Conservación y rehabilitación de la edificación</option>
+                            <option value="pvp">Pavimentación de vías públicas</option>
+                            <option value="a">Alcantarillado</option>
+                            <option value="rgtr">Recogida, gestión y tratamiento de residuos</option>
+                            <option value="rr">Recogida de residuos</option>
+                            <option value="grsu">Gestión de residuos sólidos urbanos</option>
+                            <option value="tr">Tratamiento de residuos</option>
+                            <option value="lv">Limpieza viaria</option>
+                            <option value="csf">Cementerios y servicios funerarios</option>
+                            <option value="ap">Alumbrado público</option>
+                            <option value="pj">Parques y jardines</option>
+                            <option value="p">Pensiones</option>
+                            <option value="ssps">Servicios sociales y promoción social</option>
+                            <option value="fe">Fomento del empleo</option>
+                            <option value="s">Sanidad</option>
+                            <option value="e">Educación</option>
+                            <option value="c">Cultura</option>
+                            <option value="d">Deporte</option>
+                            <option value="agp">Agricultura, ganadería y pesca</option>
+                            <option value="ie">Industria y energía</option>
+                            <option value="com">Comercio</option>
+                            <option value="tp">Transporte público</option>
+                            <option value="it">Infraestructuras del transporte</option>
+                            <option value="idi">Investigación, desarrollo e innovación</option>
                         </select>
                         <br> 
                         <button type="submit" class="form-button">Consultar</button>

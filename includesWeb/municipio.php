@@ -158,8 +158,6 @@ class Municipio{
     private $it;
     private $idi;
 
-
-
     public function getCodigo(){
         return $this->codigo;
     }

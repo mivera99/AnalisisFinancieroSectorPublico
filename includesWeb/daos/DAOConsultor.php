@@ -68,11 +68,11 @@ class DAOConsultor{
 
         return $daodip->consultarDIPs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $pmp, $ingrnofin, $gasto,$checked_boxes);
     }
-    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $checked_boxes){
+    public function consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $prog, $checked_boxes){
         $muns = array();
         $daomun = new DAOConsultorMunicipio();
 
-        return $daomun->consultarMUNs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $checked_boxes);
+        return $daomun->consultarMUNs(strtoupper($scoring), $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $prog, $checked_boxes);
     }
 
     public function getCCAA($nombre){
