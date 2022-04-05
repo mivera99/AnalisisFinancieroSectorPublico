@@ -306,7 +306,7 @@ $pdf->AddPage();
 $html = '
 <span style="text-align:justify;">
 <br>
-<h3><b>Resultado presupuestario y endeudamiento (en %)</b></h3>
+<h3><b>Resultado presupuestario y endeudamiento</b></h3>
 ';
 for($i=0;$i<4;$i++){
     if($i==0) $tmp=$ccaa->getCCAAPib();
@@ -333,8 +333,8 @@ for($i=0;$i<4;$i++){
     $html .= '<tr>';
     if($i==0) $html .= '<th>Resultado presupuestario</th>';
     else if ($i==1) $html .= '<th>Resultado presupuestario nacional</th>';
-    else if ($i==2) $html .= '<th>Deuda viva sobre ingresos corrientes</th>';
-    else if ($i==3) $html .= '<th>Deuda viva nacional sobre ingresos corrientes</th>';
+    else if ($i==2) $html .= '<th>Endeudamiento</th>';
+    else if ($i==3) $html .= '<th>Endeudamiento media nacional</th>';
     if($i<2){
         foreach($tmp as $clave=>$valor){
             $html .= '<td>'.($valor*100).'%</td>';
@@ -603,7 +603,7 @@ $html = '
 
 $html .= '
 <br><br>
-<h3>Solvencia (en %)</h3>
+<h3>Solvencia</h3>
 ';
 for($i=0;$i<3;$i++){
     if($i==0) $tmp=$ccaa->getRSosteFinanciera();
@@ -621,7 +621,7 @@ for($i=0;$i<3;$i++){
     $html .='<tbody>';
     $html .='<tr>';
     if($i==0) $html .='<th>Sostenibilidad financiera</th>';
-    else if ($i==1) $html .='<th>Apalancamiento operativo</th>';
+    else if ($i==1) $html .='<th>Apalancamiento</th>';
     else if ($i==2) $html .='<th>Sostenibilidad de la deuda</th>';
     foreach($tmp as $clave=>$valor){
         $html .='<td>'.($valor*100).'%</td>';
@@ -650,8 +650,8 @@ for($i=0;$i<2;$i++){
     $html .= '</thead>';
     $html .= '<tbody>';
     $html .= '<tr>';
-    if($i==0) $html .= '<th>PMP</th>';
-    else if ($i==1) $html .= '<th>PMP medio</th>';
+    if($i==0) $html .= '<th>Periodo medio de pago</th>';
+    else if ($i==1) $html .= '<th>Periodo medio de pago nacional</th>';
     foreach($tmp as $array){
         $html .= '<td>'.$array[2].' días</td>';
     }
@@ -672,7 +672,7 @@ $pdf->AddPage();
 
 $html = '<span style="text-align:justify;">
 <br><br>
-<h3>Eficiencia (en %)</h3>
+<h3>Eficiencia</h3>
 ';
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getREfic();
@@ -701,7 +701,7 @@ for($i=0;$i<2;$i++){
 
 $html .= '
 <br><br>
-<h3>Ejecución presupuestaria (en %)</h3>
+<h3>Gestión presupuestaria</h3>
 ';
 for($i=0;$i<4;$i++){
     if($i==0) $tmp=$ccaa->getREjeIngrCorr();
@@ -734,7 +734,7 @@ for($i=0;$i<4;$i++){
 
 $html .='
 <br>
-<h3>Deuda comercial pendiente de pago (en %)</h3>
+<h3>Deuda comercial pendiente de pago</h3>
 ';
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getRDCPP();
@@ -771,8 +771,9 @@ $pdf->writeHTML($html, true, false, false, false, 'C');
 
 $pdf->AddPage();
 
-$html = '<span style="text-align:justify;">
-<h3>Pagos obligacionales (en %)</h3>
+$html .= '
+<br>
+<h3>Cumplimiento de pagos</h3>
 ';
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getPagosObligaciones();
@@ -788,7 +789,7 @@ for($i=0;$i<2;$i++){
     $html .='</thead>';
     $html .= '<tbody>';
     $html .= '<tr>';
-    if($i==0) $html .= '<th>Porcentaje de gastos pagados</th>';
+    if($i==0) $html .= '<th>Pagos sobre obligaciones reconocidas</th>';
     else if ($i==1) $html .= '<th>Porcentaje medio de gastos pagados</th>';
     foreach($tmp as $clave=>$valor){
         $html .= '<td>'.($valor*100).'%</td>';
@@ -796,11 +797,11 @@ for($i=0;$i<2;$i++){
     $html .= '</tr>';
     $html .='</tbody>';
     $html .= '</table></span>';
-    $html .= '<br><br>';
+    $html .= '<br>';
 }
 
-$html .= '
-<h3>Eficacia recaudatoria (en %)</h3>
+$html = '<span style="text-align:justify;">
+<h3>Gestión tributaria</h3>
 ';
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getREficaciaRec();
@@ -824,7 +825,7 @@ for($i=0;$i<2;$i++){
     $html .= '</tr>';
     $html .='</tbody>';
     $html .= '</table></span>';
-    $html .= '<br>';
+    $html .= '<br><br>';
 }
 
 $html .= '</span>';
