@@ -1035,7 +1035,7 @@ class DAOConsultorMunicipio{
                 else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "prog_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "prog_mun.ANHO = cuentas_mun_gastos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "prog_mun.ANHO = deudas_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";
+                //if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
             /*if($prog=='personal'){
                 $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST1' ";
@@ -1088,7 +1088,7 @@ class DAOConsultorMunicipio{
             if($choice =='SelectYear'){
                 if(!empty($anho)){
                     if($conditions!=""){
-                        $conditions = $conditions . "AND ";
+                        $conditions = $conditions . " AND ";
                     }
                     $conditions = $conditions."$anhoref = '$anho' ";
                 }
@@ -1096,21 +1096,21 @@ class DAOConsultorMunicipio{
             else {
                 if(!empty($from) && !empty($to)){
                     if($conditions!=""){
-                        $conditions = $conditions . "AND ";
+                        $conditions = $conditions . " AND ";
                     }
                     $conditions = $conditions."$anhoref BETWEEN '$from' AND '$to' ";
                 }
                 else if(!empty($from) && empty($to)){
                     
                     if($conditions!=""){
-                        $conditions = $conditions . "AND ";
+                        $conditions = $conditions . " AND ";
                     }
                     $conditions = $conditions."$anhoref >= '$from' ";
                 }
                 else if(empty($from) && !empty($to)){
                     
                     if($conditions!=""){
-                        $conditions = $conditions . "AND ";
+                        $conditions = $conditions . " AND ";
                     }
                     $conditions = $conditions."$anhoref <= '$to' ";
                 }
