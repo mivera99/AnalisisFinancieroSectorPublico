@@ -838,6 +838,6 @@ $pdf->writeHTML($html, true, false, false, false, 'C');
 $pdf->lastPage();
 ob_end_clean();
 
-$pdf->Output('EjemploCCAA.pdf', 'I');
+$pdf->Output('Informe_comunidad_autonoma.pdf', 'I');
 
 ?>

@@ -744,5 +744,5 @@ $pdf->writeHTML($html, true, false, false, false, 'C');
 $pdf->lastPage();
 ob_end_clean();
 
-$pdf->Output('EjemploDIP.pdf', 'I');
+$pdf->Output('Informe_diputacion.pdf', 'I');
 ?>

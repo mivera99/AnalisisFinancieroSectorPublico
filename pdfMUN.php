@@ -747,5 +747,5 @@ $pdf->writeHTML($html, true, false, false, false, 'C');
 $pdf->lastPage();
 ob_end_clean();
 
-$pdf->Output('EjemploMUN.pdf', 'I');
+$pdf->Output('Informe_municipio.pdf', 'I');
 ?>
