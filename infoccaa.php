@@ -2637,7 +2637,7 @@ if($ccaa && $ccaaNac){
                     const pagosObligacionalesNac = new Chart(chartPON, configChartPON);
                 </script>
                 <br>
-                <h3>Gestión Tributaria</h3>
+                <h3>Gestión tributaria</h3>
                 <?php
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getREficaciaRec();
