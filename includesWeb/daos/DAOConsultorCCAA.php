@@ -1197,8 +1197,8 @@ class DAOConsultorCCAA {
             if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
                 if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false) $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general_mensual.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = deudas_ccaa.ANHO ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_ccaa.ANHO";
@@ -1214,8 +1214,8 @@ class DAOConsultorCCAA {
                 }
                 if(strpos($joins, ' scoring_ccaa ')!==false) $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
@@ -1233,8 +1233,8 @@ class DAOConsultorCCAA {
                 }
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_general_mensual.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = deudas_ccaa.ANHO" ;
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general.ANHO";
@@ -1250,8 +1250,8 @@ class DAOConsultorCCAA {
                 }
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_ccaa_general_mensual.ANHO";
@@ -1270,8 +1270,8 @@ class DAOConsultorCCAA {
                 }
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO ";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO ";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO ";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO ";
             }
             
@@ -1311,8 +1311,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false) $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general_mensual.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = deudas_ccaa.ANHO";
 
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
@@ -1335,8 +1335,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false) $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general_mensual.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_general.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "scoring_ccaa.ANHO = deudas_ccaa.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
             }
@@ -1372,8 +1372,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_ccaa ')!==false) $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
  
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
@@ -1412,8 +1412,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = scoring_ccaa.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general_mensual ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_general_mensual.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general.ANHO = deudas_ccaa.ANHO";
                 
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
@@ -1450,8 +1450,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
             }
@@ -1493,8 +1493,8 @@ class DAOConsultorCCAA {
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = scoring_ccaa.ANHO";
                 else if(strpos($joins, ' cuentas_ccaa_general ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_general.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_gastos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_ccaa_ingresos ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = cuentas_ccaa_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_ccaa ')!==false)  $conditions = $conditions . "cuentas_ccaa_general_mensual.ANHO = deudas_ccaa.ANHO";
 
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";  

@@ -632,8 +632,8 @@ class DAOConsultorMunicipio{
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
             }    
@@ -656,8 +656,8 @@ class DAOConsultorMunicipio{
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
             }
@@ -673,8 +673,8 @@ class DAOConsultorMunicipio{
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
             }
@@ -691,8 +691,8 @@ class DAOConsultorMunicipio{
                 }
                 if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = scoring_mun.ANHO";
                 else if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = prog_mun.ANHO";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_mun.ANHO";
@@ -707,8 +707,8 @@ class DAOConsultorMunicipio{
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = scoring_mun.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = prog_mun.ANHO";
             }
@@ -745,8 +745,8 @@ class DAOConsultorMunicipio{
             if($joins!=""){
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
@@ -765,8 +765,8 @@ class DAOConsultorMunicipio{
             if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
@@ -819,8 +819,8 @@ class DAOConsultorMunicipio{
             if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
@@ -892,8 +892,8 @@ class DAOConsultorMunicipio{
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = scoring_mun.ANHO";
                 else if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";    
             }
@@ -924,8 +924,8 @@ class DAOConsultorMunicipio{
             if($joins!=""){
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = scoring_mun.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = deudas_mun.ANHO";
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";    
@@ -971,7 +971,7 @@ class DAOConsultorMunicipio{
                 else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = prog_mun.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
-            $conditions = $conditions."cuentas_mun_ingresos.TIPO='PARTIDAINGR1' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR2' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR3' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR4' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR5' ";
+            $conditions = $conditions."(cuentas_mun_ingresos.TIPO='PARTIDAINGR1' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR2' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR3' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR4' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR5') ";
             if($ingrnofin=='tramo1'){
                 $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 0 AND 1000000 ";
             }

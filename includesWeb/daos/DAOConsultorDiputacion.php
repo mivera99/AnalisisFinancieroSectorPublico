@@ -642,8 +642,8 @@ class DAOConsultorDiputacion {
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
@@ -658,8 +658,8 @@ class DAOConsultorDiputacion {
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
@@ -675,8 +675,8 @@ class DAOConsultorDiputacion {
                 }
                 if(strpos($joins, ' scoring_dip ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = scoring_dip.ANHO";
                 else if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 //$conditions = $conditions." AND ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_dip.ANHO";
@@ -691,8 +691,8 @@ class DAOConsultorDiputacion {
                     $conditions = $conditions." AND ";
                 }
                 if(strpos($joins, ' scoring_dip ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = scoring_dip.ANHO";
-                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = deudas_dip.ANHO";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_pmp.ANHO";
@@ -728,8 +728,8 @@ class DAOConsultorDiputacion {
             if($joins!=""){
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_dip_pmp ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
@@ -757,7 +757,7 @@ class DAOConsultorDiputacion {
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_pmp.ANHO";
                 else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
@@ -792,7 +792,7 @@ class DAOConsultorDiputacion {
                 $tmp=$conditions;
                 if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_pmp.ANHO";
                 else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
@@ -828,7 +828,7 @@ class DAOConsultorDiputacion {
                 if(strpos($joins, ' scoring_dip ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = scoring_dip.ANHO";
                 else if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_pmp.ANHO";
                 else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_ingresos.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";    
             }
             if($fondliq=='tramo1'){
@@ -859,7 +859,7 @@ class DAOConsultorDiputacion {
                 $tmp=$conditions;
                 if(strpos($joins, ' scoring_dip ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = scoring_dip.ANHO";
                 else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_gastos.ANHO";
+                else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = cuentas_dip_ingresos.ANHO";
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "cuentas_dip_pmp.ANHO = deudas_dip.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";    
             }
