@@ -973,16 +973,16 @@ class DAOConsultorMunicipio{
             }
             $conditions = $conditions."cuentas_mun_ingresos.TIPO='PARTIDAINGR1' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR2' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR3' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR4' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR5' ";
             if($ingrnofin=='tramo1'){
-                $having = $having."SUMA_INGR BETWEEN 0 AND 1000000 ";
+                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 0 AND 1000000 ";
             }
             else if($ingrnofin=='tramo2'){
-                $having = $having."SUMA_INGR BETWEEN 1000000 AND 5000000 ";
+                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 1000000 AND 5000000 ";
             }
             else if($ingrnofin=='tramo3'){
-                $having = $having."SUMA_INGR BETWEEN 5000000 AND 50000000 ";
+                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 5000000 AND 50000000 ";
             }
             else if($ingrnofin=='tramo4'){
-                $having = $having."SUMA_INGR > 50000000 ";
+                $having = $having."SUM(cuentas_mun_ingresos.DERE) > 50000000 ";
             }
             /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_mun_ingresos.ANHO";
             $returning_values = $returning_values.",SUM(cuentas_mun_ingresos.DERE) AS SUMA_INGR";

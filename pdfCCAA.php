@@ -2,7 +2,6 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-
 if(isset($_COOKIE["ccaa"])){
     $nombre = $_COOKIE["ccaa"];
     //$html .= "Hola, soy " . $nombre . "!";
@@ -21,14 +20,42 @@ $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 /* AÑADIMOS LA LIBRERÍA TCPDF */
 
 require_once('includes/tcpdf/tcpdf_import.php');
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+class MYTCPDF extends TCPDF {
+
+	//Page header
+	public function Header() {
+        $this->setY(15);
+		// Logo
+		/*$image_file = K_PATH_IMAGES.'logo_example.jpg';
+		$this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);*/
+		// Set font
+		$this->setFont('helvetica', 'B', 20);
+		// Title
+		$this->Cell(0, 15, 'Informe de comunidad autónoma', 'B', false, 'C', 0, '', 0, false, 'M', 'M');
+	}
+
+	// Page footer
+	public function Footer() {
+		// Position at 15 mm from bottom
+		$this->setY(-15);
+		// Set font
+		$this->setFont('helvetica', 'I', 8);
+        //Company name
+		$this->Cell(0, 10, 'Noster Economía', 'T', false, 'L', 0, '', 0, false, 'T', 'M');
+		// Page number
+		$this->Cell(0, 10, $this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'R', 0, '', 0, false, 'T', 'M');
+	}
+}
+
+$pdf = new MYTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 $pdf->setCreator(PDF_CREATOR);
 $pdf->setAuthor('Noster Economía');
 $pdf->setTitle($nombre . ' (CCAA)');
 
-$pdf->setPrintHeader(false);
-//$pdf->setPrintFooter(false);
+//$pdf->setPrintHeader(true);
+//$pdf->setPrintFooter(true);
 
 $pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
@@ -37,11 +64,11 @@ $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 $pdf->setDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-$pdf->setMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP-25, PDF_MARGIN_RIGHT);
+$pdf->setMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->setHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 
-$pdf->setAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM-25);
+$pdf->setAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
@@ -145,7 +172,9 @@ foreach($ccaa->getScoring() as $clave => $valor){
     }
 
     $html .= '<sup>'.$quoteNum.'</sup></i><br><br>';
-
+    /*$pdf->setY(-25);
+    $pdf->Cell(0, 10, '<sup>'.$quoteNum.'</sup>', 0, false, 'R', 0, '', 0, false, 'T', 'M');
+    $pdf->setY(25);*/
     $quoteNum++;
 
 }
@@ -301,11 +330,9 @@ $pdf->writeHTML($html, true, false, false, false, 'C');
 
 $pdf->AddPage();
 
-
 //Resultados Presupuestarios
 $html = '
 <span style="text-align:justify;">
-<br>
 <h3><b>Resultado presupuestario y endeudamiento</b></h3>
 ';
 for($i=0;$i<4;$i++){
@@ -357,7 +384,7 @@ $html.= '
     <thead>
         <tr>
             <th></th>
-            <th colspan="3">Liquidación der$html .=s reconocidos</th>
+            <th colspan="3">Liquidación de derechos reconocidos</th>
         </tr>
         <tr>
             <th>Ingresos</th>
@@ -632,8 +659,16 @@ for($i=0;$i<3;$i++){
     $html .='<br>';
 }
 
-$html .='
-<br><br>
+$html .= '</span>';
+
+
+$pdf->writeHTML($html, true, false, false, false, 'C');
+
+/* PÁGINA 4 */
+
+$pdf->AddPage();
+
+$html = '<span style="text-align:justify;">
 <h3>Liquidez</h3>
 ';
 for($i=0;$i<2;$i++){
@@ -661,19 +696,11 @@ for($i=0;$i<2;$i++){
     $html .= '<br>';
 }
 
-$html .= '</span>';
-
-
-$pdf->writeHTML($html, true, false, false, false, 'C');
-
-/* PÁGINA 4 */
-
-$pdf->AddPage();
-
-$html = '<span style="text-align:justify;">
+$html .='
 <br><br>
 <h3>Eficiencia</h3>
 ';
+
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getREfic();
     else if ($i==1) $tmp=$ccaaNac->getREfic();
@@ -732,10 +759,19 @@ for($i=0;$i<4;$i++){
     $html .= '<br>';
 }
 
-$html .='
-<br>
+$html .= '</span>';
+
+
+$pdf->writeHTML($html, true, false, false, false, 'C');
+
+/* PÁGINA 5 */
+
+$pdf->AddPage();
+
+$html = '<span style="text-align:justify;">
 <h3>Deuda comercial pendiente de pago</h3>
 ';
+
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getRDCPP();
     else if ($i==1) $tmp=$ccaaNac->getRDCPP();
@@ -761,20 +797,11 @@ for($i=0;$i<2;$i++){
     $html .= '<br>';
 }
 
-
-$html .= '</span>';
-
-
-$pdf->writeHTML($html, true, false, false, false, 'C');
-
-/* PÁGINA 5 */
-
-$pdf->AddPage();
-
 $html .= '
 <br>
 <h3>Cumplimiento de pagos</h3>
 ';
+
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getPagosObligaciones();
     else if ($i==1) $tmp=$ccaaNac->getPagosObligaciones();
@@ -800,9 +827,11 @@ for($i=0;$i<2;$i++){
     $html .= '<br>';
 }
 
-$html = '<span style="text-align:justify;">
+$html .= '
+<br>
 <h3>Gestión tributaria</h3>
 ';
+
 for($i=0;$i<2;$i++){
     if($i==0) $tmp=$ccaa->getREficaciaRec();
     else if ($i==1) $tmp=$ccaaNac->getREficaciaRec();

@@ -63,6 +63,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <input type="checkbox" id="ingrnofin" class="selectCCAA" name="ingrnofinCCAA_C" value="Ingrnofin" onclick="checkAllButton('selectCCAA','allCCAA')">
                         <label for="ingrnofin"> Nivel de ingresos no financieros </label>
                         <br>
+
+                        <h3>Filtros</h3>
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
                         <input type="radio" id="selectinterval" name="selection" value="SelectInterval" onclick="hideOption('selection','sel')">
@@ -210,6 +212,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <input type="checkbox" id="ingrnofinDIP" class="selectDIP" name="ingrnofinDIP_C" value="Ingrnofin" onclick="checkAllButton('selectDIP','allDIP')">
                         <label for="ingrnofinDIP"> Nivel de ingresos no financieros </label>
                         <br>
+                        <h3>Filtros</h3>
                         <input type="radio" id="selectyearDIP" name="selectionDIP" value="SelectYear" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectyearDIP">Consultar por año</label>
                         <input type="radio" id="selectintervalDIP" name="selectionDIP" value="SelectInterval" onclick="hideOption('selectionDIP','selDIP')">
@@ -359,6 +362,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
                         <label for="ingrnofinMUN"> Nivel de ingresos no financieros </label>
                         <br>
+                        <h3>Filtros</h3>
                         <input type="radio" id="selectyearMUN" name="selectionMUN" value="SelectYear" onclick="hideOption('selectionMUN','selMUN')">
                         <label for="selectyearMUN">Consultar por año</label>
                         <input type="radio" id="selectintervalMUN" name="selectionMUN" value="SelectInterval" onclick="hideOption('selectionMUN','selMUN')">
