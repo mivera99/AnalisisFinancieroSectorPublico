@@ -129,6 +129,10 @@ button:hover {
   justify-content: space-between;
 }
 
+.type_chart {
+  margin: 320px 0 0 -680px;
+}
+
 #consultaCCAA,
 #consultaDIP,
 #consultaMUN {

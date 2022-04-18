@@ -1893,9 +1893,20 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <div class="graficos">
                     <canvas id="pmp" height="300" width="500"></canvas>
+                    <div class="type_chart">
+                        <input type="radio" id="selectBar" name="selectionChart" value="SelectBar" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
+                        <label for="selectBar">Barras</label>
+                        <input type="radio" id="selectLine" name="selectionChart" value="SelectLine" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
+                        <label for="selectLine">Líneas</label>
+                    </div>
                     <canvas id="pmpNac" height="300" width="500"></canvas>
+                    <div class="type_chart">
+                        <input type="radio" id="selectBarPmpNac" name="selectionPMPNac" value="SelectBar" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
+                        <label for="selectBarPmpNac">Barras</label>
+                        <input type="radio" id="selectLinePmpNac" name="selectionPMPNac" value="SelectLine" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
+                        <label for="selectLinePmpNac">Líneas</label>
+                    </div>
                     <br><br>
-                </div>
                 <script>
                     const chartPMP = document.getElementById('pmp').getContext('2d');
                     const configChartPMP = {
@@ -1972,15 +1983,7 @@ if($ccaa && $ccaaNac){
                     const pmp = new Chart(chartPMP, configChartPMP);
                     const pmpNac = new Chart(chartPMPNac, configChartPMPNac);
                 </script>
-                <input type="radio" id="selectBar" name="selectionChart" value="SelectBar" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
-                <label for="selectBar">Barras</label>
-                <input type="radio" id="selectLine" name="selectionChart" value="SelectLine" onclick="changeChart(pmp, configChartPMP, 'selectionChart')">
-                <label for="selectLine">Líneas</label>
-                <br><br>
-                <input type="radio" id="selectBarPmpNac" name="selectionPMPNac" value="SelectBar" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
-                <label for="selectBarPmpNac">Barras</label>
-                <input type="radio" id="selectLinePmpNac" name="selectionPMPNac" value="SelectLine" onclick="changeChart(pmpNac, configChartPMPNac, 'selectionPMPNac')">
-                <label for="selectLinePmpNac">Líneas</label>
+                </div>
                 <br><br>
                 <h3>Eficiencia</h3>
                 <?php
