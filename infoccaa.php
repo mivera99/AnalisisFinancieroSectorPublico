@@ -858,7 +858,7 @@ if($ccaa && $ccaaNac){
                                 Resultado presupuestario
                                 <div class="info">
                                     <img src="info.svg" alt="información" height="14px">
-                                    <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
+                                    <span class="extra-info">Mide el déficit público en relación al PIB de la comunidad. Mejor cuanto más bajo</span>
                                 </div>
                             </div>
                         </th>
@@ -1858,7 +1858,7 @@ if($ccaa && $ccaaNac){
                             Periodo medio de pago
                             <div class="info">
                                 <img src="info.svg" alt="información" height="14px">
-                                <span class="extra-info">Mide el número de días teórico que se tarda en pagar a terceros</span>
+                                <span class="extra-info">Mide el número de días que se tarda en pagar a proveedores desde los 30 días legales</span>
                             </div>
                         </th>
                         </div>
