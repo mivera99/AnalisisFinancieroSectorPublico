@@ -149,7 +149,7 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
                 echo '<td class="ratingCell">'.($i+1).'</td>';
                 echo '<td>'.$dips[$i][$year]->getNombre().'</td>';
                 if(!empty($dips[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$dips[$i][$year]->getScoring().'</td>';
-                else if(!/*empty($scoring)||*/$checked_boxes[0]) echo '<td class="ratingCell">N/A</td>';
+                else if(/*!empty($scoring)||*/$checked_boxes[0]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getAutonomia())) echo '<td class="ratingCell">'.$dips[$i][$year]->getAutonomia().'</td>';
                 else if(/*!empty($autonomia)||*/$checked_boxes[1]) echo '<td class="ratingCell">N/A</td>';
                 if(!empty($dips[$i][$year]->getEndeudamiento())) echo '<td class="ratingCell">'.($dips[$i][$year]->getEndeudamiento()*100).'%</td>';
