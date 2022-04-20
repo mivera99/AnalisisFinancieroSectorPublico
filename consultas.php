@@ -45,6 +45,9 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaCCAA.php' method='POST'>
                     <h3 class="form-name">Consultas de comunidades autónomas</h3>
                     <fieldset>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
+                        <br>
                         <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
                         <label for="allCCAA"> Seleccionar todo </label><br>
 
@@ -62,9 +65,19 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <label for="dcpp"> Deuda comercial pendiente de pago </label>
                         <input type="checkbox" id="ingrnofin" class="selectCCAA" name="ingrnofinCCAA_C" value="Ingrnofin" onclick="checkAllButton('selectCCAA','allCCAA')">
                         <label for="ingrnofin"> Nivel de ingresos no financieros </label>
-                        <br>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoCCAA">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <br><br>
 
                         <h3>Filtros</h3>
+                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <br>
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
                         <input type="radio" id="selectinterval" name="selection" value="SelectInterval" onclick="hideOption('selection','sel')">
@@ -111,7 +124,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             </select>
                             </p>
                         </div>
-                        <br><br>
+                        <br>
                         <p>Scoring </p>
                         <select name="scoringCCAA">
                             <option value="inicio" selected>Seleccione un rating</option>
@@ -176,14 +189,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
                         </select>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
                         <br>
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>
@@ -194,6 +199,9 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaDIP.php' method='POST'>
                 <h3 class="form-name">Consultas de diputaciones</h3>
                     <fieldset>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
+                        <br>
                         <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
                         <label for="allDIP"> Seleccionar todo </label><br>
 
@@ -211,8 +219,18 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <label for="pmpDIP"> PMP </label>
                         <input type="checkbox" id="ingrnofinDIP" class="selectDIP" name="ingrnofinDIP_C" value="Ingrnofin" onclick="checkAllButton('selectDIP','allDIP')">
                         <label for="ingrnofinDIP"> Nivel de ingresos no financieros </label>
-                        <br>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoDIP">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <br><br>
                         <h3>Filtros</h3>
+                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <br>
                         <input type="radio" id="selectyearDIP" name="selectionDIP" value="SelectYear" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectyearDIP">Consultar por año</label>
                         <input type="radio" id="selectintervalDIP" name="selectionDIP" value="SelectInterval" onclick="hideOption('selectionDIP','selDIP')">
@@ -322,14 +340,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
                         </select>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
                         <br>
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>
@@ -340,6 +350,9 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaMUN.php' method='POST'>
                 <h3 class="form-name">Consultas de municipios</h3>
                     <fieldset>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
+                        <br>
                         <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
                         <label for="allMUN"> Seleccionar todo </label><br>
 
@@ -361,8 +374,53 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <label for="pmpMUN"> PMP </label>
                         <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
                         <label for="ingrnofinMUN"> Nivel de ingresos no financieros </label>
-                        <br>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoMUN">
+                            <option value="inicio" selected>Seleccione un tipo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <p>Programa de gasto</p>
+                        <select name="progMUN">
+                            <option value="inicio" selected>Seleccione un tipo</option>
+                            <option value="agspc">Administración general de la seguridad y protección civil</option>
+                            <option value="sop">Seguridad y orden público</option>
+                            <option value="ote">Ordenación del tráfico y del estacionamiento</option>
+                            <option value="mu">Movilidad urbana</option>
+                            <option value="pc">Protección civil</option>
+                            <option value="spei">Servicio de prevención y extinción de incendios</option>
+                            <option value="pgvpp">Promoción y gestión de vivienda de protección pública</option>
+                            <option value="cre">Conservación y rehabilitación de la edificación</option>
+                            <option value="pvp">Pavimentación de vías públicas</option>
+                            <option value="a">Alcantarillado</option>
+                            <option value="rgtr">Recogida, gestión y tratamiento de residuos</option>
+                            <option value="rr">Recogida de residuos</option>
+                            <option value="grsu">Gestión de residuos sólidos urbanos</option>
+                            <option value="tr">Tratamiento de residuos</option>
+                            <option value="lv">Limpieza viaria</option>
+                            <option value="csf">Cementerios y servicios funerarios</option>
+                            <option value="ap">Alumbrado público</option>
+                            <option value="pj">Parques y jardines</option>
+                            <option value="p">Pensiones</option>
+                            <option value="ssps">Servicios sociales y promoción social</option>
+                            <option value="fe">Fomento del empleo</option>
+                            <option value="s">Sanidad</option>
+                            <option value="e">Educación</option>
+                            <option value="c">Cultura</option>
+                            <option value="d">Deporte</option>
+                            <option value="agp">Agricultura, ganadería y pesca</option>
+                            <option value="ie">Industria y energía</option>
+                            <option value="com">Comercio</option>
+                            <option value="tp">Transporte público</option>
+                            <option value="it">Infraestructuras del transporte</option>
+                            <option value="idi">Investigación, desarrollo e innovación</option>
+                        </select>
+                        <br><br>
                         <h3>Filtros</h3>
+                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <br>
                         <input type="radio" id="selectyearMUN" name="selectionMUN" value="SelectYear" onclick="hideOption('selectionMUN','selMUN')">
                         <label for="selectyearMUN">Consultar por año</label>
                         <input type="radio" id="selectintervalMUN" name="selectionMUN" value="SelectInterval" onclick="hideOption('selectionMUN','selMUN')">
@@ -494,49 +552,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo2">1M - 5M</option>
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
-                        </select>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoMUN">
-                            <option value="inicio" selected>Seleccione un tipo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
-                        <p>Programa de gasto</p>
-                        <select name="progMUN">
-                            <option value="inicio" selected>Seleccione un tipo</option>
-                            <option value="agspc">Administración general de la seguridad y protección civil</option>
-                            <option value="sop">Seguridad y orden público</option>
-                            <option value="ote">Ordenación del tráfico y del estacionamiento</option>
-                            <option value="mu">Movilidad urbana</option>
-                            <option value="pc">Protección civil</option>
-                            <option value="spei">Servicio de prevención y extinción de incendios</option>
-                            <option value="pgvpp">Promoción y gestión de vivienda de protección pública</option>
-                            <option value="cre">Conservación y rehabilitación de la edificación</option>
-                            <option value="pvp">Pavimentación de vías públicas</option>
-                            <option value="a">Alcantarillado</option>
-                            <option value="rgtr">Recogida, gestión y tratamiento de residuos</option>
-                            <option value="rr">Recogida de residuos</option>
-                            <option value="grsu">Gestión de residuos sólidos urbanos</option>
-                            <option value="tr">Tratamiento de residuos</option>
-                            <option value="lv">Limpieza viaria</option>
-                            <option value="csf">Cementerios y servicios funerarios</option>
-                            <option value="ap">Alumbrado público</option>
-                            <option value="pj">Parques y jardines</option>
-                            <option value="p">Pensiones</option>
-                            <option value="ssps">Servicios sociales y promoción social</option>
-                            <option value="fe">Fomento del empleo</option>
-                            <option value="s">Sanidad</option>
-                            <option value="e">Educación</option>
-                            <option value="c">Cultura</option>
-                            <option value="d">Deporte</option>
-                            <option value="agp">Agricultura, ganadería y pesca</option>
-                            <option value="ie">Industria y energía</option>
-                            <option value="com">Comercio</option>
-                            <option value="tp">Transporte público</option>
-                            <option value="it">Infraestructuras del transporte</option>
-                            <option value="idi">Investigación, desarrollo e innovación</option>
                         </select>
                         <br> 
                         <button type="submit" class="form-button">Consultar</button>
