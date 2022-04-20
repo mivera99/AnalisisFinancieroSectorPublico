@@ -103,6 +103,68 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
 </div>
 <div id="consultaCCAA">
     <?php
+    echo '<h3>Filtros seleccionados</h3>';
+    if(!empty($scoring)) echo '<p><b>Scoring</b>: '.$scoring.'</p>';
+    if(!empty($poblacion)) {
+        $msg="";
+        if($poblacion=='tramo1') $msg="0-750.000";
+        else if($poblacion=='tramo2') $msg="750.000-1.500.000";
+        else if($poblacion=='tramo3') $msg="1.500.000-3.000.000";
+        else if($poblacion=='tramo4') $msg="3.000.000-6.000.000";
+        else if($poblacion=='tramo5') $msg=">6.000.000";
+        echo '<p><b>Población</b>: '.$msg.'</p>';
+    }
+    if(!empty($endeudamiento)){ 
+        $msg="";
+        if($endeudamiento=='tramo1') $msg="0-20%";
+        else if($endeudamiento=='tramo2') $msg="20%-40%";
+        else if($endeudamiento=='tramo3') $msg="40%-80%";
+        else if($endeudamiento=='tramo4') $msg="80%-120%";
+        else if($endeudamiento=='tramo5') $msg=">120%";
+        echo '<p><b>Endeudamiento</b>: '.$msg.'</p>';
+    }
+    if(!empty($ahorro_neto)) {
+        $msg="";
+        if($ahorro_neto=='tramo1') $msg="<-20%";
+        else if($ahorro_neto=='tramo2') $msg="-20%-0%";
+        else if($ahorro_neto=='tramo3') $msg="0%-20%";
+        else if($ahorro_neto=='tramo4') $msg="20%-50%";
+        else if($ahorro_neto=='tramo5') $msg=">50%";
+        echo '<p><b>Ahorro neto</b>: '.$msg.'</p>';
+    }
+    if(!empty($pmp)) {
+        $msg="";
+        if($pmp=='tramo1') $msg="0-10 días";
+        else if($pmp=='tramo2') $msg="10-20 días";
+        else if($pmp=='tramo3') $msg="20-30 días";
+        else if($pmp=='tramo4') $msg="30-40 días";
+        else if($pmp=='tramo5') $msg="40-50 días";
+        else if($pmp=='tramo6') $msg=">50 días";
+        echo '<p><b>PMP</b>: '.$msg.'</p>';
+    }
+    if(!empty($dcpp)) { 
+        $msg="";
+        if($dcpp=='tramo1') $msg="0-4%";
+        else if($dcpp=='tramo2') $msg="4-8%";
+        else if($dcpp=='tramo3') $msg="8-12%";
+        else if($dcpp=='tramo4') $msg="12-16%";
+        else if($dcpp=='tramo5') $msg="16-20%";
+        else if($dcpp=='tramo6') $msg=">20%";
+        echo '<p><b>Deuda comercial pendiente de pago</b>: '.$msg.'</p>';
+    }
+    if(!empty($ingrnofin)) {
+        $msg="";
+        if($ingrnofin=='tramo1') $msg="0-1M";
+        else if($ingrnofin=='tramo2') $msg="1M-5M";
+        else if($ingrnofin=='tramo3') $msg="5M-50M";
+        else if($ingrnofin=='tramo4') $msg=">50M";
+        echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
+    }
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<p>Gasto: Gastos de personal</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<p>Gasto: Gastos corrientes de bienes y servicios</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<p>Gasto: Gastos financieros</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
+    echo '<br>';
     if(count($ccaas)>0){
         echo '<p>Se han encontrado '.count($ccaas).' resultados</p>';
         $year=0;
