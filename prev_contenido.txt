@@ -422,3 +422,17 @@
 ccaaMUN
  onchange="changeProv('provMUN', 'ccaaMUN', <?php echo(json_encode($ccaaCombobox))?>, <?php echo(json_encode($provCombobox))?>)"
  onchange="changeCCAA('ccaaMUN', 'provMUN', <?php echo(json_encode($ccaaCombobox))?>, <?php echo(json_encode($provCombobox))?>)"
+
+
+
+ public function toArray(){
+        return [
+            'codigo' => $this->codigo,
+            'nombre' => $this->nombre,
+            'ccaaCode' => $this->ccaaCode,
+        ];
+    }
+
+    public function toJson(){
+        return json_encode($this->toArray());
+    }
