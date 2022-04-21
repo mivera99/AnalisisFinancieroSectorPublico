@@ -257,7 +257,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                 else if(!empty($prog) && $_REQUEST['progMUN']=='idi') echo '<td class="ratingCell">Investigación, desarrollo e innovación</td>';
                 echo '</tr>';
                 $i=0;
-                foreach($muns as $mun){
+                foreach($mun_array as $mun){
                     echo '<tr>';
                     echo '<td class="ratingCell">'.($i+1).'</td>';
                     echo '<td>'.$mun->getNombre().'</td>';
@@ -284,7 +284,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                     else if(!empty($mun->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($mun->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
                     else if(!empty($mun->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($mun->getInversionesReales1(), 0, '','.').'€</td>';
                     else if(!empty($gasto)) echo '<td class="ratingCell">N/A</td>';
-                    if(!empty($muns[$i][$year]->getAgspc())) echo '<td class="ratingCell">'.number_format($mun->getAgspc(), 0, '','.').'€</td>';
+                    if(!empty($mun->getAgspc())) echo '<td class="ratingCell">'.number_format($mun->getAgspc(), 0, '','.').'€</td>';
                     else if(!empty($mun->getSop())) echo '<td class="ratingCell">'.number_format($mun->getSop(), 0, '','.').'€</td>';
                     else if(!empty($mun->getOte())) echo '<td class="ratingCell">'.number_format($mun->getOte(), 0, '','.').'€</td>';
                     else if(!empty($mun->getMu())) echo '<td class="ratingCell">'.number_format($mun->getMu(), 0, '','.').'€</td>';
