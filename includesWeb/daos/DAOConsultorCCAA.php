@@ -1714,13 +1714,20 @@ class DAOConsultorCCAA {
         return $elements;
     }
 
-    private function in_multi_array($element, $multiarray) {
-        foreach($multiarray as $array){
-            if (in_array($element, $array)) {
-               return true;
-            }
-         }
-        return false;
+    public function getCCAAById($id){
+        $db = getConexionBD();
+        $sql ="SELECT CODIGO, NOMBRE FROM ccaas WHERE CODIGO = '$id'";
+        $result = mysqli_query($db, $sql);
+        if(!$result){
+            return false;
+        }
+        $elements = array();
+        $resultado = mysqli_fetch_assoc($result);
+        $ccaa = new CCAA();
+        $ccaa->setCodigo($resultado['CODIGO']);
+        $ccaa->setNombre($resultado['NOMBRE']);
+
+        return $ccaa;
     }
 
 }

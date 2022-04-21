@@ -136,6 +136,66 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
 </div>
 <div id="consultaMUN">
     <?php
+    echo '<h3>Filtros seleccionados</h3>';
+    if(!empty($scoring)) echo '<p><b>Scoring</b>: '.$scoring.'</p>';
+    if(!empty($poblacion)) {
+        $msg="";
+        if($poblacion=='tramo1') $msg="0-100";
+        else if($poblacion=='tramo2') $msg="100-500";
+        else if($poblacion=='tramo3') $msg="500-1.000";
+        else if($poblacion=='tramo4') $msg="1.000-2.000";
+        else if($poblacion=='tramo5') $msg="2.000-5.000";
+        else if($poblacion=='tramo6') $msg="5.000-10.000";
+        else if($poblacion=='tramo7') $msg="10.000-20.000";
+        else if($poblacion=='tramo8') $msg="20.000-50.000";
+        else if($poblacion=='tramo9') $msg="50.000-100.000";
+        else if($poblacion=='tramo10') $msg="100.000-500.000";
+        else if($poblacion=='tramo11') $msg="> 500.000";
+        echo '<p><b>Población</b>: '.$msg.'</p>';
+    }
+    if(!empty($autonomia)) echo '<p><b>Autonomía</b>: '.((new DAOConsultor())->getCCAAById($autonomia))->getNombre().'</p>';
+    if(!empty($provincia)) echo '<p><b>Provincia</b>: '.((new DAOConsultor())->getProvinciaById($provincia))->getNombre().'</p>';
+    if(!empty($endeudamiento)){ 
+        $msg="";
+        if($endeudamiento=='tramo1') $msg="0-20%";
+        else if($endeudamiento=='tramo2') $msg="20%-40%";
+        else if($endeudamiento=='tramo3') $msg="40%-80%";
+        else if($endeudamiento=='tramo4') $msg="80%-120%";
+        else if($endeudamiento=='tramo5') $msg=">120%";
+        echo '<p><b>Endeudamiento</b>: '.$msg.'</p>';
+    }
+    if(!empty($ahorro_neto)) {
+        $msg="";
+        if($ahorro_neto=='tramo1') $msg="<-20%";
+        else if($ahorro_neto=='tramo2') $msg="-20%-0%";
+        else if($ahorro_neto=='tramo3') $msg="0%-20%";
+        else if($ahorro_neto=='tramo4') $msg="20%-50%";
+        else if($ahorro_neto=='tramo5') $msg=">50%";
+        echo '<p><b>Ahorro neto</b>: '.$msg.'</p>';
+    }
+    if(!empty($pmp)) {
+        $msg="";
+        if($pmp=='tramo1') $msg="0-10 días";
+        else if($pmp=='tramo2') $msg="10-20 días";
+        else if($pmp=='tramo3') $msg="20-30 días";
+        else if($pmp=='tramo4') $msg="30-40 días";
+        else if($pmp=='tramo5') $msg="40-50 días";
+        else if($pmp=='tramo6') $msg=">50 días";
+        echo '<p><b>PMP</b>: '.$msg.'</p>';
+    }
+    if(!empty($ingrnofin)) {
+        $msg="";
+        if($ingrnofin=='tramo1') $msg="0-1M";
+        else if($ingrnofin=='tramo2') $msg="1M-5M";
+        else if($ingrnofin=='tramo3') $msg="5M-50M";
+        else if($ingrnofin=='tramo4') $msg=">50M";
+        echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
+    }
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<p>Gasto: Gastos de personal</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<p>Gasto: Gastos corrientes de bienes y servicios</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<p>Gasto: Gastos financieros</p>';
+    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
+    echo '<br>';
     if(count($muns)>0){
         echo '<p>Se han encontrado '.count($muns).' resultados</p>';
         $year=0;

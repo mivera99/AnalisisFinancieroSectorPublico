@@ -733,7 +733,9 @@ class DAOConsultorDiputacion {
                 else if(strpos($joins, ' deudas_dip ')!==false)  $conditions = $conditions . "scoring_dip.ANHO = deudas_dip.ANHO";
                 if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
             $conditions = $conditions."scoring_dip.RATING = '$scoring' ";
+
             //$returning_values = $returning_values.",scoring_dip.ANHO, scoring_dip.RATING";
             if(strpos($joins, 'INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO ";
             $order_by = $order_by . "scoring_dip.ANHO DESC, ";
@@ -776,8 +778,8 @@ class DAOConsultorDiputacion {
             else if($endeudamiento=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R1*100) > 120 ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
-            $returning_values = $returning_values.",scoring_dip.R1";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
+            /*$returning_values = $returning_values.",scoring_dip.R1";
             if(strpos($joins, 'INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO ";
             */
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_dip.ANHO DESC, ";
@@ -811,8 +813,8 @@ class DAOConsultorDiputacion {
             else if($ahorro_neto=='tramo5'){
                 $conditions = $conditions."(scoring_dip.R2*100) > 50 ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
-            $returning_values = $returning_values.", scoring_dip.R2";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_dip.ANHO";
+            /*$returning_values = $returning_values.", scoring_dip.R2";
             */
             if(strpos($joins, 'INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO ";
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_dip.ANHO DESC, ";
@@ -843,8 +845,8 @@ class DAOConsultorDiputacion {
             else if($fondliq=='tramo4'){
                 $conditions = $conditions."(deudas_dip.FONDLIQUIDOS) > 50000000 ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_dip.ANHO";
-            $returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_dip.ANHO";
+            /*$returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
             */
             if(strpos($joins, 'INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN deudas_dip ON deudas_dip.CODIGO=diputaciones.CODIGO ";
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "deudas_dip.ANHO DESC, ";
@@ -881,8 +883,8 @@ class DAOConsultorDiputacion {
             else if($pmp=='tramo6'){
                 $conditions = $conditions."(cuentas_dip_pmp.PMP) > 50 ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_pmp.ANHO";
-            if(strpos($returning_values, ', cuentas_dip_pmp.TRIMESTRE ')===false) $returning_values = $returning_values . ", cuentas_dip_pmp.TRIMESTRE";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_pmp.ANHO";
+            /*if(strpos($returning_values, ', cuentas_dip_pmp.TRIMESTRE ')===false) $returning_values = $returning_values . ", cuentas_dip_pmp.TRIMESTRE";
             $returning_values = $returning_values.",cuentas_dip_pmp.PMP";
             */
             if(strpos($joins, 'INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_pmp ON cuentas_dip_pmp.CODIGO=diputaciones.CODIGO ";
@@ -917,8 +919,8 @@ class DAOConsultorDiputacion {
             else if($ingrnofin=='tramo4'){
                 $having = $having."SUM(cuentas_dip_ingresos.DERE) > 50000000 ";
             }
-            /*if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_ingresos.ANHO";
-            $returning_values = $returning_values.",SUM(cuentas_dip_ingresos.DERE) AS SUMA_INGR";
+            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_dip_ingresos.ANHO";
+            /*$returning_values = $returning_values.",SUM(cuentas_dip_ingresos.DERE) AS SUMA_INGR";
             */
             if(strpos($joins, 'INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_dip_ingresos ON cuentas_dip_ingresos.CODIGO=diputaciones.CODIGO ";
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_dip_ingresos.ANHO DESC, ";

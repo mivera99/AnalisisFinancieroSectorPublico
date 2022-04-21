@@ -49,6 +49,14 @@ class DAOConsultor{
         return $facilities;
     }
 
+    public function getProvinciaById($id){
+        return (new DAOConsultorProvincia())->getProvinciaById($id);
+    }
+
+    public function getCCAAById($id){
+        return (new DAOConsultorCCAA())->getCCAAById($id);
+    }
+
     public function getAllProvincias(){
         return (new DAOConsultorProvincia())->getAllProvincias();
     }
