@@ -1056,9 +1056,22 @@ class DAOConsultorDiputacion {
                 $autonomia = mysqli_fetch_assoc($resultCode);
                 $dip->setAutonomia($autonomia['NOMBRE']);
             }
-            $elements2[$resultado['ANHO']]=$dip;
-            array_push($elements, $elements2);
+            //$elements2[$resultado['ANHO']]=$dip;
+            //array_push($elements, $elements2);
+            if(!array_key_exists($resultado['ANHO'], $elements)){
+                $elements[$resultado['ANHO']]=array();
+            }
+            ($elements[$resultado['ANHO']])[$resultado['CODIGO']]=$dip;
         }
+        krsort($elements);
+        $sum=0;
+        while ($year_array = current($elements)) {
+            ksort($elements[key($elements)]);
+            $sum+=count($elements[key($elements)]);
+            next($elements);
+        }
+        $elements['total']=$sum;
+        
         return $elements;
     }   
 

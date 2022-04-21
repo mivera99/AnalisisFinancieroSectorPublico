@@ -104,117 +104,123 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
 <div id="consultaCCAA">
     <?php
     echo '<h3>Filtros seleccionados</h3>';
-    if(!empty($scoring)) echo '<p><b>Scoring</b>: '.$scoring.'</p>';
-    if(!empty($poblacion)) {
-        $msg="";
-        if($poblacion=='tramo1') $msg="0-750.000";
-        else if($poblacion=='tramo2') $msg="750.000-1.500.000";
-        else if($poblacion=='tramo3') $msg="1.500.000-3.000.000";
-        else if($poblacion=='tramo4') $msg="3.000.000-6.000.000";
-        else if($poblacion=='tramo5') $msg=">6.000.000";
-        echo '<p><b>Población</b>: '.$msg.'</p>';
+    if(empty($scoring)&&empty($poblacion)&&empty($endeudamiento)&&empty($ahorro_neto)&&empty($pmp)&&empty($anho)&&empty($dcpp)&&empty($ingrnofin)&&empty($choice)&&empty($from)&&empty($to)){
+        echo '<p>Ninguno</p>';
     }
-    if(!empty($endeudamiento)){ 
-        $msg="";
-        if($endeudamiento=='tramo1') $msg="0-20%";
-        else if($endeudamiento=='tramo2') $msg="20%-40%";
-        else if($endeudamiento=='tramo3') $msg="40%-80%";
-        else if($endeudamiento=='tramo4') $msg="80%-120%";
-        else if($endeudamiento=='tramo5') $msg=">120%";
-        echo '<p><b>Endeudamiento</b>: '.$msg.'</p>';
+    else {
+        if(!empty($scoring)) echo '<p><b>Scoring</b>: '.$scoring.'</p>';
+        if(!empty($poblacion)) {
+            $msg="";
+            if($poblacion=='tramo1') $msg="0-750.000";
+            else if($poblacion=='tramo2') $msg="750.000-1.500.000";
+            else if($poblacion=='tramo3') $msg="1.500.000-3.000.000";
+            else if($poblacion=='tramo4') $msg="3.000.000-6.000.000";
+            else if($poblacion=='tramo5') $msg=">6.000.000";
+            echo '<p><b>Población</b>: '.$msg.'</p>';
+        }
+        if(!empty($endeudamiento)){ 
+            $msg="";
+            if($endeudamiento=='tramo1') $msg="0-20%";
+            else if($endeudamiento=='tramo2') $msg="20%-40%";
+            else if($endeudamiento=='tramo3') $msg="40%-80%";
+            else if($endeudamiento=='tramo4') $msg="80%-120%";
+            else if($endeudamiento=='tramo5') $msg=">120%";
+            echo '<p><b>Endeudamiento</b>: '.$msg.'</p>';
+        }
+        if(!empty($ahorro_neto)) {
+            $msg="";
+            if($ahorro_neto=='tramo1') $msg="<-20%";
+            else if($ahorro_neto=='tramo2') $msg="-20%-0%";
+            else if($ahorro_neto=='tramo3') $msg="0%-20%";
+            else if($ahorro_neto=='tramo4') $msg="20%-50%";
+            else if($ahorro_neto=='tramo5') $msg=">50%";
+            echo '<p><b>Ahorro neto</b>: '.$msg.'</p>';
+        }
+        if(!empty($pmp)) {
+            $msg="";
+            if($pmp=='tramo1') $msg="0-10 días";
+            else if($pmp=='tramo2') $msg="10-20 días";
+            else if($pmp=='tramo3') $msg="20-30 días";
+            else if($pmp=='tramo4') $msg="30-40 días";
+            else if($pmp=='tramo5') $msg="40-50 días";
+            else if($pmp=='tramo6') $msg=">50 días";
+            echo '<p><b>PMP</b>: '.$msg.'</p>';
+        }
+        if(!empty($dcpp)) { 
+            $msg="";
+            if($dcpp=='tramo1') $msg="0-4%";
+            else if($dcpp=='tramo2') $msg="4-8%";
+            else if($dcpp=='tramo3') $msg="8-12%";
+            else if($dcpp=='tramo4') $msg="12-16%";
+            else if($dcpp=='tramo5') $msg="16-20%";
+            else if($dcpp=='tramo6') $msg=">20%";
+            echo '<p><b>Deuda comercial pendiente de pago</b>: '.$msg.'</p>';
+        }
+        if(!empty($ingrnofin)) {
+            $msg="";
+            if($ingrnofin=='tramo1') $msg="0-1M";
+            else if($ingrnofin=='tramo2') $msg="1M-5M";
+            else if($ingrnofin=='tramo3') $msg="5M-50M";
+            else if($ingrnofin=='tramo4') $msg=">50M";
+            echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
+        }
+        if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<p>Gasto: Gastos de personal</p>';
+        if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<p>Gasto: Gastos corrientes de bienes y servicios</p>';
+        if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<p>Gasto: Gastos financieros</p>';
+        if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
     }
-    if(!empty($ahorro_neto)) {
-        $msg="";
-        if($ahorro_neto=='tramo1') $msg="<-20%";
-        else if($ahorro_neto=='tramo2') $msg="-20%-0%";
-        else if($ahorro_neto=='tramo3') $msg="0%-20%";
-        else if($ahorro_neto=='tramo4') $msg="20%-50%";
-        else if($ahorro_neto=='tramo5') $msg=">50%";
-        echo '<p><b>Ahorro neto</b>: '.$msg.'</p>';
-    }
-    if(!empty($pmp)) {
-        $msg="";
-        if($pmp=='tramo1') $msg="0-10 días";
-        else if($pmp=='tramo2') $msg="10-20 días";
-        else if($pmp=='tramo3') $msg="20-30 días";
-        else if($pmp=='tramo4') $msg="30-40 días";
-        else if($pmp=='tramo5') $msg="40-50 días";
-        else if($pmp=='tramo6') $msg=">50 días";
-        echo '<p><b>PMP</b>: '.$msg.'</p>';
-    }
-    if(!empty($dcpp)) { 
-        $msg="";
-        if($dcpp=='tramo1') $msg="0-4%";
-        else if($dcpp=='tramo2') $msg="4-8%";
-        else if($dcpp=='tramo3') $msg="8-12%";
-        else if($dcpp=='tramo4') $msg="12-16%";
-        else if($dcpp=='tramo5') $msg="16-20%";
-        else if($dcpp=='tramo6') $msg=">20%";
-        echo '<p><b>Deuda comercial pendiente de pago</b>: '.$msg.'</p>';
-    }
-    if(!empty($ingrnofin)) {
-        $msg="";
-        if($ingrnofin=='tramo1') $msg="0-1M";
-        else if($ingrnofin=='tramo2') $msg="1M-5M";
-        else if($ingrnofin=='tramo3') $msg="5M-50M";
-        else if($ingrnofin=='tramo4') $msg=">50M";
-        echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
-    }
-    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<p>Gasto: Gastos de personal</p>';
-    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<p>Gasto: Gastos corrientes de bienes y servicios</p>';
-    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<p>Gasto: Gastos financieros</p>';
-    if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
     echo '<br>';
-    if(count($ccaas)>0){
-        echo '<p>Se han encontrado '.count($ccaas).' resultados</p>';
-        $year=0;
-        $i=0;
-        while($i<count($ccaas)){
-            echo '<h2>'.key($ccaas[$i]).'</h2>';
-            echo '<table>';
-            $year = key($ccaas[$i]);
-            echo '<tr>';
-            echo '<td></td>';
-            echo '<td>Nombre</td>';
-            if(/*!empty($scoring)||*/$checked_boxes[0]) echo '<td class="ratingCell">Scoring</td>';
-            if(/*!empty($poblacion)||*/$checked_boxes[1]) echo '<td class="ratingCell">Población</td>';
-            if(/*!empty($endeudamiento)||*/$checked_boxes[2]) echo '<td class="ratingCell">Endeudamiento</td>';
-            if(/*!empty($ahorro_neto)||*/$checked_boxes[3]) echo '<td class="ratingCell">Ahorro neto</td>';
-            if(/*!empty($pmp)||*/$checked_boxes[4]) echo '<td class="ratingCell">PMP</td>';
-            if(/*!empty($dcpp)||*/$checked_boxes[5]) echo '<td class="ratingCell">Deuda comercial pendiente de pago</td>';
-            if(/*!empty($ingrnofin)||*/$checked_boxes[6]) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
-            if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
-            if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
-            if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
-            if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<td class="ratingCell">Inversiones</td>';
-            echo '</tr>';
-            while($i < count($ccaas) && $year==key($ccaas[$i])){
+    if(!empty($ccaas)){
+        echo '<p>Se han encontrado '.$ccaas['total'].' resultados</p>';
+        foreach($ccaas as $year=>$ccaa_array){
+            if(!is_int($ccaa_array)){
+                echo '<h2>'.$year.'</h2>';
+                echo '<p>'.count($ccaa_array).' resultados</p>';
+                echo '<table>';
                 echo '<tr>';
-                echo '<td class="ratingCell">'.($i+1).'</td>';
-                echo '<td>'.$ccaas[$i][$year]->getNombre().'</td>';
-                if(!empty($ccaas[$i][$year]->getScoring())) echo '<td class="ratingCell">'.$ccaas[$i][$year]->getScoring().'</td>';
-                else if(/*!empty($scoring)||*/$checked_boxes[0]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getPoblacion()) && !empty($poblacion)) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getPoblacion(), 0, '','.').'</td>';
-                else if(/*!empty($poblacion)||*/$checked_boxes[1]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getDeudaVivaIngrCor())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getDeudaVivaIngrCor()*100).'%</td>';
-                else if(/*!empty($endeudamiento)||*/$checked_boxes[2]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getRSosteFinanciera())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getRSosteFinanciera()*100).'%</td>';
-                else if(/*!empty($ahorro_neto)||*/$checked_boxes[3]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getPMP())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getPMP()).' días</td>';
-                else if(/*!empty($pmp)||*/$checked_boxes[4]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getRDCPP())) echo '<td class="ratingCell">'.($ccaas[$i][$year]->getRDCPP()*100).'%</td>';
-                else if(/*!empty($dcpp)||*/$checked_boxes[5]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
-                else if(/*!empty($ingrnofin)||*/$checked_boxes[6]) echo '<td class="ratingCell">N/A</td>';
-                if(!empty($ccaas[$i][$year]->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosPersonal1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
-                else if(!empty($ccaas[$i][$year]->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($ccaas[$i][$year]->getInversionesReales1(), 0, '','.').'€</td>';
-                else if(!empty($gasto)) echo '<td class="ratingCell">N/A</td>';
+                echo '<td></td>';
+                echo '<td>Nombre</td>';
+                if($checked_boxes[0]) echo '<td class="ratingCell">Scoring</td>';
+                if($checked_boxes[1]) echo '<td class="ratingCell">Población</td>';
+                if($checked_boxes[2]) echo '<td class="ratingCell">Endeudamiento</td>';
+                if($checked_boxes[3]) echo '<td class="ratingCell">Ahorro neto</td>';
+                if($checked_boxes[4]) echo '<td class="ratingCell">PMP</td>';
+                if($checked_boxes[5]) echo '<td class="ratingCell">Deuda comercial pendiente de pago</td>';
+                if($checked_boxes[6]) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+                if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
+                if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
+                if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
+                if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<td class="ratingCell">Inversiones</td>';
                 echo '</tr>';
-                $i+=1;
+                $i=0;
+                foreach($ccaa_array as $ccaa){ 
+                    echo '<tr>';
+                    echo '<td class="ratingCell">'.($i+1).'</td>';
+                    echo '<td>'.$ccaa->getNombre().'</td>';
+                    if(!empty($ccaa->getScoring())) echo '<td class="ratingCell">'.$ccaa->getScoring().'</td>';
+                    else if($checked_boxes[0]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getPoblacion()) && !empty($poblacion)) echo '<td class="ratingCell">'.number_format($ccaa->getPoblacion(), 0, '','.').'</td>';
+                    else if($checked_boxes[1]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getDeudaVivaIngrCor())) echo '<td class="ratingCell">'.($ccaa->getDeudaVivaIngrCor()*100).'%</td>';
+                    else if($checked_boxes[2]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getRSosteFinanciera())) echo '<td class="ratingCell">'.($ccaa->getRSosteFinanciera()*100).'%</td>';
+                    else if($checked_boxes[3]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getPMP())) echo '<td class="ratingCell">'.($ccaa->getPMP()).' días</td>';
+                    else if($checked_boxes[4]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getRDCPP())) echo '<td class="ratingCell">'.($ccaa->getRDCPP()*100).'%</td>';
+                    else if($checked_boxes[5]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getTotalIngresosNoCorrientes1())) echo '<td class="ratingCell">'.number_format($ccaa->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
+                    else if($checked_boxes[6]) echo '<td class="ratingCell">N/A</td>';
+                    if(!empty($ccaa->getGastosPersonal1())) echo '<td class="ratingCell">'.number_format($ccaa->getGastosPersonal1(), 0, '','.').'€</td>';
+                    else if(!empty($ccaa->getGastosCorrientesBienesServicios1())) echo '<td class="ratingCell">'.number_format($ccaa->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
+                    else if(!empty($ccaa->getTransferenciasCorrientesGastos1())) echo '<td class="ratingCell">'.number_format($ccaa->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
+                    else if(!empty($ccaa->getInversionesReales1())) echo '<td class="ratingCell">'.number_format($ccaa->getInversionesReales1(), 0, '','.').'€</td>';
+                    else if(!empty($gasto)) echo '<td class="ratingCell">N/A</td>';
+                    echo '</tr>';
+                    $i+=1;
+                }
+                echo '</table>';
             }
-            echo '</table>';
         }
     }
     else{

@@ -119,18 +119,40 @@ function changeProv(provId, ccaaId, ccaaArray, provArray){
   if(ccaaTag.selectedIndex!=0){
     
   }
+  
+  /*var obj_prov = JSON.parse(provs);
+  var obj_ccaa = JSON.parse(ccaas);*/
 }
 
 function changeCCAA(ccaaId, provId, ccaaArray, provArray){
   var ccaaTag = document.getElementById(ccaaId);
   var provTag = document.getElementById(provId);
   
+  /*var obj_prov = JSON.parse(provs);
+  var obj_ccaa = JSON.parse(ccaas);*/
+
   for(i=0;i<ccaaTag.options.length;i++){
     var option = ccaaTag.options[i];
     option.style.display="block";
   }
   if(provTag.selectedIndex!=0){
-
+    var provObj=null;
+    for(i=0;i<provArray.length;i++){
+      if(JSON.parse(provArray[i]).codigo == provTag.options[provTag.selectedIndex].value){
+        provObj=JSON.parse(provArray[i]);
+      }
+    }
+    if(provObj != null){
+      for(i=0;i<ccaaTag.options.length;i++){
+        if(ccaaTag.options[i].value == provObj.ccaaCode){
+          ccaaTag.options[i].style.display="block";
+        }
+        else {
+          ccaaTag.options[i].style.display="none";
+        }
+      }
+      ccaaTag.selectedIndex=provObj.ccaaCode;
+    }
   }
 }
 

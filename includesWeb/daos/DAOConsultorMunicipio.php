@@ -1198,10 +1198,23 @@ class DAOConsultorMunicipio{
                 $mun->setAutonomia($autonomia['NOMBRE']);
             }
             if(!empty($resultado['PROVINCIA'])) $mun->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
-            $elements2[$resultado['ANHO']]=$mun;
-            array_push($elements, $elements2);
+            
+            //$elements2[$resultado['ANHO']]=$mun;
+            //array_push($elements, $elements2);
+            if(!array_key_exists($resultado['ANHO'], $elements)){
+                $elements[$resultado['ANHO']]=array();
+            }
+            ($elements[$resultado['ANHO']])[$resultado['CODIGO']]=$mun;
         }
-        
+        krsort($elements);
+        $sum=0;
+        while ($year_array = current($elements)) {
+            ksort($elements[key($elements)]);
+            $sum+=count($elements[key($elements)]);
+            next($elements);
+        }
+        $elements['total']=$sum;
+
         return $elements;
     }
 

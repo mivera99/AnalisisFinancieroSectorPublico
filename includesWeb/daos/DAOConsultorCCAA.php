@@ -1687,11 +1687,25 @@ class DAOConsultorCCAA {
                 else if($resultado['TIPO']=='PARTIDAGAST3') $ccaa->setTransferenciasCorrientesGastos1(($resultado['OBLG_REC']*1000));
                 else if($resultado['TIPO']=='PARTIDAGAST6') $ccaa->setInversionesReales1(($resultado['OBLG_REC']*1000));
             }
-            $elements2[$resultado['ANHO']]=$ccaa;
-            array_push($elements, $elements2);
+
+            if(!array_key_exists($resultado['ANHO'], $elements)){
+                $elements[$resultado['ANHO']]=array();
+            }
+            ($elements[$resultado['ANHO']])[$resultado['CODIGO']]=$ccaa;
+            //$elements2[$resultado['ANHO']]=$ccaa;
+            //array_push($elements, $elements2);
         }
         //echo '<p>'.$sql.'</p>';
         //echo $conditions;
+        krsort($elements);
+        $sum=0;
+        while ($year_array = current($elements)) {
+            ksort($elements[key($elements)]);
+            $sum+=count($elements[key($elements)]);
+            next($elements);
+        }
+        $elements['total']=$sum;
+        
         //var_dump($elements);
         return $elements;
     }   
