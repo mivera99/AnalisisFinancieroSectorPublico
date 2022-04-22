@@ -40,7 +40,6 @@ if (isset($_SESSION['mensaje'])) {
         <div id ="contenido">     
             <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
             <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
-            <p>Provincias, diputaciones y municipios en segundos.</p>
             <script>cargarNombres();</script>
             <br><br>
             <form autocomplete="off" action="redirect.php" method="post">
