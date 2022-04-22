@@ -269,7 +269,6 @@ if($ccaa && $ccaaNac){
     <script src="functions2.js"></script>
 
     <script src="node_modules/chart.js/dist/chart.js"></script>
-    <!--<script src="graphics.js"></script>-->
     <!--  ====== ICONOS ====== -->
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
@@ -390,8 +389,8 @@ if($ccaa && $ccaaNac){
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2">Población (Año <?php echo key($ccaa->getPoblacion()).'): '. number_format(($ccaa->getPoblacion())[key($ccaa->getPoblacion())], 0, '','.');?></th>
-                            <th colspan="2">PIB per cápita (Año <?php echo key($ccaa->getPibc()).'): '. number_format(($ccaa->getPibc())[key($ccaa->getPibc())]*1000, 0, '','.');?></th>
+                            <th colspan="2">Población (Año <?php echo key($ccaa->getPoblacion()).'): '. number_format(($ccaa->getPoblacion())[key($ccaa->getPoblacion())], 0, '','.');?> habs.</th>
+                            <th colspan="2">PIB per cápita (Año <?php echo key($ccaa->getPibc()).'): '. number_format(($ccaa->getPibc())[key($ccaa->getPibc())]*1000, 0, '','.');?>€</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -863,7 +862,6 @@ if($ccaa && $ccaaNac){
                             </div>
                         </th>
                         <?php
-                        //echo '<th>Resultado presupuestario</th>';
                     }
                     else if ($i==1) echo '<th>Resultado presupuestario nacional</th>';
                     else if ($i==2) {
@@ -878,7 +876,6 @@ if($ccaa && $ccaaNac){
                             </div>
                         </th>
                         <?php
-                        //echo '<th>Deuda viva sobre ingresos corrientes</th>';
                     }
                     else if ($i==3) echo '<th>Endeudamiento media nacional</th>';
                     if($i<2){
@@ -912,13 +909,6 @@ if($ccaa && $ccaaNac){
                     echo '</table>';
                     echo '<br>';
                 }
-
-                /*foreach($ccaa->getDeudaVivaIngrCor() as $array){
-                    echo '<p><b>Deuda viva sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
-                }
-                foreach($ccaaNac->getDeudaVivaIngrCor() as $array){
-                    echo '<p><b>Deuda viva nacional sobre ingresos corrientes '.$array[0].' trimestre '.$array[1].' : </b>'.($array[2]*100).'%</p>';
-                }*/
                 ?>
                 <!-- GRAFICAS-->
                 <script>
@@ -1112,7 +1102,6 @@ if($ccaa && $ccaaNac){
                     <tbody>
                         <tr>
                             <td>1. Impuestos directos 
-                            <!--<ion-icon name="information-circle-outline" onclick="showDialog()"></ion-icon></td>-->
                             <?php
                             foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
                                 echo '<td>'.number_format($valor, 2, ',','.').'</td>';
@@ -1591,17 +1580,6 @@ if($ccaa && $ccaaNac){
                 <h3>Solvencia</h3>
                 <!--METER LOS GRAFICOS AQUI-->
                 <?php
-                /*foreach($ccaa->getRSosteFinanciera() as $clave=>$valor){
-                    echo '<p><b>Sostenibilidad financiera año '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                echo '<br>';
-                foreach($ccaa->getRRigidez() as $clave=>$valor){
-                    echo '<p><b>Apalancamiento operativo año '.$clave.': </b>'.($valor*100).'%</p>';
-                }
-                echo '<br>';
-                foreach($ccaa->getRSosteEndeuda() as $clave=>$valor){
-                    echo '<p><b>Sostenibilidad de la deuda año '.$clave.': </b>'.($valor*100).'%</p>';
-                }*/
                 for($i=0;$i<3;$i++){
                     if($i==0) $tmp=$ccaa->getRSosteFinanciera();
                     else if ($i==1) $tmp=$ccaa->getRRigidez();
@@ -1629,7 +1607,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Sostenibilidad financiera</th>';
                     }
                     else if ($i==1){ 
                         ?>
@@ -1643,7 +1620,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Apalancamiento operativo</th>';
                     }
                     else if ($i==2) {
                         ?>
@@ -1657,7 +1633,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Sostenibilidad de la deuda</th>';
                     }
                     foreach($tmp as $clave=>$valor){
                         $porcentaje = ($valor*100);
@@ -1830,12 +1805,6 @@ if($ccaa && $ccaaNac){
                 <br><br>
                 <h3>Liquidez</h3>
                 <?php
-                /*foreach($ccaa->getPMP() as $array){
-                    echo '<p>PMP '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
-                }
-                foreach($ccaaNac->getPMP() as $array){
-                    echo '<p>PMP medio '.$array[0].' (Mes '.$array[1].'): '.$array[2].' días</p>';
-                }*/
                 for($i=0;$i<2;$i++){
                     if($i==0) $tmp=$ccaa->getPMP();
                     else if ($i==1) $tmp=$ccaaNac->getPMP();
@@ -1851,7 +1820,6 @@ if($ccaa && $ccaaNac){
                     echo '<tbody>';
                     echo '<tr>';
                     if($i==0) {
-                        //echo '<th>PMP</th>';
                         ?>
                         <th>
                         <div class="celda-pmp">
@@ -2013,7 +1981,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Eficiencia</th>';
                     }
                     else if ($i==1) echo '<th>Eficiencia media</th>';
                     foreach($tmp as $clave=>$valor){
@@ -2155,7 +2122,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Ejecución sobre ingresos corrientes</th>';
                     }
                     else if ($i==1) echo '<th>Ejecución media sobre ingresos corrientes</th>';
                     else if ($i==2) {
@@ -2170,7 +2136,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Ejecución sobre gastos corrientes</th>';
                     }
                     else if ($i==3) echo '<th>Ejecución media sobre gastos corrientes</th>';
                     foreach($tmp as $clave=>$valor){
@@ -2528,7 +2493,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Porcentaje de gastos pagados</th>';
                     }
                     else if ($i==1) echo '<th>Porcentaje medio de gastos pagados</th>';
                     foreach($tmp as $clave=>$valor){
@@ -2668,7 +2632,6 @@ if($ccaa && $ccaaNac){
                         </div>
                         </th>
                         <?php
-                        //echo '<th>Eficacia recaudatoria</th>';
                     }
                     else if ($i==1) echo '<th>Eficacia media recaudatoria</th>';
                     foreach($tmp as $clave=>$valor){
