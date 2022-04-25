@@ -38,7 +38,7 @@ class Importer_prog_mun{
             if($x>1 && $values[0]!= "") {
                 $CODIGO_MUN=$values[0];
 
-                $ANHO = intval(((explode('_',(explode('.',$realname))[0]))[3])/100)-1;
+                $ANHO = intval(((explode('_',(explode('.',$realname))[0]))[3])/100)-2;
 
                 $MUNICIPIO=addslashes($values[1]);
                 
