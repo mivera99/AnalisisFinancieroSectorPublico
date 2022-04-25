@@ -36,42 +36,17 @@ class Diputacion{
 
     /* GASTOS */
     private $gastos_personal1;
-    /*private $gastos_personal2;
-    private $gastos_personal3;*/
     private $gastos_corrientes_bienes_servicios1;
-    /*private $gastos_corrientes_bienes_servicios2;
-    private $gastos_corrientes_bienes_servicios3;*/
     private $gastos_financieros1;
-    /*private $gastos_financieros2;
-    private $gastos_financieros3;*/
     private $transferencias_corrientes_gastos1;
-    /*private $transferencias_corrientes_gastos2;
-    private $transferencias_corrientes_gastos3;*/
     private $fondo_contingencia1;
-    /*private $fondo_contingencia2;
-    private $fondo_contingencia3;*/
     private $total_gastos_corrientes1;
-    /*private $total_gastos_corrientes2;
-    private $total_gastos_corrientes3;*/
     private $inversiones_reales1;
-    /*private $inversiones_reales2;
-    private $inversiones_reales3;*/
     private $transferencias_capital_gastos1;
-    /*private $transferencias_capital_gastos2;
-    private $transferencias_capital_gastos3;*/
     private $total_gastos_no_financieros1;
-    /*private $total_gastos_no_financieros2;
-    private $total_gastos_no_financieros3;*/
     private $activos_financieros_gastos1;
-    /*private $activos_financieros_gastos2;
-    private $activos_financieros_gastos3;*/
     private $pasivos_financieros_gastos1;
-    /*private $pasivos_financieros_gastos2;
-    private $pasivos_financieros_gastos3;*/
     private $total_gastos1;
-    /*private $total_gastos2;
-    private $total_gastos3;*/
-
 
     /* ENDEUDAMIENTO */
     private $deuda_financiera;
@@ -94,7 +69,6 @@ class Diputacion{
     private $solvencia_corto_plazo_media_diputaciones;
     private $solvencia_corto_plazo_media_diputaciones2;
     private $solvencia_corto_plazo;
-
 
     /* EFICIENCIA */
     private $eficiencia;

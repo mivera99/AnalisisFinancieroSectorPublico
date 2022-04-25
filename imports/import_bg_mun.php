@@ -41,7 +41,6 @@ class Importer_bg_mun{
             }
             if($x>1 && $values[0]!= "") {
                 $CODIGO_MUN=$values[0];
-                //echo $CODIGO_MUN . "<br>";
                 $CIF_MUNICIPIO=$values[1];
                 $MUNICIPIO=addslashes($values[2]);
         

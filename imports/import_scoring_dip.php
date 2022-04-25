@@ -1,54 +1,11 @@
 <?php
 require_once("includesWeb/config.php");
 require_once('imports/configFile.php');
-
-//Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-/*ini_set('memory_limit', '2G');
-ini_set("default_charset", "UTF-8");
-*/
-
-/*
-Importar libreria PHPSpreadsheet
-*/
-
-/*require "../includes/vendor/autoload.php";
-
-use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Path del archivo
-$path = "../files/BLOQUE_GENERAL_DIP_202109.xlsx";
-//Cargamos el archivo en la variable de documento "doc"
-$doc = IOFactory::load($path);
-
-//Número total de hojas
-$totalHojas = $doc->getSheetCount();
-*/
-//Recorrido por hojas...
-/*
-for($i = 0; $i < $totalHojas; $i++){
-    $hoja = $doc->getSheet($i);
-}
-*/
-
-/*$hoja = $doc->getSheet(2);
-
-//Última fila con datos
-$rows = $hoja->getHighestDataRow();//Número
-echo $rows."<br>";
-$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $cols."<br>";
-$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
-echo $cols.'<br>';
-
-$conn = getConexionBD();//new mysqli("localhost", "root", "", "dbs_01");
-//$conn = new mysqli("localhost", "root", "", "dbs_01");
-$conn->set_charset("utf8");
-*/
-
 require("includes/vendor/autoload.php");
+
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Importer_scoring_dip{
 
     //Función convertir dato string de un decimal en Excel (con ",") a float para PHP y MySQL
@@ -120,9 +77,6 @@ class Importer_scoring_dip{
                     }
                     if($year!='' && $tipo!=''){
                         //Consulta para averiguar si ya existe la fila 
-                        //echo 'Nombre de field: '.$tipo.'<br>';
-                        //echo 'Año: '.$year.'<br>';
-                        //echo 'Valor de value: '.$value.'<br><br>';
                         $query="SELECT CODIGO,ANHO FROM scoring_dip WHERE ANHO = '$year' AND CODIGO='$COD_DIP'";
                         $result= mysqli_query($conn,$query);
                         if(!$result){
@@ -149,7 +103,6 @@ class Importer_scoring_dip{
                 $vals = array();
             }
         }
-        //mysqli_close($conn);
         //cierraConexion();
 
         return true;

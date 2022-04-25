@@ -428,9 +428,6 @@ class DAOConsultor{
         //TOTAL INGRESOS
         $mun->setTotalIngresos1($tmpMunicipio->getTotalIngresos1());
 
-
-
-
         /* GASTOS */
         $tmpMunicipio = $daomun->getGastos($codigo, $year);
         if(!$tmpMunicipio){
@@ -460,7 +457,6 @@ class DAOConsultor{
         $mun->setPasivosFinancierosGastos1($tmpMunicipio->getPasivosFinancierosGastos1());
         //TOTAL GASTOS
         $mun->setTotalGastos1($tmpMunicipio->getTotalGastos1());
-
 
         /* ENDEUDAMIENTO */
         if($year >= 2019){
@@ -649,9 +645,6 @@ class DAOConsultor{
         //TOTAL INGRESOS
         $dip->setTotalIngresos1($tmpDiputacion->getTotalIngresos1());
 
-
-
-
         /* GASTOS */
         $tmpDiputacion = $daodip->getGastos($codigo, $year);
         if(!$tmpDiputacion){
@@ -681,7 +674,6 @@ class DAOConsultor{
         $dip->setPasivosFinancierosGastos1($tmpDiputacion->getPasivosFinancierosGastos1());
         //TOTAL GASTOS
         $dip->setTotalGastos1($tmpDiputacion->getTotalGastos1());
-
 
         /* ENDEUDAMIENTO */
         if($year >= 2019){

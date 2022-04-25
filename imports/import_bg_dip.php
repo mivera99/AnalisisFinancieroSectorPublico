@@ -20,8 +20,6 @@ class Importer_bg_dip{
     }
 
     public function import_bg_dip($filename){
-        //Path del archivo
-        //$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
         //Cargamos el archivo en la variable de documento "doc"
         $path = $filename;
         $doc = IOFactory::load($path);

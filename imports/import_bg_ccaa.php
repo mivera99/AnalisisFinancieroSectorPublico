@@ -10,8 +10,6 @@ class Importer_bg_ccaa{
     
     public function import_bg_ccaa($filename){ //=null para PHP 7.X
 
-        //Path del archivo
-        //$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
         //Cargamos el archivo en la variable de documento "doc"
         $path = $filename;
         $doc = IOFactory::load($path);

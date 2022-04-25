@@ -1,48 +1,11 @@
 <?php
 require_once("includesWeb/config.php");
 require_once("includesWeb/config.php");
-//Aumentamos la memoria de PHP para poder cargar la burrada de datos que tenemos
-/*ini_set('memory_limit', '1G');
-ini_set("default_charset", "UTF-8");
-ini_set('max_execution_time', 1200);
-*/
-/*
-Importar libreria PHPSpreadsheet
-*/
-
-/*require "../includes/vendor/autoload.php";
-
-use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Path del archivo
-$path = "../files/BLOQUE_GENERAL_CCAA_202109.xlsx";
-//Cargamos el archivo en la variable de documento "doc"
-$doc = IOFactory::load($path);
-
-//Número total de hojas
-$totalHojas = $doc->getSheetCount();
-
-$hoja = $doc->getSheet(1);
-
-//Última fila con datos
-$rows = $hoja->getHighestDataRow();//Número
-echo $rows."<br>";
-$cols = $hoja->getHighestDataColumn();//Letra, hay que convertirlo a numero
-echo $cols."<br>";
-$cols = Coordinate::columnIndexFromString($cols);//Conversion a numero
-echo $cols."<br>";
-
-
-$conn = getConexionBD(); //new mysqli("localhost", "root", "", "dbs_01");
-//$conn = new mysqli("localhost", "root", "", "dbs_01");
-$conn->set_charset("utf8");
-$values=array();
-$fields=array();
-*/
 require("includes/vendor/autoload.php");
+
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Importer_cuentas_ccaa{
     public function import_cuentas_ccaa($filename){
         //Cargamos el archivo en la variable de documento "doc"
@@ -56,9 +19,6 @@ class Importer_cuentas_ccaa{
         $cols = Coordinate::columnIndexFromString($cols);
 
         $conn = getConexionBD();
-        /*echo $rows.'<br>';
-        echo $hoja->getCellByColumnAndRow(3,$hoja->getHighestDataRow()).'<br>';
-        */
         for($x = 1; $x < $rows + 1; $x++){
 
             for($y = 1; $y <= $cols; $y++){
@@ -74,9 +34,7 @@ class Importer_cuentas_ccaa{
             if($x>1 && $values[1]!= "") { // Se escoge la posicion 1 en este caso porque es la que se va a usar como clave en la BBDD
                 /* EMPIEZA LA TOMA DE DATOS */
         
-                //$CIF_CCAA = $values[0];
                 $CODIGO_CCAA = intval($values[1]);
-                //$NOMBRE_CCAA = addslashes($values[2]);
                 //Añadimos el primer formato de datos (desde la columna D[3] hasta la BM[64], ambas incluidas)
                 for($k=3;$k<=64;$k+=4){
                     // En este caso en particular, a partir de la posicion 16 comienzan los datos correspondientes a la tabla deudas_ccaa
