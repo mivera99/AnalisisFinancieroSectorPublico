@@ -359,7 +359,8 @@ if($ccaa && $ccaaNac){
                 }
             ?>
                 <br>
-                <button type="button" id="verPDFCCAA" onclick="window.open('pdfCCAA.php','_blank')">Ver Informe</button>
+                <a href="pdfCCAA.php" target="_blank"><button type="button" id="verPDFCCAA">Ver Informe</button></a>
+                <a <?php echo 'href="procesarExportacion.php?nombre='.$ccaa->getNombre().'"';?> target="_blank"><button type="button" id="verPDFCCAA" >Exportar información</button></a>
             <?php
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';

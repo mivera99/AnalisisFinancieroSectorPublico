@@ -11,6 +11,7 @@ require_once('imports/import_scoring_ccaa.php');
 require_once('imports/import_scoring_dip.php');
 require_once('imports/import_scoring_mun.php');
 require_once('imports/import_prog_mun.php');
+require_once('exports/export_ccaa.php');
 
 class DAOCargador {
     
@@ -80,6 +81,14 @@ class DAOCargador {
         }
         return false;
     }
+
+    public function export_ccaa($ccaaNombre){
+        if((new Exporter_ccaa())->export_ccaa($ccaaNombre)){
+            return true;
+        }
+        return false;
+    }
+
 
 }
 
