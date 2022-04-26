@@ -54,12 +54,35 @@ button:hover {
   margin-top: 0px;
 }
 
+#buscador {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textoBuscador{
+  padding-left: 200px;
+}
+
+.barraBuscador{
+  padding-top: 13px;
+  padding-right: 270px;
+}
+
 #cabecera {
   position: fixed;
   height: 90px;
   width: 100%;
   left: 0;
   top: 0;
+  background: #D8E8E9;
+}
+
+#cabeceraIni {
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  left: 0;
+  top: 100px;
   background: #D8E8E9;
 }
 
@@ -103,6 +126,13 @@ button:hover {
   padding-top: 120px;
 }
 
+#contenidoIni {
+  margin-left: 108px;
+  margin-right: 108px;
+  height: 150vh;
+  padding-top: 20px;
+}
+
 #contenidoCCAA {
   margin-left: 108px;
   margin-right: 108px;
@@ -143,7 +173,14 @@ button:hover {
 }
 
 #pie {
+  position: fixed;
+  bottom: 0;
   padding-left: 108px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  color: white !important;
+  background-color: #003E99;
 }
 
 .scoring{
@@ -421,25 +458,25 @@ input::placeholder {
   transition: 0.2s;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 7px;
   height: 30px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: white; 
-}
+} */
  
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: #003E99; 
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: #003E99; 
-}
+} */
 
 input#facility{
   border: solid 3px #003E99;

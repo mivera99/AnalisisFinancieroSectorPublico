@@ -33,7 +33,7 @@ if (isset($_SESSION['mensaje'])) {
 </head>
     <body>
 
-        <div id = "cabecera">
+        <div id = "cabeceraIni">
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
 
@@ -55,6 +55,8 @@ if (isset($_SESSION['mensaje'])) {
                     $show_message=null;
                 }
             ?>
+        <div id ="contenidoIni">     
+        <?php require("includesWeb/comun/buscador.php");?>  
         </div>
 
         <div id = "pie">
