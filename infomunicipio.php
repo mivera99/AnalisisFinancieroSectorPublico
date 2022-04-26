@@ -280,9 +280,8 @@ if($municipio){
             ?>
 
             <br>
-            <button type="button" id="verPDFMUN" onclick="window.open('pdfMUN.php','_blank')">Ver Informe</button>
-            <button type="button" id="verPDFMUN" onclick="window.open('pdfPROG.php','_blank')">Ver Programas de Gastos</button>
-
+            <a href="pdfMUN.php" target="_blank"><button type="button" id="verPDFMUN">Ver Informe</button></a>
+            <a <?php echo 'href="procesarExportacion.php?nombre='.$mun2018->getNombre().'&tipo=mun"';?> target="_blank"><button type="button" id="verPDFMUN" >Exportar información</button></a>
             <?php
                 echo '<br><br>';
                 echo '<h3>Información general</h3>';
@@ -316,9 +315,6 @@ if($municipio){
                 else{
                     echo '<p><b>Correo electrónico: </b>'.$municipio->getMail().'</p>';
                 }
-
-
-
             ?>
             <br><br>
             <h3>Ingresos (en €)</h3>
@@ -336,7 +332,6 @@ if($municipio){
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
                         <td>1. Impuestos Directos</td>
                         <td style="width:14%"><?php echo number_format($mun2018->getImpuestosDirectos1(), 2, ",",".");?></td>

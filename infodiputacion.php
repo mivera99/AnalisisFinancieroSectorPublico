@@ -277,8 +277,8 @@ if($diputacion){
             ?>
 
             <br>
-            <button type="button" id="verPDFDIP" onclick="window.open('pdfDIP.php','_blank')">Ver Informe</button>
-
+            <a href="pdfDIP.php" target="_blank"><button type="button" id="verPDFDIP">Ver Informe</button></a>
+            <a <?php echo 'href="procesarExportacion.php?nombre='.$dip2018->getNombre().'&tipo=dip"';?> target="_blank"><button type="button" id="verPDFDIP" >Exportar información</button></a>
             <?php
 
                 echo '<br><br>';

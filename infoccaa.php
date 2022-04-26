@@ -360,7 +360,7 @@ if($ccaa && $ccaaNac){
             ?>
                 <br>
                 <a href="pdfCCAA.php" target="_blank"><button type="button" id="verPDFCCAA">Ver Informe</button></a>
-                <a <?php echo 'href="procesarExportacion.php?nombre='.$ccaa->getNombre().'"';?> target="_blank"><button type="button" id="verPDFCCAA" >Exportar información</button></a>
+                <a <?php echo 'href="procesarExportacion.php?nombre='.$ccaa->getNombre().'&tipo=ccaa"';?> target="_blank"><button type="button" id="verPDFCCAA" >Exportar información</button></a>
             <?php
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';

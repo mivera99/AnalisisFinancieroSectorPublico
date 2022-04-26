@@ -1,13 +1,18 @@
 <?php
 require_once("includesWeb/daos/DAOCargador.php");
 
-$nombre = htmlspecialchars(trim(strip_tags($_REQUEST['nombre'])));; 
-
+$nombre = htmlspecialchars(trim(strip_tags($_REQUEST['nombre']))); 
+$type = htmlspecialchars(trim(strip_tags($_REQUEST['tipo'])));
 $cargador = new DAOCargador();
 
-$cargador->export_ccaa($nombre);
-
-//header('Location:infoCCAA.php?ccaa='.$nombre.'');
+$filename = $cargador->export($nombre,$type);
+$nombre = str_replace(' ', '_', str_replace(',','',str_replace('-','',strtolower($nombre)))).'_ingresos.xlsx';
+header('Content-Type: text/xlsx; charset=utf-8');
+header('Content-Disposition: attachment; filename="'.$nombre.'";');
+if($filename!='') {
+    flush();
+    readfile($filename);
+    unlink($filename);
+}
 exit();
-
 ?>

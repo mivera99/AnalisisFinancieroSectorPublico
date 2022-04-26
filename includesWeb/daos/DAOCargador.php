@@ -82,13 +82,33 @@ class DAOCargador {
         return false;
     }
 
-    public function export_ccaa($ccaaNombre){
-        if((new Exporter_ccaa())->export_ccaa($ccaaNombre)){
-            return true;
+    public function export($nombre, $type){
+        $filepath = "";
+
+        if($type=='ccaa'){
+            $filepath = $this->export_ccaa($nombre);
         }
-        return false;
+        else if($type=='dip'){
+            $filepath = $this->export_dip($nombre);
+        }
+        else if($type=='mun'){
+            $filepath = $this->export_mun($nombre);
+        }
+
+        return $filepath;
     }
 
+    private function export_ccaa($ccaaNombre){
+        return (new Exporter_ccaa())->export_ccaa($ccaaNombre);
+    }
+
+    private function export_dip($dipNombre){
+        return (new Exporter_dip())->export_dip($dipNombre);
+    }
+
+    private function export_mun($munNombre){
+        return (new Exporter_mun())->export_mun($munNombre);
+    }
 
 }
 

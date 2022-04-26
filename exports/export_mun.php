@@ -8,11 +8,11 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Exporter_ccaa {
+class Exporter_mun {
 
-    public function export_ccaa($ccaaNombre){        
-        $daoccaa = new DAOConsultor();
-        $ccaa = $daoccaa->getCCAA($ccaaNombre);
+    public function export_ccaa($munNombre){        
+        $daomun = new DAOConsultor();
+        $mun = $daoccaa->getCCAA($munNombre);
         $file = new SpreadSheet();
         $active_sheet = $file->getActiveSheet();
         $count = 2;
