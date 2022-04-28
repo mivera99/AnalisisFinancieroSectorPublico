@@ -15,82 +15,102 @@ class Exporter_ccaa {
         $ccaa = $daoccaa->getCCAA($ccaaNombre);
         $file = new SpreadSheet();
         $active_sheet = $file->getActiveSheet();
-        $count = 2;
-        foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
-            $active_sheet->setCellValue('A'.$count,$clave);
-            $count++;
+        $alphabet=array();
+        foreach(range('A','Z') as $letter){
+            array_push($alphabet, $letter);
         }
-        $count=2;
-        $active_sheet->setCellValue('B1','IMPUESTOS_DIRECTOS');
+        
+        $active_sheet->setCellValue('A1','INGRESOS');
+        $active_sheet->setCellValue('A2','IMPUESTOS_DIRECTOS');
+        $active_sheet->setCellValue('A3','IMPUESTOS_INDIRECTOS');
+        $active_sheet->setCellValue('A4','TASAS_PRECIOS_PUBLICOS_Y_OTROS_INGRESOS');
+        $active_sheet->setCellValue('A5','TRANSFERENCIAS_CORRIENTES');
+        $active_sheet->setCellValue('A6','INGRESOS_PATRIMONIALES');
+        $active_sheet->setCellValue('A7','TOTAL_INGRESOS_CORRIENTES');
+        $active_sheet->setCellValue('A8','ENAJENACION_INVERSIONES_REALES');
+        $active_sheet->setCellValue('A9','TRANSFERENCIAS_DE_CAPITAL');
+        $active_sheet->setCellValue('A10','INGRESOS_NO_FINANCIEROS');
+        $active_sheet->setCellValue('A11','ACTIVOS_FINANCIEROS');
+        $active_sheet->setCellValue('A12','PASIVOS_FINANCIEROS');
+        $active_sheet->setCellValue('A13','INGRESOS_TOTALES');
+        
+        $index=1;
+        $count=1;
         foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
-            $active_sheet->setCellValue('B'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,$clave);
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('C1','IMPUESTOS_INDIRECTOS');
+        $count++;
+        $index=1;
+        foreach($ccaa->getImpuestosDirectos1() as $clave=>$valor){
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
+        }
+        $count++;
+        $index=1;
         foreach($ccaa->getImpuestosIndirectos1() as $clave=>$valor){
-            $active_sheet->setCellValue('C'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('D1','TASAS_PRECIOS_PUBLICOS_Y_OTROS_INGRESOS');
+        $count++;
+        $index=1;
         foreach($ccaa->getTasasPreciosOtros1() as $clave=>$valor){
-            $active_sheet->setCellValue('D'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('E1','TRANSFERENCIAS_CORRIENTES');
+        $count++;
+        $index=1;
         foreach($ccaa->getTransferenciasCorrientes1() as $clave=>$valor){
-            $active_sheet->setCellValue('E'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('F1','INGRESOS_PATRIMONIALES');
+        $count++;
+        $index=1;
         foreach($ccaa->getIngresosPatrimoniales1() as $clave=>$valor){
-            $active_sheet->setCellValue('F'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('G1','TOTAL_INGRESOS_CORRIENTES');
+        $count++;
+        $index=1;
         foreach($ccaa->getTotalIngresosCorrientes1() as $clave=>$valor){
-            $active_sheet->setCellValue('G'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('H1','ENAJENACION_DE_INVERSIONES_REALES');
+        $count++;
+        $index=1;
         foreach($ccaa->getEnajenacionInversionesReales1() as $clave=>$valor){
-            $active_sheet->setCellValue('H'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('I1','TRANSFERENCIAS_DE_CAPITAL');
+        $count++;
+        $index=1;
         foreach($ccaa->getTransferenciasCapital1() as $clave=>$valor){
-            $active_sheet->setCellValue('I'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('J1','INGRESOS_NO_FINANCIEROS');
+        $count++;
+        $index=1;
         foreach($ccaa->getTotalIngresosNoCorrientes1() as $clave=>$valor){
-            $active_sheet->setCellValue('J'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('K1','ACTIVOS_FINANCIEROS');
+        $count++;
+        $index=1;
         foreach($ccaa->getActivosFinancieros1() as $clave=>$valor){
-            $active_sheet->setCellValue('K'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('L1','PASIVOS_FINANCIEROS');
+        $count++;
+        $index=1;
         foreach($ccaa->getPasivosFinancieros1() as $clave=>$valor){
-            $active_sheet->setCellValue('L'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
-        $count=2;
-        $active_sheet->setCellValue('M1','INGRESOS_TOTALES');
+        $count++;
+        $index=1;
         foreach($ccaa->getTotalIngresos1() as $clave=>$valor){
-            $active_sheet->setCellValue('M'.$count,number_format($valor, 2, ',','.'));
-            $count++;
+            $active_sheet->setCellValue($alphabet[$index].$count,number_format($valor, 2, ',','.'));
+            $index++;
         }
 
         $writer = new Xlsx($file);
