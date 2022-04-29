@@ -1,7 +1,7 @@
 <?php
 require_once("includesWeb/daos/DAOCargador.php");
 
-$nombre = htmlspecialchars(trim(strip_tags($_REQUEST['nombre']))); 
+$nombre = urldecode(htmlspecialchars(trim(strip_tags($_REQUEST['nombre'])))); 
 $type = htmlspecialchars(trim(strip_tags($_REQUEST['tipo'])));
 $cargador = new DAOCargador();
 

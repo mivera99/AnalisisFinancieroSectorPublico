@@ -12,6 +12,8 @@ require_once('imports/import_scoring_dip.php');
 require_once('imports/import_scoring_mun.php');
 require_once('imports/import_prog_mun.php');
 require_once('exports/export_ccaa.php');
+require_once('exports/export_dip.php');
+require_once('exports/export_mun.php');
 
 class DAOCargador {
     

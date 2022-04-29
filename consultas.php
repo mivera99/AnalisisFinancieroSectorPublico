@@ -45,38 +45,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaCCAA.php' method='POST'>
                     <h3 class="form-name">Consultas de comunidades autónomas</h3>
                     <fieldset>
-                        <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
-                        <br>
-                        <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
-                        <label for="allCCAA"> Seleccionar todo </label><br>
-
-                        <input type="checkbox" id="scoring" class="selectCCAA" name="scoringCCAA_C" value="Scoring" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="scoring"> Scoring </label>
-                        <input type="checkbox" id="poblacion" class="selectCCAA" name="poblacionCCAA_C" value="Poblacion" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="poblacion"> Poblacion </label>
-                        <input type="checkbox" id="endeudamiento" class="selectCCAA" name="endeudamientoCCAA_C" value="Endeudamiento" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="endeudamiento"> Endeudamiento </label>
-                        <input type="checkbox" id="ahorro_neto" class="selectCCAA" name="ahorronetoCCAA_C" value="AhorroNeto" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="ahorro_neto"> Ahorro neto </label>
-                        <input type="checkbox" id="pmp" class="selectCCAA" name="pmpCCAA_C" value="PMP" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="pmp"> PMP </label>
-                        <input type="checkbox" id="dcpp" class="selectCCAA" name="dcppCCAA_C" value="DCPP" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="dcpp"> Deuda comercial pendiente de pago </label>
-                        <input type="checkbox" id="ingrnofin" class="selectCCAA" name="ingrnofinCCAA_C" value="Ingrnofin" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="ingrnofin"> Nivel de ingresos no financieros </label>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
-                        <br><br>
-
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
                         <br>
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
@@ -181,7 +151,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo5">16% - 20%</option>
                             <option value="tramo6">> 20%</option>
                         </select>
-                        <p>Nivel de ingresos no financieros</p>
+                        <p>Ingresos no financieros</p>
                         <select name="ingrnofinCCAA">
                             <option value="inicio" selected>Seleccione un tramo</option>
                             <option value="tramo1">0 - 1M</option>
@@ -189,7 +159,36 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
                         </select>
+                        <br><br>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
                         <br>
+                        <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
+                        <label for="allCCAA"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoring" class="selectCCAA" name="scoringCCAA_C" value="Scoring" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="scoring"> Scoring </label>
+                        <input type="checkbox" id="poblacion" class="selectCCAA" name="poblacionCCAA_C" value="Poblacion" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="poblacion"> Poblacion </label>
+                        <input type="checkbox" id="endeudamiento" class="selectCCAA" name="endeudamientoCCAA_C" value="Endeudamiento" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="endeudamiento"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_neto" class="selectCCAA" name="ahorronetoCCAA_C" value="AhorroNeto" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="ahorro_neto"> Ahorro neto </label>
+                        <input type="checkbox" id="pmp" class="selectCCAA" name="pmpCCAA_C" value="PMP" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="pmp"> PMP </label>
+                        <input type="checkbox" id="dcpp" class="selectCCAA" name="dcppCCAA_C" value="DCPP" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="dcpp"> Deuda comercial pendiente de pago </label>
+                        <input type="checkbox" id="ingrnofin" class="selectCCAA" name="ingrnofinCCAA_C" value="Ingrnofin" onclick="checkAllButton('selectCCAA','allCCAA')">
+                        <label for="ingrnofin"> Ingresos no financieros </label>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoCCAA">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <br><br>
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>
                 </form>
@@ -199,37 +198,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaDIP.php' method='POST'>
                 <h3 class="form-name">Consultas de diputaciones</h3>
                     <fieldset>
-                        <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
-                        <br>
-                        <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
-                        <label for="allDIP"> Seleccionar todo </label><br>
-
-                        <input type="checkbox" id="scoringDIP" class="selectDIP" name="scoringDIP_C" value="Scoring" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="scoringDIP"> Scoring </label>
-                        <input type="checkbox" id="autonomiaDIP" class="selectDIP" name="autonomiaDIP_C" value="Autonomia" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="autonomiaDIP"> Comunidad Autónoma </label>
-                        <input type="checkbox" id="endeudamientoDIP" class="selectDIP" name="endeudamientoDIP_C" value="Endeudamiento" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="endeudamientoDIP"> Endeudamiento </label>
-                        <input type="checkbox" id="ahorro_netoDIP" class="selectDIP" name="ahorronetoDIP_C" value="AhorroNeto" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="ahorro_netoDIP"> Ahorro neto </label>
-                        <input type="checkbox" id="fondliqDIP" class="selectDIP" name="fondliqDIP_C" value="FondLiq" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="fondliqDIP"> Fondos líquidos </label>
-                        <input type="checkbox" id="pmpDIP" class="selectDIP" name="pmpDIP_C" value="PMP" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="pmpDIP"> PMP </label>
-                        <input type="checkbox" id="ingrnofinDIP" class="selectDIP" name="ingrnofinDIP_C" value="Ingrnofin" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="ingrnofinDIP"> Nivel de ingresos no financieros </label>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
-                        <br><br>
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
                         <br>
                         <input type="radio" id="selectyearDIP" name="selectionDIP" value="SelectYear" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectyearDIP">Consultar por año</label>
@@ -340,7 +310,36 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
                         </select>
+                        <br><br>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
                         <br>
+                        <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
+                        <label for="allDIP"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoringDIP" class="selectDIP" name="scoringDIP_C" value="Scoring" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="scoringDIP"> Scoring </label>
+                        <input type="checkbox" id="autonomiaDIP" class="selectDIP" name="autonomiaDIP_C" value="Autonomia" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="autonomiaDIP"> Comunidad Autónoma </label>
+                        <input type="checkbox" id="endeudamientoDIP" class="selectDIP" name="endeudamientoDIP_C" value="Endeudamiento" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="endeudamientoDIP"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_netoDIP" class="selectDIP" name="ahorronetoDIP_C" value="AhorroNeto" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="ahorro_netoDIP"> Ahorro neto </label>
+                        <input type="checkbox" id="fondliqDIP" class="selectDIP" name="fondliqDIP_C" value="FondLiq" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="fondliqDIP"> Fondos líquidos </label>
+                        <input type="checkbox" id="pmpDIP" class="selectDIP" name="pmpDIP_C" value="PMP" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="pmpDIP"> PMP </label>
+                        <input type="checkbox" id="ingrnofinDIP" class="selectDIP" name="ingrnofinDIP_C" value="Ingrnofin" onclick="checkAllButton('selectDIP','allDIP')">
+                        <label for="ingrnofinDIP"> Ingresos no financieros </label>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoDIP">
+                            <option value="inicio" selected>Seleccione un tramo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <br><br>
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>
                 </form>
@@ -350,76 +349,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <form action='procesarConsultaMUN.php' method='POST'>
                 <h3 class="form-name">Consultas de municipios</h3>
                     <fieldset>
-                        <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos que el usuario desea observar. Marca la casilla del campo que desea ver</p>
-                        <br>
-                        <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
-                        <label for="allMUN"> Seleccionar todo </label><br>
-
-                        <input type="checkbox" id="scoringMUN" class="selectMUN" name="scoringMUN_C" value="Scoring" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="scoringMUN"> Scoring </label>
-                        <input type="checkbox" id="poblacionMUN" class="selectMUN" name="poblacionMUN_C" value="Poblacion" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="poblacionMUN"> Poblacion </label>
-                        <input type="checkbox" id="autonomiaMUN" class="selectMUN" name="autonomiaMUN_C" value="Autonomia" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="autonomiaMUN"> Comunidad Autónoma </label>
-                        <input type="checkbox" id="provinciaMUN" class="selectMUN" name="provinciaMUN_C" value="Provincia" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="provinciaMUN"> Provincia </label>
-                        <input type="checkbox" id="endeudamientoMUN" class="selectMUN" name="endeudamientoMUN_C" value="Endeudamiento" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="endeudamientoMUN"> Endeudamiento </label>
-                        <input type="checkbox" id="ahorro_netoMUN" class="selectMUN" name="ahorronetoMUN_C" value="AhorroNeto" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="ahorro_netoMUN"> Ahorro neto </label>
-                        <input type="checkbox" id="fondliqMUN" class="selectMUN" name="fondliqMUN_C" value="FondLiq" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="fondliqMUN"> Fondos líquidos </label>
-                        <input type="checkbox" id="pmpMUN" class="selectMUN" name="pmpMUN_C" value="PMP" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="pmpMUN"> PMP </label>
-                        <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="ingrnofinMUN"> Nivel de ingresos no financieros </label>
-                        <p>Tipo de gasto</p>
-                        <select name="gastoMUN">
-                            <option value="inicio" selected>Seleccione un tipo</option>
-                            <option value="personal">Por gastos de personal</option>
-                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
-                            <option value="financieros">Por gastos financieros</option>
-                            <option value="inversiones">Por inversiones</option>
-                        </select>
-                        <p>Programa de gasto</p>
-                        <select name="progMUN">
-                            <option value="inicio" selected>Seleccione un tipo</option>
-                            <option value="agspc">Administración general de la seguridad y protección civil</option>
-                            <option value="sop">Seguridad y orden público</option>
-                            <option value="ote">Ordenación del tráfico y del estacionamiento</option>
-                            <option value="mu">Movilidad urbana</option>
-                            <option value="pc">Protección civil</option>
-                            <option value="spei">Servicio de prevención y extinción de incendios</option>
-                            <option value="pgvpp">Promoción y gestión de vivienda de protección pública</option>
-                            <option value="cre">Conservación y rehabilitación de la edificación</option>
-                            <option value="pvp">Pavimentación de vías públicas</option>
-                            <option value="a">Alcantarillado</option>
-                            <option value="rgtr">Recogida, gestión y tratamiento de residuos</option>
-                            <option value="rr">Recogida de residuos</option>
-                            <option value="grsu">Gestión de residuos sólidos urbanos</option>
-                            <option value="tr">Tratamiento de residuos</option>
-                            <option value="lv">Limpieza viaria</option>
-                            <option value="csf">Cementerios y servicios funerarios</option>
-                            <option value="ap">Alumbrado público</option>
-                            <option value="pj">Parques y jardines</option>
-                            <option value="p">Pensiones</option>
-                            <option value="ssps">Servicios sociales y promoción social</option>
-                            <option value="fe">Fomento del empleo</option>
-                            <option value="s">Sanidad</option>
-                            <option value="e">Educación</option>
-                            <option value="c">Cultura</option>
-                            <option value="d">Deporte</option>
-                            <option value="agp">Agricultura, ganadería y pesca</option>
-                            <option value="ie">Industria y energía</option>
-                            <option value="com">Comercio</option>
-                            <option value="tp">Transporte público</option>
-                            <option value="it">Infraestructuras del transporte</option>
-                            <option value="idi">Investigación, desarrollo e innovación</option>
-                        </select>
-                        <br><br>
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para aplicar los criterios a la búsqueda que el usuario desee.</p>
+                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
                         <br>
                         <input type="radio" id="selectyearMUN" name="selectionMUN" value="SelectYear" onclick="hideOption('selectionMUN','selMUN')">
                         <label for="selectyearMUN">Consultar por año</label>
@@ -553,7 +484,75 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo3">5M - 50M</option>
                             <option value="tramo4">> 50M</option>
                         </select>
-                        <br> 
+                        <br><br>
+                        <h3>Mostrar</h3>
+                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
+                        <br>
+                        <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
+                        <label for="allMUN"> Seleccionar todo </label><br>
+
+                        <input type="checkbox" id="scoringMUN" class="selectMUN" name="scoringMUN_C" value="Scoring" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="scoringMUN"> Scoring </label>
+                        <input type="checkbox" id="poblacionMUN" class="selectMUN" name="poblacionMUN_C" value="Poblacion" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="poblacionMUN"> Poblacion </label>
+                        <input type="checkbox" id="autonomiaMUN" class="selectMUN" name="autonomiaMUN_C" value="Autonomia" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="autonomiaMUN"> Comunidad Autónoma </label>
+                        <input type="checkbox" id="provinciaMUN" class="selectMUN" name="provinciaMUN_C" value="Provincia" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="provinciaMUN"> Provincia </label>
+                        <input type="checkbox" id="endeudamientoMUN" class="selectMUN" name="endeudamientoMUN_C" value="Endeudamiento" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="endeudamientoMUN"> Endeudamiento </label>
+                        <input type="checkbox" id="ahorro_netoMUN" class="selectMUN" name="ahorronetoMUN_C" value="AhorroNeto" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="ahorro_netoMUN"> Ahorro neto </label>
+                        <input type="checkbox" id="fondliqMUN" class="selectMUN" name="fondliqMUN_C" value="FondLiq" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="fondliqMUN"> Fondos líquidos </label>
+                        <input type="checkbox" id="pmpMUN" class="selectMUN" name="pmpMUN_C" value="PMP" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="pmpMUN"> PMP </label>
+                        <input type="checkbox" id="ingrnofinMUN" class="selectMUN" name="ingrnofinMUN_C" value="Ingrnofin" onclick="checkAllButton('selectMUN','allMUN')">
+                        <label for="ingrnofinMUN"> Ingresos no financieros </label>
+                        <p>Tipo de gasto</p>
+                        <select name="gastoMUN">
+                            <option value="inicio" selected>Seleccione un tipo</option>
+                            <option value="personal">Por gastos de personal</option>
+                            <option value="bienesservicios">Por gastos de bienes y servicios</option>
+                            <option value="financieros">Por gastos financieros</option>
+                            <option value="inversiones">Por inversiones</option>
+                        </select>
+                        <p>Programa de gasto</p>
+                        <select name="progMUN">
+                            <option value="inicio" selected>Seleccione un tipo</option>
+                            <option value="agspc">Administración general de la seguridad y protección civil</option>
+                            <option value="sop">Seguridad y orden público</option>
+                            <option value="ote">Ordenación del tráfico y del estacionamiento</option>
+                            <option value="mu">Movilidad urbana</option>
+                            <option value="pc">Protección civil</option>
+                            <option value="spei">Servicio de prevención y extinción de incendios</option>
+                            <option value="pgvpp">Promoción y gestión de vivienda de protección pública</option>
+                            <option value="cre">Conservación y rehabilitación de la edificación</option>
+                            <option value="pvp">Pavimentación de vías públicas</option>
+                            <option value="a">Alcantarillado</option>
+                            <option value="rgtr">Recogida, gestión y tratamiento de residuos</option>
+                            <option value="rr">Recogida de residuos</option>
+                            <option value="grsu">Gestión de residuos sólidos urbanos</option>
+                            <option value="tr">Tratamiento de residuos</option>
+                            <option value="lv">Limpieza viaria</option>
+                            <option value="csf">Cementerios y servicios funerarios</option>
+                            <option value="ap">Alumbrado público</option>
+                            <option value="pj">Parques y jardines</option>
+                            <option value="p">Pensiones</option>
+                            <option value="ssps">Servicios sociales y promoción social</option>
+                            <option value="fe">Fomento del empleo</option>
+                            <option value="s">Sanidad</option>
+                            <option value="e">Educación</option>
+                            <option value="c">Cultura</option>
+                            <option value="d">Deporte</option>
+                            <option value="agp">Agricultura, ganadería y pesca</option>
+                            <option value="ie">Industria y energía</option>
+                            <option value="com">Comercio</option>
+                            <option value="tp">Transporte público</option>
+                            <option value="it">Infraestructuras del transporte</option>
+                            <option value="idi">Investigación, desarrollo e innovación</option>
+                        </select>
+                        <br><br>
                         <button type="submit" class="form-button">Consultar</button>
                     </fieldset>
                 </form>

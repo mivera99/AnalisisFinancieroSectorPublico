@@ -197,6 +197,7 @@ if($diputacion){
             <h3>Diputación</h3>
             <?php
             if($encontrado){
+                echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$diputacion->getNombre().'</h2>';
                 foreach($diputacion->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
@@ -278,7 +279,7 @@ if($diputacion){
 
             <br>
             <a href="pdfDIP.php" target="_blank"><button type="button" id="verPDFDIP">Ver Informe</button></a>
-            <a <?php echo 'href="procesarExportacion.php?nombre='.$dip2018->getNombre().'&tipo=dip"';?> target="_blank"><button type="button" id="verPDFDIP" >Exportar información</button></a>
+            <a <?php echo 'href="procesarExportacion.php?nombre='.urlencode($diputacion->getNombre()).'&tipo=dip"';?> target="_blank"><button type="button" id="verPDFDIP" >Exportar información</button></a>
             <?php
 
                 echo '<br><br>';
@@ -608,8 +609,8 @@ if($diputacion){
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getActivosFinancieros1(), 2, ',','.');?></td>
-                        <td style="width:14%"><?php echo number_format($dip2019->getActivosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2018->getActivosFinancierosGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2019->getActivosFinancierosGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getActivosFinancierosGastos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>

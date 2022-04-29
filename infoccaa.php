@@ -282,6 +282,7 @@ if($ccaa && $ccaaNac){
         <div id ="contenidoCCAA">
             <?php
             if($encontrado){
+                echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$ccaa->getNombre().'</h2>';
                 foreach($ccaa->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
@@ -360,7 +361,7 @@ if($ccaa && $ccaaNac){
             ?>
                 <br>
                 <a href="pdfCCAA.php" target="_blank"><button type="button" id="verPDFCCAA">Ver Informe</button></a>
-                <a <?php echo 'href="procesarExportacion.php?nombre='.$ccaa->getNombre().'&tipo=ccaa"';?> target="_blank"><button type="button" id="verPDFCCAA" >Exportar información</button></a>
+                <a <?php echo 'href="procesarExportacion.php?nombre='.urlencode($ccaa->getNombre()).'&tipo=ccaa"';?> target="_blank"><button type="button" id="verPDFCCAA" >Exportar información</button></a>
             <?php
                 echo "<br>";
                 echo '<h3>Datos generales</h3>';

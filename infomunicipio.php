@@ -201,6 +201,7 @@ if($municipio){
             <h3>Municipio</h3>
             <?php
             if($encontrado){
+                echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$municipio->getNombre().'</h2>';
                 foreach($municipio->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
@@ -281,7 +282,7 @@ if($municipio){
 
             <br>
             <a href="pdfMUN.php" target="_blank"><button type="button" id="verPDFMUN">Ver Informe</button></a>
-            <a <?php echo 'href="procesarExportacion.php?nombre='.$mun2018->getNombre().'&tipo=mun"';?> target="_blank"><button type="button" id="verPDFMUN" >Exportar información</button></a>
+            <a <?php echo 'href="procesarExportacion.php?nombre='.urlencode($municipio->getNombre()).'&tipo=mun"';?> target="_blank"><button type="button" id="verPDFMUN" >Exportar información</button></a>
             <?php
                 echo '<br><br>';
                 echo '<h3>Información general</h3>';
@@ -609,8 +610,8 @@ if($municipio){
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancieros1(), 2, ",",".");?></td>
-                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancieros1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2018->getActivosFinancierosGastos1(), 2, ",",".");?></td>
+                        <td style="width:14%"><?php echo number_format($mun2019->getActivosFinancierosGastos1(), 2, ",",".");?></td>
                         <td style="width:14%"><?php echo number_format($mun2020->getActivosFinancierosGastos1(), 2, ",",".");?></td>
                     </tr>
                     <tr>
