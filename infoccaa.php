@@ -280,10 +280,12 @@ if($ccaa && $ccaaNac){
         </div>
         
         <div id ="contenidoCCAA">
+            <h3>Comunidad Autónoma</h3>
             <?php
             if($encontrado){
                 echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$ccaa->getNombre().'</h2>';
+                $i=0;
                 foreach($ccaa->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
                     echo '<button class="scoring '.$valor.'">'.$valor.'</button><p>Tendencia: '.($ccaa->getTendencia())[$clave].'</p>';
@@ -357,6 +359,105 @@ if($ccaa && $ccaaNac){
                     }
 
                     echo "<i>" . $infoRating . "</i><br><br>";
+                    if($i==0){
+                        $array= array_values($ccaa->getCCAAPib());
+                        $dato = end($array)*100;
+                        if($dato>=0) echo'<p>Resultado presupuestario positivo.</p>';
+                        else if ($dato<0 && $dato>=-1) echo'<p>Buen resultado presupuestario.</p>';
+                        else if ($dato<-1 && $dato>=-2) echo'<p>Razonable resultado presupuestario.</p>';
+                        else if ($dato<-2 && $dato>=-5) echo'<p>Mal resultado presupuestario en el último ejercicio.</p>';
+                        else if ($dato<-5) echo'<p>Muy mal resultado presupuestario en el último ejercicio.</p>';
+
+                        $array= array_values(($ccaa->getDeudaVivaIngrCor()));
+                        $dato = end($array)[2]*100;
+                        if($dato>=0 && $dato<50) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if ($dato>=50 && $dato<75) echo'<p>Moderado nivel de deuda financiera.</p>';
+                        else if ($dato>=75 && $dato<100) echo'<p>Aceptable nivel de deuda financiera.</p>';
+                        else if ($dato>=100 && $dato<150) echo'<p>Alto nivel de deuda financiera.</p>';
+                        else if ($dato>=150) echo'<p>Excesivo nivel de deuda financiera.</p>';
+                        
+                        $array= array_values($ccaa->getRSosteFinanciera());
+                        $dato = end($array)*100;
+                        if($dato>=0) echo'<p>Con buena capacidad de ahorro en el último ejercicio.</p>';
+                        else if ($dato>=-5 && $dato<0) echo'<p>Sin capacidad de ahorro pero en niveles aceptables.</p>';
+                        else if ($dato>=-10 && $dato<-5) echo'<p>Con porcentaje de desahorro medio-alto.</p>';
+                        else if ($dato>=-20 && $dato<-10) echo'<p>Elevado nivel de desahorro.</p>';
+                        else if ($dato<=-20) echo'<p>Nula capacidad de ahorro que le obliga a fuertes incrementos de deuda.</p>';
+                        
+                        $array= array_values($ccaa->getRRigidez());
+                        $dato = end($array)*100;
+                        if($dato<=50) echo'<p>Muy bajo apalancamiento operativo.</p>';
+                        else if ($dato>=50 && $dato<60) echo'<p>Reducido apalancamiento operativo.</p>';
+                        else if ($dato>=60 && $dato<75) echo'<p>Cuenta con un nivel de apalancamiento operativo controlado.</p>';
+                        else if ($dato>=75 && $dato<90) echo'<p>Alto apalancamiento operativo.</p>';
+                        else if ($dato>=90) echo'<p>Elevado apalancamiento operativo.</p>';
+                        
+                        $array= array_values($ccaa->getRSosteEndeuda());
+                        $dato = end($array)*100;
+                        if($dato>=0 && $dato<10) echo'<p>Nulo nivel de carga financiera.</p>';
+                        else if ($dato>=10 && $dato<20) echo'<p>Bajo nivel de carga financiera.</p>';
+                        else if ($dato>=20 && $dato<30) echo'<p>Nivel de carga financiera controlado.</p>';
+                        else if ($dato>=30 && $dato<50) echo'<p>Alto nivel de carga financiera.</p>';
+                        else if ($dato>=50) echo'<p>Nivel excesivo de carga financiera.</p>';
+
+                        $array= array_values(($ccaa->getPMP()));
+                        $dato = end($array)[2];
+                        if($dato>=0 && $dato<30) echo'<p>Pago de facturas muy rápido.</p>';
+                        else if ($dato>=30 && $dato<60) echo'<p>Pago de facturas en tiempo aceptable.</p>';
+                        else if ($dato>=60 && $dato<90) echo'<p>Pago de facturas lento.</p>';
+                        else if ($dato>=90 && $dato<120) echo'<p>Tarda mucho en abonar las facturas.</p>';
+                        else if ($dato>=120) echo'<p>Excesivo tiempo en el abono de facturas.</p>';
+                        
+                        $array= array_values($ccaa->getREfic());
+                        $dato = end($array)*100;
+                        if($dato<=80) echo'<p>Muy eficiente en términos de gastos ordinarios.</p>';
+                        else if ($dato>=80 && $dato<100) echo'<p>Eficiente en términos de gastos ordinarios.</p>';
+                        else if ($dato>=100 && $dato<125) echo'<p>Nivel de eficiencia intermedio.</p>';
+                        else if ($dato>=125 && $dato<150) echo'<p>Bajo de nivel de eficiencia.</p>';
+                        else if ($dato>=150) echo'<p>Muy poco eficiente en términos de gastos ordinarios.</p>';
+
+                        $array= array_values($ccaa->getREjeIngrCorr());
+                        $dato = end($array)*100;
+                        if($dato>=99) echo'<p>Muy buena previsión de ingresos.</p>';
+                        else if ($dato>=97.5 && $dato<990) echo'<p>Buena previsión de ingresos.</p>';
+                        else if ($dato>=95 && $dato<97.5) echo'<p>Razonable previsión de ingresos.</p>';
+                        else if ($dato>=90 && $dato<95) echo'<p>Baja capacidad de previsión de ingresos.</p>';
+                        else if ($dato<=90) echo'<p>Mala previsión de ingresos.</p>';
+
+                        $array= array_values($ccaa->getREjeGastosCorr());
+                        $dato = end($array)*100;
+                        if($dato>=99) echo'<p>Muy buen nivel de cumplimiento de gastos.</p>';
+                        else if ($dato>=97.5 && $dato<99) echo'<p>Buen nivel de cumplimiento de gastos.</p>';
+                        else if ($dato>=95 && $dato<97.5) echo'<p>Razonable cumplimiento de gastos.</p>';
+                        else if ($dato>=90 && $dato<95) echo'<p>Baja ejecución presupuestaria de gastos.</p>';
+                        else if ($dato<=90) echo'<p>Mala ejecución de gastos.</p>';
+
+                        $array= array_values(($ccaa->getRDCPP()));
+                        $dato = end($array)[2]*100;
+                        if($dato==0) echo'<p>Sin deuda comercial.</p>';
+                        else if ($dato>0 && $dato<=5) echo'<p>Bajo nivel de deuda comercial.</p>';
+                        else if ($dato>5 && $dato<=10) echo'<p>Razonable nivel de deuda comercial.</p>';
+                        else if ($dato>10 && $dato<=20) echo'<p>Alto nivel de deuda comercial.</p>';
+                        else if ($dato>20) echo'<p>Muy alto nivel de deuda comercial.</p>';
+                        
+                        $array= array_values($ccaa->getPagosObligaciones());
+                        $dato = end($array)*100;
+                        if($dato>=99) echo'<p>Eelevado nivel de pagos sobre gastos reconocidos.</p>';
+                        else if ($dato>=95 && $dato<99) echo'<p>Nivel de pagos razonable sobre gastos reconocidos.</p>';
+                        else if ($dato>=90 && $dato<95) echo'<p>Aceptable nivel de pagos sobre gastos reconocidos.</p>';
+                        else if ($dato>=85 && $dato<90) echo'<p>Bajo nivel de pagos sobre gastos reconocidos.</p>';
+                        else if ($dato<=85) echo'<p>Muy bajo porcentaje de pagos sobre obligaciones reconocidas.</p>';
+
+                        $array= array_values($ccaa->getREficaciaRec());
+                        $dato = end($array)*100;
+                        if($dato>=95) echo'<p>Muy buen nivel de eficacia.</p>';
+                        else if ($dato>=90 && $dato<95) echo'<p>Razonable nivel de eficacia recaudatoria.</p>';
+                        else if ($dato>=85 && $dato<90) echo'<p>Aceptable nivel de eficacia recaudatoria.</p>';
+                        else if ($dato>=80 && $dato<85) echo'<p>Bajo nivel de eficacia recaudatoria.</p>';
+                        else if ($dato<=80) echo'<p>Muy bajo nivel de eficacia recaudatoria.</p>';
+
+                    }
+                    $i++;
                 }
             ?>
                 <br>
@@ -884,11 +985,11 @@ if($ccaa && $ccaaNac){
                         foreach($tmp as $clave=>$valor){
                             $porcentaje = $valor*100;
                             $color = "";
-                            if($porcentaje<=0) $color="darkgreenCell";
-                            else if ($porcentaje>0 && $porcentaje<=1) $color="greenCell";
-                            else if ($porcentaje>1 && $porcentaje<=2) $color="lightgreenCell";
-                            else if ($porcentaje>2 && $porcentaje<=5) $color="orangeCell";
-                            else if ($porcentaje>5) $color="redCell";
+                            if($porcentaje>=0) $color="darkgreenCell";
+                            else if ($porcentaje<0 && $porcentaje>=-1) $color="greenCell";
+                            else if ($porcentaje<-1 && $porcentaje>=-2) $color="lightgreenCell";
+                            else if ($porcentaje<-2 && $porcentaje>=-5) $color="orangeCell";
+                            else if ($porcentaje<-5) $color="redCell";
                             else $color="greyCell";
                             echo '<td class="'.$color.'">'.$porcentaje.'%</td>';
                         }

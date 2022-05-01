@@ -199,6 +199,7 @@ if($diputacion){
             if($encontrado){
                 echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$diputacion->getNombre().'</h2>';
+                $i=0;
                 foreach($diputacion->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
                     $tend = $diputacion->getTendencia();
@@ -273,10 +274,103 @@ if($diputacion){
                     }
 
                     echo "<i>" . $infoRating . "</i><br><br>";
+                    if($i==0){
+                        $dato = $dip2020->getEndeudamiento()*100;
+                        if($dato==0) echo'<p>Sin deuda financiera.</p>';
+                        else if($dato>0 && $dato<=25) echo'<p>Muy bajo nivel de deuda.</p>';
+                        else if($dato>25 && $dato<=50) echo'<p>Relativamente bajo nivel de deuda financiera.</p>';
+                        else if($dato>50 && $dato<=75) echo'<p>Nivel de deuda financiera aceptable.</p>'; 
+                        else if($dato>75) echo'<p>Nivel de endeudamiento excesivo.</p>';
+                        
+                        $dato = $dip2020->getSostenibilidadFinanciera()*100;
+                        if($dato>15) echo'<p>Con elevada capacidad de ahorro.</p>';
+                        else if($dato>5 && $dato<=15) echo'<p>Con capacidad de ahorro.</p>';
+                        else if($dato>-5 && $dato<=5) echo'<p>Con porcentaje de ahorro en torno a cero.</p>';
+                        else if($dato>-15 && $dato<=-5) echo'<p>Sin capacidad de ahorro.</p>'; 
+                        else if($dato<-15) echo'<p>Nula capcidad de ahorro que obliga a fuertes incrementos de deuda.</p>';
+                        
+                        $dato = $dip2020->getApalancamientoOperativo()*100;
+                        if($dato<30) echo'<p>Muy bajo apalancamiento operativo.</p>';
+                        else if($dato>=30 && $dato<40) echo'<p>Reducido apalancamiento operativo.</p>';
+                        else if($dato>=40 && $dato<50) echo'<p>Cuenta con un nivel de apalancamiento operativo.</p>';
+                        else if($dato>=50 && $dato<60) echo'<p>Alto apalancamiento operativo.</p>'; 
+                        else if($dato>=60) echo'<p>Elevado apalancamiento operativo.</p>';
+                        
+                        $dato = $dip2020->getSostenibilidadDeuda()*100;
+                        if($dato==0) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=0 && $dato<5) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=5 && $dato<15) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=15 && $dato<25) echo'<p>Bajo nivel de deuda financiera.</p>'; 
+                        else if($dato>=25) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        
+                        $dato = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
+                        if($dato>=25) echo'<p>Elevado nivel de tesorería.</p>';
+                        else if($dato>=5 && $dato<25) echo'<p>Buena posición de caja.</p>';
+                        else if($dato>=-5 && $dato<5) echo'<p>Nivel razonable de tesorería.</p>';
+                        else if($dato>=-25 && $dato<-5) echo'<p>Baja liquidez.</p>'; 
+                        else if($dato<-25) echo'<p>Nivel de tesorería muy deficiente.</p>';
+                        
+                        /*$dato = $dip2020->getLiquidezInmediata()*100;
+                        if($dato>=100) echo'<p>.</p>';
+                        else if($dato>=50 && $dato<100) echo'<p>.</p>';
+                        else if($dato>=30 && $dato<50) echo'<p>.</p>';
+                        else if($dato>=20 && $dato<30) echo'<p>.</p>'; 
+                        else if($dato<20) echo'<p>.</p>';
+                        */
+                        /*
+                        $dato = $dip2020->getSolvenciaCortoPlazo()*100;
+                        if($dato>=300) echo'<p>.</p>';
+                        else if($dato>=200 && $dato<300) echo'<p>.</p>';
+                        else if($dato>=150 && $dato<200) echo'<p>.</p>';
+                        else if($dato>=100 && $dato<150) echo'<p>.</p>'; 
+                        else if($dato<100) echo'<p>.</p>';
+                        */
+                        $dato = $dip2020->getEficiencia()*100;
+                        if($dato<=80) echo'<p>Muy eficiente en términos de gastos ordinarios.</p>';
+                        else if($dato>=80 && $dato<100) echo'<p>Eficiente en términos de gastos ordinarios.</p>';
+                        else if($dato>=100 && $dato<125) echo'<p>Nivel de eficiencia intermedio.</p>';
+                        else if($dato>=125 && $dato<150) echo'<p>Bajo nivel de eficiencia.</p>'; 
+                        else if($dato>=150) echo'<p>Muy poco eficiente en términos de gastos ordinarios.</p>';
+                        
+                        $dato = $dip2020->getEjecucionIngresosCorrientes()*100;
+                        if($dato>=99) echo'<p>Muy buena previsión de ingresos.</p>';
+                        else if($dato>=97.5 && $dato<99) echo'<p>Buena previsión de ingresos.</p>';
+                        else if($dato>=95 && $dato<97) echo'<p>Razonbale previsión de ingresos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Baja capacidad de previsión de ingresos.</p>'; 
+                        else if($dato<90) echo'<p>Mala previsión de ingresos.</p>';
 
+                        $dato = $dip2020->getEjecucionGastosCorrientes()*100;
+                        if($dato>=99) echo'<p>Muy buena nivel de cumplimiento de gastos.</p>';
+                        else if($dato>=97.5 && $dato<99) echo'<p>Buen nivel de cumplimiento de gastos.</p>';
+                        else if($dato>=95 && $dato<97.5) echo'<p>Razonbale cumplimiento de gastos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Baja ejecución presupuestaria de gastos.</p>'; 
+                        else if($dato<90) echo'<p>Mala ejecución de gastos.</p>';
+                        
+                        $dato = $dip2020->getPeriodoMedioPagos()*100;
+                        if($dato<=30) echo'<p>Pago de facturas muy rápido.</p>';
+                        else if($dato>=30 && $dato<90) echo'<p>Pago de facturas en tiempo aceptable.</p>';
+                        else if($dato>=90 && $dato<120) echo'<p>Pago de facturas lento.</p>';
+                        else if($dato>=120 && $dato<180) echo'<p>Tarda mucho en abonar las facturas.</p>'; 
+                        else if($dato>=180) echo'<p>Excesivo tiempo en el abono de facturas.</p>';
+                        
+                        $dato = $dip2020->getPagosSobreObligacionesReconocidas()*100;
+                        if($dato>=99) echo'<p>Elevado nivel de pagos sobre gastos reconocidos.</p>';
+                        else if($dato>=95 && $dato<99) echo'<p>Nivel de pagos razonable sobre gastos reconocidos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Aceptable nivel de pagos sobre gastos reconocidos.</p>';
+                        else if($dato>=85 && $dato<90) echo'<p>Bajo nivel de pagos sobre gastos reconocidos.</p>'; 
+                        else if($dato<85) echo'<p>Muy bajo porcentaje de pagos sobre obligaciones reconocidas.</p>';
+                        
+                        $dato = $dip2020->getEficaciaRecaudatoria()*100;
+                        if($dato>=95) echo'<p>Muy buen nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Razonable nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=85 && $dato<90) echo'<p>Aceptable nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=80 && $dato<85) echo'<p>Bajo nivel de eficacia recaudatoria.</p>'; 
+                        else if($dato<80) echo'<p>Muy bajo nivel de eficacia recaudatoria.</p>';
+                        
+                    }
+                    $i++;
                 }
             ?>
-
             <br>
             <a href="pdfDIP.php" target="_blank"><button type="button" id="verPDFDIP">Ver Informe</button></a>
             <a <?php echo 'href="procesarExportacion.php?nombre='.urlencode($diputacion->getNombre()).'&tipo=dip"';?> target="_blank"><button type="button" id="verPDFDIP" >Exportar información</button></a>
@@ -311,8 +405,6 @@ if($diputacion){
                     echo '<p>Correo electrónico: '.$diputacion->getMail().'</p>';
                 }
             ?>
-
-
 
 <br><br>
             <h3>Ingresos (en €)</h3>
@@ -923,11 +1015,6 @@ if($diputacion){
                 const endM = new Chart(chartEndM, configEndM);
             </script>
 
-
-
-
-
-
             <h3>Solvencia</h3>
             <br>
             <table class="dataTable">
@@ -976,20 +1063,20 @@ if($diputacion){
                         <?php
                         $porcentaje = $dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100;
                         $color="";
-                        if($porcentaje==0) $color="darkgreenCell";
-                        else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
-                        else if($porcentaje>25 && $porcentaje<=50) $color="lightgreenCell";
-                        else if($porcentaje>50 && $porcentaje<=75) $color="orangeCell"; 
-                        else if($porcentaje>75) $color="redCell"; 
+                        if($porcentaje>15) $color="darkgreenCell";
+                        else if($porcentaje>5 && $porcentaje<=15) $color="greenCell";
+                        else if($porcentaje>-5 && $porcentaje<=5) $color="lightgreenCell";
+                        else if($porcentaje>-15 && $porcentaje<=-5) $color="orangeCell"; 
+                        else if($porcentaje<-15) $color="redCell"; 
                         else $color="greyCell";
 
                         $porcentaje2 = $dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100;
                         $color2="";
-                        if($porcentaje2==0) $color2="darkgreenCell";
-                        else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
-                        else if($porcentaje2>25 && $porcentaje2<=50) $color2="lightgreenCell";
-                        else if($porcentaje2>50 && $porcentaje2<=75) $color2="orangeCell"; 
-                        else if($porcentaje2>75) $color2="redCell";
+                        if($porcentaje2>15) $color2="darkgreenCell";
+                        else if($porcentaje2>5 && $porcentaje2<=15) $color2="greenCell";
+                        else if($porcentaje2>-5 && $porcentaje2<=5) $color2="lightgreenCell";
+                        else if($porcentaje2>-15 && $porcentaje2<=-5) $color2="orangeCell"; 
+                        else if($porcentaje2<-15) $color2="redCell";
                         else $color2="greyCell";
                         ?>
                         <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
@@ -1223,17 +1310,15 @@ if($diputacion){
                 const sosFin = new Chart(chartSosFin, configSosFin);
                 const sosFinM = new Chart(chartSosFinM, configSosFinM);
             </script>
-
             <br><br>
-
             <script>
                 var datosApalancamiento = <?php echo json_encode($datosApalancamiento)?>;
                 var datosApalancamientoM = <?php echo json_encode($datosApalancamientoM)?>;
             </script>
             <div class="graficos">
-                    <canvas id="apal" height="300" width="500"></canvas>
-                    <canvas id="apalM" height="300" width="500"></canvas>
-                    <br><br>
+                <canvas id="apal" height="300" width="500"></canvas>
+                <canvas id="apalM" height="300" width="500"></canvas>
+                <br><br>
             </div>
             <script>
                 const chartApal = document.getElementById('apal').getContext('2d');
@@ -1311,17 +1396,15 @@ if($diputacion){
                 const apal = new Chart(chartApal, configApal);
                 const apalM = new Chart(chartApalM, configApalM);
             </script>
-
             <br><br>
-
             <script>
                 var datosSostenibilidadDeuda = <?php echo json_encode($datosSostenibilidadDeuda)?>;
                 var datosSostenibilidadDeudaM = <?php echo json_encode($datosSostenibilidadDeudaM)?>;
             </script>
             <div class="graficos">
-                    <canvas id="sosDeu" height="300" width="500"></canvas>
-                    <canvas id="sosDeuM" height="300" width="500"></canvas>
-                    <br><br>
+                <canvas id="sosDeu" height="300" width="500"></canvas>
+                <canvas id="sosDeuM" height="300" width="500"></canvas>
+                <br><br>
             </div>
             <script>
                 const charSosDeu = document.getElementById('sosDeu').getContext('2d');
@@ -1399,7 +1482,6 @@ if($diputacion){
                 const sosDeu = new Chart(charSosDeu, configSosDeu);
                 const sosDeuM = new Chart(charSosDeuM, configSosDeuM);
             </script>
-
 
             <!-- TO DO -->
             <h3>Liquidez</h3>

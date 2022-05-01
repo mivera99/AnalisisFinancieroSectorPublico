@@ -203,6 +203,7 @@ if($municipio){
             if($encontrado){
                 echo '<p>Nota: el rating se corresponde con los últimos datos disponibles.</p>';
                 echo '<h2>'.$municipio->getNombre().'</h2>';
+                $i=0;
                 foreach($municipio->getScoring() as $clave => $valor){
                     echo '<h2>Rating '.$clave.'</h2>';
                     $tend = $municipio->getTendencia();
@@ -277,6 +278,101 @@ if($municipio){
                     }
 
                     echo "<i>" . $infoRating . "</i><br><br>";
+                    if($i==0){
+                        $dato = $mun2020->getEndeudamiento()*100;
+                        if($dato==0) echo'<p>Sin deuda financiera.</p>';
+                        else if($dato>0 && $dato<=25) echo'<p>Muy bajo nivel de deuda.</p>';
+                        else if($dato>25 && $dato<=50) echo'<p>Relativamente bajo nivel de deuda financiera.</p>';
+                        else if($dato>50 && $dato<=75) echo'<p>Nivel de deuda financiera aceptable.</p>'; 
+                        else if($dato>75) echo'<p>Nivel de endeudamiento excesivo.</p>';
+                        
+                        $dato = $mun2020->getSostenibilidadFinanciera()*100;
+                        if($dato>15) echo'<p>Con elevada capacidad de ahorro.</p>';
+                        else if($dato>5 && $dato<=15) echo'<p>Con capacidad de ahorro.</p>';
+                        else if($dato>-5 && $dato<=5) echo'<p>Con porcentaje de ahorro en torno a cero.</p>';
+                        else if($dato>-15 && $dato<=-5) echo'<p>Sin capacidad de ahorro.</p>'; 
+                        else if($dato<-15) echo'<p>Nula capcidad de ahorro que obliga a fuertes incrementos de deuda.</p>';
+                        
+                        $dato = $mun2020->getApalancamientoOperativo()*100;
+                        if($dato<30) echo'<p>Muy bajo apalancamiento operativo.</p>';
+                        else if($dato>=30 && $dato<40) echo'<p>Reducido apalancamiento operativo.</p>';
+                        else if($dato>=40 && $dato<50) echo'<p>Cuenta con un nivel de apalancamiento operativo.</p>';
+                        else if($dato>=50 && $dato<60) echo'<p>Alto apalancamiento operativo.</p>'; 
+                        else if($dato>=60) echo'<p>Elevado apalancamiento operativo.</p>';
+                        
+                        $dato = $mun2020->getSostenibilidadDeuda()*100;
+                        if($dato==0) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=0 && $dato<5) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=5 && $dato<15) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        else if($dato>=15 && $dato<25) echo'<p>Bajo nivel de deuda financiera.</p>'; 
+                        else if($dato>=25) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        
+                        $dato = $mun2020->getRemanenteTesoreriaGastosGenerales()*100;
+                        if($dato>=25) echo'<p>Elevado nivel de tesorería.</p>';
+                        else if($dato>=5 && $dato<25) echo'<p>Buena posición de caja.</p>';
+                        else if($dato>=-5 && $dato<5) echo'<p>Nivel razonable de tesorería.</p>';
+                        else if($dato>=-25 && $dato<-5) echo'<p>Baja liquidez.</p>'; 
+                        else if($dato<-25) echo'<p>Nivel de tesorería muy deficiente.</p>';
+                        
+                        /*$dato = $mun2020->getLiquidezInmediata()*100;
+                        if($dato>=100) echo'<p>.</p>';
+                        else if($dato>=50 && $dato<100) echo'<p>.</p>';
+                        else if($dato>=30 && $dato<50) echo'<p>.</p>';
+                        else if($dato>=20 && $dato<30) echo'<p>.</p>'; 
+                        else if($dato<20) echo'<p>.</p>';
+                        */
+                        /*
+                        $dato = $mun2020->getSolvenciaCortoPlazo()*100;
+                        if($dato>=300) echo'<p>.</p>';
+                        else if($dato>=200 && $dato<300) echo'<p>.</p>';
+                        else if($dato>=150 && $dato<200) echo'<p>.</p>';
+                        else if($dato>=100 && $dato<150) echo'<p>.</p>'; 
+                        else if($dato<100) echo'<p>.</p>';
+                        */
+                        $dato = $mun2020->getEficiencia()*100;
+                        if($dato<=80) echo'<p>Muy eficiente en términos de gastos ordinarios.</p>';
+                        else if($dato>=80 && $dato<100) echo'<p>Eficiente en términos de gastos ordinarios.</p>';
+                        else if($dato>=100 && $dato<125) echo'<p>Nivel de eficiencia intermedio.</p>';
+                        else if($dato>=125 && $dato<150) echo'<p>Bajo nivel de eficiencia.</p>'; 
+                        else if($dato>=150) echo'<p>Muy poco eficiente en términos de gastos ordinarios.</p>';
+                        
+                        $dato = $mun2020->getEjecucionIngresosCorrientes()*100;
+                        if($dato>=99) echo'<p>Muy buena previsión de ingresos.</p>';
+                        else if($dato>=97.5 && $dato<99) echo'<p>Buena previsión de ingresos.</p>';
+                        else if($dato>=95 && $dato<97) echo'<p>Razonbale previsión de ingresos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Baja capacidad de previsión de ingresos.</p>'; 
+                        else if($dato<90) echo'<p>Mala previsión de ingresos.</p>';
+
+                        $dato = $mun2020->getEjecucionGastosCorrientes()*100;
+                        if($dato>=99) echo'<p>Muy buena nivel de cumplimiento de gastos.</p>';
+                        else if($dato>=97.5 && $dato<99) echo'<p>Buen nivel de cumplimiento de gastos.</p>';
+                        else if($dato>=95 && $dato<97.5) echo'<p>Razonbale cumplimiento de gastos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Baja ejecución presupuestaria de gastos.</p>'; 
+                        else if($dato<90) echo'<p>Mala ejecución de gastos.</p>';
+                        
+                        $dato = $mun2020->getPeriodoMedioPagos()*100;
+                        if($dato<=30) echo'<p>Pago de facturas muy rápido.</p>';
+                        else if($dato>=30 && $dato<90) echo'<p>Pago de facturas en tiempo aceptable.</p>';
+                        else if($dato>=90 && $dato<120) echo'<p>Pago de facturas lento.</p>';
+                        else if($dato>=120 && $dato<180) echo'<p>Tarda mucho en abonar las facturas.</p>'; 
+                        else if($dato>=180) echo'<p>Excesivo tiempo en el abono de facturas.</p>';
+                        
+                        $dato = $mun2020->getPagosSobreObligacionesReconocidas()*100;
+                        if($dato>=99) echo'<p>Elevado nivel de pagos sobre gastos reconocidos.</p>';
+                        else if($dato>=95 && $dato<99) echo'<p>Nivel de pagos razonable sobre gastos reconocidos.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Aceptable nivel de pagos sobre gastos reconocidos.</p>';
+                        else if($dato>=85 && $dato<90) echo'<p>Bajo nivel de pagos sobre gastos reconocidos.</p>'; 
+                        else if($dato<85) echo'<p>Muy bajo porcentaje de pagos sobre obligaciones reconocidas.</p>';
+                        
+                        $dato = $mun2020->getEficaciaRecaudatoria()*100;
+                        if($dato>=95) echo'<p>Muy buen nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=90 && $dato<95) echo'<p>Razonable nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=85 && $dato<90) echo'<p>Aceptable nivel de eficacia recaudatoria.</p>';
+                        else if($dato>=80 && $dato<85) echo'<p>Bajo nivel de eficacia recaudatoria.</p>'; 
+                        else if($dato<80) echo'<p>Muy bajo nivel de eficacia recaudatoria.</p>';
+                        
+                    }
+                    $i++;
                 }
             ?>
 
