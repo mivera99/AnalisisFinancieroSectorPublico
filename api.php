@@ -330,6 +330,329 @@ if($metodo == "GET"){
                 echo "ERROR: 'getMunicipio' necesita el campo 'name' para poder devolver un valor";
             }
             break;
+        
+        case "getEconomiaMUN":
+            if($id && $anio){
+                $dao = new DAOConsultor();
+                $peticion = new stdClass();
+                $mun_aux = new Municipio();
+
+                $id = intval($id);
+                $anio = intval($anio);
+
+                $mun = $dao->getEconomiaMUN($mun_aux,$id,$anio);
+
+                $result = new stdClass();
+                
+                //Ingresos
+                $ingresos = new stdClass();
+                $ingresos->ImpuestosDirectos = $mun->getImpuestosDirectos1();
+                $ingresos->ImpuestosIndirectos = $mun->getImpuestosIndirectos1();
+                $ingresos->TasasPreciosOtros = $mun->getTasasPreciosOtros1();
+                $ingresos->TransferenciasCorrientes = $mun->getTransferenciasCorrientes1();
+                $ingresos->IngresosPatrimoniales = $mun->getIngresosPatrimoniales1();
+                $ingresos->TotalIngresosCorrientes = $mun->getTotalIngresosCorrientes1();
+                $ingresos->EnajenacionInversionesReales = $mun->getEnajenacionInversionesReales1();
+                $ingresos->TransferenciasCapital = $mun->getTransferenciasCapital1();
+                $ingresos->TotalIngresosNoCorrientes = $mun->getTotalIngresosNoCorrientes1();
+                $ingresos->ActivosFinancieros = $mun->getActivosFinancieros1();
+                $ingresos->PasivosFinancieros = $mun->getPasivosFinancieros1();
+                $ingresos->TotalIngresos = $mun->getTotalIngresos1();
+
+                $result->Ingresos = $ingresos;
+
+                //Gastos
+                $gastos = new stdClass();
+                $gastos->GastosPersonal = $mun->getGastosPersonal1();
+                $gastos->GastosCorrientesBienesServicios = $mun->getGastosCorrientesBienesServicios1();
+                $gastos->GastosFinancieros = $mun->getGastosFinancieros1();
+                $gastos->TransferenciasCorrientesGastos = $mun->getTransferenciasCorrientesGastos1();
+                $gastos->FondoContingencia = $mun->getFondoContingencia1();
+                $gastos->TotalGastosCorrientes = $mun->getTotalGastosCorrientes1();
+                $gastos->InversionesReales = $mun->getInversionesReales1();
+                $gastos->TransferenciasCapitalGastos = $mun->getTransferenciasCapitalGastos1();
+                $gastos->TotalGastosNoFinancieros = $mun->getTotalGastosNoFinancieros1();
+                $gastos->ActivosFinancierosGastos = $mun->getActivosFinancierosGastos1();
+                $gastos->PasivosFinancierosGastos = $mun->getPasivosFinancierosGastos1();
+                $gastos->TotalGastos = $mun->getTotalGastos1();
+
+                $result->Gastos = $ingresos;
+
+                //Endeudamiento
+                $endeudamiento = new stdClass();
+                $endeudamiento->SostenibilidadFinanciera = $mun->getSostenibilidadFinanciera();
+                $endeudamiento->SostenibilidadFinancieraMediaDiputaciones = $mun->getSostenibilidadFinancieraMediaDiputaciones();
+                $endeudamiento->ApalancamientoOperativo = $mun->getApalancamientoOperativo();
+                $endeudamiento->ApalancamientoOperativoMediaDiputaciones = $mun->getApalancamientoOperativoMediaDiputaciones();
+                $endeudamiento->SostenibilidadDeuda = $mun->getSostenibilidadDeuda();
+                $endeudamiento->SostenibilidadDeudaMediaDiputaciones = $mun->getSostenibilidadDeudaMediaDiputaciones();
+
+                $result->Endeudamiento = $endeudamiento;
+
+                //Liquidez
+                $liquidez = new stdClass();
+                $liquidez->FondosLiquidos = $mun->getFondosLiquidos();
+                $liquidez->RemanenteTesoreriaGastosGenerales = $mun->getRemanenteTesoreriaGastosGenerales();
+                $liquidez->RemanenteTesoreriaGastosGeneralesMediaDiputaciones = $mun->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones();
+                $liquidez->LiquidezInmediata = $mun->getLiquidezInmediata();
+                $liquidez->SolvenciaCortoPlazoMediaDiputaciones = $mun->getSolvenciaCortoPlazoMediaDiputaciones();
+                $liquidez->SolvenciaCortoPlazoMediaDiputaciones2 = $mun->getSolvenciaCortoPlazoMediaDiputaciones2();
+                $liquidez->SolvenciaCortoPlazo = $mun->getSolvenciaCortoPlazo();
+
+                $result->Liquidez = $liquidez;
+
+                //Eficiencia
+                $eficiencia = new stdClass();
+                $eficiencia->Eficiencia = $mun->getEficiencia();
+                $eficiencia->EficienciaMediaDiputaciones = $mun->getEficienciaMediaDiputaciones();
+
+                $result->Eficiencia = $eficiencia;
+
+                //Gestion Presupuestaria
+                $gest = new stdClass();
+                $gest->EjecucionIngresosCorrientes = $mun->getEjecucionIngresosCorrientes();
+                $gest->EjecucionIngresosCorrientesMediaDiputaciones = $mun->getEjecucionIngresosCorrientesMediaDiputaciones();
+                $gest->EjecucionGastosCorrientes = $mun->getEjecucionGastosCorrientes();
+                $gest->EjecucionGastosCorrientesMediaDiputaciones = $mun->getEjecucionGastosCorrientesMediaDiputaciones();
+
+                $result->GestionPresupuestaria = $gest;
+
+                //Cumplimiento Pagos
+                $cum = new stdClass();
+                $cum->DeudaComercial = $mun->getDeudaComercial();
+                $cum->PMP = $mun->getPeriodoMedioPagos();
+                $cum->PMPMediaDiputaciones = $mun->getPeriodoMedioPagosMediaDiputaciones();
+                $cum->PagosSobreObligacionesReconocidas = $mun->getPagosSobreObligacionesReconocidas();
+                $cum->PagosSobreObligacionesReconocidasMediaDiputaciones = $mun->getPagosSobreObligacionesReconocidasMediaDiputaciones();
+
+                $result->CumplimientoPagos = $cum;
+
+                //Gestion Tributaria
+                $gest = new stdClass();
+                $gest->DerechosPendientesCobro = $mun->getDerechosPendientesCobro();
+                $gest->EficaciaRecaudatoria = $mun->getEficaciaRecaudatoria();
+                $gest->EficaciaRecaudatoriaMediaDiputaciones = $mun->getEficaciaRecaudatoriaMediaDiputaciones();
+
+                $result->GestionTributaria = $gest;
+
+
+                $peticion->getEconomiaMUN = $result;
+                echo json_encode($peticion);
+
+
+            }
+            else{
+                if(!$id){
+                    echo "ERROR: 'getEconomiaMUN' necesita el campo 'id' para poder devolver un valor";
+                }
+                if(!$anio){
+                    echo "ERROR: 'getEconomiaMUN' necesita el campo 'year' para poder devolver un valor"; 
+                }
+            }
+            break;
+
+        case "getProgMUN":
+            if($id){
+                $dao = new DAOConsultor();
+                $peticion = new stdClass();
+                $mun_aux = new Municipio();
+
+                $mun = $dao->getProgMUN($mun_aux,$id);
+
+                $result = new stdClass();
+                $result->Agp = $mun->getAgp();
+                $result->Sop = $mun->getSop();
+                $result->Ote = $mun->getOte();
+                $result->Mu = $mun->getMu();
+                $result->Pc = $mun->getPc();
+                $result->Spei = $mun->getSpei();
+                $result->Pgvpp = $mun->getPgvpp();
+                $result->Cre = $mun->getCre();
+                $result->Pvp = $mun->getPvp();
+                $result->A = $mun->getA();
+                $result->Rgtr = $mun->getRgtr();
+                $result->Rr = $mun->getRr();
+                $result->Grsu = $mun->getGrsu();
+                $result->Tr = $mun->getTr();
+                $result->Lv = $mun->getLv();
+                $result->Csf = $mun->getCsf();
+                $result->Ap = $mun->getAp();
+                $result->Pj = $mun->getPj();
+                $result->P = $mun->getP();
+                $result->Ssps = $mun->getSsps();
+                $result->Fe = $mun->getFe();
+                $result->S = $mun->getS();
+                $result->E = $mun->getE();
+                $result->C = $mun->getC();
+                $result->D = $mun->getD();
+                $result->Agp = $mun->getAgp();
+                $result->Ie = $mun->getIe();
+                $result->Com = $mun->getCom();
+                $result->Tp = $mun->getTp();
+                $result->It = $mun->getIt();
+                $result->Idi = $mun->getIdi();
+
+
+                $peticion->getProgMUN = $result;
+                echo json_encode($peticion);
+            }
+            else{
+                echo "ERROR: 'getProgMUN' necesita el campo 'name' para poder devolver un valor";
+            }
+            break;
+
+        case "getDiputacion":
+            if($nombre){
+                $dao = new DAOConsultor();
+                $peticion = new stdClass();
+
+                $dip = $dao->getDiputacion($nombre);
+
+                $result = new stdClass();
+                $result->Codigo = $dip->getCodigo();
+                $result->Nombre = $dip->getNombre();
+                $result->Autonomia = $dip->getAutonomia();
+                $result->Provincia = $dip->getProvincia();
+                $result->Cif = $dip->getCif();
+                $result->TipoVia = $dip->getTipoVia();
+                $result->NombreVia = $dip->getNombreVia();
+                $result->NumVia = $dip->getNumVia();
+                $result->Telefono = $dip->getTelefono();
+                $result->CodigoPostal = $dip->getCodigoPostal();
+                $result->Fax = $dip->getFax();
+                $result->Mail = $dip->getMail();
+                $result->Web = $dip->getWeb();
+                $result->Scoring = $dip->getScoring();
+                $result->Tendencia  = $dip->getTendencia();
+
+
+                $peticion->getDiputacion = $result;
+                echo json_encode($peticion);
+            }
+            else{
+                echo "ERROR: 'getDiputacion' necesita el campo 'name' para poder devolver un valor";
+            }
+            break;
+        
+        case "getEconomiaDIP":
+            if($id && $anio){
+                $dao = new DAOConsultor();
+                $peticion = new stdClass();
+                $dip_aux = new Diputacion();
+
+                $anio = intval($anio);
+
+                $dip = $dao->getEconomiaDIP($dip_aux,$id,$anio);
+                echo gettype($dip);
+
+                $result = new stdClass();
+                
+                //Ingresos
+                $ingresos = new stdClass();
+                $ingresos->ImpuestosDirectos = $dip->getImpuestosDirectos1();
+                $ingresos->ImpuestosIndirectos = $dip->getImpuestosIndirectos1();
+                $ingresos->TasasPreciosOtros = $dip->getTasasPreciosOtros1();
+                $ingresos->TransferenciasCorrientes = $dip->getTransferenciasCorrientes1();
+                $ingresos->IngresosPatrimoniales = $dip->getIngresosPatrimoniales1();
+                $ingresos->TotalIngresosCorrientes = $dip->getTotalIngresosCorrientes1();
+                $ingresos->EnajenacionInversionesReales = $dip->getEnajenacionInversionesReales1();
+                $ingresos->TransferenciasCapital = $dip->getTransferenciasCapital1();
+                $ingresos->TotalIngresosNoCorrientes = $dip->getTotalIngresosNoCorrientes1();
+                $ingresos->ActivosFinancieros = $dip->getActivosFinancieros1();
+                $ingresos->PasivosFinancieros = $dip->getPasivosFinancieros1();
+                $ingresos->TotalIngresos = $dip->getTotalIngresos1();
+
+                $result->Ingresos = $ingresos;
+
+                //Gastos
+                $gastos = new stdClass();
+                $gastos->GastosPersonal = $dip->getGastosPersonal1();
+                $gastos->GastosCorrientesBienesServicios = $dip->getGastosCorrientesBienesServicios1();
+                $gastos->GastosFinancieros = $dip->getGastosFinancieros1();
+                $gastos->TransferenciasCorrientesGastos = $dip->getTransferenciasCorrientesGastos1();
+                $gastos->FondoContingencia = $dip->getFondoContingencia1();
+                $gastos->TotalGastosCorrientes = $dip->getTotalGastosCorrientes1();
+                $gastos->InversionesReales = $dip->getInversionesReales1();
+                $gastos->TransferenciasCapitalGastos = $dip->getTransferenciasCapitalGastos1();
+                $gastos->TotalGastosNoFinancieros = $dip->getTotalGastosNoFinancieros1();
+                $gastos->ActivosFinancierosGastos = $dip->getActivosFinancierosGastos1();
+                $gastos->PasivosFinancierosGastos = $dip->getPasivosFinancierosGastos1();
+                $gastos->TotalGastos = $dip->getTotalGastos1();
+
+                $result->Gastos = $ingresos;
+
+                //Endeudamiento
+                $endeudamiento = new stdClass();
+                $endeudamiento->SostenibilidadFinanciera = $dip->getSostenibilidadFinanciera();
+                $endeudamiento->SostenibilidadFinancieraMediaDiputaciones = $dip->getSostenibilidadFinancieraMediaDiputaciones();
+                $endeudamiento->ApalancamientoOperativo = $dip->getApalancamientoOperativo();
+                $endeudamiento->ApalancamientoOperativoMediaDiputaciones = $dip->getApalancamientoOperativoMediaDiputaciones();
+                $endeudamiento->SostenibilidadDeuda = $dip->getSostenibilidadDeuda();
+                $endeudamiento->SostenibilidadDeudaMediaDiputaciones = $dip->getSostenibilidadDeudaMediaDiputaciones();
+
+                $result->Endeudamiento = $endeudamiento;
+
+                //Liquidez
+                $liquidez = new stdClass();
+                $liquidez->FondosLiquidos = $dip->getFondosLiquidos();
+                $liquidez->RemanenteTesoreriaGastosGenerales = $dip->getRemanenteTesoreriaGastosGenerales();
+                $liquidez->RemanenteTesoreriaGastosGeneralesMediaDiputaciones = $dip->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones();
+                $liquidez->LiquidezInmediata = $dip->getLiquidezInmediata();
+                $liquidez->SolvenciaCortoPlazoMediaDiputaciones = $dip->getSolvenciaCortoPlazoMediaDiputaciones();
+                $liquidez->SolvenciaCortoPlazoMediaDiputaciones2 = $dip->getSolvenciaCortoPlazoMediaDiputaciones2();
+                $liquidez->SolvenciaCortoPlazo = $dip->getSolvenciaCortoPlazo();
+
+                $result->Liquidez = $liquidez;
+
+                //Eficiencia
+                $eficiencia = new stdClass();
+                $eficiencia->Eficiencia = $dip->getEficiencia();
+                $eficiencia->EficienciaMediaDiputaciones = $dip->getEficienciaMediaDiputaciones();
+
+                $result->Eficiencia = $eficiencia;
+
+                //Gestion Presupuestaria
+                $gest = new stdClass();
+                $gest->EjecucionIngresosCorrientes = $dip->getEjecucionIngresosCorrientes();
+                $gest->EjecucionIngresosCorrientesMediaDiputaciones = $dip->getEjecucionIngresosCorrientesMediaDiputaciones();
+                $gest->EjecucionGastosCorrientes = $dip->getEjecucionGastosCorrientes();
+                $gest->EjecucionGastosCorrientesMediaDiputaciones = $dip->getEjecucionGastosCorrientesMediaDiputaciones();
+
+                $result->GestionPresupuestaria = $gest;
+
+                //Cumplimiento Pagos
+                $cum = new stdClass();
+                $cum->DeudaComercial = $dip->getDeudaComercial();
+                $cum->PMP = $dip->getPeriodoMedioPagos();
+                $cum->PMPMediaDiputaciones = $dip->getPeriodoMedioPagosMediaDiputaciones();
+                $cum->PagosSobreObligacionesReconocidas = $dip->getPagosSobreObligacionesReconocidas();
+                $cum->PagosSobreObligacionesReconocidasMediaDiputaciones = $dip->getPagosSobreObligacionesReconocidasMediaDiputaciones();
+
+                $result->CumplimientoPagos = $cum;
+
+                //Gestion Tributaria
+                $gest = new stdClass();
+                $gest->DerechosPendientesCobro = $dip->getDerechosPendientesCobro();
+                $gest->EficaciaRecaudatoria = $dip->getEficaciaRecaudatoria();
+                $gest->EficaciaRecaudatoriaMediaDiputaciones = $dip->getEficaciaRecaudatoriaMediaDiputaciones();
+
+                $result->GestionTributaria = $gest;
+
+
+                $peticion->getEconomiaDIP = $result;
+                echo json_encode($peticion);
+
+
+            }
+            else{
+                if(!$id){
+                    echo "ERROR: 'getEconomiaDIP' necesita el campo 'id' para poder devolver un valor";
+                }
+                if(!$anio){
+                    echo "ERROR: 'getEconomiaDIP' necesita el campo 'year' para poder devolver un valor"; 
+                }
+            }
+            break;
 
         default:
             echo "ERROR: '{$peticion}': Petición no soportada. Por favor introduce alguna de las siguientes: getAllFacilities";
