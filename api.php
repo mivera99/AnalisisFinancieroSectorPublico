@@ -11,7 +11,8 @@ $metodo = $_SERVER['REQUEST_METHOD']; //Solo nos interesa "GET"
 
 $peticion = $_REQUEST['request'] ?? null;
 $id = $_REQUEST['id'] ?? null;
-$nombre = $_REQUEST['nombre'] ?? null;
+$nombre = $_REQUEST['name'] ?? null;
+$anio = $_REQUEST['year'] ?? null;
 
 if($metodo == "GET"){
     switch($peticion){
@@ -243,19 +244,90 @@ if($metodo == "GET"){
                 }
                 $cuentasGeneralMenusal->TransaccionesImobliarias = $tiarray;
                 
-                
                 $result->CuentasGeneralMensual = $cuentasGeneralMenusal;
 
 
 
+                //Ingresos
+                $ingresos = new stdClass();
 
+                $ingresos->ImpuestosDirectos = $ccaa->getImpuestosDirectos1();
+                $ingresos->ImpuestosIndirectos = $ccaa->getImpuestosIndirectos1();
+                $ingresos->TasasPreciosOtros = $ccaa->getTasasPreciosOtros1();
+                $ingresos->TransferenciasCorrientes = $ccaa->getTransferenciasCorrientes1();
+                $ingresos->IngresosPatrimoniales = $ccaa->getIngresosPatrimoniales1();
+                $ingresos->TotalIngresosCorrientes = $ccaa->getTotalIngresosCorrientes1();
+                $ingresos->EnajenacionInversionesReales = $ccaa->getEnajenacionInversionesReales1();
+                $ingresos->TransferenciasCapital = $ccaa->getTransferenciasCapital1();
+                $ingresos->TotalIngresosNoCorrientes = $ccaa->getTotalIngresosNoCorrientes1();
+                $ingresos->ActivosFinancieros = $ccaa->getActivosFinancieros1();
+                $ingresos->PasivosFinancieros = $ccaa->getPasivosFinancieros1();
+                $ingresos->TotalIngresos = $ccaa->getTotalIngresos1();
 
+                $result->Ingresos = $ingresos;
+
+                //Gastos
+                $gastos = new stdClass();
+
+                $gastos->GastosPersonal = $ccaa->getGastosPersonal1();
+                $gastos->GastosCorrientesBienesServicios = $ccaa->getGastosCorrientesBienesServicios1();
+                $gastos->GastosFinancieros = $ccaa->getGastosFinancieros1();
+                $gastos->TransferenciasCorrientes = $ccaa->getTransferenciasCorrientesGastos1();
+                $gastos->FondoContingencia = $ccaa->getFondoContingencia1();
+                $gastos->TotalGastosCorrientes = $ccaa->getTotalGastosCorrientes1();
+                $gastos->InversionesReales = $ccaa->getInversionesReales1();
+                $gastos->TransferenciasCapital = $ccaa->getTransferenciasCapitalGastos1();
+                $gastos->TotalGastosNoFinancieros = $ccaa->getTotalGastosNoFinancieros1();
+                $gastos->ActivosFinancieros = $ccaa->getActivosFinancierosGastos1();
+                $gastos->PasivosFinancieros = $ccaa->getPasivosFinancierosGastos1();
+                $gastos->TotalGastos = $ccaa->getTotalGastos1();
+
+                $result->Gastos = $gastos;
+                
 
                 $peticion->getCCAA = $result;
                 echo json_encode($peticion);
             }
             else{
                 echo "ERROR: 'getCCAA' necesita el campo 'nombre' para poder devolver un valor";
+            }
+            break;
+        
+        case "getMunicipio":
+            if($nombre){
+                $dao = new DAOConsultor();
+                $peticion = new stdClass();
+
+                $mun = $dao->getMunicipio($nombre);
+
+                $result = new stdClass();
+                $result->Codigo = $mun->getCodigo();
+                $result->Nombre = $mun->getNombre();
+                $result->NombreAlcalde = $mun->getNombreAlcalde();
+                $result->Apellido1 = $mun->getApellido1();
+                $result->Apellido2 = $mun->getApellido2();
+                $result->Autonomia = $mun->getAutonomia();
+                $result->Provincia = $mun->getProvincia();
+                $result->Vigencia = $mun->getVigencia();
+                $result->Partido = $mun->getPartido();
+                $result->Cif = $mun->getCif();
+                $result->TipoVia = $mun->getTipoVia();
+                $result->NombreVia = $mun->getNombreVia();
+                $result->NumVia = $mun->getNumVia();
+                $result->Telefono = $mun->getTelefono();
+                $result->CodigoPostal = $mun->getCodigoPostal();
+                $result->Fax = $mun->getFax();
+                $result->Mail = $mun->getMail();
+                $result->Web = $mun->getWeb();
+                $result->Scoring = $mun->getScoring();
+                $result->Tendencia  = $mun->getTendencia();
+
+
+                $peticion->getMunicipio = $result;
+                echo json_encode($peticion);
+            }
+            else{
+                echo "ERROR: 'getMunicipio' necesita el campo 'name' para poder devolver un valor";
             }
             break;
 
