@@ -59,6 +59,11 @@ if (isset($_SESSION['mensaje'])) {
         <?php require("includesWeb/comun/buscador.php");?>  
         </div>
 
+        <div id="contenido">
+            <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
+            <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
+        </div>
+
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>
         </div>

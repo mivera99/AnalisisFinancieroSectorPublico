@@ -1,10 +1,7 @@
 <div id="menu">
-    <div id="menu-left">
-        <a href="index">
-            <p class="title">Análisis financiero del sector público</p>
-            <p class="subtitle">Noster Economía</p>
-        </a>
-    </div>
+    <!-- <div id="menu-left">
+        <p>Prueaba menu</p>
+    </div> -->
     <div id="menu-right">
         <a href="index">INICIO</a>
         <a href="consultas">CONSULTAS</a>

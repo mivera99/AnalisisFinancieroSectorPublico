@@ -1,7 +1,10 @@
 <div id="buscador">
     <div class="textoBuscador">
-        <h2>Informes financieros para la <b>transparencia</b> del sector público</h2>
-        <p>Obten información detallada y actualizada sobre las comunidades autónomas, diputaciones y municipios.</p>
+        <a href="index">
+            <p class="title">Análisis financiero del sector público</p>
+            <p class="subtitle">Noster Economía</p>
+        </a>
+       
         <script>cargarNombres();</script>
     </div>
     <div class="barraBuscador">

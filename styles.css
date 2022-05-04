@@ -64,7 +64,7 @@ button:hover {
 }
 
 .barraBuscador{
-  padding-top: 13px;
+  padding-top: 4px;
   padding-right: 270px;
 }
 
@@ -82,7 +82,7 @@ button:hover {
   height: 90px;
   width: 100%;
   left: 0;
-  top: 100px;
+  top: 90px;
   background: #D8E8E9;
 }
 
@@ -101,12 +101,12 @@ button:hover {
 
 #menu-right {
   display: inline;
-  margin-right: 108px;
+  margin-left: 109px;
   margin-top: 9px;
 }
 
 #menu-right a{
-  margin-left: 108px;
+  margin-left: 198px;
   text-decoration: underline solid transparent;
   transition: text-decoration 0.5s ease;
   transition: 0.5s;
@@ -120,16 +120,16 @@ button:hover {
 }
 
 #contenido {
-  margin-left: 108px;
+  margin-left: 120px;
   margin-right: 108px;
-  height: 150vh;
-  padding-top: 120px;
+  height: 20vh;
+  padding-top: 30px;
 }
 
 #contenidoIni {
   margin-left: 108px;
   margin-right: 108px;
-  height: 150vh;
+  height: 18vh;
   padding-top: 20px;
 }
 
