@@ -275,8 +275,14 @@ if($ccaa && $ccaaNac){
     <title>Análisis Financiero del Sector Público - Comunidad Autónoma</title>
 </head>
     <body>
-        <div id = "cabecera">
+        <div id = "cabeceraIni">
             <?php require("includesWeb/comun/cabecera.php");?>  
+        </div>
+
+        <div id="menu-superior">
+            <div id ="contenidoIni">     
+            <?php require("includesWeb/comun/buscador.php");?>  
+            </div>
         </div>
         
         <div id ="contenidoCCAA">
@@ -2852,6 +2858,8 @@ if($ccaa && $ccaaNac){
             }
             ?>
         </div>
+
+        <br><br><br>
 
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>

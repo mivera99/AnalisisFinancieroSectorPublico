@@ -39,9 +39,9 @@
         <fieldset>
             <p>Email * </p><input type='email' name='email' required> <br><br>
             <p>Contraseña * </p><input type='password' name='password' id='password' required>
-            <button type="button" onclick=showPassword()>Mostrar contraseña</button>  
+            <button type="button" class="mostrar-contraseña" onclick=showPassword()>Mostrar contraseña</button>  
             <br> 
-            <br><br><br>
+            <br><br>
             <button type="submit" class="form-button">Enviar</button>
         </fieldset>
     </form>

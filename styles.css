@@ -54,6 +54,27 @@ button:hover {
   margin-top: 0px;
 }
 
+fieldset{
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border: #003E99 2px solid;
+  border-radius: 10px;
+}
+
+.tabcontent fieldset {
+  /* margin-left: 200px; */
+  width: 1200px;
+}
+
+.mostrar-contraseña{
+  position: relative;
+  width: 150px;
+  height: 35px;
+  font-size: 10px;
+}
+
 #buscador {
   display: flex;
   justify-content: space-between;
@@ -61,9 +82,11 @@ button:hover {
 
 .textoBuscador{
   padding-left: 200px;
+  width: 400px;
 }
 
 .barraBuscador{
+  padding-left: 300px;
   padding-top: 4px;
   padding-right: 270px;
 }
@@ -119,17 +142,32 @@ button:hover {
   color: #5287D5;
 }
 
+#menu-superior{
+  position: fixed;
+  background-color: white;
+  height: 9.5vh;
+  width:100%;
+}
+
 #contenido {
   margin-left: 120px;
   margin-right: 108px;
   height: 20vh;
-  padding-top: 30px;
+  padding-top: 250px;
+}
+
+#contenidoConsultas {
+  margin-left: 120px;
+  margin-right: 108px;
+  height: 100vh;
+  padding-top: 250px;
 }
 
 #contenidoIni {
+  position: fixed;
   margin-left: 108px;
   margin-right: 108px;
-  height: 18vh;
+  height: 5vh;
   padding-top: 20px;
 }
 
@@ -137,21 +175,21 @@ button:hover {
   margin-left: 108px;
   margin-right: 108px;
   height: 535vh;
-  padding-top: 120px;
+  padding-top: 210px;
 }
 
 #contenidoDIP {
   margin-left: 108px;
   margin-right: 108px;
   height: 440vh;
-  padding-top: 120px;
+  padding-top: 210px;
 }
 
 #contenidoMUN {
   margin-left: 108px;
   margin-right: 108px;
   height: 445vh;
-  padding-top: 120px;
+  padding-top: 210px;
 }
 
 .graficos {
@@ -410,6 +448,12 @@ td, th {
   text-align: left !important;
 }
 
+input {
+  color: #003E99;
+  border: #003E99 2px solid;
+  border-radius: 5px;
+}
+
 input::placeholder {
   color: #5287D5;
 }
@@ -497,7 +541,8 @@ input#facility{
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #003E99;
+  border: 2px solid #003E99;
+  border-radius: 10px;
   background-color: #D8E8E9;
 }
 
@@ -531,7 +576,8 @@ input#facility{
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: 2px solid #003E99;
+  border-radius: 5px;
   border-top: none;
 }
 

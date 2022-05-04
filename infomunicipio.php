@@ -193,8 +193,14 @@ if($municipio){
 </head>
     <body>
 
-        <div id = "cabecera">
+        <div id = "cabeceraIni">
             <?php require("includesWeb/comun/cabecera.php");?>  
+        </div>
+
+        <div id="menu-superior">
+            <div id ="contenidoIni">     
+            <?php require("includesWeb/comun/buscador.php");?>  
+            </div>
         </div>
 
         <div id ="contenidoMUN"> 

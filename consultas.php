@@ -22,16 +22,24 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     
     <!--  ====== FUNCIÓN AUTOCOMPLETAR BÚSQUEDA ===== -->
+    <script src="functions.js"></script>
     <script src="functions2.js"></script>
 
     <title>Análisis Financiero del Sector Público</title>
 </head>
     <body>
-        <div id = "cabecera">
+        <div id = "cabeceraIni">
             <?php require("includesWeb/comun/cabecera.php");?>  
         </div>
 
-        <div id ="contenido">
+        <div id="menu-superior">
+            <div id ="contenidoIni">     
+            <?php require("includesWeb/comun/buscador.php");?>  
+            </div>
+        </div>
+        
+
+        <div id ="contenidoConsultas">
             <script>
                 resetFields();
             </script>
@@ -348,7 +356,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
             <div id="contentMUN" class="tabcontent">
                 <form action='procesarConsultaMUN.php' method='POST'>
                 <h3 class="form-name">Consultas de municipios</h3>
-                    <fieldset>
+                    <fieldset class="fieldsetConsultasMUN">
                         <h3>Filtros</h3>
                         <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
                         <br>
