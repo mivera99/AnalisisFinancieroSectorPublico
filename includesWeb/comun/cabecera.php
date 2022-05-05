@@ -1,11 +1,8 @@
 <div id="menu">
-    <!-- <div id="menu-left">
-        <p>Prueaba menu</p>
-    </div> -->
     <div id="menu-right">
         <a href="index">INICIO</a>
         <a href="consultas">CONSULTAS</a>
-        <a href="sobre_nosotros">SOBRE NOSOTROS</a>
+        <!--<a href="sobre_nosotros">SOBRE NOSOTROS</a>-->
         <a href="contacto">CONTACTO</a>
         <?php
         if(!isset($_SESSION['email'])) {
