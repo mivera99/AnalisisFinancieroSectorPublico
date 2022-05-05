@@ -28,12 +28,15 @@
 <body>
 <div id="contenedor">
 
-<div id="cabecera">
-    <?php
-        require('includesWeb/comun/cabecera.php');
-    ?>
-</div>
-<div id="contenido">
+    <div id = "cabeceraIni">
+            <?php require("includesWeb/comun/cabecera.php");?>  
+        </div>
+    <div id="menu-superior">
+            <div id ="contenidoIni">     
+            <?php require("includesWeb/comun/buscador.php");?>  
+            </div>
+        </div>
+    <div id="contenido">
     <form action='procesarLogin.php' method='POST'>
         <h2 class="form-name">Login</h2>
         <fieldset>

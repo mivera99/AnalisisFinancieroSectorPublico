@@ -448,7 +448,7 @@ if($ccaa && $ccaaNac){
                         
                         $array= array_values($ccaa->getPagosObligaciones());
                         $dato = end($array)*100;
-                        if($dato>=99) echo'<p>Eelevado nivel de pagos sobre gastos reconocidos.</p>';
+                        if($dato>=99) echo'<p>Elevado nivel de pagos sobre gastos reconocidos.</p>';
                         else if ($dato>=95 && $dato<99) echo'<p>Nivel de pagos razonable sobre gastos reconocidos.</p>';
                         else if ($dato>=90 && $dato<95) echo'<p>Aceptable nivel de pagos sobre gastos reconocidos.</p>';
                         else if ($dato>=85 && $dato<90) echo'<p>Bajo nivel de pagos sobre gastos reconocidos.</p>';
@@ -1711,7 +1711,7 @@ if($ccaa && $ccaaNac){
                             Sostenibilidad financiera
                             <div class="info">
                                 <img src="info.svg" alt="información" height="14px">
-                                <span class="extra-info">Mide el ahorro sobre ingresos corrientes. Mejor cuanto más alto</span>
+                                <span class="extra-info">Mide el ahorro neto sobre ingresos corrientes. Mejor cuanto más alto</span>
                             </div>
                         </div>
                         </th>
