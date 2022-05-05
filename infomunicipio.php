@@ -883,7 +883,7 @@ if($municipio){
                             <div class="celda-endeudamiento">
                                 Endeudamiento
                                 <div class="info">
-                                    <img src="info.svg" alt="información" height="14px">
+                                    <img src="icons/info.svg" alt="información" height="14px">
                                     <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
                                 </div>
                             </div>
@@ -1044,7 +1044,7 @@ if($municipio){
                         <div class="celda-sostenibilidad-financiera">
                             Sostenibilidad Financiera
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el ahorro sobre ingresos corrientes. Mejor cuanto más alto</span>
                             </div>
                         </div>
@@ -1112,7 +1112,7 @@ if($municipio){
                         <div class="celda-apalancamiento">
                             Apalancamiento 
                             <div class="info-apalancamiento">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide gastos de difícil ajuste (personal, amortización e intereses) sobre ingresos corrientes</span>
                             </div>
                         </div>
@@ -1180,7 +1180,7 @@ if($municipio){
                         <div class="celda-sostenibilidad-deuda">
                             Sostenibilidad de la Deuda
                             <div class="info-sostenibilidad-deuda">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide la carga financiera entre ingresos corrientes</span>
                             </div>
                         </div>
@@ -1522,7 +1522,7 @@ if($municipio){
                         <div class="celda-remanente">
                             Remanente de Tesorería Gastos Generales
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el remanente de tesorería entre ingresos corrientes</span>
                             </div>
                         </div>
@@ -1590,7 +1590,7 @@ if($municipio){
                         <div class="celda-liquidez-inmediata">
                             Liquidez Inmediata
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide los fondos líquidos entre obligaciones pendientes de pago</span>
                             </div>
                         </div>
@@ -1658,7 +1658,7 @@ if($municipio){
                         <div class="celda-solvencia-corto">
                             Solvencia Corto Plazo
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide fondos líquidos + derechos pendientes de cobro entre obligaciones pendientes de pago</span>
                             </div>
                         </div>
@@ -1995,7 +1995,7 @@ if($municipio){
                         <div class="celda-eficiencia">
                             Eficiencia
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide gastos de personal + bienes y servicios entre ingresos corrientes propios recurrentes</span>
                             </div>
                         </div>
@@ -2156,7 +2156,7 @@ if($municipio){
                         <div class="celda-ejecucion-ingresos">
                             Ejecución Ingresos corrientes
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de derechos reconocidos sobre los ingresos presupuestados</span>
                             </div>
                         </div>
@@ -2224,7 +2224,7 @@ if($municipio){
                         <div class="celda-ejecucion-gastos">
                             Ejecución Gastos corrientes
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de obligaciones reconocidas sobre los gastos presupuestados</span>
                             </div>
                         </div>
@@ -2477,7 +2477,7 @@ if($municipio){
                         <div class="celda-pmp">
                             Periodo Medio de Pagos
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el número de días teórico que se tarda en pagar a terceros</span>
                             </div>
                         </div>
@@ -2545,7 +2545,7 @@ if($municipio){
                         <div class="celda-pagos-obligaciones">
                             Pagos sobre Obligaciones Reconocidas
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de pagos sobre las obligaciones reconocidas</span>
                             </div>
                         </div>
@@ -2796,7 +2796,7 @@ if($municipio){
                         <div class="celda-eficacia-recaudatoria">
                             Eficacia Recaudatoria
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide los ingresos cobrados sobre los ingresos devengados</span>
                             </div>
                         </div>

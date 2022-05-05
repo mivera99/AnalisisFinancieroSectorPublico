@@ -965,7 +965,7 @@ if($ccaa && $ccaaNac){
                             <div class="celda-presupuesto">
                                 Resultado presupuestario
                                 <div class="info">
-                                    <img src="info.svg" alt="información" height="14px">
+                                    <img src="icons/info.svg" alt="información" height="14px">
                                     <span class="extra-info">Mide el déficit público en relación al PIB de la comunidad. Mejor cuanto más bajo</span>
                                 </div>
                             </div>
@@ -979,7 +979,7 @@ if($ccaa && $ccaaNac){
                             <div class="celda-endeudamiento">
                                 Endeudamiento
                                 <div class="info">
-                                    <img src="info.svg" alt="información" height="14px">
+                                    <img src="icons/info.svg" alt="información" height="14px">
                                     <span class="extra-info">Mide la deuda sobre ingresos corrientes. Mejor cuanto más bajo</span>
                                 </div>
                             </div>
@@ -1710,7 +1710,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-sostenibilidad-financiera">
                             Sostenibilidad financiera
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el ahorro neto sobre ingresos corrientes. Mejor cuanto más alto</span>
                             </div>
                         </div>
@@ -1723,7 +1723,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-apalancamiento">
                             Apalancamiento
                             <div class="info-apalancamiento">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide gastos de difícil ajuste (personal, amortización e intereses) sobre ingresos corrientes</span>
                             </div>
                         </div>
@@ -1736,7 +1736,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-sostenibilidad-deuda">
                             Sostenibilidad de la deuda
                             <div class="info-sostenibilidad-deuda">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide la carga financiera entre ingresos corrientes</span>
                             </div>
                         </div>
@@ -1934,7 +1934,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-pmp">
                             Periodo medio de pago
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el número de días que se tarda en pagar a proveedores desde los 30 días legales</span>
                             </div>
                         </th>
@@ -2084,7 +2084,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-eficiencia">
                             Eficiencia
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide gastos de personal + bienes y servicios entre ingresos corrientes propios recurrentes</span>
                             </div>
                         </div>
@@ -2225,7 +2225,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-ejecucion-ingresos">
                             Ejecución sobre ingresos corrientes
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de derechos reconocidos sobre los ingresos presupuestados</span>
                             </div>
                         </div>
@@ -2239,7 +2239,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-ejecucion-gastos">
                             Ejecución sobre gastos corrientes
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de obligaciones reconocidas sobre los gastos presupuestados</span>
                             </div>
                         </div>
@@ -2457,7 +2457,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-pmp">
                             Deuda comercial sobre obligaciones reconocidas
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide los pagos pendientes de la deuda comercial</span>
                             </div>
                         </div>
@@ -2596,7 +2596,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-pagos-obligaciones">
                             Pagos sobre obligaciones reconocidas
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide el porcentaje de pagos sobre las obligaciones reconocidas</span>
                             </div>
                         </div>
@@ -2735,7 +2735,7 @@ if($ccaa && $ccaaNac){
                         <div class="celda-eficacia-recaudatoria">
                             Eficacia recaudatoria
                             <div class="info">
-                                <img src="info.svg" alt="información" height="14px">
+                                <img src="icons/info.svg" alt="información" height="14px">
                                 <span class="extra-info">Mide los ingresos cobrados sobre los ingresos devengados</span>
                             </div>
                         </div>
