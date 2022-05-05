@@ -54,7 +54,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                     <h3 class="form-name">Consultas de comunidades autónomas</h3>
                     <fieldset>
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
+                        <p>Para aquellas entidades seleccionadas según los siguientes filtros...</p>
                         <br>
                         <input type="radio" id="selectyear" name="selection" value="SelectYear" onclick="hideOption('selection','sel')">
                         <label for="selectyear">Consultar por año</label>
@@ -169,7 +169,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         </select>
                         <br><br>
                         <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
+                        <p>Mostrar los siguientes datos</p>
                         <br>
                         <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
                         <label for="allCCAA"> Seleccionar todo </label><br>
@@ -207,7 +207,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <h3 class="form-name">Consultas de diputaciones</h3>
                     <fieldset>
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
+                        <p>Para aquellas entidades seleccionadas según los siguientes filtros….. </p>
                         <br>
                         <input type="radio" id="selectyearDIP" name="selectionDIP" value="SelectYear" onclick="hideOption('selectionDIP','selDIP')">
                         <label for="selectyearDIP">Consultar por año</label>
@@ -320,7 +320,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         </select>
                         <br><br>
                         <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
+                        <p>Mostrar los siguientes datos</p>
                         <br>
                         <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
                         <label for="allDIP"> Seleccionar todo </label><br>
@@ -358,7 +358,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                 <h3 class="form-name">Consultas de municipios</h3>
                     <fieldset class="fieldsetConsultasMUN">
                         <h3>Filtros</h3>
-                        <p>Información: Los filtros se usarán para conocer qué entidades cumplen con los siguientes criterios. </p>
+                        <p>Para aquellas entidades seleccionadas según los siguientes filtros….. </p>
                         <br>
                         <input type="radio" id="selectyearMUN" name="selectionMUN" value="SelectYear" onclick="hideOption('selectionMUN','selMUN')">
                         <label for="selectyearMUN">Consultar por año</label>
@@ -494,7 +494,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         </select>
                         <br><br>
                         <h3>Mostrar</h3>
-                        <p>Información: Las casillas se utilizan para mostrar los campos de las entidades que cumplen con los criterios. Marca la casilla del campo que desea ver</p>
+                        <p>Mostrar los siguientes datos</p>
                         <br>
                         <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
                         <label for="allMUN"> Seleccionar todo </label><br>

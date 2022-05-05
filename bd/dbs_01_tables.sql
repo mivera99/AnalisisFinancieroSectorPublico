@@ -415,6 +415,61 @@ CREATE TABLE `scoring_mun` (
   `TENDENCIA` varchar(8) COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `correo` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nombre` varchar(80) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `contrasenia` varchar(256) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `rol` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `prog_mun`
+--
+
+CREATE TABLE `prog_mun` (
+  `CODIGO` int(5) NOT NULL,
+  `ANHO` int(4) NOT NULL,
+  `AGSPC` decimal(15,2) DEFAULT NULL,
+  `SOP` decimal(15,2) DEFAULT NULL,
+  `OTE` decimal(15,2) DEFAULT NULL,
+  `MU` decimal(15,2) DEFAULT NULL,
+  `PC` decimal(15,2) DEFAULT NULL,
+  `SPEI` decimal(15,2) DEFAULT NULL,
+  `PGVPP` decimal(15,2) DEFAULT NULL,
+  `CRE` decimal(15,2) DEFAULT NULL,
+  `PVP` decimal(15,2) DEFAULT NULL,
+  `A` decimal(15,2) DEFAULT NULL,
+  `RGTR` decimal(15,2) DEFAULT NULL,
+  `RR` decimal(15,2) DEFAULT NULL,
+  `GRSU` decimal(15,2) DEFAULT NULL,
+  `TR` decimal(15,2) DEFAULT NULL,
+  `LV` decimal(15,2) DEFAULT NULL,
+  `CSF` decimal(15,2) DEFAULT NULL,
+  `AP` decimal(15,2) DEFAULT NULL,
+  `PJ` decimal(15,2) DEFAULT NULL,
+  `P` decimal(15,2) DEFAULT NULL,
+  `SSPS` decimal(15,2) DEFAULT NULL,
+  `FE` decimal(15,2) DEFAULT NULL,
+  `S` decimal(15,2) DEFAULT NULL,
+  `E` decimal(15,2) DEFAULT NULL,
+  `C` decimal(15,2) DEFAULT NULL,
+  `D` decimal(15,2) DEFAULT NULL,
+  `AGP` decimal(15,2) DEFAULT NULL,
+  `IE` decimal(15,2) DEFAULT NULL,
+  `COM` decimal(15,2) DEFAULT NULL,
+  `TP` decimal(15,2) DEFAULT NULL,
+  `IT` decimal(15,2) DEFAULT NULL,
+  `IDI` decimal(15,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -558,6 +613,19 @@ ALTER TABLE `scoring_dip`
 ALTER TABLE `scoring_mun`
   ADD PRIMARY KEY (`CODIGO`,`ANHO`),
   ADD KEY `CODIGO` (`CODIGO`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`correo`);
+
+--
+-- Indices de la tabla `prog_mun`
+--
+ALTER TABLE `prog_mun`
+  ADD PRIMARY KEY (`CODIGO`,`ANHO`),
+  ADD KEY `CODIGO` (`CODIGO`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -718,6 +786,12 @@ ALTER TABLE `scoring_dip`
 --
 ALTER TABLE `scoring_mun`
   ADD CONSTRAINT `scoring_mun_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `municipios` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `prog_mun`
+--
+ALTER TABLE `prog_mun`
+  ADD CONSTRAINT `prog_mun_ibfk_1` FOREIGN KEY (`CODIGO`) REFERENCES `municipios` (`CODIGO`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
