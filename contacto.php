@@ -30,6 +30,7 @@ session_start();
         
         <div id ="contenido"> 
             <h2>Contacto</h2>
+            <p>noster.economia@gmail.com</p>
         </div>
 
         <div id = "pie">
