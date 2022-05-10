@@ -96,12 +96,16 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
 <body>
 <div id="contenedor">
 
-<div id="cabecera">
-    <?php
-        require('includesWeb/comun/cabecera.php');
-    ?>
-</div>
-<div id="consultaCCAA">
+    <div id = "cabeceraIni">
+        <?php require("includesWeb/comun/cabecera.php");?>  
+    </div>
+
+    <div id="menu-superior">
+        <div id ="contenidoIni">     
+        <?php require("includesWeb/comun/buscador.php");?>  
+        </div>
+    </div>
+    <div id="consultaCCAA">
     <?php
     echo '<h3>Filtros seleccionados</h3>';
     if(empty($scoring)&&empty($poblacion)&&empty($endeudamiento)&&empty($ahorro_neto)&&empty($pmp)&&empty($anho)&&empty($dcpp)&&empty($ingrnofin)&&empty($choice)&&empty($from)&&empty($to)){
