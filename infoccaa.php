@@ -456,7 +456,7 @@ if($ccaa && $ccaaNac){
 
                         $array= array_values($ccaa->getREficaciaRec());
                         $dato = end($array)*100;
-                        if($dato>=95) echo'<p>Muy buen nivel de eficacia.</p>';
+                        if($dato>=95) echo'<p>Muy buen nivel de eficacia recaudatoria.</p>';
                         else if ($dato>=90 && $dato<95) echo'<p>Razonable nivel de eficacia recaudatoria.</p>';
                         else if ($dato>=85 && $dato<90) echo'<p>Aceptable nivel de eficacia recaudatoria.</p>';
                         else if ($dato>=80 && $dato<85) echo'<p>Bajo nivel de eficacia recaudatoria.</p>';
