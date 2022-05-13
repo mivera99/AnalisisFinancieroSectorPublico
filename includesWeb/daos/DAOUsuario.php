@@ -38,7 +38,6 @@ class DAOUsuario {
     }
 
     public function insertaUsuario($emailS,$contraseniaS,$nombre, $rol){
-        //por defecto se inserta como usuario registrado
         $db = getConexionBD();
         $passwordS = password_hash($contraseniaS, PASSWORD_DEFAULT, ['cost'=>12]);
         
