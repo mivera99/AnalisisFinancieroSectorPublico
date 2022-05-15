@@ -627,6 +627,7 @@ class DAOConsultorDiputacion {
         $group_by="";
         $having="";
 
+        // Checkboxes
         if($checked_boxes[0]){ //scoring
             $returning_values = $returning_values.",scoring_dip.ANHO, scoring_dip.RATING";
             if(strpos($joins, 'INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_dip ON scoring_dip.CODIGO=diputaciones.CODIGO ";
@@ -720,6 +721,7 @@ class DAOConsultorDiputacion {
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_dip_ingresos.ANHO ";
         }
 
+        // Filtros
         if(!empty($scoring)){
             //$returning_values = $returning_values.",scoring_dip.RATING";
             if($conditions!=""){

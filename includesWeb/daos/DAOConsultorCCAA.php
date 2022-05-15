@@ -1187,6 +1187,7 @@ class DAOConsultorCCAA {
         $order_by = "";
         $joins="";
 
+        //Checkboxes
         if($checked_boxes[0]){ //scoring
             $returning_values = $returning_values.",scoring_ccaa.ANHO, scoring_ccaa.RATING";
             if(strpos($joins, 'INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_ccaa ON scoring_ccaa.CODIGO=ccaas.CODIGO ";
@@ -1303,6 +1304,7 @@ class DAOConsultorCCAA {
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_ccaa_ingresos.ANHO ";
         }
 
+        // Filtros
         if(!empty($scoring)){
             if($conditions!=""){
                 $conditions = $conditions." AND ";

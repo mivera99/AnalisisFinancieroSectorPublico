@@ -43,6 +43,7 @@ if(!empty($_REQUEST['ingrnofinMUN_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 
 
+// Revisa los filtros. Si el usuario ha seleccionado un filtro, se guarda su valor, sino se deja a NULL 
 if(!empty($_REQUEST['scoringMUN']) && $_REQUEST['scoringMUN']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringMUN'])));
 }
