@@ -20,6 +20,8 @@ $to=NULL;
 
 $checked_boxes=array();
 
+// Hay un array de checkboxes. Si el usuario activa una checkbox, se guarda como true, sino como false. 
+// Asi se sabe que checkboxes ha seleccionado el usuario y cuales no
 if(!empty($_REQUEST['scoringDIP_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 if(!empty($_REQUEST['autonomiaDIP_C'])) array_push($checked_boxes, true);
@@ -35,6 +37,7 @@ else array_push($checked_boxes,false);
 if(!empty($_REQUEST['ingrnofinDIP_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 
+// Revisa los filtros. Si el usuario ha seleccionado un filtro, se guarda su valor, sino se deja a NULL 
 if(!empty($_REQUEST['scoringDIP']) && $_REQUEST['scoringDIP']!='inicio'){
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringDIP'])));
 }

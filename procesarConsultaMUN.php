@@ -21,6 +21,8 @@ $provincia=NULL;
 
 $checked_boxes=array();
 
+// Hay un array de checkboxes. Si el usuario activa una checkbox, se guarda como true, sino como false. 
+// Asi se sabe que checkboxes ha seleccionado el usuario y cuales no
 if(!empty($_REQUEST['scoringMUN_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 if(!empty($_REQUEST['poblacionMUN_C'])) array_push($checked_boxes, true);

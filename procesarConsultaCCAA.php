@@ -17,6 +17,8 @@ $from=NULL;
 $to=NULL;
 $checked_boxes=array();
 
+// Hay un array de checkboxes. Si el usuario activa una checkbox, se guarda como true, sino como false. 
+// Asi se sabe que checkboxes ha seleccionado el usuario y cuales no
 if(!empty($_REQUEST['scoringCCAA_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 if(!empty($_REQUEST['poblacionCCAA_C'])) array_push($checked_boxes, true);
@@ -32,6 +34,7 @@ else array_push($checked_boxes,false);
 if(!empty($_REQUEST['ingrnofinCCAA_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 
+// Revisa los filtros. Si el usuario ha seleccionado un filtro, se guarda su valor, sino se deja a NULL 
 if(!empty($_REQUEST['scoringCCAA']) && $_REQUEST['scoringCCAA']!='inicio') 
     $scoring = htmlspecialchars(trim(strip_tags($_REQUEST['scoringCCAA'])));
 
