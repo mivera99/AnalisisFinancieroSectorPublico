@@ -1319,9 +1319,6 @@ class DAOConsultorCCAA {
 
                 if($tmp!=$conditions) $conditions = $conditions . " AND ";
             }
-            else {
-                
-            }
             
             $conditions = $conditions."scoring_ccaa.RATING = '$scoring' ";
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_ccaa.ANHO";
