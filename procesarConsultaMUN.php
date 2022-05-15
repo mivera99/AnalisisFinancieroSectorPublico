@@ -140,6 +140,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
 <div id="consultaMUN">
     <?php
     echo '<h3>Filtros seleccionados</h3>';
+    // Para mostrar los filtros seleccionados por el usuario por pantalla
     if(empty($scoring)&&empty($poblacion)&&empty($endeudamiento)&&empty($ahorro_neto)&&empty($pmp)&&empty($anho)&&empty($dcpp)&&empty($ingrnofin)&&empty($choice)&&empty($from)&&empty($to)&&empty($fondliq)&&empty($autonomia)&&empty($provincia)){
         echo '<p>Ninguno</p>';
     }
@@ -204,6 +205,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
         if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
     }
     echo '<br>';
+    // Creación de la tabla
     if(!empty($muns)){
         echo '<p>Se han encontrado '.$muns['total'].' resultados</p>';
         foreach($muns as $year=>$mun_array){

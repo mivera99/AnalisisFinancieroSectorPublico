@@ -107,6 +107,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
 <div id="consultaCCAA">
     <?php
     echo '<h3>Filtros seleccionados</h3>';
+    // Para mostrar los filtros seleccionados por el usuario por pantalla
     if(empty($scoring)&&empty($poblacion)&&empty($endeudamiento)&&empty($ahorro_neto)&&empty($pmp)&&empty($anho)&&empty($dcpp)&&empty($ingrnofin)&&empty($choice)&&empty($from)&&empty($to)){
         echo '<p>Ninguno</p>';
     }
@@ -173,6 +174,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
         if(!empty($gasto) && $_REQUEST['gastoCCAA']=='inversiones') echo '<p>Gasto: Inversiones</p>';
     }
     echo '<br>';
+    // Creación de la tabla
     if(!empty($ccaas)){
         echo '<p>Se han encontrado '.$ccaas['total'].' resultados</p>';
         foreach($ccaas as $year=>$ccaa_array){

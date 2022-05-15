@@ -125,6 +125,7 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
 <div id="consultaDIP">
     <?php
     echo '<h3>Filtros seleccionados</h3>';
+    // Para mostrar los filtros seleccionados por el usuario por pantalla
     if(empty($scoring)&&empty($poblacion)&&empty($endeudamiento)&&empty($ahorro_neto)&&empty($pmp)&&empty($anho)&&empty($dcpp)&&empty($ingrnofin)&&empty($choice)&&empty($from)&&empty($to)){
         echo '<p>Ninguno</p>';
     }
@@ -168,6 +169,8 @@ $dips = (new DAOConsultor())->consultarDIPs($scoring, $poblacion, $endeudamiento
             echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
         }
     }
+    echo '<br>';
+    // Creación de la tabla
     if(!empty($dips)){
         echo '<p>Se han encontrado '.$dips['total'].' resultados</p>';
         foreach($dips as $year=>$dip_array){
