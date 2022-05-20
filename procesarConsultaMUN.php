@@ -19,6 +19,8 @@ $to=NULL;
 $autonomia=NULL;
 $provincia=NULL;
 
+$sum=0;
+
 $checked_boxes=array();
 
 // Hay un array de checkboxes. Si el usuario activa una checkbox, se guarda como true, sino como false. 
@@ -210,56 +212,90 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
         echo '<p>Se han encontrado '.$muns['total'].' resultados</p>';
         foreach($muns as $year=>$mun_array){
             if(!is_int($mun_array)){
+                $num_cols=0;
                 echo '<h2>'.$year.'</h2>';
                 echo '<p>'.count($mun_array).' resultados</p>';
                 echo '<table>';
                 echo '<tr>';
                 echo '<td></td>';
                 echo '<td>Nombre</td>';
-                if($checked_boxes[0]) echo '<td class="ratingCell">Scoring</td>';
-                if($checked_boxes[1]) echo '<td class="ratingCell">Población</td>';
-                if($checked_boxes[2]) echo '<td class="ratingCell">Comunidad Autónoma</td>';
-                if($checked_boxes[3]) echo '<td class="ratingCell">Provincia</td>';
-                if($checked_boxes[4]) echo '<td class="ratingCell">Endeudamiento</td>';
-                if($checked_boxes[5]) echo '<td class="ratingCell">Ahorro neto</td>';
-                if($checked_boxes[6]) echo '<td class="ratingCell">Fondos líquidos</td>';
-                if($checked_boxes[7]) echo '<td class="ratingCell">PMP</td>';
-                if($checked_boxes[8]) echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
-                if(!empty($gasto) && $_REQUEST['gastoMUN']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
-                else if(!empty($gasto) && $_REQUEST['gastoMUN']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
-                else if(!empty($gasto) && $_REQUEST['gastoMUN']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
-                else if(!empty($gasto) && $_REQUEST['gastoMUN']=='inversiones') echo '<td class="ratingCell">Inversiones</td>';
-                if(!empty($prog) && $_REQUEST['progMUN']=='agspc') echo '<td class="ratingCell">Administración general de la seguridad y protección civil</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='sop') echo '<td class="ratingCell">Seguridad y orden público</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='ote') echo '<td class="ratingCell">Ordenación del tráfico y del estacionamiento</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='mu') echo '<td class="ratingCell">Movilidad urbana</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='pc') echo '<td class="ratingCell">Protección civil</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='spei') echo '<td class="ratingCell">Servicio de prevención y extinción de incendios</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='pgvpp') echo '<td class="ratingCell">Promoción y gestión de vivienda de protección pública</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='cre') echo '<td class="ratingCell">Conservación y rehabilitación de la edificación</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='pvp') echo '<td class="ratingCell">Pavimentación de vías públicas</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='a') echo '<td class="ratingCell">Alcantarillado</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='rgtr') echo '<td class="ratingCell">Recogida, gestión y tratamiento de residuos</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='rr') echo '<td class="ratingCell">Recogida de residuos</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='grsu') echo '<td class="ratingCell">Gestión de residuos sólidos urbanos</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='tr') echo '<td class="ratingCell">Tratamiento de residuos</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='lv') echo '<td class="ratingCell">Limpieza viaria</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='csf') echo '<td class="ratingCell">Cementerios y servicios funerarios</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='ap') echo '<td class="ratingCell">Alumbrado público</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='pj') echo '<td class="ratingCell">Parques y jardines</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='p') echo '<td class="ratingCell">Pensiones</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='ssps') echo '<td class="ratingCell">Servicios sociales y promoción social</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='fe') echo '<td class="ratingCell">Fomento del empleo</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='s') echo '<td class="ratingCell">Sanidad</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='e') echo '<td class="ratingCell">Educación</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='c') echo '<td class="ratingCell">Cultura</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='d') echo '<td class="ratingCell">Deporte</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='agp') echo '<td class="ratingCell">Agricultura, ganadería y pesca</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='ie') echo '<td class="ratingCell">Industria y energía</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='com') echo '<td class="ratingCell">Comercio</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='tp') echo '<td class="ratingCell">Transporte público</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='it') echo '<td class="ratingCell">Infraestructuras del transporte</td>';
-                else if(!empty($prog) && $_REQUEST['progMUN']=='idi') echo '<td class="ratingCell">Investigación, desarrollo e innovación</td>';
+                if($checked_boxes[0]) {
+                    echo '<td class="ratingCell">Scoring</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[1]) {
+                    echo '<td class="ratingCell">Población</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[2]) {
+                    echo '<td class="ratingCell">Comunidad Autónoma</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[3]) {
+                    echo '<td class="ratingCell">Provincia</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[4]) {
+                    echo '<td class="ratingCell">Endeudamiento</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[5]) {
+                    echo '<td class="ratingCell">Ahorro neto</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[6]) {
+                    echo '<td class="ratingCell">Fondos líquidos</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[7]) {
+                    echo '<td class="ratingCell">PMP</td>';
+                    $num_cols++;
+                }
+                if($checked_boxes[8]) {
+                    echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
+                    $num_cols++;
+                }
+                if(!empty($gasto)){
+                    $num_cols++;
+                    if($_REQUEST['gastoMUN']=='personal') echo '<td class="ratingCell">Gastos de personal</td>';
+                    else if($_REQUEST['gastoMUN']=='bienesservicios') echo '<td class="ratingCell">Gastos corrientes de bienes y servicios</td>';
+                    else if($_REQUEST['gastoMUN']=='financieros') echo '<td class="ratingCell">Gastos financieros</td>';
+                    else if($_REQUEST['gastoMUN']=='inversiones') echo '<td class="ratingCell">Inversiones</td>';
+                }
+                if(!empty($prog)){
+                    $num_cols++;
+                    if($_REQUEST['progMUN']=='agspc') echo '<td class="ratingCell">Administración general de la seguridad y protección civil</td>';
+                    else if($_REQUEST['progMUN']=='sop') echo '<td class="ratingCell">Seguridad y orden público</td>';
+                    else if($_REQUEST['progMUN']=='ote') echo '<td class="ratingCell">Ordenación del tráfico y del estacionamiento</td>';
+                    else if($_REQUEST['progMUN']=='mu') echo '<td class="ratingCell">Movilidad urbana</td>';
+                    else if($_REQUEST['progMUN']=='pc') echo '<td class="ratingCell">Protección civil</td>';
+                    else if($_REQUEST['progMUN']=='spei') echo '<td class="ratingCell">Servicio de prevención y extinción de incendios</td>';
+                    else if($_REQUEST['progMUN']=='pgvpp') echo '<td class="ratingCell">Promoción y gestión de vivienda de protección pública</td>';
+                    else if($_REQUEST['progMUN']=='cre') echo '<td class="ratingCell">Conservación y rehabilitación de la edificación</td>';
+                    else if($_REQUEST['progMUN']=='pvp') echo '<td class="ratingCell">Pavimentación de vías públicas</td>';
+                    else if($_REQUEST['progMUN']=='a') echo '<td class="ratingCell">Alcantarillado</td>';
+                    else if($_REQUEST['progMUN']=='rgtr') echo '<td class="ratingCell">Recogida, gestión y tratamiento de residuos</td>';
+                    else if($_REQUEST['progMUN']=='rr') echo '<td class="ratingCell">Recogida de residuos</td>';
+                    else if($_REQUEST['progMUN']=='grsu') echo '<td class="ratingCell">Gestión de residuos sólidos urbanos</td>';
+                    else if($_REQUEST['progMUN']=='tr') echo '<td class="ratingCell">Tratamiento de residuos</td>';
+                    else if($_REQUEST['progMUN']=='lv') echo '<td class="ratingCell">Limpieza viaria</td>';
+                    else if($_REQUEST['progMUN']=='csf') echo '<td class="ratingCell">Cementerios y servicios funerarios</td>';
+                    else if($_REQUEST['progMUN']=='ap') echo '<td class="ratingCell">Alumbrado público</td>';
+                    else if($_REQUEST['progMUN']=='pj') echo '<td class="ratingCell">Parques y jardines</td>';
+                    else if($_REQUEST['progMUN']=='p') echo '<td class="ratingCell">Pensiones</td>';
+                    else if($_REQUEST['progMUN']=='ssps') echo '<td class="ratingCell">Servicios sociales y promoción social</td>';
+                    else if($_REQUEST['progMUN']=='fe') echo '<td class="ratingCell">Fomento del empleo</td>';
+                    else if($_REQUEST['progMUN']=='s') echo '<td class="ratingCell">Sanidad</td>';
+                    else if($_REQUEST['progMUN']=='e') echo '<td class="ratingCell">Educación</td>';
+                    else if($_REQUEST['progMUN']=='c') echo '<td class="ratingCell">Cultura</td>';
+                    else if($_REQUEST['progMUN']=='d') echo '<td class="ratingCell">Deporte</td>';
+                    else if($_REQUEST['progMUN']=='agp') echo '<td class="ratingCell">Agricultura, ganadería y pesca</td>';
+                    else if($_REQUEST['progMUN']=='ie') echo '<td class="ratingCell">Industria y energía</td>';
+                    else if($_REQUEST['progMUN']=='com') echo '<td class="ratingCell">Comercio</td>';
+                    else if($_REQUEST['progMUN']=='tp') echo '<td class="ratingCell">Transporte público</td>';
+                    else if($_REQUEST['progMUN']=='it') echo '<td class="ratingCell">Infraestructuras del transporte</td>';
+                    else if($_REQUEST['progMUN']=='idi') echo '<td class="ratingCell">Investigación, desarrollo e innovación</td>';
+                }
                 echo '</tr>';
                 $i=0;
                 foreach($mun_array as $mun){
@@ -289,40 +325,141 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                     else if(!empty($mun->getTransferenciasCorrientesGastos1())&&$mun->getTransferenciasCorrientesGastos1()!=0) echo '<td class="ratingCell">'.number_format($mun->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
                     else if(!empty($mun->getInversionesReales1())&&$mun->getInversionesReales1()!=0) echo '<td class="ratingCell">'.number_format($mun->getInversionesReales1(), 0, '','.').'€</td>';
                     else if(!empty($gasto)) echo '<td class="ratingCell">-</td>';
-                    if(!empty($mun->getAgspc())&&$mun->getAgspc()!=0) echo '<td class="ratingCell">'.number_format($mun->getAgspc(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getSop())&&$mun->getSop()!=0) echo '<td class="ratingCell">'.number_format($mun->getSop(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getOte())&&$mun->getOte()!=0) echo '<td class="ratingCell">'.number_format($mun->getOte(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getMu())&&$mun->getMu()!=0) echo '<td class="ratingCell">'.number_format($mun->getMu(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getPc())&&$mun->getPc()!=0) echo '<td class="ratingCell">'.number_format($mun->getPc(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getSpei())&&$mun->getSpei()!=0) echo '<td class="ratingCell">'.number_format($mun->getSpei(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getPgvpp())&&$mun->getPgvpp()!=0) echo '<td class="ratingCell">'.number_format($mun->getPgvpp(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getCre())&&$mun->getCre()!=0) echo '<td class="ratingCell">'.number_format($mun->getCre(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getPvp())&&$mun->getPvp()!=0) echo '<td class="ratingCell">'.number_format($mun->getPvp(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getA())&&$mun->getA()!=0) echo '<td class="ratingCell">'.number_format($mun->getA(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getRgtr())&&$mun->getRgtr()!=0) echo '<td class="ratingCell">'.number_format($mun->getRgtr(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getRr())&&$mun->getRr()!=0) echo '<td class="ratingCell">'.number_format($mun->getRr(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getGrsu())&&$mun->getGrsu()!=0) echo '<td class="ratingCell">'.number_format($mun->getGrsu(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getTr())&&$mun->getTr()!=0) echo '<td class="ratingCell">'.number_format($mun->getTr(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getLv())&&$mun->getLv()!=0) echo '<td class="ratingCell">'.number_format($mun->getLv(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getCsf())&&$mun->getCsf()!=0) echo '<td class="ratingCell">'.number_format($mun->getCsf(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getAp())&&$mun->getAp()!=0) echo '<td class="ratingCell">'.number_format($mun->getAp(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getPj())&&$mun->getPj()!=0) echo '<td class="ratingCell">'.number_format($mun->getPj(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getP())&&$mun->getP()!=0) echo '<td class="ratingCell">'.number_format($mun->getP(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getSsps())&&$mun->getSsps()!=0) echo '<td class="ratingCell">'.number_format($mun->getSsps(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getFe())&&$mun->getFe()!=0) echo '<td class="ratingCell">'.number_format($mun->getFe(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getS())&&$mun->getS()!=0) echo '<td class="ratingCell">'.number_format($mun->getS(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getE())&&$mun->getE()!=0) echo '<td class="ratingCell">'.number_format($mun->getE(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getC())&&$mun->getC()!=0) echo '<td class="ratingCell">'.number_format($mun->getC(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getD())&&$mun->getD()!=0) echo '<td class="ratingCell">'.number_format($mun->getD(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getAgp())&&$mun->getAgp()!=0) echo '<td class="ratingCell">'.number_format($mun->getAgp(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getIe())&&$mun->getIe()!=0) echo '<td class="ratingCell">'.number_format($mun->getIe(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getCom())&&$mun->getCom()!=0) echo '<td class="ratingCell">'.number_format($mun->getCom(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getTp())&&$mun->getTp()!=0) echo '<td class="ratingCell">'.number_format($mun->getTp(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getIt())&&$mun->getIt()!=0) echo '<td class="ratingCell">'.number_format($mun->getIt(), 0, '','.').'€</td>';
-                    else if(!empty($mun->getIdi())&&$mun->getIdi()!=0) echo '<td class="ratingCell">'.number_format($mun->getIdi(), 0, '','.').'€</td>';
+                    if(!empty($mun->getAgspc())&&$mun->getAgspc()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getAgspc(), 0, '','.').'€</td>';
+                        $sum+=$mun->getAgspc();
+                    }
+                    else if(!empty($mun->getSop())&&$mun->getSop()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getSop(), 0, '','.').'€</td>';
+                        $sum+=$mun->getSop();
+                    }
+                    else if(!empty($mun->getOte())&&$mun->getOte()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getOte(), 0, '','.').'€</td>';
+                        $sum+=$mun->getOte();
+                    }
+                    else if(!empty($mun->getMu())&&$mun->getMu()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getMu(), 0, '','.').'€</td>';
+                        $sum+=$mun->getMu();
+                    }
+                    else if(!empty($mun->getPc())&&$mun->getPc()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getPc(), 0, '','.').'€</td>';
+                        $sum+=$mun->getPc();
+                    }
+                    else if(!empty($mun->getSpei())&&$mun->getSpei()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getSpei(), 0, '','.').'€</td>';
+                        $sum+=$mun->getSpei();
+                    }
+                    else if(!empty($mun->getPgvpp())&&$mun->getPgvpp()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getPgvpp(), 0, '','.').'€</td>';
+                        $sum+=$mun->getPgvpp();
+                    }
+                    else if(!empty($mun->getCre())&&$mun->getCre()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getCre(), 0, '','.').'€</td>';
+                        $sum+=$mun->getCre();
+                    }
+                    else if(!empty($mun->getPvp())&&$mun->getPvp()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getPvp(), 0, '','.').'€</td>';
+                        $sum+=$mun->getPvp();
+                    }
+                    else if(!empty($mun->getA())&&$mun->getA()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getA(), 0, '','.').'€</td>';
+                        $sum+=$mun->getA();
+                    }
+                    else if(!empty($mun->getRgtr())&&$mun->getRgtr()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getRgtr(), 0, '','.').'€</td>';
+                        $sum+=$mun->getRgtr();
+                    }
+                    else if(!empty($mun->getRr())&&$mun->getRr()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getRr(), 0, '','.').'€</td>';
+                        $sum+=$mun->getRr();
+                    }
+                    else if(!empty($mun->getGrsu())&&$mun->getGrsu()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getGrsu(), 0, '','.').'€</td>';
+                        $sum+=$mun->getGrsu();
+                    }
+                    else if(!empty($mun->getTr())&&$mun->getTr()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getTr(), 0, '','.').'€</td>';
+                        $sum+=$mun->getTr();
+                    }
+                    else if(!empty($mun->getLv())&&$mun->getLv()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getLv(), 0, '','.').'€</td>';
+                        $sum+=$mun->getLv();
+                    }
+                    else if(!empty($mun->getCsf())&&$mun->getCsf()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getCsf(), 0, '','.').'€</td>';
+                        $sum+=$mun->getCsf();
+                    }
+                    else if(!empty($mun->getAp())&&$mun->getAp()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getAp(), 0, '','.').'€</td>';
+                        $sum+=$mun->getAp();
+                    }
+                    else if(!empty($mun->getPj())&&$mun->getPj()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getPj(), 0, '','.').'€</td>';
+                        $sum+=$mun->getPj();
+                    }
+                    else if(!empty($mun->getP())&&$mun->getP()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getP(), 0, '','.').'€</td>';
+                        $sum+=$mun->getP();
+                    }
+                    else if(!empty($mun->getSsps())&&$mun->getSsps()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getSsps(), 0, '','.').'€</td>';
+                        $sum+=$mun->getSsps();
+                    }
+                    else if(!empty($mun->getFe())&&$mun->getFe()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getFe(), 0, '','.').'€</td>';
+                        $sum+=$mun->getFe();
+                    }
+                    else if(!empty($mun->getS())&&$mun->getS()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getS(), 0, '','.').'€</td>';
+                        $sum+=$mun->getS();
+                    }
+                    else if(!empty($mun->getE())&&$mun->getE()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getE(), 0, '','.').'€</td>';
+                        $sum+=$mun->getE();
+                    }
+                    else if(!empty($mun->getC())&&$mun->getC()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getC(), 0, '','.').'€</td>';
+                        $sum+=$mun->getC();
+                    }
+                    else if(!empty($mun->getD())&&$mun->getD()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getD(), 0, '','.').'€</td>';
+                        $sum+=$mun->getD();
+                    }
+                    else if(!empty($mun->getAgp())&&$mun->getAgp()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getAgp(), 0, '','.').'€</td>';
+                        $sum+=$mun->getAgp();
+                    }
+                    else if(!empty($mun->getIe())&&$mun->getIe()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getIe(), 0, '','.').'€</td>';
+                        $sum+=$mun->getIe();
+                    }
+                    else if(!empty($mun->getCom())&&$mun->getCom()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getCom(), 0, '','.').'€</td>';
+                        $sum+=$mun->getCom();
+                    }
+                    else if(!empty($mun->getTp())&&$mun->getTp()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getTp(), 0, '','.').'€</td>';
+                        $sum+=$mun->getTp();
+                    }
+                    else if(!empty($mun->getIt())&&$mun->getIt()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getIt(), 0, '','.').'€</td>';
+                        $sum+=$mun->getIt();
+                    }
+                    else if(!empty($mun->getIdi())&&$mun->getIdi()!=0) {
+                        echo '<td class="ratingCell">'.number_format($mun->getIdi(), 0, '','.').'€</td>'; 
+                        $sum+=$mun->getIdi();
+                    }
                     else if(!empty($prog)) echo '<td class="ratingCell">-</td>';
                     echo '</tr>';
                     $i+=1;
+                }
+                if(!empty($prog)){
+                    echo'<tfoot>';
+                    echo'<tr>';
+                    echo'<td colspan="'.($num_cols+1).'">Total gasto</td>';
+                    echo'<td class="ratingCell">'.number_format($sum, 0, '','.').'€</td>';
+                    echo'</tr>';
+                    echo'</tfoot>';
                 }
                 echo '</table>';
             }
