@@ -620,37 +620,7 @@ class DAOConsultorMunicipio{
         $order_by="";
         $having="";
 
-        if($checked_boxes[0]){ //scoring
-            $returning_values = $returning_values.",scoring_mun.ANHO, scoring_mun.RATING";
-            if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
-            $order_by = $order_by . "scoring_mun.ANHO DESC, ";
-            $group_by = $group_by.",scoring_mun.ANHO";
-        }
-        if($checked_boxes[1]){ //poblacion
-            if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
-                if($conditions!=""){
-                    $conditions = $conditions." AND ";
-                }
-                if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
-            }    
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_mun.ANHO";
-            $returning_values = $returning_values.", scoring_mun.POBLACION";
-            if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
-        
-        }
-        if($checked_boxes[2]){ //autonomia
-            $returning_values = $returning_values.",municipios.AUTONOMIA";    
-        }
-        if($checked_boxes[3]){ //provincia
-            $returning_values = $returning_values.",municipios.PROVINCIA";    
-        }
-        if($checked_boxes[4]){ //endeudamiento
+        if($checked_boxes[0]){ //endeudamiento
             if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
@@ -667,7 +637,7 @@ class DAOConsultorMunicipio{
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
         }
-        if($checked_boxes[5]){ //ahorro neto
+        if($checked_boxes[1]){ //ahorro neto
             if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
@@ -684,7 +654,7 @@ class DAOConsultorMunicipio{
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";    
         }
-        if($checked_boxes[6]){ //fondos liquidos
+        if($checked_boxes[2]){ //fondos liquidos
             if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
@@ -701,7 +671,7 @@ class DAOConsultorMunicipio{
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "deudas_mun.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",deudas_mun.ANHO ";
         }
-        if($checked_boxes[7]){ //pmp
+        if($checked_boxes[3]){ //pmp
             if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
@@ -720,7 +690,7 @@ class DAOConsultorMunicipio{
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_mun_pmp.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_mun_pmp.ANHO ";    
         }
-        if($checked_boxes[8]){ // nivel de ingresos no financieros
+        if($checked_boxes[4]){ // nivel de ingresos no financieros
             if($joins!=""){
                 if($conditions!=""){
                     $conditions = $conditions." AND ";
@@ -812,186 +782,6 @@ class DAOConsultorMunicipio{
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
         }
-
-        if(!empty($endeudamiento)){
-            if($conditions!=""){
-                $conditions = $conditions . " AND ";
-            }
-            if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
-                $tmp=$conditions;
-                if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";
-            }
-            if($endeudamiento=='tramo1'){
-                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 0 AND 20 ";
-            }
-            else if($endeudamiento=='tramo2'){
-                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 20 AND 40 ";
-            }
-            else if($endeudamiento=='tramo3'){
-                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 40 AND 80 ";
-            }
-            else if($endeudamiento=='tramo4'){
-                $conditions = $conditions."(scoring_mun.R1*100) BETWEEN 80 AND 120 ";
-            }
-            else if($endeudamiento=='tramo5'){
-                $conditions = $conditions."(scoring_mun.R1*100) > 120 ";
-            }
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_mun.ANHO";
-            /*$returning_values = $returning_values.",scoring_mun.R1";
-            */
-            if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
-        }
-        
-        if(!empty($ahorro_neto)){
-            if($conditions!=""){
-                $conditions = $conditions . " AND ";
-            }
-            if($joins!=""){ //significa que el  usuario ha pedido scoring aparte de poblacion
-                $tmp=$conditions;
-                if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = deudas_mun.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "scoring_mun.ANHO = prog_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";
-            }
-            if($ahorro_neto=='tramo1'){
-                $conditions = $conditions."(scoring_mun.R2*100) < -20 ";
-            }
-            else if($ahorro_neto=='tramo2'){
-                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN -20 AND 0 ";
-            }
-            else if($ahorro_neto=='tramo3'){
-                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN 0 AND 20 ";
-            }
-            else if($ahorro_neto=='tramo4'){
-                $conditions = $conditions."(scoring_mun.R2*100) BETWEEN 20 AND 50 ";
-            }
-            else if($ahorro_neto=='tramo5'){
-                $conditions = $conditions."(scoring_mun.R2*100) > 50 ";
-            }
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_mun.ANHO";
-            /*$returning_values = $returning_values.", scoring_mun.R2";
-            */
-            if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
-        }
-        
-        if(!empty($fondliq)){
-            if($conditions!=""){
-                $conditions = $conditions . " AND ";
-            }
-            if($joins!=""){
-                $tmp=$conditions;
-                if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = scoring_mun.ANHO";
-                else if(strpos($joins, ' cuentas_mun_pmp ')!==false) $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "deudas_mun.ANHO = prog_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";    
-            }
-            if($fondliq=='tramo1'){
-                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 0 AND 1000000 ";
-            }
-            else if($fondliq=='tramo2'){
-                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 1000000 AND 5000000 ";
-            }
-            else if($fondliq=='tramo3'){
-                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) BETWEEN 5000000 AND 50000000 ";
-            }
-            else if($fondliq=='tramo4'){
-                $conditions = $conditions."(deudas_mun.FONDLIQUIDOS) > 50000000 ";
-            }
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_mun.ANHO";
-            /*$returning_values = $returning_values.",deudas_mun.FONDLIQUIDOS";
-            */
-            if(strpos($joins, 'INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN deudas_mun ON deudas_mun.CODIGO=municipios.CODIGO ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "deudas_mun.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",deudas_mun.ANHO ";
-        }
-
-        if(!empty($pmp)){
-            if($conditions!=""){
-                $conditions = $conditions . " AND ";
-            }
-            if($joins!=""){
-                $tmp=$conditions;
-                if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = scoring_mun.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = cuentas_mun_ingresos.ANHO";
-                else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = deudas_mun.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "cuentas_mun_pmp.ANHO = prog_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";    
-            }
-            if($pmp=='tramo1'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 0 AND 10 ";
-            }
-            else if($pmp=='tramo2'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 10 AND 20 ";
-            }
-            else if($pmp=='tramo3'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 20 AND 30 ";
-            }
-            else if($pmp=='tramo4'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 30 AND 40 ";
-            }
-            else if($pmp=='tramo5'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) BETWEEN 40 AND 50 ";
-            }
-            else if($pmp=='tramo6'){
-                $conditions = $conditions."(cuentas_mun_pmp.PMP) > 50 ";
-            }
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_mun_pmp.ANHO";
-            /*if(strpos($returning_values, ', cuentas_mun_pmp.TRIMESTRE ')===false) $returning_values = $returning_values . ", cuentas_mun_pmp.TRIMESTRE";
-            $returning_values = $returning_values.",cuentas_mun_pmp.PMP";
-            */
-            if(strpos($joins, 'INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_mun_pmp ON cuentas_mun_pmp.CODIGO=municipios.CODIGO ";
-            if(strpos($joins, 'INNER JOIN (SELECT c4.CODIGO, c4.ANHO, MAX(c4.TRIMESTRE) MAX_TRIMESTRE FROM cuentas_mun_pmp c4 WHERE c4.PMP IS NOT NULL GROUP BY c4.CODIGO, c4.ANHO) c4 ON c4.CODIGO=cuentas_mun_pmp.CODIGO AND c4.ANHO = cuentas_mun_pmp.ANHO AND cuentas_mun_pmp.TRIMESTRE=c4.MAX_TRIMESTRE')===false) $joins = $joins . "INNER JOIN (SELECT c4.CODIGO, c4.ANHO, MAX(c4.TRIMESTRE) MAX_TRIMESTRE FROM cuentas_mun_pmp c4 WHERE c4.PMP IS NOT NULL GROUP BY c4.CODIGO, c4.ANHO) c4 ON c4.CODIGO=cuentas_mun_pmp.CODIGO AND c4.ANHO = cuentas_mun_pmp.ANHO AND cuentas_mun_pmp.TRIMESTRE=c4.MAX_TRIMESTRE ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_mun_pmp.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_mun_pmp.ANHO ";
-        }
-
-        if(!empty($ingrnofin)){
-            if($conditions!=""){
-                $conditions = $conditions . " AND ";
-            }
-            if($joins!=""){
-                $tmp=$conditions;
-                if(strpos($joins, ' scoring_mun ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = scoring_mun.ANHO";
-                else if(strpos($joins, ' cuentas_mun_pmp ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = cuentas_mun_pmp.ANHO";
-                else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = cuentas_mun_gastos.ANHO";
-                else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = deudas_mun.ANHO";
-                else if(strpos($joins, ' prog_mun ')!==false)  $conditions = $conditions . "cuentas_mun_ingresos.ANHO = prog_mun.ANHO";
-                if($tmp!=$conditions) $conditions = $conditions." AND ";
-            }
-            $conditions = $conditions."(cuentas_mun_ingresos.TIPO='PARTIDAINGR1' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR2' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR3' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR4' OR cuentas_mun_ingresos.TIPO='PARTIDAINGR5') ";
-            if($ingrnofin=='tramo1'){
-                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 0 AND 1000000 ";
-            }
-            else if($ingrnofin=='tramo2'){
-                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 1000000 AND 5000000 ";
-            }
-            else if($ingrnofin=='tramo3'){
-                $having = $having."SUM(cuentas_mun_ingresos.DERE) BETWEEN 5000000 AND 50000000 ";
-            }
-            else if($ingrnofin=='tramo4'){
-                $having = $having."SUM(cuentas_mun_ingresos.DERE) > 50000000 ";
-            }
-            if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",cuentas_mun_ingresos.ANHO";
-            /*$returning_values = $returning_values.",SUM(cuentas_mun_ingresos.DERE) AS SUMA_INGR";
-            */
-            if(strpos($joins, 'INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN cuentas_mun_ingresos ON cuentas_mun_ingresos.CODIGO=municipios.CODIGO ";
-            if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "cuentas_mun_ingresos.ANHO DESC, ";
-            if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",cuentas_mun_ingresos.ANHO ";
-        }
         
         if(!empty($gasto)){
             if($conditions!=""){
@@ -1064,7 +854,7 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions . " AND ";
             }
             $conditions = $conditions."municipios.AUTONOMIA = '$autonomia' ";
-            //$returning_values = $returning_values.",municipios.AUTONOMIA";
+            $returning_values = $returning_values.",municipios.AUTONOMIA";
         }   
         
         if(!empty($provincia)){
@@ -1072,7 +862,7 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions . " AND ";
             }
             $conditions = $conditions."municipios.PROVINCIA = '$provincia' ";
-            //$returning_values = $returning_values.",municipios.PROVINCIA";
+            $returning_values = $returning_values.",municipios.PROVINCIA";
         }
 
         if(!empty($choice)){

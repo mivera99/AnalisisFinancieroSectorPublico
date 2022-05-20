@@ -121,52 +121,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="tramo4">3.000.000 - 6.000.000</option>
                             <option value="tramo5">> 6.000.000</option>
                         </select>
-                        <p>Endeudamiento</p>
-                        <select name="endeudamientoCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0% - 20%</option>
-                            <option value="tramo2">20% - 40%</option>
-                            <option value="tramo3">40% - 80%</option>
-                            <option value="tramo4">80% - 120%</option>
-                            <option value="tramo5">> 120%</option>
-                        </select>
-                        <p>Ahorro neto</p>
-                        <select name="ahorro_netoCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">< -20%</option>
-                            <option value="tramo2">-20% - 0%</option>
-                            <option value="tramo3">0% - 20%</option>
-                            <option value="tramo4">20% - 50%</option>
-                            <option value="tramo5">> 50%</option>
-                        </select>
-                        <p>PMP</p>
-                        <select name="pmpCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 10 días</option>
-                            <option value="tramo2">10 - 20 días</option>
-                            <option value="tramo3">20 - 30 días</option>
-                            <option value="tramo4">30 - 40 días</option>
-                            <option value="tramo5">40 - 50 días</option>
-                            <option value="tramo6">> 50 días</option>
-                        </select>
-                        <p>Deuda comercial pendiente de pago</p>
-                        <select name="dcppCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0% - 4%</option>
-                            <option value="tramo2">4% - 8%</option>
-                            <option value="tramo3">8% - 12%</option>
-                            <option value="tramo4">12% - 16%</option>
-                            <option value="tramo5">16% - 20%</option>
-                            <option value="tramo6">> 20%</option>
-                        </select>
-                        <p>Ingresos no financieros</p>
-                        <select name="ingrnofinCCAA">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 1M</option>
-                            <option value="tramo2">1M - 5M</option>
-                            <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">> 50M</option>
-                        </select>
                         <br><br>
                         <h3>Mostrar</h3>
                         <p>Mostrar los siguientes datos</p>
@@ -174,10 +128,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <input type="checkbox" id="allCCAA" name="selectAll" value="All" onclick="enableAll('selectCCAA','allCCAA')">
                         <label for="allCCAA"> Seleccionar todo </label><br>
 
-                        <input type="checkbox" id="scoring" class="selectCCAA" name="scoringCCAA_C" value="Scoring" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="scoring"> Scoring </label>
-                        <input type="checkbox" id="poblacion" class="selectCCAA" name="poblacionCCAA_C" value="Poblacion" onclick="checkAllButton('selectCCAA','allCCAA')">
-                        <label for="poblacion"> Poblacion </label>
                         <input type="checkbox" id="endeudamiento" class="selectCCAA" name="endeudamientoCCAA_C" value="Endeudamiento" onclick="checkAllButton('selectCCAA','allCCAA')">
                         <label for="endeudamiento"> Endeudamiento </label>
                         <input type="checkbox" id="ahorro_neto" class="selectCCAA" name="ahorronetoCCAA_C" value="AhorroNeto" onclick="checkAllButton('selectCCAA','allCCAA')">
@@ -270,53 +220,10 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
                             foreach($ccaaCombobox as $ccaa){
-                                echo '<option value="'.$ccaa->getCodigo().'">'.$ccaa->getNombre().'</option>';
+                                if($ccaa->getNombre()!="NACIONAL")
+                                    echo '<option value="'.$ccaa->getCodigo().'">'.$ccaa->getNombre().'</option>';
                             }
                             ?>
-                        </select>
-                        <p>Endeudamiento</p>
-                        <select name="endeudamientoDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0% - 20%</option>
-                            <option value="tramo2">20% - 40%</option>
-                            <option value="tramo3">40% - 80%</option>
-                            <option value="tramo4">80% - 120%</option>
-                            <option value="tramo5">> 120%</option>
-                        </select>
-                        <p>Ahorro neto</p>
-                        <select name="ahorro_netoDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">< -20%</option>
-                            <option value="tramo2">-20% - 0%</option>
-                            <option value="tramo3">0% - 20%</option>
-                            <option value="tramo4">20% - 50%</option>
-                            <option value="tramo5">> 50%</option>
-                        </select>
-                        <p>Fondos líquidos</p>
-                        <select name="fondliqDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 1M</option>
-                            <option value="tramo2">1M - 5M</option>
-                            <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">> 50M</option>
-                        </select>
-                        <p>PMP</p>
-                        <select name="pmpDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 10 días</option>
-                            <option value="tramo2">10 - 20 días</option>
-                            <option value="tramo3">20 - 30 días</option>
-                            <option value="tramo4">30 - 40 días</option>
-                            <option value="tramo5">40 - 50 días</option>
-                            <option value="tramo6">> 50 días</option>
-                        </select>
-                        <p>Ingresos no financieros</p>
-                        <select name="ingrnofinDIP">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 1M</option>
-                            <option value="tramo2">1M - 5M</option>
-                            <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">> 50M</option>
                         </select>
                         <br><br>
                         <h3>Mostrar</h3>
@@ -324,11 +231,7 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <br>
                         <input type="checkbox" id="allDIP" name="selectAll" value="All" onclick="enableAll('selectDIP','allDIP')">
                         <label for="allDIP"> Seleccionar todo </label><br>
-
-                        <input type="checkbox" id="scoringDIP" class="selectDIP" name="scoringDIP_C" value="Scoring" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="scoringDIP"> Scoring </label>
-                        <input type="checkbox" id="autonomiaDIP" class="selectDIP" name="autonomiaDIP_C" value="Autonomia" onclick="checkAllButton('selectDIP','allDIP')">
-                        <label for="autonomiaDIP"> Comunidad Autónoma </label>
+                        
                         <input type="checkbox" id="endeudamientoDIP" class="selectDIP" name="endeudamientoDIP_C" value="Endeudamiento" onclick="checkAllButton('selectDIP','allDIP')">
                         <label for="endeudamientoDIP"> Endeudamiento </label>
                         <input type="checkbox" id="ahorro_netoDIP" class="selectDIP" name="ahorronetoDIP_C" value="AhorroNeto" onclick="checkAllButton('selectDIP','allDIP')">
@@ -435,7 +338,8 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             <option value="inicio" selected>Seleccione una autonomía</option>
                             <?php
                             foreach($ccaaCombobox as $ccaa){
-                                echo '<option value="'.$ccaa->getCodigo().'">'.$ccaa->getNombre().'</option>';
+                                if($ccaa->getNombre()!="NACIONAL")
+                                    echo '<option value="'.$ccaa->getCodigo().'">'.$ccaa->getNombre().'</option>';
                             }
                             ?>
                         </select>
@@ -448,50 +352,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                             }
                             ?>
                         </select>
-                        <p>Endeudamiento</p>
-                        <select name="endeudamientoMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0% - 20%</option>
-                            <option value="tramo2">20% - 40%</option>
-                            <option value="tramo3">40% - 80%</option>
-                            <option value="tramo4">80% - 120%</option>
-                            <option value="tramo5">> 120%</option>
-                        </select>
-                        <p>Ahorro neto</p>
-                        <select name="ahorro_netoMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">< -20%</option>
-                            <option value="tramo2">-20% - 0%</option>
-                            <option value="tramo3">0% - 20%</option>
-                            <option value="tramo4">20% - 50%</option>
-                            <option value="tramo5">> 50%</option>
-                        </select>
-                        <p>Fondos líquidos</p>
-                        <select name="fondliqMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 1M</option>
-                            <option value="tramo2">1M - 5M</option>
-                            <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">> 50M</option>
-                        </select>
-                        <p>PMP</p>
-                        <select name="pmpMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 10 días</option>
-                            <option value="tramo2">10 - 20 días</option>
-                            <option value="tramo3">20 - 30 días</option>
-                            <option value="tramo4">30 - 40 días</option>
-                            <option value="tramo5">40 - 50 días</option>
-                            <option value="tramo6">> 50 días</option>
-                        </select>
-                        <p>Ingresos no financieros</p>
-                        <select name="ingrnofinMUN">
-                            <option value="inicio" selected>Seleccione un tramo</option>
-                            <option value="tramo1">0 - 1M</option>
-                            <option value="tramo2">1M - 5M</option>
-                            <option value="tramo3">5M - 50M</option>
-                            <option value="tramo4">> 50M</option>
-                        </select>
                         <br><br>
                         <h3>Mostrar</h3>
                         <p>Mostrar los siguientes datos</p>
@@ -499,14 +359,6 @@ $provCombobox = (new DAOConsultor())->getAllProvincias();
                         <input type="checkbox" id="allMUN" name="selectAll" value="All" onclick="enableAll('selectMUN','allMUN')">
                         <label for="allMUN"> Seleccionar todo </label><br>
 
-                        <input type="checkbox" id="scoringMUN" class="selectMUN" name="scoringMUN_C" value="Scoring" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="scoringMUN"> Scoring </label>
-                        <input type="checkbox" id="poblacionMUN" class="selectMUN" name="poblacionMUN_C" value="Poblacion" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="poblacionMUN"> Poblacion </label>
-                        <input type="checkbox" id="autonomiaMUN" class="selectMUN" name="autonomiaMUN_C" value="Autonomia" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="autonomiaMUN"> Comunidad Autónoma </label>
-                        <input type="checkbox" id="provinciaMUN" class="selectMUN" name="provinciaMUN_C" value="Provincia" onclick="checkAllButton('selectMUN','allMUN')">
-                        <label for="provinciaMUN"> Provincia </label>
                         <input type="checkbox" id="endeudamientoMUN" class="selectMUN" name="endeudamientoMUN_C" value="Endeudamiento" onclick="checkAllButton('selectMUN','allMUN')">
                         <label for="endeudamientoMUN"> Endeudamiento </label>
                         <input type="checkbox" id="ahorro_netoMUN" class="selectMUN" name="ahorronetoMUN_C" value="AhorroNeto" onclick="checkAllButton('selectMUN','allMUN')">

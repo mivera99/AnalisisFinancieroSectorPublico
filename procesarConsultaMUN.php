@@ -25,14 +25,6 @@ $checked_boxes=array();
 
 // Hay un array de checkboxes. Si el usuario activa una checkbox, se guarda como true, sino como false. 
 // Asi se sabe que checkboxes ha seleccionado el usuario y cuales no
-if(!empty($_REQUEST['scoringMUN_C'])) array_push($checked_boxes, true);
-else array_push($checked_boxes,false);
-if(!empty($_REQUEST['poblacionMUN_C'])) array_push($checked_boxes, true);
-else array_push($checked_boxes,false);
-if(!empty($_REQUEST['autonomiaMUN_C'])) array_push($checked_boxes, true);
-else array_push($checked_boxes,false);
-if(!empty($_REQUEST['provinciaMUN_C'])) array_push($checked_boxes, true);
-else array_push($checked_boxes,false);
 if(!empty($_REQUEST['endeudamientoMUN_C'])) array_push($checked_boxes, true);
 else array_push($checked_boxes,false);
 if(!empty($_REQUEST['ahorronetoMUN_C'])) array_push($checked_boxes, true);
@@ -54,24 +46,12 @@ if(!empty($_REQUEST['poblacionMUN'])&& $_REQUEST['poblacionMUN']!='inicio'){
     $poblacion = htmlspecialchars(trim(strip_tags($_REQUEST['poblacionMUN'])));
 }
 
-if(!empty($_REQUEST['endeudamientoMUN']) && $_REQUEST['endeudamientoMUN']!='inicio'){
-    $endeudamiento = htmlspecialchars(trim(strip_tags($_REQUEST['endeudamientoMUN'])));
+if(!empty($_REQUEST['autonomiasMUN']) && $_REQUEST['autonomiasMUN']!='inicio'){
+    $autonomia = htmlspecialchars(trim(strip_tags($_REQUEST['autonomiasMUN'])));
 }
 
-if(!empty($_REQUEST['ahorro_netoMUN']) && $_REQUEST['ahorro_netoMUN']!='inicio'){
-    $ahorro_neto = htmlspecialchars(trim(strip_tags($_REQUEST['ahorro_netoMUN'])));
-}
-
-if(!empty($_REQUEST['fondliqMUN']) && $_REQUEST['fondliqMUN']!='inicio'){
-    $fondliq = htmlspecialchars(trim(strip_tags($_REQUEST['fondliqMUN'])));
-}
-
-if(!empty($_REQUEST['pmpMUN']) && $_REQUEST['pmpMUN']!='inicio'){
-    $pmp = htmlspecialchars(trim(strip_tags($_REQUEST['pmpMUN'])));
-}
-
-if(!empty($_REQUEST['ingrnofinMUN']) && $_REQUEST['ingrnofinMUN']!='inicio'){
-    $ingrnofin = htmlspecialchars(trim(strip_tags($_REQUEST['ingrnofinMUN'])));
+if(!empty($_REQUEST['provinciasMUN']) && $_REQUEST['provinciasMUN']!='inicio'){
+    $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasMUN'])));
 }
 
 if(!empty($_REQUEST['gastoMUN']) && $_REQUEST['gastoMUN']!='inicio'){
@@ -100,14 +80,6 @@ if(isset($_REQUEST['selectionMUN'])){
         
         }
     }
-}
-
-if(!empty($_REQUEST['autonomiasMUN']) && $_REQUEST['autonomiasMUN']!='inicio'){
-    $autonomia = htmlspecialchars(trim(strip_tags($_REQUEST['autonomiasMUN'])));
-}
-
-if(!empty($_REQUEST['provinciasMUN']) && $_REQUEST['provinciasMUN']!='inicio'){
-    $provincia = htmlspecialchars(trim(strip_tags($_REQUEST['provinciasMUN'])));
 }
 
 $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento, $ahorro_neto, $fondliq, $choice, $anho, $from, $to, $autonomia, $provincia, $pmp, $ingrnofin, $gasto, $prog, $checked_boxes);
@@ -165,42 +137,6 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
         }
         if(!empty($autonomia)) echo '<p><b>Autonomía</b>: '.((new DAOConsultor())->getCCAAById($autonomia))->getNombre().'</p>';
         if(!empty($provincia)) echo '<p><b>Provincia</b>: '.((new DAOConsultor())->getProvinciaById($provincia))->getNombre().'</p>';
-        if(!empty($endeudamiento)){ 
-            $msg="";
-            if($endeudamiento=='tramo1') $msg="0-20%";
-            else if($endeudamiento=='tramo2') $msg="20%-40%";
-            else if($endeudamiento=='tramo3') $msg="40%-80%";
-            else if($endeudamiento=='tramo4') $msg="80%-120%";
-            else if($endeudamiento=='tramo5') $msg=">120%";
-            echo '<p><b>Endeudamiento</b>: '.$msg.'</p>';
-        }
-        if(!empty($ahorro_neto)) {
-            $msg="";
-            if($ahorro_neto=='tramo1') $msg="<-20%";
-            else if($ahorro_neto=='tramo2') $msg="-20%-0%";
-            else if($ahorro_neto=='tramo3') $msg="0%-20%";
-            else if($ahorro_neto=='tramo4') $msg="20%-50%";
-            else if($ahorro_neto=='tramo5') $msg=">50%";
-            echo '<p><b>Ahorro neto</b>: '.$msg.'</p>';
-        }
-        if(!empty($pmp)) {
-            $msg="";
-            if($pmp=='tramo1') $msg="0-10 días";
-            else if($pmp=='tramo2') $msg="10-20 días";
-            else if($pmp=='tramo3') $msg="20-30 días";
-            else if($pmp=='tramo4') $msg="30-40 días";
-            else if($pmp=='tramo5') $msg="40-50 días";
-            else if($pmp=='tramo6') $msg=">50 días";
-            echo '<p><b>PMP</b>: '.$msg.'</p>';
-        }
-        if(!empty($ingrnofin)) {
-            $msg="";
-            if($ingrnofin=='tramo1') $msg="0-1M";
-            else if($ingrnofin=='tramo2') $msg="1M-5M";
-            else if($ingrnofin=='tramo3') $msg="5M-50M";
-            else if($ingrnofin=='tramo4') $msg=">50M";
-            echo '<p><b>Nivel de ingresos no financieros</b>: '.$msg.'</p>';
-        }
         if(!empty($gasto) && $_REQUEST['gastoCCAA']=='personal') echo '<p>Gasto: Gastos de personal</p>';
         if(!empty($gasto) && $_REQUEST['gastoCCAA']=='bienesservicios') echo '<p>Gasto: Gastos corrientes de bienes y servicios</p>';
         if(!empty($gasto) && $_REQUEST['gastoCCAA']=='financieros') echo '<p>Gasto: Gastos financieros</p>';
@@ -219,39 +155,39 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                 echo '<tr>';
                 echo '<td></td>';
                 echo '<td>Nombre</td>';
-                if($checked_boxes[0]) {
+                if(!empty($scoring)) {
                     echo '<td class="ratingCell">Scoring</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[1]) {
+                if(!empty($poblacion)) {
                     echo '<td class="ratingCell">Población</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[2]) {
+                if(!empty($autonomia)) {
                     echo '<td class="ratingCell">Comunidad Autónoma</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[3]) {
+                if(!empty($provincia)) {
                     echo '<td class="ratingCell">Provincia</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[4]) {
+                if($checked_boxes[0]) {
                     echo '<td class="ratingCell">Endeudamiento</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[5]) {
+                if($checked_boxes[1]) {
                     echo '<td class="ratingCell">Ahorro neto</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[6]) {
+                if($checked_boxes[2]) {
                     echo '<td class="ratingCell">Fondos líquidos</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[7]) {
+                if($checked_boxes[3]) {
                     echo '<td class="ratingCell">PMP</td>';
                     $num_cols++;
                 }
-                if($checked_boxes[8]) {
+                if($checked_boxes[4]) {
                     echo '<td class="ratingCell">Nivel de ingresos no financieros</td>';
                     $num_cols++;
                 }
@@ -303,23 +239,23 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
                     echo '<td class="ratingCell">'.($i+1).'</td>';
                     echo '<td>'.$mun->getNombre().'</td>';
                     if(!empty($mun->getScoring())) echo '<td class="ratingCell">'.$mun->getScoring().'</td>';
-                    else if($checked_boxes[0]) echo '<td class="ratingCell">-</td>';
+                    else if(!empty($scoring)) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getPoblacion())&&$mun->getPoblacion()!=0) echo '<td class="ratingCell">'.number_format($mun->getPoblacion(), 0, '','.').'</td>';
-                    else if($checked_boxes[1]) echo '<td class="ratingCell">-</td>';
+                    else if(!empty($poblacion)) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getAutonomia())) echo '<td class="ratingCell">'.($mun->getAutonomia()).'</td>';
-                    else if($checked_boxes[2]) echo '<td class="ratingCell">-</td>';
+                    else if(!empty($autonomia)) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getProvincia())) echo '<td class="ratingCell">'.($mun->getProvincia()).'</td>';
-                    else if($checked_boxes[3]) echo '<td class="ratingCell">-</td>';
+                    else if(!empty($provincia)) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getEndeudamiento())&&$mun->getEndeudamiento()!=0) echo '<td class="ratingCell">'.($mun->getEndeudamiento()*100).'%</td>';
-                    else if($checked_boxes[4]) echo '<td class="ratingCell">-</td>';
+                    else if($checked_boxes[0]) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getSostenibilidadFinanciera())&&$mun->getSostenibilidadFinanciera()!=0) echo '<td class="ratingCell">'.($mun->getSostenibilidadFinanciera()*100).'%</td>';
-                    else if($checked_boxes[5]) echo '<td class="ratingCell">-</td>';
+                    else if($checked_boxes[1]) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getLiquidezInmediata())&&$mun->getLiquidezInmediata()!=0) echo '<td class="ratingCell">'.number_format($mun->getLiquidezInmediata(), 0, '','.').'€</td>';
-                    else if($checked_boxes[6]) echo '<td class="ratingCell">-</td>';
+                    else if($checked_boxes[2]) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getPeriodoMedioPagos())&&$mun->getPeriodoMedioPagos()!=0) echo '<td class="ratingCell">'.($mun->getPeriodoMedioPagos()).' días</td>';
-                    else if($checked_boxes[7]) echo '<td class="ratingCell">-</td>';
+                    else if($checked_boxes[3]) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getTotalIngresosNoCorrientes1())&&$mun->getTotalIngresosNoCorrientes1()!=0) echo '<td class="ratingCell">'.number_format($mun->getTotalIngresosNoCorrientes1(), 0, '','.').'€</td>';
-                    else if($checked_boxes[8]) echo '<td class="ratingCell">-</td>';
+                    else if($checked_boxes[4]) echo '<td class="ratingCell">-</td>';
                     if(!empty($mun->getGastosPersonal1())&&$mun->getGastosPersonal1()!=0) echo '<td class="ratingCell">'.number_format($mun->getGastosPersonal1(), 0, '','.').'€</td>';
                     else if(!empty($mun->getGastosCorrientesBienesServicios1())&&$mun->getGastosCorrientesBienesServicios1()!=0) echo '<td class="ratingCell">'.number_format($mun->getGastosCorrientesBienesServicios1(), 0, '','.').'€</td>';
                     else if(!empty($mun->getTransferenciasCorrientesGastos1())&&$mun->getTransferenciasCorrientesGastos1()!=0) echo '<td class="ratingCell">'.number_format($mun->getTransferenciasCorrientesGastos1(), 0, '','.').'€</td>';
