@@ -281,98 +281,99 @@ if($diputacion){
 
                     echo "<i>" . $infoRating . "</i><br><br>";
                     if($i==0){
+                        echo '<p>';
                         $dato = $dip2020->getEndeudamiento()*100;
-                        if($dato==0) echo'<p>Sin deuda financiera.</p>';
-                        else if($dato>0 && $dato<=25) echo'<p>Muy bajo nivel de deuda.</p>';
-                        else if($dato>25 && $dato<=50) echo'<p>Relativamente bajo nivel de deuda financiera.</p>';
-                        else if($dato>50 && $dato<=75) echo'<p>Nivel de deuda financiera aceptable.</p>'; 
-                        else if($dato>75) echo'<p>Nivel de endeudamiento excesivo.</p>';
+                        if($dato==0) echo'Sin deuda financiera. ';
+                        else if($dato>0 && $dato<=25) echo'Muy bajo nivel de deuda. ';
+                        else if($dato>25 && $dato<=50) echo'Relativamente bajo nivel de deuda financiera. ';
+                        else if($dato>50 && $dato<=75) echo'Nivel de deuda financiera aceptable. '; 
+                        else if($dato>75) echo'Nivel de endeudamiento excesivo. ';
                         
                         $dato = $dip2020->getSostenibilidadFinanciera()*100;
-                        if($dato>15) echo'<p>Con elevada capacidad de ahorro.</p>';
-                        else if($dato>5 && $dato<=15) echo'<p>Con capacidad de ahorro.</p>';
-                        else if($dato>-5 && $dato<=5) echo'<p>Con porcentaje de ahorro en torno a cero.</p>';
-                        else if($dato>-15 && $dato<=-5) echo'<p>Sin capacidad de ahorro.</p>'; 
-                        else if($dato<-15) echo'<p>Nula capcidad de ahorro que obliga a fuertes incrementos de deuda.</p>';
+                        if($dato>15) echo'Con elevada capacidad de ahorro. ';
+                        else if($dato>5 && $dato<=15) echo'Con capacidad de ahorro. ';
+                        else if($dato>-5 && $dato<=5) echo'Con porcentaje de ahorro en torno a cero. ';
+                        else if($dato>-15 && $dato<=-5) echo'Sin capacidad de ahorro. '; 
+                        else if($dato<-15) echo'Nula capcidad de ahorro que obliga a fuertes incrementos de deuda. ';
                         
                         $dato = $dip2020->getApalancamientoOperativo()*100;
-                        if($dato<30) echo'<p>Muy bajo apalancamiento operativo.</p>';
-                        else if($dato>=30 && $dato<40) echo'<p>Reducido apalancamiento operativo.</p>';
-                        else if($dato>=40 && $dato<50) echo'<p>Cuenta con un nivel de apalancamiento operativo.</p>';
-                        else if($dato>=50 && $dato<60) echo'<p>Alto apalancamiento operativo.</p>'; 
-                        else if($dato>=60) echo'<p>Elevado apalancamiento operativo.</p>';
+                        if($dato<30) echo'Muy bajo apalancamiento operativo. ';
+                        else if($dato>=30 && $dato<40) echo'Reducido apalancamiento operativo. ';
+                        else if($dato>=40 && $dato<50) echo'Cuenta con un nivel de apalancamiento operativo. ';
+                        else if($dato>=50 && $dato<60) echo'Alto apalancamiento operativo. '; 
+                        else if($dato>=60) echo'Elevado apalancamiento operativo. ';
                         
                         $dato = $dip2020->getSostenibilidadDeuda()*100;
-                        if($dato==0) echo'<p>Bajo nivel de deuda financiera.</p>';
-                        else if($dato>=0 && $dato<5) echo'<p>Bajo nivel de deuda financiera.</p>';
-                        else if($dato>=5 && $dato<15) echo'<p>Bajo nivel de deuda financiera.</p>';
-                        else if($dato>=15 && $dato<25) echo'<p>Bajo nivel de deuda financiera.</p>'; 
-                        else if($dato>=25) echo'<p>Bajo nivel de deuda financiera.</p>';
+                        if($dato==0) echo'Bajo nivel de deuda financiera. ';
+                        else if($dato>=0 && $dato<5) echo'Bajo nivel de deuda financiera. ';
+                        else if($dato>=5 && $dato<15) echo'Bajo nivel de deuda financiera. ';
+                        else if($dato>=15 && $dato<25) echo'Bajo nivel de deuda financiera. '; 
+                        else if($dato>=25) echo'Bajo nivel de deuda financiera. ';
                         
                         $dato = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
-                        if($dato>=25) echo'<p>Elevado nivel de tesorería.</p>';
-                        else if($dato>=5 && $dato<25) echo'<p>Buena posición de caja.</p>';
-                        else if($dato>=-5 && $dato<5) echo'<p>Nivel razonable de tesorería.</p>';
-                        else if($dato>=-25 && $dato<-5) echo'<p>Baja liquidez.</p>'; 
-                        else if($dato<-25) echo'<p>Nivel de tesorería muy deficiente.</p>';
+                        if($dato>=25) echo'Elevado nivel de tesorería. ';
+                        else if($dato>=5 && $dato<25) echo'Buena posición de caja. ';
+                        else if($dato>=-5 && $dato<5) echo'Nivel razonable de tesorería. ';
+                        else if($dato>=-25 && $dato<-5) echo'Baja liquidez. '; 
+                        else if($dato<-25) echo'Nivel de tesorería muy deficiente. ';
                         
                         /*$dato = $dip2020->getLiquidezInmediata()*100;
-                        if($dato>=100) echo'<p>.</p>';
-                        else if($dato>=50 && $dato<100) echo'<p>.</p>';
-                        else if($dato>=30 && $dato<50) echo'<p>.</p>';
-                        else if($dato>=20 && $dato<30) echo'<p>.</p>'; 
-                        else if($dato<20) echo'<p>.</p>';
+                        if($dato>=100) echo'.';
+                        else if($dato>=50 && $dato<100) echo'.';
+                        else if($dato>=30 && $dato<50) echo'.';
+                        else if($dato>=20 && $dato<30) echo'.'; 
+                        else if($dato<20) echo'.';
                         */
                         /*
                         $dato = $dip2020->getSolvenciaCortoPlazo()*100;
-                        if($dato>=300) echo'<p>.</p>';
-                        else if($dato>=200 && $dato<300) echo'<p>.</p>';
-                        else if($dato>=150 && $dato<200) echo'<p>.</p>';
-                        else if($dato>=100 && $dato<150) echo'<p>.</p>'; 
-                        else if($dato<100) echo'<p>.</p>';
+                        if($dato>=300) echo'.';
+                        else if($dato>=200 && $dato<300) echo'.';
+                        else if($dato>=150 && $dato<200) echo'.';
+                        else if($dato>=100 && $dato<150) echo'.'; 
+                        else if($dato<100) echo'.';
                         */
                         $dato = $dip2020->getEficiencia()*100;
-                        if($dato<=80) echo'<p>Muy eficiente en términos de gastos ordinarios.</p>';
-                        else if($dato>=80 && $dato<100) echo'<p>Eficiente en términos de gastos ordinarios.</p>';
-                        else if($dato>=100 && $dato<125) echo'<p>Nivel de eficiencia intermedio.</p>';
-                        else if($dato>=125 && $dato<150) echo'<p>Bajo nivel de eficiencia.</p>'; 
-                        else if($dato>=150) echo'<p>Muy poco eficiente en términos de gastos ordinarios.</p>';
+                        if($dato<=80) echo'Muy eficiente en términos de gastos ordinarios. ';
+                        else if($dato>=80 && $dato<100) echo'Eficiente en términos de gastos ordinarios. ';
+                        else if($dato>=100 && $dato<125) echo'Nivel de eficiencia intermedio. ';
+                        else if($dato>=125 && $dato<150) echo'Bajo nivel de eficiencia. '; 
+                        else if($dato>=150) echo'Muy poco eficiente en términos de gastos ordinarios. ';
                         
                         $dato = $dip2020->getEjecucionIngresosCorrientes()*100;
-                        if($dato>=99) echo'<p>Muy buena previsión de ingresos.</p>';
-                        else if($dato>=97.5 && $dato<99) echo'<p>Buena previsión de ingresos.</p>';
-                        else if($dato>=95 && $dato<97) echo'<p>Razonbale previsión de ingresos.</p>';
-                        else if($dato>=90 && $dato<95) echo'<p>Baja capacidad de previsión de ingresos.</p>'; 
-                        else if($dato<90) echo'<p>Mala previsión de ingresos.</p>';
+                        if($dato>=99) echo'Muy buena previsión de ingresos. ';
+                        else if($dato>=97.5 && $dato<99) echo'Buena previsión de ingresos. ';
+                        else if($dato>=95 && $dato<97) echo'Razonbale previsión de ingresos. ';
+                        else if($dato>=90 && $dato<95) echo'Baja capacidad de previsión de ingresos. '; 
+                        else if($dato<90) echo'Mala previsión de ingresos. ';
 
                         $dato = $dip2020->getEjecucionGastosCorrientes()*100;
-                        if($dato>=99) echo'<p>Muy buena nivel de cumplimiento de gastos.</p>';
-                        else if($dato>=97.5 && $dato<99) echo'<p>Buen nivel de cumplimiento de gastos.</p>';
-                        else if($dato>=95 && $dato<97.5) echo'<p>Razonbale cumplimiento de gastos.</p>';
-                        else if($dato>=90 && $dato<95) echo'<p>Baja ejecución presupuestaria de gastos.</p>'; 
-                        else if($dato<90) echo'<p>Mala ejecución de gastos.</p>';
+                        if($dato>=99) echo'Muy buena nivel de cumplimiento de gastos. ';
+                        else if($dato>=97.5 && $dato<99) echo'Buen nivel de cumplimiento de gastos. ';
+                        else if($dato>=95 && $dato<97.5) echo'Razonbale cumplimiento de gastos. ';
+                        else if($dato>=90 && $dato<95) echo'Baja ejecución presupuestaria de gastos. '; 
+                        else if($dato<90) echo'Mala ejecución de gastos. ';
                         
                         $dato = $dip2020->getPeriodoMedioPagos()*100;
-                        if($dato<=30) echo'<p>Pago de facturas muy rápido.</p>';
-                        else if($dato>=30 && $dato<90) echo'<p>Pago de facturas en tiempo aceptable.</p>';
-                        else if($dato>=90 && $dato<120) echo'<p>Pago de facturas lento.</p>';
-                        else if($dato>=120 && $dato<180) echo'<p>Tarda mucho en abonar las facturas.</p>'; 
-                        else if($dato>=180) echo'<p>Excesivo tiempo en el abono de facturas.</p>';
+                        if($dato<=30) echo'Pago de facturas muy rápido. ';
+                        else if($dato>=30 && $dato<90) echo'Pago de facturas en tiempo aceptable. ';
+                        else if($dato>=90 && $dato<120) echo'Pago de facturas lento. ';
+                        else if($dato>=120 && $dato<180) echo'Tarda mucho en abonar las facturas. '; 
+                        else if($dato>=180) echo'Excesivo tiempo en el abono de facturas. ';
                         
                         $dato = $dip2020->getPagosSobreObligacionesReconocidas()*100;
-                        if($dato>=99) echo'<p>Elevado nivel de pagos sobre gastos reconocidos.</p>';
-                        else if($dato>=95 && $dato<99) echo'<p>Nivel de pagos razonable sobre gastos reconocidos.</p>';
-                        else if($dato>=90 && $dato<95) echo'<p>Aceptable nivel de pagos sobre gastos reconocidos.</p>';
-                        else if($dato>=85 && $dato<90) echo'<p>Bajo nivel de pagos sobre gastos reconocidos.</p>'; 
-                        else if($dato<85) echo'<p>Muy bajo porcentaje de pagos sobre obligaciones reconocidas.</p>';
+                        if($dato>=99) echo'Elevado nivel de pagos sobre gastos reconocidos. ';
+                        else if($dato>=95 && $dato<99) echo'Nivel de pagos razonable sobre gastos reconocidos. ';
+                        else if($dato>=90 && $dato<95) echo'Aceptable nivel de pagos sobre gastos reconocidos. ';
+                        else if($dato>=85 && $dato<90) echo'Bajo nivel de pagos sobre gastos reconocidos. '; 
+                        else if($dato<85) echo'Muy bajo porcentaje de pagos sobre obligaciones reconocidas. ';
                         
                         $dato = $dip2020->getEficaciaRecaudatoria()*100;
-                        if($dato>=95) echo'<p>Muy buen nivel de eficacia recaudatoria.</p>';
-                        else if($dato>=90 && $dato<95) echo'<p>Razonable nivel de eficacia recaudatoria.</p>';
-                        else if($dato>=85 && $dato<90) echo'<p>Aceptable nivel de eficacia recaudatoria.</p>';
-                        else if($dato>=80 && $dato<85) echo'<p>Bajo nivel de eficacia recaudatoria.</p>'; 
-                        else if($dato<80) echo'<p>Muy bajo nivel de eficacia recaudatoria.</p>';
-                        
+                        if($dato>=95) echo'Muy buen nivel de eficacia recaudatoria. ';
+                        else if($dato>=90 && $dato<95) echo'Razonable nivel de eficacia recaudatoria. ';
+                        else if($dato>=85 && $dato<90) echo'Aceptable nivel de eficacia recaudatoria. ';
+                        else if($dato>=80 && $dato<85) echo'Bajo nivel de eficacia recaudatoria. '; 
+                        else if($dato<80) echo'Muy bajo nivel de eficacia recaudatoria. ';
+                        echo '</p>';
                     }
                     $i++;
                 }
@@ -2926,18 +2927,6 @@ if($diputacion){
                 const efiR = new Chart(charEfiR, configEfiR);
                 const efiRM = new Chart(charEfiRM, configEfiRM);
             </script>
-
-
-
-
-
-
-
-
-
-
-
-
             <?php
             }
             else {

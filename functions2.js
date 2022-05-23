@@ -8,6 +8,7 @@ function showPassword(){
     }
 }
 
+// Funcion para mostrar el tipo de consulta (ccaa, municipio o diputacion)
 function showFacility(evt, facilityName) {
   let i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -22,6 +23,7 @@ function showFacility(evt, facilityName) {
   evt.currentTarget.className += " active";
 }
 
+// Funcion para resetear los campos del formulario de consultas
 function resetFields(){
   var forms = document.getElementsByTagName("form");
   for(i=0;i<forms.length;i++){
@@ -45,6 +47,7 @@ function resetFields(){
   }
 }
 
+// Funcion para esconder la opcion de los años en las consultas
 function hideOption(radioName, selectName){
   let selectionOptions = document.getElementsByName(radioName);
   let forms = document.getElementsByClassName(selectName); 
@@ -59,6 +62,8 @@ function hideOption(radioName, selectName){
     forms[1].style.display="block";
   }
 }
+
+// Funcion para cambiar el tipo de grafica
 function changeChart(chart, configChart, radioButtonName){
 
   let radiobuttons = document.getElementsByName(radioButtonName);
@@ -74,23 +79,7 @@ function changeChart(chart, configChart, radioButtonName){
   chart.update();
 }
 
-function changeTo(toId, fromId){
-  let to = document.getElementById(toId);
-  let from = document.getElementById(fromId);
-  
-  for(i=0;i<to.options.length;i++){
-    let option = to.options[i];
-    option.style.display="block";
-  }
-
-  if(from.selectedIndex!=0){
-    for(i=1;i<from.selectedIndex;i++){
-      let option = to.options[i];
-      option.style.display="none";
-    }
-  }
-}
-
+// Funcion para cambiar la casilla From de los años de las consultas
 function changeFrom(fromId,toId){
   let from = document.getElementById(fromId);
   let to = document.getElementById(toId);
@@ -103,6 +92,24 @@ function changeFrom(fromId,toId){
   if(to.selectedIndex!=0){
     for(i=to.selectedIndex+1;i<from.options.length;i++){
       let option = from.options[i];
+      option.style.display="none";
+    }
+  }
+}
+
+// Funcion para cambiar la casilla To de los años de las consultas
+function changeTo(toId, fromId){
+  let to = document.getElementById(toId);
+  let from = document.getElementById(fromId);
+  
+  for(i=0;i<to.options.length;i++){
+    let option = to.options[i];
+    option.style.display="block";
+  }
+
+  if(from.selectedIndex!=0){
+    for(i=1;i<from.selectedIndex;i++){
+      let option = to.options[i];
       option.style.display="none";
     }
   }
@@ -156,6 +163,7 @@ function changeCCAA(ccaaId, provId, ccaaArray, provArray){
   }
 }
 
+// Funcion para habilitar todas las casillas de las consultas
 function enableAll(selectButton, allButton){
   let checkboxes = document.getElementsByClassName(selectButton);
   let selectAll = document.getElementById(allButton);
@@ -172,6 +180,7 @@ function enableAll(selectButton, allButton){
   }
 }
 
+// Revisa si todas las casillas han sido activadas o no, para poder activar la casilla de Seleccionar Todo de las consultas
 function checkAllButton(selectButton, allButton){
   let checkboxes = document.getElementsByClassName(selectButton);
   let selectAll = document.getElementById(allButton);
