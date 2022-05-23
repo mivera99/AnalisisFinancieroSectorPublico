@@ -1034,8 +1034,7 @@ class DAOConsultorMunicipio{
         $mun->setTp($mun2["TP"]);
         $mun->setIt($mun2["IT"]);
         $mun->setIdi($mun2["IDI"]);
-
-
+        
         return $mun;
     }
 
