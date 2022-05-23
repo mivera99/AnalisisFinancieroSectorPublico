@@ -723,7 +723,6 @@ class DAOConsultorMunicipio{
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_mun.ANHO";
             $conditions = $conditions."scoring_mun.RATING = '$scoring' ";
-            //$returning_values = $returning_values.",scoring_mun.ANHO, scoring_mun.RATING";
             if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
             $order_by = $order_by . "scoring_mun.ANHO DESC, ";
             $group_by = $group_by.",scoring_mun.ANHO";
@@ -776,8 +775,6 @@ class DAOConsultorMunicipio{
                 $conditions = $conditions."(scoring_mun.POBLACION) > 500000 ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",scoring_mun.ANHO";
-            /*$returning_values = $returning_values.", scoring_mun.POBLACION";
-            */
             if(strpos($joins, 'INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO')===false) $joins = $joins . "INNER JOIN scoring_mun ON scoring_mun.CODIGO=municipios.CODIGO ";
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "scoring_mun.ANHO DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",scoring_mun.ANHO ";
@@ -826,20 +823,7 @@ class DAOConsultorMunicipio{
                 else if(strpos($joins, ' cuentas_mun_ingresos ')!==false)  $conditions = $conditions . "prog_mun.ANHO = cuentas_mun_ingresos.ANHO";
                 else if(strpos($joins, ' cuentas_mun_gastos ')!==false)  $conditions = $conditions . "prog_mun.ANHO = cuentas_mun_gastos.ANHO";
                 else if(strpos($joins, ' deudas_mun ')!==false)  $conditions = $conditions . "prog_mun.ANHO = deudas_mun.ANHO";
-                //if($tmp!=$conditions) $conditions = $conditions." AND ";
             }
-            /*if($prog=='personal'){
-                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST1' ";
-            }
-            else if($gasto=='bienesservicios'){
-                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST2' ";
-            }
-            else if($gasto=='financieros'){
-                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST3' ";
-            }
-            else if($gasto=='inversiones'){
-                $conditions = $conditions."(cuentas_mun_gastos.TIPO) ='PARTIDAGAST6' ";
-            }*/
             $prog = strtoupper($prog);
 
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",prog_mun.ANHO";
@@ -988,9 +972,6 @@ class DAOConsultorMunicipio{
                 $mun->setAutonomia($autonomia['NOMBRE']);
             }
             if(!empty($resultado['PROVINCIA'])) $mun->setProvincia(((new DAOConsultorProvincia())->getProvinciaById($resultado['PROVINCIA']))->getNombre());
-            
-            //$elements2[$resultado['ANHO']]=$mun;
-            //array_push($elements, $elements2);
             if(!array_key_exists($resultado['ANHO'], $elements)){
                 $elements[$resultado['ANHO']]=array();
             }

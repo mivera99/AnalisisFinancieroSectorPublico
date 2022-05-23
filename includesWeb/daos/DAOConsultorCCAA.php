@@ -1471,7 +1471,6 @@ class DAOConsultorCCAA {
                 $elements[$resultado['ANHO']]=array();
             }
             ($elements[$resultado['ANHO']])[$resultado['CODIGO']]=$ccaa;
-            //$elements2[$resultado['ANHO']]=$ccaa;
             //array_push($elements, $elements2);
         }
         //echo '<p>'.$sql.'</p>';

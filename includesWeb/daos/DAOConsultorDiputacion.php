@@ -820,14 +820,6 @@ class DAOConsultorDiputacion {
             if(strpos($order_by, 'ANHO DESC')===false) $order_by = $order_by . "$anhoref DESC, ";
             if(strpos($group_by, 'ANHO')===false) $group_by = $group_by . ",$anhoref ";
         }   
-        
-        /*if(!empty($provincia)){
-            if($conditions!=""){
-                $conditions = $conditions . "AND ";
-            }
-            $conditions = $conditions."diputaciones.PROVINCIA = '$provincia' ";
-            $returning_values = $returning_values.",diputaciones.PROVINCIA";
-        }*/
 
         if($conditions!=""){
             $conditions =" WHERE ".$conditions;
@@ -873,8 +865,6 @@ class DAOConsultorDiputacion {
                 $autonomia = mysqli_fetch_assoc($resultCode);
                 $dip->setAutonomia($autonomia['NOMBRE']);
             }
-            //$elements2[$resultado['ANHO']]=$dip;
-            //array_push($elements, $elements2);
             if(!array_key_exists($resultado['ANHO'], $elements)){
                 $elements[$resultado['ANHO']]=array();
             }
