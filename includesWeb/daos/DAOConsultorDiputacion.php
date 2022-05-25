@@ -669,7 +669,6 @@ class DAOConsultorDiputacion {
                 else if(strpos($joins, ' cuentas_dip_pmp ')!==false) $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_pmp.ANHO";
                 else if(strpos($joins, ' cuentas_dip_gastos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_gastos.ANHO";
                 else if(strpos($joins, ' cuentas_dip_ingresos ')!==false)  $conditions = $conditions . "deudas_dip.ANHO = cuentas_dip_ingresos.ANHO";
-                //$conditions = $conditions." AND ";
             }
             if(strpos($returning_values, 'ANHO')===false) $returning_values = $returning_values . ",deudas_dip.ANHO";
             $returning_values = $returning_values.",deudas_dip.FONDLIQUIDOS";
@@ -714,7 +713,6 @@ class DAOConsultorDiputacion {
 
         // Filtros
         if(!empty($scoring)){
-            //$returning_values = $returning_values.",scoring_dip.RATING";
             if($conditions!=""){
                 $conditions = $conditions." AND ";
             }
