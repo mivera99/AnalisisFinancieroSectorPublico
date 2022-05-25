@@ -1446,7 +1446,6 @@ class DAOConsultorCCAA {
         if(!$result){
             return false;
         }
-        //echo '<br>exito';
         $elements=array();
         while($resultado = mysqli_fetch_assoc($result)){
             $elements2 = array();
@@ -1471,10 +1470,7 @@ class DAOConsultorCCAA {
                 $elements[$resultado['ANHO']]=array();
             }
             ($elements[$resultado['ANHO']])[$resultado['CODIGO']]=$ccaa;
-            //array_push($elements, $elements2);
         }
-        //echo '<p>'.$sql.'</p>';
-        //echo $conditions;
         krsort($elements);
         $sum=0;
         while ($year_array = current($elements)) {
@@ -1484,7 +1480,6 @@ class DAOConsultorCCAA {
         }
         $elements['total']=$sum;
         
-        //var_dump($elements);
         return $elements;
     }   
 
