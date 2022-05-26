@@ -167,6 +167,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
         echo '<p>No se encontraron resultados</p>';
     }
     ?>
+    <div style="height:15vh"></div>
 </div>
 <div id="pie">
     <?php

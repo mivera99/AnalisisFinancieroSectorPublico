@@ -2933,7 +2933,9 @@ if($diputacion){
                 echo '<p>Diputación no encontrada</p>';
             }
             ?>
+            <div style="height:15vh"></div>
         </div>
+
 
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>

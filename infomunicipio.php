@@ -641,7 +641,7 @@ if($municipio){
                     const ingrcorN = new Chart(chartIngrN, configChartIngrN);
                     const ingrcorT = new Chart(chartIngrT, configChartIngrT);
                 </script>
-<br><br>
+            <br><br>
             <h3>Gastos (en €)</h3>
             <table>
                 <thead>
@@ -3079,8 +3079,7 @@ if($municipio){
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <br>
+            <div style="height:15vh"></div>
             <?php
             }
             else {
@@ -3088,10 +3087,17 @@ if($municipio){
             }
             ?>
         </div>
+        <div>
+            <p>Prueba de escritura</p>
+        </div>
 
+        <footer>
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>
         </div>
+        </footer>
 
     </body>
+
+
 </html>

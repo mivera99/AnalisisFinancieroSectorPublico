@@ -4,6 +4,10 @@
     color: #003E99;
     transition: all .2s ease;
 }
+body{
+  margin: 0;
+  padding: 0;
+}
 
 body h1 {
   font-size: 22px;
@@ -214,6 +218,7 @@ fieldset{
 #pie {
   position: fixed;
   bottom: 0;
+  /* top: 800vh; */
   padding-left: 108px;
   padding-top: 20px;
   padding-bottom: 20px;

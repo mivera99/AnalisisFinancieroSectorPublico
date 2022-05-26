@@ -2858,6 +2858,7 @@ if($ccaa && $ccaaNac){
                 echo '<p>Comunidad autónoma no encontrada</p>';
             }
             ?>
+            <div style="height:15vh"></div>
         </div>
 
         <br><br><br>

@@ -405,6 +405,7 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
         echo '<p>No se encontraron resultados</p>';
     }
     ?>
+    <div style="height:15vh"></div>
 </div>
 <div id="pie">
     <?php
