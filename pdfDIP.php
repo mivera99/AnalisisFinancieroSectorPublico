@@ -10,7 +10,7 @@ if(isset($_COOKIE["dip"]))
 /* RECOGEMOS LOS DATOS DEL DIPUTACION */
 
 $daodip = new DAOConsultor();
-$diputacion = $daodip->getDiputacion($nombre);
+$diputacion = $daodip->getDiputacion(addslashes($nombre));
 
 
 $dip2018 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2018);

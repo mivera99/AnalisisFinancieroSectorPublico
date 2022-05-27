@@ -9,7 +9,7 @@ if(isset($_COOKIE["mun"]))
 /* RECOGEMOS LOS DATOS DEL MUNICIPIO */
 
 $daomun = new DAOConsultor();
-$municipio = $daomun->getMunicipio($nombre);
+$municipio = $daomun->getMunicipio(addslashes($nombre));
 
 
 $mun2018 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2018);

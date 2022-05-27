@@ -8,7 +8,7 @@ if(isset($_COOKIE["ccaa"]))
 
 /* RECOGEMOS LOS DATOS DE LA CCAA */
 $daoccaa = new DAOConsultor();
-$ccaa = $daoccaa->getCCAA($nombre);
+$ccaa = $daoccaa->getCCAA(addslashes($nombre));
 $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
 
