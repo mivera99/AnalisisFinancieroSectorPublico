@@ -35,17 +35,15 @@ require_once('includesWeb/daos/DAOUsuario.php');
                 <h2>Eliminar Usuarios</h2>
                 <?php
                 $usuarios=(new DAOUsuario())->getAllUsuarios($_SESSION["email"]);
-                if(count($usuarios)!=1){
+                if(count($usuarios)!=1)
                     echo '<p>'.count($usuarios).' usuarios encontrados</p>';
-                }
-                else {
+                else 
                     echo '<p>'.count($usuarios).' usuario encontrado</p>';
-                }
+
                 if(count($usuarios)>0){
                 ?>
                     <fieldset>
                         <p>Selecciona aquellos usuarios que desea eliminar</p><br>
-                        <div>
                         <select name="usuarios[]" multiple size="8">
                         <?php
                             foreach($usuarios as $usuario) {
@@ -54,7 +52,7 @@ require_once('includesWeb/daos/DAOUsuario.php');
                                 echo"<option value=\"$correo\">$infoUsuario</option>";
                             }
                         ?>
-                        </select></div></p><br><br>
+                        </select><br><br>
                     <button type="submit">Eliminar</button>
                     </fieldset>
                 <?php

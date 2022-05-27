@@ -2,13 +2,8 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-if(isset($_COOKIE["ccaa"])){
+if(isset($_COOKIE["ccaa"]))
     $nombre = $_COOKIE["ccaa"];
-    //$html .= "Hola, soy " . $nombre . "!";
-}
-else {
-    //$html .= "<b>NO HAY COOKIE :(</b><br>";
-}
 
 
 /* RECOGEMOS LOS DATOS DE LA CCAA */
@@ -26,9 +21,6 @@ class MYTCPDF extends TCPDF {
 	//Page header
 	public function Header() {
         $this->setY(15);
-		// Logo
-		/*$image_file = K_PATH_IMAGES.'logo_example.jpg';
-		$this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);*/
 		// Set font
 		$this->setFont('helvetica', 'B', 20);
 		// Title

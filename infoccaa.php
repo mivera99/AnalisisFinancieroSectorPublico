@@ -281,7 +281,7 @@ if($ccaa && $ccaaNac){
 
         <div id="menu-superior">
             <div id ="contenidoIni">     
-            <?php require("includesWeb/comun/buscador.php");?>  
+                <?php require("includesWeb/comun/buscador.php");?>  
             </div>
         </div>
         

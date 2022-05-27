@@ -1,5 +1,4 @@
 <?php
-    //require_once __DIR__.'/Aplicacion.php';
     
     define('BD_HOST', 'localhost'); // 
     define('BD_NAME', 'dbs_01');// 
@@ -52,15 +51,10 @@
     }
 
     function cierraConexion() {
-        // Sólo hacer uso de global para cerrar la conexion !!
+        // Sólo hacer uso de global para cerrar la conexion
         global $BD;
         if ( isset($BD) && ! $BD->connect_errno ) {
           $BD->close();
         }
     }
-    // Inicializa la aplicación
-/*$app = Aplicacion::getInstance();
-$app->init(array('host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS));
-register_shutdown_function(array($app, 'shutdown'));
-*/
 ?>

@@ -174,9 +174,7 @@ $ccaas = (new DAOConsultor())->consultarCCAAs($scoring, $poblacion, $endeudamien
     <div style="height:15vh"></div>
 </div>
 <div id="pie">
-    <?php
-        require('includesWeb/comun/pie.php');
-    ?>
+    <?php require('includesWeb/comun/pie.php');?>
 </div>
 </body>
 </html>

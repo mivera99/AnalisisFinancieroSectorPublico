@@ -2,9 +2,8 @@
     session_start();
     require('includesWeb/daos/DAOUsuario.php');
 
-    if(isset($_SESSION['email'])){
+    if(isset($_SESSION['email']))
         $usuario = (new DAOUsuario())->getUsuario($_SESSION['email'], $_SESSION['password']);
-    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,9 +32,7 @@
 <div id="contenedor">
 
 	<div id="cabecera">
-		<?php
-			require('includesWeb/comun/cabecera.php');
-		?>
+		<?php require('includesWeb/comun/cabecera.php');?>
 	</div>
 
 	<div id="contenido">
@@ -63,9 +60,7 @@
         </form>
     </div>
 	<div id="pie">
-		<?php
-			require('includesWeb/comun/pie.php');
-		?>
+		<?php require('includesWeb/comun/pie.php');?>
 	</div>
 
 </body>

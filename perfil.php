@@ -91,9 +91,7 @@
         ?>
     </div>
 	<div id="pie">
-		<?php
-			require('includesWeb/comun/pie.php');
-		?>
+		<?php require('includesWeb/comun/pie.php');?>
 	</div>
 
 </body>

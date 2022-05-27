@@ -2,15 +2,8 @@
 session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
-
-if(isset($_COOKIE["mun"])){
+if(isset($_COOKIE["mun"]))
     $nombre = $_COOKIE["mun"];
-    //echo "Hola, soy " . $nombre . "!";
-}
-else {
-    //echo "<b>NO HAY COOKIE :(</b><br>";
-}
-
 
 /* RECOGEMOS LOS DATOS DEL MUNICIPIO */
 

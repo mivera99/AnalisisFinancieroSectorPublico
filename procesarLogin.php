@@ -11,9 +11,9 @@
         $_SESSION['password'] = $usuario->getcontrasenia();
         $_SESSION['mensaje'] = 'Bienvenido, '. $usuario->getnombreusuario();
     }
-    else{
+    else
         $_SESSION['mensaje']='Error en el inicio de sesión';
-    }
+    
     header('Location:index');
     exit();
 ?>

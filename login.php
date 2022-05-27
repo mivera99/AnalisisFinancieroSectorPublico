@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,16 +28,17 @@
 
     <div id = "cabeceraIni">
             <?php require("includesWeb/comun/cabecera.php");?>  
-        </div>
+    </div>
     <div id="menu-superior">
-            <div id ="contenidoIni">     
+        <div id ="contenidoIni">     
             <?php require("includesWeb/comun/buscador.php");?>  
-            </div>
         </div>
+    </div>
     <div id="contenido">
     <form action='procesarLogin.php' method='POST'>
         <h2 class="form-name">Login</h2>
         <fieldset>
+            <p>Introduce las credenciales. Sólo las cuentas de usuario autorizadas pueden entrar.</p><br>
             <p>Email * </p><input type='email' name='email' required> <br><br>
             <p>Contraseña * </p><input type='password' name='password' id='password' required>
             <button type="button" class="mostrar-contraseña" onclick=showPassword()>Mostrar contraseña</button>  
@@ -51,9 +50,7 @@
 
 </div>
 <div id="pie">
-    <?php
-        require('includesWeb/comun/pie.php');
-    ?>
+    <?php require('includesWeb/comun/pie.php');?>
 </div>
 </body>
 </html>
