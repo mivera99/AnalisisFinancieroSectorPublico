@@ -39,10 +39,9 @@ function autocomplete(inp) {
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("div");
                     b.setAttribute("class", "elementos");
-                    
                     b.innerHTML = "<a class='lista-autocompletar'>" + objeto.nombre + "</a>";
                     /*insert a input field that will hold the current array item's value:*/
-                    b.innerHTML += "<input type='hidden' value='" + objeto.nombre + "'>"; // *** cambiamos arr[i] por nombres[i].nombre ***
+                    b.innerHTML += '<input type="hidden" value="' + objeto.nombre + '">'; // *** cambiamos arr[i] por nombres[i].nombre ***
                     /*execute a function when someone clicks on the item value (DIV element):*/
                     b.addEventListener("click", function(e) {
                         /*insert the value for the autocomplete text field:*/
@@ -61,33 +60,33 @@ function autocomplete(inp) {
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "-autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
-        var scelement = document.getElementById(this.id + "-autocomplete-list");
-        var limitTop = Math.round(scelement.scrollTop/x[0].offsetHeight);
-        var limitBottom = Math.round(scelement.scrollTop/x[0].offsetHeight)+5;
-        if (e.key == 'ArrowDown') {
-            /*If the arrow DOWN key is pressed,
-            increase the currentFocus variable:*/
-            currentFocus++;
-            /*and and make the current item more visible:*/
-            addActive(x);
-            if(currentFocus==limitBottom) scelement.scrollTop += x[0].offsetHeight;
-            else if (currentFocus == 0) scelement.scrollTop = 0; 
-        } else if (e.key == 'ArrowUp') { //up
-            /*If the arrow UP key is pressed,
-            decrease the currentFocus variable:*/
-            currentFocus--;
-            /*and and make the current item more visible:*/
-            addActive(x);
-            if(currentFocus == limitTop) scelement.scrollTop -= x[0].offsetHeight;
-            else if(currentFocus == x.length-1) scelement.scrollTop = x[0].offsetHeight*(x.length-1);
-        } else if (e.key == 'Enter') {
-            /*If the ENTER key is pressed, prevent the form from being submitted,*/
-            e.preventDefault();
-            if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
-            if (x) x[currentFocus].click();
+            var scelement = document.getElementById(this.id + "-autocomplete-list");
+            var limitTop = Math.round(scelement.scrollTop/x[0].offsetHeight);
+            var limitBottom = Math.round(scelement.scrollTop/x[0].offsetHeight)+5;
+            if (e.key == 'ArrowDown') {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+                if(currentFocus==limitBottom) scelement.scrollTop += x[0].offsetHeight;
+                else if (currentFocus == 0) scelement.scrollTop = 0; 
+            } else if (e.key == 'ArrowUp') { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+                if(currentFocus == limitTop) scelement.scrollTop -= x[0].offsetHeight;
+                else if(currentFocus == x.length-1) scelement.scrollTop = x[0].offsetHeight*(x.length-1);
+            } else if (e.key == 'Enter') {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+                }
             }
-        }
     });
 
     function addActive(x) {

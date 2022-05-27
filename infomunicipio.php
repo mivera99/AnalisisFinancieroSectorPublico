@@ -3,9 +3,8 @@ session_start();
 require_once('includesWeb/daos/DAOConsultor.php');
 
 $nombre = htmlspecialchars(trim(strip_tags(urldecode($_GET["mun"]))));
-
 $daomun = new DAOConsultor();
-$municipio = $daomun->getMunicipio($nombre);
+$municipio = $daomun->getMunicipio(addslashes($nombre));
 
 
 $mun2018 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2018);
@@ -3087,10 +3086,6 @@ if($municipio){
             }
             ?>
         </div>
-        <div>
-            <p>Prueba de escritura</p>
-        </div>
-
         <footer>
         <div id = "pie">
             <?php require("includesWeb/comun/pie.php");?>
