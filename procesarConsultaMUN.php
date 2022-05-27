@@ -106,10 +106,14 @@ $muns = (new DAOConsultor())->consultarMUNs($scoring, $poblacion, $endeudamiento
 <body>
 <div id="contenedor">
 
-<div id="cabecera">
-    <?php
-        require('includesWeb/comun/cabecera.php');
-    ?>
+<div id = "cabeceraIni">
+    <?php require("includesWeb/comun/cabecera.php");?>  
+</div>
+
+<div id="menu-superior">
+    <div id ="contenidoIni">     
+    <?php require("includesWeb/comun/buscador.php");?>  
+    </div>
 </div>
 <div id="consultaMUN">
     <?php

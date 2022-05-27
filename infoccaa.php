@@ -462,7 +462,7 @@ if($ccaa && $ccaaNac){
                         else if ($dato>=85 && $dato<90) echo'Aceptable nivel de eficacia recaudatoria. ';
                         else if ($dato>=80 && $dato<85) echo'Bajo nivel de eficacia recaudatoria. ';
                         else if ($dato<=80) echo'Muy bajo nivel de eficacia recaudatoria. ';
-                        echo '</p>';
+                        echo '</p><br>';
                     }
                     $i++;
                 }
