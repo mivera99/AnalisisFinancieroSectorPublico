@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `usuarios` (`correo`, `nombre`, `contrasenia`, `rol`) VALUES
-('admin@hotmail.com', 'admin', '$2y$12$wYr50aCJak2jQZRpMpw6WexIwXBHj.HQJWlhCZ2XGFMggdpvxb04W', 'admin'),
-('manager@hotmail.com', 'manager', '$2y$12$RauzszMt08a0.NKDlOIGH.Ht2QpsjMbTXklBpfzZN65E66TxSv3k6', 'gestor');
+('adminprueba@hotmail.com', 'admin', '$2y$12$wYr50aCJak2jQZRpMpw6WexIwXBHj.HQJWlhCZ2XGFMggdpvxb04W', 'admin'),
+('managerprueba@hotmail.com', 'manager', '$2y$12$RauzszMt08a0.NKDlOIGH.Ht2QpsjMbTXklBpfzZN65E66TxSv3k6', 'gestor');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
