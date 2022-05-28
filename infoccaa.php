@@ -5,7 +5,7 @@ require_once('includesWeb/daos/DAOConsultor.php');
 $nombre = htmlspecialchars(trim(strip_tags(urldecode($_GET["ccaa"]))));
 
 $daoccaa = new DAOConsultor();
-$ccaa = $daoccaa->getCCAA(adslashes($nombre));
+$ccaa = $daoccaa->getCCAA(addslashes($nombre));
 $ccaaNac = $daoccaa->getCCAA('NACIONAL');
 
 setcookie("ccaa", $nombre);
