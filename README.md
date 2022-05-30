@@ -1,6 +1,7 @@
 # AnalisisFinancieroSectorPublico
 TFG Miquel Vera Ramis y Aldair Maldonado Honores
 # Licencia
+
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
