@@ -89,9 +89,11 @@ class Importer_scoring_dip{
                             $result = mysqli_query($conn,$insert);
                         }
                         else {
-                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE scoring_dip SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_DIP'";
-                            $result = mysqli_query($conn, $update);
+                            if($value !== '') {
+                                //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                $update = "UPDATE scoring_dip SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_DIP'";
+                                $result = mysqli_query($conn, $update);
+                            }
                         }
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){

@@ -8,9 +8,9 @@ $daodip = new DAOConsultor();
 $diputacion = $daodip->getDiputacion(addslashes($nombre));
 
 
-$dip2018 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2018);
 $dip2019 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2019);
 $dip2020 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2020);
+$dip2021 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2021);
 
 setcookie("dip", $nombre);
 
@@ -21,148 +21,148 @@ if($diputacion){
     /*Ingresos Corrientes*/
     $datosIngresosCor = array();
     $etiquetasIngresosCor = array();
-    array_push($etiquetasIngresosCor,"2018","2019","2020");
-    array_push($datosIngresosCor,$dip2018->getTotalIngresosCorrientes1(),$dip2019->getTotalIngresosCorrientes1(),$dip2020->getTotalIngresosCorrientes1());
+    array_push($etiquetasIngresosCor,"2019","2020","2021");
+    array_push($datosIngresosCor,$dip2019->getTotalIngresosCorrientes1(),$dip2020->getTotalIngresosCorrientes1(),$dip2021->getTotalIngresosCorrientes1());
 
     /*Ingresos no Financieros*/
     $datosIngresosNoFinancieros = array();
     $etiquetasIngresosNoFinancieros = array();
-    array_push($etiquetasIngresosNoFinancieros,"2018","2019","2020");
-    array_push($datosIngresosNoFinancieros,$dip2018->getTotalIngresosNoCorrientes1(),$dip2019->getTotalIngresosNoCorrientes1(),$dip2020->getTotalIngresosNoCorrientes1());
+    array_push($etiquetasIngresosNoFinancieros,"2019","2020","2021");
+    array_push($datosIngresosNoFinancieros,$dip2019->getTotalIngresosNoCorrientes1(),$dip2020->getTotalIngresosNoCorrientes1(),$dip2021->getTotalIngresosNoCorrientes1());
 
     /*Ingresos Totales*/
     $datosIngresosTotales = array();
     $etiquetasIngresosTotales = array();
-    array_push($etiquetasIngresosTotales,"2018","2019","2020");
-    array_push($datosIngresosTotales,$dip2018->getTotalIngresos1(),$dip2019->getTotalIngresos1(),$dip2020->getTotalIngresos1());
+    array_push($etiquetasIngresosTotales,"2019","2020","2021");
+    array_push($datosIngresosTotales,$dip2019->getTotalIngresos1(),$dip2020->getTotalIngresos1(),$dip2021->getTotalIngresos1());
     
     /*Gastos Corrientes*/
     $datosGastosCor = array();
     $etiquetasGastosCor = array();
-    array_push($etiquetasGastosCor,"2018","2019","2020");
-    array_push($datosGastosCor,$dip2018->getTotalGastosCorrientes1(),$dip2019->getTotalGastosCorrientes1(),$dip2020->getTotalGastosCorrientes1());
+    array_push($etiquetasGastosCor,"2019","2020","2021");
+    array_push($datosGastosCor,$dip2019->getTotalGastosCorrientes1(),$dip2020->getTotalGastosCorrientes1(),$dip2021->getTotalGastosCorrientes1());
 
     /*Gastos no Financieros*/
     $datosGastosNoFinancieros = array();
     $etiquetasGastosNoFinancieros = array();
-    array_push($etiquetasGastosNoFinancieros,"2018","2019","2020");
-    array_push($datosGastosNoFinancieros,$dip2018->getTotalGastosNoFinancieros1(),$dip2019->getTotalGastosNoFinancieros1(),$dip2020->getTotalGastosNoFinancieros1());
+    array_push($etiquetasGastosNoFinancieros,"2019","2020","2021");
+    array_push($datosGastosNoFinancieros,$dip2019->getTotalGastosNoFinancieros1(),$dip2020->getTotalGastosNoFinancieros1(),$dip2021->getTotalGastosNoFinancieros1());
 
     /*Gastos Totales*/
     $datosGastosTotales = array();
     $etiquetasGastosTotales = array();
-    array_push($etiquetasGastosTotales,"2018","2019","2020");
-    array_push($datosGastosTotales,$dip2018->getTotalGastos1(),$dip2019->getTotalGastos1(),$dip2020->getTotalGastos1());
+    array_push($etiquetasGastosTotales,"2019","2020","2021");
+    array_push($datosGastosTotales,$dip2019->getTotalGastos1(),$dip2020->getTotalGastos1(),$dip2021->getTotalGastos1());
 
     /*Endeudamiento*/
     $datosEndeudamiento = array();
     $etiquetasEndeudamiento = array();
-    array_push($etiquetasEndeudamiento,"2019","2020");
-    array_push($datosEndeudamiento,$dip2019->getEndeudamiento()*100,$dip2020->getEndeudamiento()*100);
+    array_push($etiquetasEndeudamiento,"2020","2021");
+    array_push($datosEndeudamiento,$dip2020->getEndeudamiento()*100,$dip2021->getEndeudamiento()*100);
 
     /*Endeudamiento Medio Diputaciones*/
     $datosEndeudamientoM = array();
     $etiquetasEndeudamientoM = array();
-    array_push($etiquetasEndeudamientoM,"2019","2020");
-    array_push($datosEndeudamientoM,$dip2019->getEndeudamientoMediaDiputaciones()*100,$dip2020->getEndeudamientoMediaDiputaciones()*100);
+    array_push($etiquetasEndeudamientoM,"2020","2021");
+    array_push($datosEndeudamientoM,$dip2020->getEndeudamientoMediaDiputaciones()*100,$dip2021->getEndeudamientoMediaDiputaciones()*100);
 
     /*Sostenibilidad Financiera*/
     $datosSostenibilidadFinanciera = array();
-    $etiquetas20192020 = array();
-    array_push($etiquetas20192020,"2019","2020");
-    array_push($datosSostenibilidadFinanciera,$dip2019->getSostenibilidadFinanciera()*100,$dip2020->getSostenibilidadFinanciera()*100);
+    $etiquetas20202021 = array();
+    array_push($etiquetas20202021,"2020","2021");
+    array_push($datosSostenibilidadFinanciera,$dip2020->getSostenibilidadFinanciera()*100,$dip2021->getSostenibilidadFinanciera()*100);
 
     /*Sostenibilidad Financiera Media*/
     $datosSostenibilidadFinancieraM = array();
-    array_push($datosSostenibilidadFinancieraM,$dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100,$dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100);
+    array_push($datosSostenibilidadFinancieraM,$dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100,$dip2021->getSostenibilidadFinancieraMediaDiputaciones()*100);
 
     /*Apalancamiento*/
     $datosApalancamiento = array();
-    array_push($datosApalancamiento,$dip2019->getApalancamientoOperativo()*100,$dip2020->getApalancamientoOperativo()*100);
+    array_push($datosApalancamiento,$dip2020->getApalancamientoOperativo()*100,$dip2021->getApalancamientoOperativo()*100);
 
     /*Apalancamiento Media*/
     $datosApalancamientoM = array();
-    array_push($datosApalancamientoM,$dip2019->getApalancamientoOperativoMediaDiputaciones()*100,$dip2020->getApalancamientoOperativoMediaDiputaciones()*100);
+    array_push($datosApalancamientoM,$dip2020->getApalancamientoOperativoMediaDiputaciones()*100,$dip2021->getApalancamientoOperativoMediaDiputaciones()*100);
 
     /*Sostenibilidad Deuda*/
     $datosSostenibilidadDeuda = array();
-    array_push($datosSostenibilidadDeuda,$dip2019->getSostenibilidadDeuda()*100,$dip2020->getSostenibilidadDeuda()*100);
+    array_push($datosSostenibilidadDeuda,$dip2020->getSostenibilidadDeuda()*100,$dip2021->getSostenibilidadDeuda()*100);
 
     /*Sostenibilidad Deuda Media*/
     $datosSostenibilidadDeudaM = array();
-    array_push($datosSostenibilidadDeudaM,$dip2019->getSostenibilidadDeudaMediaDiputaciones()*100,$dip2020->getSostenibilidadDeudaMediaDiputaciones()*100);
+    array_push($datosSostenibilidadDeudaM,$dip2020->getSostenibilidadDeudaMediaDiputaciones()*100,$dip2021->getSostenibilidadDeudaMediaDiputaciones()*100);
 
     /*Remanente Tesoreria*/
     $datosRemanenteTesoreria = array();
-    array_push($datosRemanenteTesoreria,$dip2019->getRemanenteTesoreriaGastosGenerales()*100,$dip2020->getRemanenteTesoreriaGastosGenerales()*100);
+    array_push($datosRemanenteTesoreria,$dip2020->getRemanenteTesoreriaGastosGenerales()*100,$dip2021->getRemanenteTesoreriaGastosGenerales()*100);
 
     /*Remanente Tesoreria Media*/
     $datosRemanenteTesoreriaM = array();
-    array_push($datosRemanenteTesoreriaM,$dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100,$dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100);
+    array_push($datosRemanenteTesoreriaM,$dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100,$dip2021->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100);
 
     /*Liquidez Inmediata*/
     $datosLiquidezInmediata = array();
-    array_push($datosLiquidezInmediata,$dip2019->getLiquidezInmediata()*100,$dip2020->getLiquidezInmediata()*100);
+    array_push($datosLiquidezInmediata,$dip2020->getLiquidezInmediata()*100,$dip2021->getLiquidezInmediata()*100);
 
     /*Liquidez Inmediata M*/
     $datosLiquidezInmediataM = array();
-    array_push($datosLiquidezInmediataM,$dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100,$dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100);
+    array_push($datosLiquidezInmediataM,$dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100,$dip2021->getSolvenciaCortoPlazoMediaDiputaciones()*100);
 
     /*Solvencia Corto Plazo*/
     $datosSolvenciaCortoPlazo = array();
-    array_push($datosSolvenciaCortoPlazo,$dip2019->getSolvenciaCortoPlazo()*100,$dip2020->getSolvenciaCortoPlazo()*100);
+    array_push($datosSolvenciaCortoPlazo,$dip2020->getSolvenciaCortoPlazo()*100,$dip2021->getSolvenciaCortoPlazo()*100);
 
     /*Solvencia Corto Plazo Media*/
     $datosSolvenciaCortoPlazoM = array();
-    array_push($datosSolvenciaCortoPlazoM,$dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100,$dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100);
+    array_push($datosSolvenciaCortoPlazoM,$dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100,$dip2021->getSolvenciaCortoPlazoMediaDiputaciones2()*100);
 
     /*Eficiencia*/
     $datosEficiencia = array();
-    array_push($datosEficiencia,$dip2019->getEficiencia()*100,$dip2020->getEficiencia()*100);
+    array_push($datosEficiencia,$dip2020->getEficiencia()*100,$dip2021->getEficiencia()*100);
 
     /*Eficiencia Media*/
     $datosEficienciaM = array();
-    array_push($datosEficienciaM,$dip2019->getEficienciaMediaDiputaciones()*100,$dip2020->getEficienciaMediaDiputaciones()*100);
+    array_push($datosEficienciaM,$dip2020->getEficienciaMediaDiputaciones()*100,$dip2021->getEficienciaMediaDiputaciones()*100);
 
     /*Ejecucion Ingresos Corrientes*/
     $datosEjecucionIngresosCorrientes = array();
-    array_push($datosEjecucionIngresosCorrientes,$dip2019->getEjecucionIngresosCorrientes()*100,$dip2020->getEjecucionIngresosCorrientes()*100);
+    array_push($datosEjecucionIngresosCorrientes,$dip2020->getEjecucionIngresosCorrientes()*100,$dip2021->getEjecucionIngresosCorrientes()*100);
 
     /*Ejecucion Ingresos Corrientes Media*/
     $datosEjecucionIngresosCorrientesM = array();
-    array_push($datosEjecucionIngresosCorrientesM,$dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100,$dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100);
+    array_push($datosEjecucionIngresosCorrientesM,$dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100,$dip2021->getEjecucionIngresosCorrientesMediaDiputaciones()*100);
 
     /*Ejecucion Gastos Corrientes*/
     $datosEjecucionGastosCorrientes = array();
-    array_push($datosEjecucionGastosCorrientes,$dip2019->getEjecucionGastosCorrientes()*100,$dip2020->getEjecucionGastosCorrientes()*100);
+    array_push($datosEjecucionGastosCorrientes,$dip2020->getEjecucionGastosCorrientes()*100,$dip2021->getEjecucionGastosCorrientes()*100);
 
     /*Ejecucion Gastos Corrientes Media*/
     $datosEjecucionGastosCorrientesM = array();
-    array_push($datosEjecucionGastosCorrientesM,$dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100,$dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100);
+    array_push($datosEjecucionGastosCorrientesM,$dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100,$dip2021->getEjecucionGastosCorrientesMediaDiputaciones()*100);
    
     /*PMP*/
     $datosPMP = array();
-    array_push($datosPMP,$dip2019->getPeriodoMedioPagos(),$dip2020->getPeriodoMedioPagos());
+    array_push($datosPMP,$dip2020->getPeriodoMedioPagos(),$dip2021->getPeriodoMedioPagos());
 
     /*PMP Media*/
     $datosPMPM = array();
-    array_push($datosPMPM,$dip2019->getPeriodoMedioPagosMediaDiputaciones(),$dip2020->getPeriodoMedioPagosMediaDiputaciones());
+    array_push($datosPMPM,$dip2020->getPeriodoMedioPagosMediaDiputaciones(),$dip2021->getPeriodoMedioPagosMediaDiputaciones());
        
     /*Pagos sobre Obligaciones Reconocidas*/
     $datosPagosSobreObligaciones = array();
-    array_push($datosPagosSobreObligaciones,$dip2019->getPagosSobreObligacionesReconocidas()*100,$dip2020->getPagosSobreObligacionesReconocidas()*100);
+    array_push($datosPagosSobreObligaciones,$dip2020->getPagosSobreObligacionesReconocidas()*100,$dip2021->getPagosSobreObligacionesReconocidas()*100);
 
     /*Pagos sobre Obligaciones Reconocidas Media*/
     $datosPagosSobreObligacionesM = array();
-    array_push($datosPagosSobreObligacionesM,$dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100,$dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100);
+    array_push($datosPagosSobreObligacionesM,$dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100,$dip2021->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100);
    
     /*Eficacia Recaudatoria*/
     $datosEficaciaRecaudatoria = array();
-    array_push($datosEficaciaRecaudatoria,$dip2019->getEficaciaRecaudatoria()*100,$dip2020->getEficaciaRecaudatoria()*100);
+    array_push($datosEficaciaRecaudatoria,$dip2020->getEficaciaRecaudatoria()*100,$dip2021->getEficaciaRecaudatoria()*100);
 
     /*Eficacia Recaudatoria Media*/
     $datosEficaciaRecaudatoriaM = array();
-    array_push($datosEficaciaRecaudatoriaM,$dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100,$dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100);
+    array_push($datosEficaciaRecaudatoriaM,$dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100,$dip2021->getEficaciaRecaudatoriaMediaDiputaciones()*100);
 }
 ?>
 <!DOCTYPE html>
@@ -282,42 +282,42 @@ if($diputacion){
                     echo "<i>" . $infoRating . "</i><br><br>";
                     if($i==0){
                         echo '<p>';
-                        $dato = $dip2020->getEndeudamiento()*100;
+                        $dato = $dip2021->getEndeudamiento()*100;
                         if($dato==0) echo'Sin deuda financiera. ';
                         else if($dato>0 && $dato<=25) echo'Muy bajo nivel de deuda. ';
                         else if($dato>25 && $dato<=50) echo'Relativamente bajo nivel de deuda financiera. ';
                         else if($dato>50 && $dato<=75) echo'Nivel de deuda financiera aceptable. '; 
                         else if($dato>75) echo'Nivel de endeudamiento excesivo. ';
                         
-                        $dato = $dip2020->getSostenibilidadFinanciera()*100;
+                        $dato = $dip2021->getSostenibilidadFinanciera()*100;
                         if($dato>15) echo'Con elevada capacidad de ahorro. ';
                         else if($dato>5 && $dato<=15) echo'Con capacidad de ahorro. ';
                         else if($dato>-5 && $dato<=5) echo'Con porcentaje de ahorro en torno a cero. ';
                         else if($dato>-15 && $dato<=-5) echo'Sin capacidad de ahorro. '; 
                         else if($dato<-15) echo'Nula capcidad de ahorro que obliga a fuertes incrementos de deuda. ';
                         
-                        $dato = $dip2020->getApalancamientoOperativo()*100;
+                        $dato = $dip2021->getApalancamientoOperativo()*100;
                         if($dato<30) echo'Muy bajo apalancamiento operativo. ';
                         else if($dato>=30 && $dato<40) echo'Reducido apalancamiento operativo. ';
                         else if($dato>=40 && $dato<50) echo'Cuenta con un nivel de apalancamiento operativo. ';
                         else if($dato>=50 && $dato<60) echo'Alto apalancamiento operativo. '; 
                         else if($dato>=60) echo'Elevado apalancamiento operativo. ';
                         
-                        $dato = $dip2020->getSostenibilidadDeuda()*100;
+                        $dato = $dip2021->getSostenibilidadDeuda()*100;
                         if($dato==0) echo'Bajo nivel de deuda financiera. ';
                         else if($dato>=0 && $dato<5) echo'Bajo nivel de deuda financiera. ';
                         else if($dato>=5 && $dato<15) echo'Bajo nivel de deuda financiera. ';
                         else if($dato>=15 && $dato<25) echo'Bajo nivel de deuda financiera. '; 
                         else if($dato>=25) echo'Bajo nivel de deuda financiera. ';
                         
-                        $dato = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
+                        $dato = $dip2021->getRemanenteTesoreriaGastosGenerales()*100;
                         if($dato>=25) echo'Elevado nivel de tesorería. ';
                         else if($dato>=5 && $dato<25) echo'Buena posición de caja. ';
                         else if($dato>=-5 && $dato<5) echo'Nivel razonable de tesorería. ';
                         else if($dato>=-25 && $dato<-5) echo'Baja liquidez. '; 
                         else if($dato<-25) echo'Nivel de tesorería muy deficiente. ';
                         
-                        /*$dato = $dip2020->getLiquidezInmediata()*100;
+                        /*$dato = $dip2021->getLiquidezInmediata()*100;
                         if($dato>=100) echo'.';
                         else if($dato>=50 && $dato<100) echo'.';
                         else if($dato>=30 && $dato<50) echo'.';
@@ -325,49 +325,49 @@ if($diputacion){
                         else if($dato<20) echo'.';
                         */
                         /*
-                        $dato = $dip2020->getSolvenciaCortoPlazo()*100;
+                        $dato = $dip2021->getSolvenciaCortoPlazo()*100;
                         if($dato>=300) echo'.';
                         else if($dato>=200 && $dato<300) echo'.';
                         else if($dato>=150 && $dato<200) echo'.';
                         else if($dato>=100 && $dato<150) echo'.'; 
                         else if($dato<100) echo'.';
                         */
-                        $dato = $dip2020->getEficiencia()*100;
+                        $dato = $dip2021->getEficiencia()*100;
                         if($dato<=80) echo'Muy eficiente en términos de gastos ordinarios. ';
                         else if($dato>=80 && $dato<100) echo'Eficiente en términos de gastos ordinarios. ';
                         else if($dato>=100 && $dato<125) echo'Nivel de eficiencia intermedio. ';
                         else if($dato>=125 && $dato<150) echo'Bajo nivel de eficiencia. '; 
                         else if($dato>=150) echo'Muy poco eficiente en términos de gastos ordinarios. ';
                         
-                        $dato = $dip2020->getEjecucionIngresosCorrientes()*100;
+                        $dato = $dip2021->getEjecucionIngresosCorrientes()*100;
                         if($dato>=99) echo'Muy buena previsión de ingresos. ';
                         else if($dato>=97.5 && $dato<99) echo'Buena previsión de ingresos. ';
                         else if($dato>=95 && $dato<97) echo'Razonbale previsión de ingresos. ';
                         else if($dato>=90 && $dato<95) echo'Baja capacidad de previsión de ingresos. '; 
                         else if($dato<90) echo'Mala previsión de ingresos. ';
 
-                        $dato = $dip2020->getEjecucionGastosCorrientes()*100;
+                        $dato = $dip2021->getEjecucionGastosCorrientes()*100;
                         if($dato>=99) echo'Muy buena nivel de cumplimiento de gastos. ';
                         else if($dato>=97.5 && $dato<99) echo'Buen nivel de cumplimiento de gastos. ';
                         else if($dato>=95 && $dato<97.5) echo'Razonbale cumplimiento de gastos. ';
                         else if($dato>=90 && $dato<95) echo'Baja ejecución presupuestaria de gastos. '; 
                         else if($dato<90) echo'Mala ejecución de gastos. ';
                         
-                        $dato = $dip2020->getPeriodoMedioPagos()*100;
+                        $dato = $dip2021->getPeriodoMedioPagos()*100;
                         if($dato<=30) echo'Pago de facturas muy rápido. ';
                         else if($dato>=30 && $dato<90) echo'Pago de facturas en tiempo aceptable. ';
                         else if($dato>=90 && $dato<120) echo'Pago de facturas lento. ';
                         else if($dato>=120 && $dato<180) echo'Tarda mucho en abonar las facturas. '; 
                         else if($dato>=180) echo'Excesivo tiempo en el abono de facturas. ';
                         
-                        $dato = $dip2020->getPagosSobreObligacionesReconocidas()*100;
+                        $dato = $dip2021->getPagosSobreObligacionesReconocidas()*100;
                         if($dato>=99) echo'Elevado nivel de pagos sobre gastos reconocidos. ';
                         else if($dato>=95 && $dato<99) echo'Nivel de pagos razonable sobre gastos reconocidos. ';
                         else if($dato>=90 && $dato<95) echo'Aceptable nivel de pagos sobre gastos reconocidos. ';
                         else if($dato>=85 && $dato<90) echo'Bajo nivel de pagos sobre gastos reconocidos. '; 
                         else if($dato<85) echo'Muy bajo porcentaje de pagos sobre obligaciones reconocidas. ';
                         
-                        $dato = $dip2020->getEficaciaRecaudatoria()*100;
+                        $dato = $dip2021->getEficaciaRecaudatoria()*100;
                         if($dato>=95) echo'Muy buen nivel de eficacia recaudatoria. ';
                         else if($dato>=90 && $dato<95) echo'Razonable nivel de eficacia recaudatoria. ';
                         else if($dato>=85 && $dato<90) echo'Aceptable nivel de eficacia recaudatoria. ';
@@ -423,84 +423,84 @@ if($diputacion){
                     </tr>
                     <tr>
                         <th style="height:40px">Ingresos</th>
-                        <th>2018</th>
                         <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <tr>
                         <td>1. Impuestos Directos</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getImpuestosDirectos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getImpuestosDirectos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getImpuestosDirectos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getImpuestosDirectos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>2. Impuestos Indirectos</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getImpuestosIndirectos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getImpuestosIndirectos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getImpuestosIndirectos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getImpuestosIndirectos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>3. Tasas, Precios Públicos y Otros Ingresos</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getTasasPreciosOtros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getTasasPreciosOtros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getTasasPreciosOtros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getTasasPreciosOtros1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>4. Transferencias Corrientes</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getTransferenciasCorrientes1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getTransferenciasCorrientes1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>5. Ingresos Patrimoniales</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getIngresosPatrimoniales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getIngresosPatrimoniales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getIngresosPatrimoniales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getIngresosPatrimoniales1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Total Ingresos Corrientes</th>
-                        <th><?php echo number_format($dip2018->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalIngresosCorrientes1(), 2, ',','.');?></th>
                     </tr>
                     <tr>
                         <td>6. Enajenación de Inversiones Reales</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getEnajenacionInversionesReales1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>7. Transferencias de Capital</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getTransferenciasCapital1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getTransferenciasCapital1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getTransferenciasCapital1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getTransferenciasCapital1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Ingresos No Financieros</th>
-                        <th><?php echo number_format($dip2018->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalIngresosNoCorrientes1(), 2, ',','.');?></th>
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getActivosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getActivosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getActivosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getActivosFinancieros1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>9. Pasivos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getPasivosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getPasivosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getPasivosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getPasivosFinancieros1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">TOTAL INGRESOS</th>
-                        <th><?php echo number_format($dip2018->getTotalIngresos1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalIngresos1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalIngresos1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalIngresos1(), 2, ',','.');?></th>
                     </tr>
                 </tbody>
                 
@@ -646,83 +646,83 @@ if($diputacion){
                     </tr>
                     <tr>
                     <th style="height:40px">GASTOS</th>
-                        <th>2018</th>
                         <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1. Gastos del Personal</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getGastosPersonal1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getGastosPersonal1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getGastosPersonal1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getGastosPersonal1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>2. Gastos Corrientes en Bienes y Servicios</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getGastosCorrientesBienesServicios1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>3. Gastos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getGastosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getGastosFinancieros1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getGastosFinancieros1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getGastosFinancieros1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>4. Transferencias Corrientes</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getTransferenciasCorrientesGastos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>5. Fondo de contingencia</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getFondoContingencia1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getFondoContingencia1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getFondoContingencia1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getFondoContingencia1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Total gastos corrientes</th>
-                        <th><?php echo number_format($dip2018->getTotalGastosCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalGastosCorrientes1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalGastosCorrientes1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalGastosCorrientes1(), 2, ',','.');?></th>
                     </tr>
                     <tr>
                         <td>6. Inversiones Reales</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getInversionesReales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getInversionesReales1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getInversionesReales1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getInversionesReales1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>7. Transferencias de capital</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getTransferenciasCapitalGastos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">Gastos No financieros</th>
-                        <th><?php echo number_format($dip2018->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalGastosNoFinancieros1(), 2, ',','.');?></th>
                     </tr>
                     <tr>
                         <td>8. Activos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getActivosFinancierosGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getActivosFinancierosGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getActivosFinancierosGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getActivosFinancierosGastos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <td>9. Pasivos Financieros</td>
-                        <td style="width:14%"><?php echo number_format($dip2018->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2019->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
                         <td style="width:14%"><?php echo number_format($dip2020->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
+                        <td style="width:14%"><?php echo number_format($dip2021->getPasivosFinancierosGastos1(), 2, ',','.');?></td>
                     </tr>
                     <tr>
                         <th style="height:40px">TOTAL GASTOS</th>
-                        <th><?php echo number_format($dip2018->getTotalGastos1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2019->getTotalGastos1(), 2, ',','.');?></th>
                         <th><?php echo number_format($dip2020->getTotalGastos1(), 2, ',','.');?></th>
+                        <th><?php echo number_format($dip2021->getTotalGastos1(), 2, ',','.');?></th>
                     </tr>
                 </tbody>
             </table>
@@ -862,15 +862,15 @@ if($diputacion){
 
             <h3>Endeudamiento</h3>
             <br>
+            <p><b>Deuda Financiera 2021: </b><?php echo number_format($dip2021->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
             <p><b>Deuda Financiera 2020: </b><?php echo number_format($dip2020->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
-            <p><b>Deuda Financiera 2019: </b><?php echo number_format($dip2019->getDeudaFinanciera(), 2, ',','.') . "€";?></p>
             <br>
             <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -885,7 +885,7 @@ if($diputacion){
                             </div>
                         </th>
                         <?php
-                            $porcentaje = $dip2019->getEndeudamiento()*100;
+                            $porcentaje = $dip2020->getEndeudamiento()*100;
                             $color="";
                             if($porcentaje==0) $color="darkgreenCell";
                             else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
@@ -894,7 +894,7 @@ if($diputacion){
                             else if($porcentaje>75) $color="redCell"; 
                             else $color="greyCell";
 
-                            $porcentaje2 = $dip2020->getEndeudamiento()*100;
+                            $porcentaje2 = $dip2021->getEndeudamiento()*100;
                             $color2="";
                             if($porcentaje2==0) $color2="darkgreenCell";
                             else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
@@ -903,13 +903,13 @@ if($diputacion){
                             else if($porcentaje2>75) $color2="redCell";
                             else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getEndeudamiento()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Endeudamiento Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getEndeudamientoMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getEndeudamientoMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>0 && $porcentaje<=25) $color="greenCell";
@@ -918,7 +918,7 @@ if($diputacion){
                         else if($porcentaje>75) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEndeudamientoMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getEndeudamientoMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>0 && $porcentaje2<=25) $color2="greenCell";
@@ -927,8 +927,8 @@ if($diputacion){
                         else if($porcentaje2>75) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getEndeudamientoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -936,9 +936,9 @@ if($diputacion){
             <!--GRÁFICAS-->
             <script>
                 var datosE = <?php echo json_encode($datosEndeudamiento)?>;
-                var etiquetasE = <?php echo json_encode($etiquetas20192020)?>;
+                var etiquetasE = <?php echo json_encode($etiquetas20202021)?>;
                 var datosEM = <?php echo json_encode($datosEndeudamientoM)?>;
-                var etiquetasEM = <?php echo json_encode($etiquetas20192020)?>;
+                var etiquetasEM = <?php echo json_encode($etiquetas20202021)?>;
             </script>
             <div class="graficos">
                     <canvas id="end" height="300" width="500"></canvas>
@@ -1028,8 +1028,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1044,7 +1044,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getSostenibilidadFinanciera()*100;
+                        $porcentaje = $dip2020->getSostenibilidadFinanciera()*100;
                         $color="";
                         if($porcentaje>15) $color="darkgreenCell";
                         else if($porcentaje>5 && $porcentaje<=15) $color="greenCell";
@@ -1053,7 +1053,7 @@ if($diputacion){
                         else if($porcentaje<-15) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSostenibilidadFinanciera()*100;
+                        $porcentaje2 = $dip2021->getSostenibilidadFinanciera()*100;
                         $color2="";
                         if($porcentaje2>15) $color2="darkgreenCell";
                         else if($porcentaje2>5 && $porcentaje2<=15) $color2="greenCell";
@@ -1062,13 +1062,13 @@ if($diputacion){
                         else if($porcentaje2<-15) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getSostenibilidadFinanciera()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Sostenibilidad Financiera Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>15) $color="darkgreenCell";
                         else if($porcentaje>5 && $porcentaje<=15) $color="greenCell";
@@ -1077,7 +1077,7 @@ if($diputacion){
                         else if($porcentaje<-15) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getSostenibilidadFinancieraMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>15) $color2="darkgreenCell";
                         else if($porcentaje2>5 && $porcentaje2<=15) $color2="greenCell";
@@ -1086,8 +1086,8 @@ if($diputacion){
                         else if($porcentaje2<-15) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1096,8 +1096,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1112,7 +1112,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getApalancamientoOperativo()*100;
+                        $porcentaje = $dip2020->getApalancamientoOperativo()*100;
                         $color="";
                         if($porcentaje<30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
@@ -1121,7 +1121,7 @@ if($diputacion){
                         else if($porcentaje>=60) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getApalancamientoOperativo()*100;
+                        $porcentaje2 = $dip2021->getApalancamientoOperativo()*100;
                         $color2="";
                         if($porcentaje2<30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
@@ -1130,13 +1130,13 @@ if($diputacion){
                         else if($porcentaje2>=60) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getApalancamientoOperativo()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Apalancamiento Operativo Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getApalancamientoOperativoMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getApalancamientoOperativoMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje<30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<40) $color="greenCell";
@@ -1145,7 +1145,7 @@ if($diputacion){
                         else if($porcentaje>=60) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getApalancamientoOperativoMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getApalancamientoOperativoMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2<30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<40) $color2="greenCell";
@@ -1154,8 +1154,8 @@ if($diputacion){
                         else if($porcentaje2>=60) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getApalancamientoOperativoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1164,8 +1164,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1180,7 +1180,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getSostenibilidadDeuda()*100;
+                        $porcentaje = $dip2020->getSostenibilidadDeuda()*100;
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
@@ -1189,7 +1189,7 @@ if($diputacion){
                         else if($porcentaje>=25) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSostenibilidadDeuda()*100;
+                        $porcentaje2 = $dip2021->getSostenibilidadDeuda()*100;
                         $color2="";
                         if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
@@ -1198,13 +1198,13 @@ if($diputacion){
                         else if($porcentaje2>=25) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getSostenibilidadDeuda()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Sostenibilidad de la Deuda Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getSostenibilidadDeudaMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getSostenibilidadDeudaMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje==0) $color="darkgreenCell";
                         else if($porcentaje>=0 && $porcentaje<5) $color="greenCell";
@@ -1213,7 +1213,7 @@ if($diputacion){
                         else if($porcentaje>=25) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSostenibilidadDeudaMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getSostenibilidadDeudaMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2==0) $color2="darkgreenCell";
                         else if($porcentaje2>=0 && $porcentaje2<5) $color2="greenCell";
@@ -1222,8 +1222,8 @@ if($diputacion){
                         else if($porcentaje2>=25) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1233,7 +1233,7 @@ if($diputacion){
             <!--GRÁFICAS-->
             <script>
                 var datosSostenibilidadFinanciera = <?php echo json_encode($datosSostenibilidadFinanciera)?>;
-                var etiquetas20192020 = <?php echo json_encode($etiquetas20192020)?>;
+                var etiquetas20202021 = <?php echo json_encode($etiquetas20202021)?>;
                 var datosSostenibilidadFinancieraM = <?php echo json_encode($datosSostenibilidadFinancieraM)?>;
             </script>
             <div class="graficos">
@@ -1246,7 +1246,7 @@ if($diputacion){
                 const configSosFin = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Sostenibilidad Financiera',
                             data: datosSostenibilidadFinanciera,
@@ -1282,7 +1282,7 @@ if($diputacion){
                 const configSosFinM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Sostenibilidad Financiera Media Diputaciones',
                             data: datosSostenibilidadFinancieraM,
@@ -1332,7 +1332,7 @@ if($diputacion){
                 const configApal = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Apalancamiento Operativo',
                             data: datosApalancamiento,
@@ -1368,7 +1368,7 @@ if($diputacion){
                 const configApalM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Apalancamiento Operativo Media Diputaciones',
                             data: datosApalancamientoM,
@@ -1418,7 +1418,7 @@ if($diputacion){
                 const configSosDeu = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Sostenibilidad Deuda',
                             data: datosSostenibilidadDeuda,
@@ -1454,7 +1454,7 @@ if($diputacion){
                 const configSosDeuM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Sostenibilidad Deuda Media Diputaciones',
                             data: datosSostenibilidadDeudaM,
@@ -1493,15 +1493,15 @@ if($diputacion){
             <!-- TO DO -->
             <h3>Liquidez</h3>
             <br>
+            <p><b>Fondos líquidos 2021: </b><?php echo number_format($dip2021->getFondosLiquidos(), 2, ',','.') . "€";?></p>
             <p><b>Fondos líquidos 2020: </b><?php echo number_format($dip2020->getFondosLiquidos(), 2, ',','.') . "€";?></p>
-            <p><b>Fondos líquidos 2019: </b><?php echo number_format($dip2019->getFondosLiquidos(), 2, ',','.') . "€";?></p>
             <br>
             <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1516,7 +1516,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getRemanenteTesoreriaGastosGenerales()*100;
+                        $porcentaje = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
                         $color="";
                         if($porcentaje>=25) $color="darkgreenCell";
                         else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
@@ -1525,7 +1525,7 @@ if($diputacion){
                         else if($porcentaje<-25) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGenerales()*100;
+                        $porcentaje2 = $dip2021->getRemanenteTesoreriaGastosGenerales()*100;
                         $color2="";
                         if($porcentaje2>=25) $color2="darkgreenCell";
                         else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
@@ -1534,13 +1534,13 @@ if($diputacion){
                         else if($porcentaje2<-25) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getRemanenteTesoreriaGastosGenerales()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Remanente de Tesorería Gastos Generales Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=25) $color="darkgreenCell";
                         else if($porcentaje>=5 && $porcentaje<25) $color="greenCell";
@@ -1549,7 +1549,7 @@ if($diputacion){
                         else if($porcentaje<-25) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=25) $color2="darkgreenCell";
                         else if($porcentaje2>=5 && $porcentaje2<25) $color2="greenCell";
@@ -1558,8 +1558,8 @@ if($diputacion){
                         else if($porcentaje2<-25) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1568,8 +1568,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1584,7 +1584,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getLiquidezInmediata()*100;
+                        $porcentaje = $dip2020->getLiquidezInmediata()*100;
                         $color="";
                         if($porcentaje>=100) $color="darkgreenCell";
                         else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
@@ -1593,7 +1593,7 @@ if($diputacion){
                         else if($porcentaje<20) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getLiquidezInmediata()*100;
+                        $porcentaje2 = $dip2021->getLiquidezInmediata()*100;
                         $color2="";
                         if($porcentaje2>=100) $color2="darkgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
@@ -1602,13 +1602,13 @@ if($diputacion){
                         else if($porcentaje2<20) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getLiquidezInmediata()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Solvencia Corto Plazo Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=100) $color="darkgreenCell";
                         else if($porcentaje>=50 && $porcentaje<100) $color="greenCell";
@@ -1617,7 +1617,7 @@ if($diputacion){
                         else if($porcentaje<20) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getSolvenciaCortoPlazoMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=100) $color2="darkgreenCell";
                         else if($porcentaje2>=50 && $porcentaje2<100) $color2="greenCell";
@@ -1626,8 +1626,8 @@ if($diputacion){
                         else if($porcentaje2<20) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1636,8 +1636,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1652,7 +1652,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getSolvenciaCortoPlazo()*100;
+                        $porcentaje = $dip2020->getSolvenciaCortoPlazo()*100;
                         $color="";
                         if($porcentaje>=300) $color="darkgreenCell";
                         else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
@@ -1661,7 +1661,7 @@ if($diputacion){
                         else if($porcentaje<100) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazo()*100;
+                        $porcentaje2 = $dip2021->getSolvenciaCortoPlazo()*100;
                         $color2="";
                         if($porcentaje2>=300) $color2="darkgreenCell";
                         else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
@@ -1670,13 +1670,13 @@ if($diputacion){
                         else if($porcentaje2<100) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getSolvenciaCortoPlazo()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Solvencia Corto Plazo Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
+                        $porcentaje = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
                         $color="";
                         if($porcentaje>=300) $color="darkgreenCell";
                         else if($porcentaje>=200 && $porcentaje<300) $color="greenCell";
@@ -1685,7 +1685,7 @@ if($diputacion){
                         else if($porcentaje<100) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
+                        $porcentaje2 = $dip2021->getSolvenciaCortoPlazoMediaDiputaciones2()*100;
                         $color2="";
                         if($porcentaje2>=300) $color2="darkgreenCell";
                         else if($porcentaje2>=200 && $porcentaje2<300) $color2="greenCell";
@@ -1694,8 +1694,8 @@ if($diputacion){
                         else if($porcentaje2<100) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -1715,7 +1715,7 @@ if($diputacion){
                 const configReman = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Remanente de Tesorería Gastos Generales',
                             data: datosRemanenteTesoreria,
@@ -1751,7 +1751,7 @@ if($diputacion){
                 const configRemanM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Remanente de Tesorería Gastos Generales Media Diputaciones',
                             data: datosRemanenteTesoreriaM,
@@ -1802,7 +1802,7 @@ if($diputacion){
                 const configLiqI = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Liquidez Inmediata',
                             data: datosLiquidezInmediata,
@@ -1838,7 +1838,7 @@ if($diputacion){
                 const configLiqIM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Liquidez Inmediata Media Diputaciones',
                             data: datosLiquidezInmediataM,
@@ -1890,7 +1890,7 @@ if($diputacion){
                 const configSolC = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Solvencia Corto Plazo',
                             data: datosSolvenciaCortoPlazo,
@@ -1926,7 +1926,7 @@ if($diputacion){
                 const configSolCM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Solvencia Corto Plazo Media Diputaciones',
                             data: datosSolvenciaCortoPlazoM,
@@ -1973,8 +1973,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1989,7 +1989,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getEficiencia()*100;
+                        $porcentaje = $dip2020->getEficiencia()*100;
                         $color="";
                         if($porcentaje<=80) $color="darkgreenCell";
                         else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
@@ -1998,7 +1998,7 @@ if($diputacion){
                         else if($porcentaje>=150) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEficiencia()*100;
+                        $porcentaje2 = $dip2021->getEficiencia()*100;
                         $color2="";
                         if($porcentaje2<=80) $color2="darkgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
@@ -2007,13 +2007,13 @@ if($diputacion){
                         else if($porcentaje2>=150) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficiencia()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficiencia()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficiencia()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEficiencia()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Eficiencia Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getEficienciaMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getEficienciaMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje<=80) $color="darkgreenCell";
                         else if($porcentaje>=80 && $porcentaje<100) $color="greenCell";
@@ -2022,7 +2022,7 @@ if($diputacion){
                         else if($porcentaje>=150) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEficienciaMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getEficienciaMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2<=80) $color2="darkgreenCell";
                         else if($porcentaje2>=80 && $porcentaje2<100) $color2="greenCell";
@@ -2031,8 +2031,8 @@ if($diputacion){
                         else if($porcentaje2>=150) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEficienciaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2054,7 +2054,7 @@ if($diputacion){
                 const configEfi = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Eficiencia',
                             data: datosEficiencia,
@@ -2090,7 +2090,7 @@ if($diputacion){
                 const configEfiM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Eficiencia Media Diputaciones',
                             data: datosEficienciaM,
@@ -2137,8 +2137,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2153,7 +2153,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getEjecucionIngresosCorrientes()*100;
+                        $porcentaje = $dip2020->getEjecucionIngresosCorrientes()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
@@ -2162,7 +2162,7 @@ if($diputacion){
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEjecucionIngresosCorrientes()*100;
+                        $porcentaje2 = $dip2021->getEjecucionIngresosCorrientes()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
@@ -2171,13 +2171,13 @@ if($diputacion){
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEjecucionIngresosCorrientes()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Ejecución Ingresos Corrientes Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
@@ -2186,7 +2186,7 @@ if($diputacion){
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getEjecucionIngresosCorrientesMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
@@ -2195,8 +2195,8 @@ if($diputacion){
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2205,8 +2205,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2221,7 +2221,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getEjecucionGastosCorrientes()*100;
+                        $porcentaje = $dip2020->getEjecucionGastosCorrientes()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
@@ -2230,7 +2230,7 @@ if($diputacion){
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEjecucionGastosCorrientes()*100;
+                        $porcentaje2 = $dip2021->getEjecucionGastosCorrientes()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
@@ -2239,13 +2239,13 @@ if($diputacion){
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEjecucionGastosCorrientes()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Ejecución Gastos Corrientes Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=97.5 && $porcentaje<99) $color="greenCell";
@@ -2254,7 +2254,7 @@ if($diputacion){
                         else if($porcentaje<90) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getEjecucionGastosCorrientesMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=97.5 && $porcentaje2<99) $color2="greenCell";
@@ -2263,8 +2263,8 @@ if($diputacion){
                         else if($porcentaje2<90) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2285,7 +2285,7 @@ if($diputacion){
                 const configEfiIng = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Ejecucion Ingresos Corrientes',
                             data: datosEjecucionIngresosCorrientes,
@@ -2321,7 +2321,7 @@ if($diputacion){
                 const configEfiIngM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Ejecucion Ingresos Corrientes Media Diputaciones',
                             data: datosEjecucionIngresosCorrientesM,
@@ -2372,7 +2372,7 @@ if($diputacion){
                 const configEfiGas = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Ejecucion Gastos Corrientes',
                             data: datosEjecucionGastosCorrientes,
@@ -2408,7 +2408,7 @@ if($diputacion){
                 const configEfiGasM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Ejecucion Gastos Corrientes Media Diputaciones',
                             data: datosEjecucionGastosCorrientesM,
@@ -2451,15 +2451,15 @@ if($diputacion){
             <!-- TO DO -->
             <h3>Cumplimiento de Pagos</h3>
             <br>
+            <p><b>Deuda Comercial 2021: </b><?php echo number_format($dip2021->getDeudaComercial(), 2, ',','.') . "€";?></p>
             <p><b>Deuda Comercial 2020: </b><?php echo number_format($dip2020->getDeudaComercial(), 2, ',','.') . "€";?></p>
-            <p><b>Deuda Comercial 2019: </b><?php echo number_format($dip2019->getDeudaComercial(), 2, ',','.') . "€";?></p>
             <br>
             <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2474,7 +2474,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getPeriodoMedioPagos()*100;
+                        $porcentaje = $dip2020->getPeriodoMedioPagos()*100;
                         $color="";
                         if($porcentaje<=30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
@@ -2483,7 +2483,7 @@ if($diputacion){
                         else if($porcentaje>=180) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getPeriodoMedioPagos()*100;
+                        $porcentaje2 = $dip2021->getPeriodoMedioPagos()*100;
                         $color2="";
                         if($porcentaje2<=30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
@@ -2492,13 +2492,13 @@ if($diputacion){
                         else if($porcentaje2>=180) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getPeriodoMedioPagos(), 2, ',','.') . " días";?></td>
                     </tr>
                     <tr>
                         <th>Periodo Medio de Pagos Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getPeriodoMedioPagosMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getPeriodoMedioPagosMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje<=30) $color="darkgreenCell";
                         else if($porcentaje>=30 && $porcentaje<90) $color="greenCell";
@@ -2507,7 +2507,7 @@ if($diputacion){
                         else if($porcentaje>=180) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getPeriodoMedioPagosMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getPeriodoMedioPagosMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2<=30) $color2="darkgreenCell";
                         else if($porcentaje2>=30 && $porcentaje2<90) $color2="greenCell";
@@ -2516,8 +2516,8 @@ if($diputacion){
                         else if($porcentaje2>=180) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getPeriodoMedioPagosMediaDiputaciones(), 2, ',','.') . " días";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2526,8 +2526,8 @@ if($diputacion){
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2542,7 +2542,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getPagosSobreObligacionesReconocidas()*100;
+                        $porcentaje = $dip2020->getPagosSobreObligacionesReconocidas()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
@@ -2551,7 +2551,7 @@ if($diputacion){
                         else if($porcentaje<85) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidas()*100;
+                        $porcentaje2 = $dip2021->getPagosSobreObligacionesReconocidas()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
@@ -2560,13 +2560,13 @@ if($diputacion){
                         else if($porcentaje2<85) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?>style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?>style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getPagosSobreObligacionesReconocidas()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Pagos sobre Obligaciones Reconocidas Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=99) $color="darkgreenCell";
                         else if($porcentaje>=95 && $porcentaje<99) $color="greenCell";
@@ -2575,7 +2575,7 @@ if($diputacion){
                         else if($porcentaje<85) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=99) $color2="darkgreenCell";
                         else if($porcentaje2>=95 && $porcentaje2<99) $color2="greenCell";
@@ -2584,8 +2584,8 @@ if($diputacion){
                         else if($porcentaje2<85) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"';?> style="width:14%"><?php echo number_format($dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"';?> style="width:14%"><?php echo number_format($dip2021->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2605,7 +2605,7 @@ if($diputacion){
                 const configPMP = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'PMP',
                             data: datosPMP,
@@ -2641,7 +2641,7 @@ if($diputacion){
                 const configPMPM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'PMP Media Diputaciones',
                             data: datosPMPM,
@@ -2692,7 +2692,7 @@ if($diputacion){
                 const configPagosObl = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Pagos sobre Obligaciones Reconocidas',
                             data: datosPagosSobreObligaciones,
@@ -2728,7 +2728,7 @@ if($diputacion){
                 const configPagosOblM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Pagos sobre Obligaciones Reconocidas Media Diputaciones',
                             data: datosPagosSobreObligacionesM,
@@ -2770,15 +2770,15 @@ if($diputacion){
             <!-- TO DO -->
             <h3>Gestión Tributaria</h3>
             <br>
+            <p><b>Derechos Pendientes de Cobro 2021: </b><?php echo number_format($dip2021->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
             <p><b>Derechos Pendientes de Cobro 2020: </b><?php echo number_format($dip2020->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
-            <p><b>Derechos Pendientes de Cobro 2019: </b><?php echo number_format($dip2019->getDerechosPendientesCobro(), 2, ',','.') . "€";?></p>
             <br>
             <table class="dataTable">
                 <thead>
                     <tr>
                         <th></th>
-                        <th>2019</th>
                         <th>2020</th>
+                        <th>2021</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2793,7 +2793,7 @@ if($diputacion){
                         </div>
                         </th>
                         <?php
-                        $porcentaje = $dip2019->getEficaciaRecaudatoria()*100;
+                        $porcentaje = $dip2020->getEficaciaRecaudatoria()*100;
                         $color="";
                         if($porcentaje>=95) $color="darkgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
@@ -2802,7 +2802,7 @@ if($diputacion){
                         else if($porcentaje<80) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEficaciaRecaudatoria()*100;
+                        $porcentaje2 = $dip2021->getEficaciaRecaudatoria()*100;
                         $color2="";
                         if($porcentaje2>=95) $color2="darkgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
@@ -2811,13 +2811,13 @@ if($diputacion){
                         else if($porcentaje2<80) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getEficaciaRecaudatoria()*100, 2, ',','.') . "%";?></td>
                     </tr>
                     <tr>
                         <th>Eficacia Recaudatoria Media Diputaciones</th>
                         <?php
-                        $porcentaje = $dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100;
+                        $porcentaje = $dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100;
                         $color="";
                         if($porcentaje>=95) $color="darkgreenCell";
                         else if($porcentaje>=90 && $porcentaje<95) $color="greenCell";
@@ -2826,7 +2826,7 @@ if($diputacion){
                         else if($porcentaje<80) $color="redCell"; 
                         else $color="greyCell";
 
-                        $porcentaje2 = $dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100;
+                        $porcentaje2 = $dip2021->getEficaciaRecaudatoriaMediaDiputaciones()*100;
                         $color2="";
                         if($porcentaje2>=95) $color2="darkgreenCell";
                         else if($porcentaje2>=90 && $porcentaje2<95) $color2="greenCell";
@@ -2835,8 +2835,8 @@ if($diputacion){
                         else if($porcentaje2<80) $color2="redCell";
                         else $color2="greyCell";
                         ?>
-                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
-                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color.'"'?> style="width:14%"><?php echo number_format($dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
+                        <td <?php echo 'class="'.$color2.'"'?> style="width:14%"><?php echo number_format($dip2021->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ',','.') . "%";?></td>
                     </tr>
                 </tbody>
             </table>
@@ -2856,7 +2856,7 @@ if($diputacion){
                 const configEfiR = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Eficacia Recaudatoria',
                             data: datosEficaciaRecaudatoria,
@@ -2892,7 +2892,7 @@ if($diputacion){
                 const configEfiRM = {
                     type: 'bar',
                     data: {
-                        labels:etiquetas20192020,
+                        labels:etiquetas20202021,
                         datasets: [{
                             label: 'Eficacia Recaudatoria Media Diputaciones',
                             data: datosEficaciaRecaudatoriaM,

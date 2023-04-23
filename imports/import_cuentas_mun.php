@@ -57,7 +57,7 @@ class Importer_cuentas_mun{
                         $v3 = str_replace(',', '.', $values[$q+2]);    //RECA
             
                         // Se revisa si la fila ya existe en la tabla o no
-                        $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_mun_ingresos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
+                        $query = "SELECT CODIGO, ANHO, TIPO, PRES, DERE, RECA FROM cuentas_mun_ingresos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                             echo mysqli_error($conn)."<br>";
@@ -70,8 +70,16 @@ class Importer_cuentas_mun{
                             echo mysqli_error($conn)."<br>";
                         }
                         else {
+                            $row = mysqli_fetch_array($result);
+                            $v1 = ($v1 === '') ? $row['PRES'] : $v1;
+                            $v2 = ($v2 === '') ? $row['DERE'] : $v2;
+                            $v3 = ($v3 === '') ? $row['RECA'] : $v3;
                             //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE cuentas_mun_ingresos SET PRES = NULLIF('$v1',''), DERE = NULLIF('$v2',''), RECA = NULLIF('$v3','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
+                            $update = "UPDATE cuentas_mun_ingresos SET 
+                                        PRES = NULLIF('$v1',''), 
+                                        DERE = NULLIF('$v2',''), 
+                                        RECA = NULLIF('$v3','') 
+                                        WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
                             mysqli_query($conn, $update);
                         }
                     }
@@ -89,7 +97,7 @@ class Importer_cuentas_mun{
                         $v3 = str_replace(',', '.', $values[$q+2]);    //PAGOS
 
                         // Se revisa si la fila ya existe en la tabla o no
-                        $query = "SELECT CODIGO, ANHO, TIPO FROM cuentas_mun_gastos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
+                        $query = "SELECT CODIGO, ANHO, TIPO, PRES, OBLG, PAGOS FROM cuentas_mun_gastos WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
                         $result = mysqli_query($conn,$query);
                         if(!$result){
                         echo mysqli_error($conn)."<br>";
@@ -101,8 +109,16 @@ class Importer_cuentas_mun{
                             mysqli_query($conn,$insert);
                         }
                         else {
+                            $row = mysqli_fetch_array($result);
+                            $v1 = ($v1 === '') ? $row['PRES'] : $v1;
+                            $v2 = ($v2 === '') ? $row['OBLG'] : $v2;
+                            $v3 = ($v3 === '') ? $row['PAGOS'] : $v3;
                             //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE cuentas_mun_gastos SET PRES = NULLIF('$v1',''), OBLG = NULLIF('$v2',''), PAGOS = NULLIF('$v3','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
+                            $update = "UPDATE cuentas_mun_gastos SET 
+                                        PRES = NULLIF('$v1',''), 
+                                        OBLG = NULLIF('$v2',''), 
+                                        PAGOS = NULLIF('$v3','') 
+                                        WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TIPO = '$tipo'";
                             mysqli_query($conn, $update);
                         }
                     }
@@ -137,9 +153,11 @@ class Importer_cuentas_mun{
                         mysqli_query($conn,$insert);
                     }
                     else {
-                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                        $update = "UPDATE cuentas_mun_pmp SET PMP = NULLIF('$valor','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TRIMESTRE = '$trimestre'";
-                        mysqli_query($conn, $update);
+                        if($valor !== '') {
+                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                            $update = "UPDATE cuentas_mun_pmp SET PMP = NULLIF('$valor','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_MUN' AND TRIMESTRE = '$trimestre'";
+                            mysqli_query($conn, $update);
+                        }
                     }
                 }
                 $values = array();

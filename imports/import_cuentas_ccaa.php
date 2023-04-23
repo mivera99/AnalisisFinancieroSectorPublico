@@ -99,9 +99,11 @@ class Importer_cuentas_ccaa{
                                     echo mysqli_error($conn);
                                 }
                                 else {
-                                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                    $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes1'";
-                                    mysqli_query($conn, $update);
+                                    if($value1 !== '') {
+                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                        $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes1'";
+                                        mysqli_query($conn, $update);
+                                    }
                                 }
         
                                 /*
@@ -121,9 +123,11 @@ class Importer_cuentas_ccaa{
                                     mysqli_query($conn,$insert);
                                 }
                                 else {
-                                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                    $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes2'";
-                                    mysqli_query($conn, $update);
+                                    if($value2 !== '') {
+                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                        $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes2'";
+                                        mysqli_query($conn, $update);
+                                    }
                                 }
                             }
                             else {
@@ -143,9 +147,11 @@ class Importer_cuentas_ccaa{
                                     mysqli_query($conn,$insert);
                                 }
                                 else {
-                                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                    $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA'";
-                                    mysqli_query($conn, $update);
+                                    if($value1 !== '') {
+                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                        $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA'";
+                                        mysqli_query($conn, $update);
+                                    }
                                 }
                             /*
                                 AÑO N-1
@@ -164,9 +170,11 @@ class Importer_cuentas_ccaa{
                                     mysqli_query($conn,$insert);
                                 }
                                 else {
-                                    //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                    $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA'";
-                                    mysqli_query($conn, $update);
+                                    if($value2 !== '') {
+                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                        $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA'";
+                                        mysqli_query($conn, $update);
+                                    }
                                 }
                             }
                             $k--;
@@ -211,10 +219,12 @@ class Importer_cuentas_ccaa{
                                         echo mysqli_error($conn);
                                     }
                                     else {
+                                        if($value1 !== '') {
                                         //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes1'";
-                                        mysqli_query($conn, $update);
-                                        echo mysqli_error($conn);
+                                            $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes1'";
+                                            mysqli_query($conn, $update);
+                                            echo mysqli_error($conn);
+                                        }
                                     }
                                 /*
                                     AÑO N-1
@@ -233,9 +243,11 @@ class Importer_cuentas_ccaa{
                                         mysqli_query($conn,$insert);
                                     }
                                     else {
-                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes2'";
-                                        mysqli_query($conn, $update);
+                                        if($value2 !== '') {
+                                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                            $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes2'";
+                                            mysqli_query($conn, $update);
+                                        }
                                     }
         
                                 /*
@@ -255,9 +267,11 @@ class Importer_cuentas_ccaa{
                                         mysqli_query($conn,$insert);
                                     }
                                     else {
-                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value3','') WHERE ANHO = '$year3' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes3'";
-                                        mysqli_query($conn, $update);
+                                        if($value3 !== '') {
+                                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                            $update = "UPDATE cuentas_ccaa_general_mensual SET $type = NULLIF('$value3','') WHERE ANHO = '$year3' AND CODIGO = '$CODIGO_CCAA' AND MES = '$mes3'";
+                                            mysqli_query($conn, $update);
+                                        }
                                     }
                             }
                             else{
@@ -279,10 +293,12 @@ class Importer_cuentas_ccaa{
                                         echo mysqli_error($conn);
                                     }
                                     else {
-                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA'";
-                                        mysqli_query($conn, $update);
-                                        echo mysqli_error($conn);
+                                        if($value1 !== '') {
+                                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                            $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value1','') WHERE ANHO = '$year1' AND CODIGO = '$CODIGO_CCAA'";
+                                            mysqli_query($conn, $update);
+                                            echo mysqli_error($conn);
+                                        }
                                     }
                                 /*
                                     AÑO N-1
@@ -301,9 +317,11 @@ class Importer_cuentas_ccaa{
                                         mysqli_query($conn,$insert);
                                     }
                                     else {
-                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA'";
-                                        mysqli_query($conn, $update);
+                                        if($value2 !== '') {
+                                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                            $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value2','') WHERE ANHO = '$year2' AND CODIGO = '$CODIGO_CCAA'";
+                                            mysqli_query($conn, $update);
+                                        }
                                     }
                                 /*
                                     AÑO N-2
@@ -322,9 +340,11 @@ class Importer_cuentas_ccaa{
                                         mysqli_query($conn,$insert);
                                     }
                                     else {
-                                        //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                        $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value3','') WHERE ANHO = '$year3' AND CODIGO = '$CODIGO_CCAA'";
-                                        mysqli_query($conn, $update);
+                                        if($value3 !== '') {
+                                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                            $update = "UPDATE cuentas_ccaa_general SET $type = NULLIF('$value3','') WHERE ANHO = '$year3' AND CODIGO = '$CODIGO_CCAA'";
+                                            mysqli_query($conn, $update);
+                                        }
                                     }
                             }
                         }
@@ -363,8 +383,22 @@ class Importer_cuentas_ccaa{
                             mysqli_query($conn,$insert);
                         }
                         else {
+                            $row = mysqli_fetch_array($result);
+                            $v1 = ($v1 === '') ? $row['PREV_INI'] : $v1;
+                            $v2 = ($v2 === '') ? $row['MOD_PREV_INI'] : $v2;
+                            $v3 = ($v3 === '') ? $row['PREV_DEF'] : $v3;
+                            $v4 = ($v4 === '') ? $row['DER_REC'] : $v4;
+                            $v5 = ($v5 === '') ? $row['RECAUDA_COR'] : $v5;
+                            $v6 = ($v6 === '') ? $row['RECAUDA_CER'] : $v6;
                             //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE cuentas_ccaa_ingresos SET PREV_INI = NULLIF('$v1',''), MOD_PREV_INI = NULLIF('$v2',''), PREV_DEF = NULLIF('$v3',''), DER_REC = NULLIF('$v4',''), RECAUDA_COR = NULLIF('$v5',''), RECAUDA_CER = NULLIF('$v6','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
+                            $update = "UPDATE cuentas_ccaa_ingresos SET 
+                                        PREV_INI = NULLIF('$v1',''), 
+                                        MOD_PREV_INI = NULLIF('$v2',''), 
+                                        PREV_DEF = NULLIF('$v3',''), 
+                                        DER_REC = NULLIF('$v4',''), 
+                                        RECAUDA_COR = NULLIF('$v5',''), 
+                                        RECAUDA_CER = NULLIF('$v6','') 
+                                        WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
                             mysqli_query($conn, $update);
                         }
         
@@ -397,8 +431,22 @@ class Importer_cuentas_ccaa{
                             mysqli_query($conn,$insert);
                         }
                         else {
+                            $row = mysqli_fetch_array($result);
+                            $v1 = ($v1 === '') ? $row['CRED_INI'] : $v1;
+                            $v2 = ($v2 === '') ? $row['MOD_CRED_INI'] : $v2;
+                            $v3 = ($v3 === '') ? $row['CRED_TOT'] : $v3;
+                            $v4 = ($v4 === '') ? $row['OBLG_REC'] : $v4;
+                            $v5 = ($v5 === '') ? $row['PAGOS_COR'] : $v5;
+                            $v6 = ($v6 === '') ? $row['PAGOS_CER'] : $v6;
                             //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE cuentas_ccaa_gastos SET CRED_INI = NULLIF('$v1',''), MOD_CRED_INI = NULLIF('$v2',''), CRED_TOT = NULLIF('$v3',''), OBLG_REC = NULLIF('$v4',''), PAGOS_COR = NULLIF('$v5',''), PAGOS_CER = NULLIF('$v6','') WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
+                            $update = "UPDATE cuentas_ccaa_gastos SET 
+                                        CRED_INI = NULLIF('$v1',''), 
+                                        MOD_CRED_INI = NULLIF('$v2',''), 
+                                        CRED_TOT = NULLIF('$v3',''), 
+                                        OBLG_REC = NULLIF('$v4',''), 
+                                        PAGOS_COR = NULLIF('$v5',''), 
+                                        PAGOS_CER = NULLIF('$v6','') 
+                                        WHERE ANHO = '$year' AND CODIGO = '$CODIGO_CCAA' AND TIPO = '$tipo'";
                             mysqli_query($conn, $update);
                         }
                     }

@@ -104,7 +104,10 @@ class Importer_prog_mun{
 
                 $IDI=floatval(str_replace(',', '.', $values[32]));
 
-                $sql = "SELECT CODIGO, ANHO FROM prog_mun WHERE CODIGO='$CODIGO_MUN' AND ANHO='$ANHO'";
+                $sql = "SELECT CODIGO, ANHO, AGSPC, SOP, OTE, MU, PC, SPEI, PGVPP, CRE, PVP, A, RGTR, RR, GRSU, TR, LV, CSF, AP, PJ, P, SSPS, FE, S, E, C, D, AGP, IE, COM, TP, IT, IDI 
+                        FROM prog_mun 
+                        WHERE CODIGO='$CODIGO_MUN' AND ANHO='$ANHO'";
+
                 $result = mysqli_query($conn,$sql);
                 if(!$result){
                     echo mysqli_error($conn);
@@ -123,11 +126,71 @@ class Importer_prog_mun{
                     }
                 }
                 else { //Actualizar
-                    $update="UPDATE prog_mun SET AGSPC=NULLIF('$AGSPC',''), SOP=NULLIF('$SOP',''), OTE=NULLIF('$OTE',''),
-                    MU=NULLIF('$MU',''), PC=NULLIF('$PC',''), SPEI=NULLIF('$SPEI',''), PGVPP=NULLIF('$PGVPP',''), CRE=NULLIF('$CRE',''), PVP=NULLIF('$PVP',''), A=NULLIF('$A',''),
-                    RGTR=NULLIF('$RGTR',''), RR=NULLIF('$RR',''), GRSU=NULLIF('$GRSU',''), TR=NULLIF('$TR',''), LV=NULLIF('$LV',''), CSF=NULLIF('$CSF',''), AP=NULLIF('$AP',''),
-                    PJ=NULLIF('$PJ',''), P=NULLIF('$P',''), SSPS=NULLIF('$SSPS',''), FE=NULLIF('$FE',''), S=NULLIF('$S',''), E=NULLIF('$E',''), C=NULLIF('$C',''),
-                    D=NULLIF('$D',''), AGP=NULLIF('$AGP',''), IE=NULLIF('$IE',''), COM=NULLIF('$COM',''), TP=NULLIF('$TP',''), IT=NULLIF('$IT',''), IDI=NULLIF('$IDI','') WHERE ANHO = '$ANHO' AND CODIGO = '$CODIGO_MUN'";
+                    $AGSPC = (!empty($AGSPC)) ? $AGSPC : $row['AGSPC'];
+                    $SOP = (!empty($SOP)) ? $SOP : $row['SOP'];
+                    $OTE = (!empty($OTE)) ? $OTE : $row['OTE'];
+                    $MU = (!empty($MU)) ? $MU : $row['MU'];
+                    $PC = (!empty($PC)) ? $PC : $row['PC'];
+                    $SPEI = (!empty($SPEI)) ? $SPEI : $row['SPEI'];
+                    $PGVPP = (!empty($PGVPP)) ? $PGVPP : $row['PGVPP'];
+                    $CRE = (!empty($CRE)) ? $CRE : $row['CRE'];
+                    $PVP = (!empty($PVP)) ? $PVP : $row['PVP'];
+                    $A = (!empty($A)) ? $A : $row['A'];
+                    $RGTR = (!empty($RGTR)) ? $RGTR : $row['RGTR'];
+                    $RR = (!empty($RR)) ? $RR : $row['RR'];
+                    $GRSU = (!empty($GRSU)) ? $GRSU : $row['GRSU'];
+                    $TR = (!empty($TR)) ? $TR : $row['TR'];
+                    $LV = (!empty($LV)) ? $LV : $row['LV'];
+                    $CSF = (!empty($CSF)) ? $CSF : $row['CSF'];
+                    $AP = (!empty($AP)) ? $AP : $row['AP'];
+                    $PJ = (!empty($PJ)) ? $PJ : $row['PJ'];
+                    $P = (!empty($P)) ? $P : $row['P'];
+                    $SSPS = (!empty($SSPS)) ? $SSPS : $row['SSPS'];
+                    $FE = (!empty($FE)) ? $FE : $row['FE'];
+                    $S = (!empty($S)) ? $S : $row['S'];
+                    $E = (!empty($E)) ? $E : $row['E'];
+                    $C = (!empty($C)) ? $C : $row['C'];
+                    $D = (!empty($D)) ? $D : $row['D'];
+                    $AGP = (!empty($AGP)) ? $AGP : $row['AGP'];
+                    $IE = (!empty($IE)) ? $IE : $row['IE'];
+                    $COM = (!empty($COM)) ? $COM : $row['COM'];
+                    $TP = (!empty($TP)) ? $TP : $row['TP'];
+                    $IT = (!empty($IT)) ? $IT : $row['IT'];
+                    $IDI = (!empty($IDI)) ? $IDI : $row['IDI'];
+
+                    $update="UPDATE prog_mun SET 
+                                AGSPC=NULLIF('$AGSPC',''), 
+                                SOP=NULLIF('$SOP',''), 
+                                OTE=NULLIF('$OTE',''),
+                                MU=NULLIF('$MU',''), 
+                                PC=NULLIF('$PC',''), 
+                                SPEI=NULLIF('$SPEI',''), 
+                                PGVPP=NULLIF('$PGVPP',''), 
+                                CRE=NULLIF('$CRE',''), 
+                                PVP=NULLIF('$PVP',''), 
+                                A=NULLIF('$A',''),
+                                RGTR=NULLIF('$RGTR',''), 
+                                RR=NULLIF('$RR',''), 
+                                GRSU=NULLIF('$GRSU',''), 
+                                TR=NULLIF('$TR',''), 
+                                LV=NULLIF('$LV',''), 
+                                CSF=NULLIF('$CSF',''), 
+                                AP=NULLIF('$AP',''),
+                                PJ=NULLIF('$PJ',''), 
+                                P=NULLIF('$P',''), 
+                                SSPS=NULLIF('$SSPS',''), 
+                                FE=NULLIF('$FE',''), 
+                                S=NULLIF('$S',''), 
+                                E=NULLIF('$E',''), 
+                                C=NULLIF('$C',''),
+                                D=NULLIF('$D',''), 
+                                AGP=NULLIF('$AGP',''), 
+                                IE=NULLIF('$IE',''), 
+                                COM=NULLIF('$COM',''), 
+                                TP=NULLIF('$TP',''), 
+                                IT=NULLIF('$IT',''), 
+                                IDI=NULLIF('$IDI','') WHERE ANHO = '$ANHO' AND CODIGO = '$CODIGO_MUN'";
+                    
                     $result=mysqli_query($conn,$update);
                     if (!$result) {
                         echo mysqli_error($conn);

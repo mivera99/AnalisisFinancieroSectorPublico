@@ -72,9 +72,11 @@ class Importer_scoring_mun{
                                 $result = mysqli_query($conn,$insert);
                             }
                             else {
+                                if($value !== '') {
                                 //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                                $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
-                                $result = mysqli_query($conn, $update);
+                                    $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
+                                    $result = mysqli_query($conn, $update);
+                                }
                             }
                             //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                             if(!$result){
@@ -109,9 +111,11 @@ class Importer_scoring_mun{
                             $result = mysqli_query($conn,$insert);
                         }
                         else {
-                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
-                            $result = mysqli_query($conn, $update);
+                            if ($value !== '') {
+                                //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
+                                $result = mysqli_query($conn, $update);
+                            }
                         }
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){
@@ -132,9 +136,11 @@ class Importer_scoring_mun{
                             $result = mysqli_query($conn,$insert);
                         }
                         else {
-                            //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
-                            $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
-                            $result = mysqli_query($conn, $update);
+                            if($value !== '') {
+                                //Si ya existe, entonces se actualiza con el nuevo valor dado en el excel
+                                $update = "UPDATE scoring_mun SET $tipo = NULLIF('$value','') WHERE ANHO = '$year' AND CODIGO = '$COD_MUN'";
+                                $result = mysqli_query($conn, $update);
+                            }
                         }
                         //Si alguna de las 2 consultas anteriores, ya sea inserción o actualización, da error, entonces me muestra el mensaje de error
                         if(!$result){
