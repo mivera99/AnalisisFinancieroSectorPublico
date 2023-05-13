@@ -2941,6 +2941,9 @@ if($municipio){
 
             <br>
             <br>
+            <?php
+                if($prog) {
+            ?>
             <!-- PROGRAMAS DE GASTO -->
             <h3>Programas de gasto</h3>
             <br>
@@ -3078,6 +3081,9 @@ if($municipio){
                     </tr>
                 </tbody>
             </table>
+            <?php
+                }
+            ?>
             <div style="height:15vh"></div>
             <?php
             }
