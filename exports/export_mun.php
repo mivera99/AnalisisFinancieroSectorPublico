@@ -13,15 +13,14 @@ class Exporter_mun {
     public function export_mun($munNombre){        
         $daomun = new DAOConsultor();
         $municipio = $daomun->getMunicipio($munNombre);
-
         $muns= array();
 
-        $mun2018 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2018);
-        array_push($muns,$mun2018);
         $mun2019 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2019);
         array_push($muns,$mun2019);
         $mun2020 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2020);
         array_push($muns,$mun2020);
+        $mun2021 = $daomun->getEconomiaMUN(new Municipio(), $municipio->getCodigo(), 2021);
+        array_push($muns,$mun2021);
         $file = new SpreadSheet();
         $active_sheet = $file->getActiveSheet();
         
@@ -43,9 +42,9 @@ class Exporter_mun {
         $active_sheet->setCellValue('A11','ACTIVOS_FINANCIEROS');
         $active_sheet->setCellValue('A12','PASIVOS_FINANCIEROS');
         $active_sheet->setCellValue('A13','INGRESOS_TOTALES');
-        $active_sheet->setCellValue('B1', 2018);
-        $active_sheet->setCellValue('C1', 2019);
-        $active_sheet->setCellValue('D1', 2020);
+        $active_sheet->setCellValue('B1', 2019);
+        $active_sheet->setCellValue('C1', 2020);
+        $active_sheet->setCellValue('D1', 2021);
         
         $active_sheet->setCellValue('F1','GASTOS');
         $active_sheet->setCellValue('F2','GASTOS_DEL_PERSONAL');
@@ -60,9 +59,9 @@ class Exporter_mun {
         $active_sheet->setCellValue('F11','ACTIVOS_FINANCIEROS');
         $active_sheet->setCellValue('F12','PASIVOS_FINANCIEROS');
         $active_sheet->setCellValue('F13','GASTOS_TOTALES');
-        $active_sheet->setCellValue('G1', 2018);
-        $active_sheet->setCellValue('H1', 2019);
-        $active_sheet->setCellValue('I1', 2020);
+        $active_sheet->setCellValue('G1', 2019);
+        $active_sheet->setCellValue('H1', 2020);
+        $active_sheet->setCellValue('I1', 2021);
 
         $index=1;
         $count=2;

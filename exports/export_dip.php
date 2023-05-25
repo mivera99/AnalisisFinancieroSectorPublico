@@ -15,12 +15,12 @@ class Exporter_dip {
         $diputacion = $daodip->getDiputacion($dipNombre);
         $dips= array();
 
-        $dip2018 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2018);
-        array_push($dips,$dip2018);
         $dip2019 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2019);
         array_push($dips,$dip2019);
         $dip2020 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2020);
         array_push($dips,$dip2020);
+        $dip2021 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2021);
+        array_push($dips,$dip2021);
         $file = new SpreadSheet();
         $active_sheet = $file->getActiveSheet();
         
@@ -43,9 +43,9 @@ class Exporter_dip {
         $active_sheet->setCellValue('A12','PASIVOS_FINANCIEROS');
         $active_sheet->setCellValue('A13','INGRESOS_TOTALES');
 
-        $active_sheet->setCellValue('B1', 2018);
-        $active_sheet->setCellValue('C1', 2019);
-        $active_sheet->setCellValue('D1', 2020);
+        $active_sheet->setCellValue('B1', 2019);
+        $active_sheet->setCellValue('C1', 2020);
+        $active_sheet->setCellValue('D1', 2021);
         
         $active_sheet->setCellValue('F1','GASTOS');
         $active_sheet->setCellValue('F2','GASTOS_DEL_PERSONAL');
@@ -60,9 +60,9 @@ class Exporter_dip {
         $active_sheet->setCellValue('F11','ACTIVOS_FINANCIEROS');
         $active_sheet->setCellValue('F12','PASIVOS_FINANCIEROS');
         $active_sheet->setCellValue('F13','GASTOS_TOTALES');
-        $active_sheet->setCellValue('G1', 2018);
-        $active_sheet->setCellValue('H1', 2019);
-        $active_sheet->setCellValue('I1', 2020);
+        $active_sheet->setCellValue('G1', 2019);
+        $active_sheet->setCellValue('H1', 2020);
+        $active_sheet->setCellValue('I1', 2021);
 
         $index=1;
         $count=2;
