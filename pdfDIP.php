@@ -13,9 +13,9 @@ $daodip = new DAOConsultor();
 $diputacion = $daodip->getDiputacion(addslashes($nombre));
 
 
-$dip2018 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2018);
 $dip2019 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2019);
 $dip2020 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2020);
+$dip2021 = $daodip->getEconomiaDIP(new Diputacion(), $diputacion->getCodigo(), 2021);
 
 
 /* AÑADIMOS LA LIBRERÍA TCPDF */
@@ -191,84 +191,84 @@ $html .= '
             </tr>
             <tr>
                 <th style="width:300"><b>Ingresos</b></th>
-                <th style="width:110"><b>2018</b></th>
                 <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
 
             <tr>
                 <td style="width:300">1. Impuestos Directos</td>
-                <td style="width:110">' . number_format($dip2018->getImpuestosDirectos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getImpuestosDirectos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getImpuestosDirectos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getImpuestosDirectos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">2. Impuestos Indirectos</td>
-                <td style="width:110">' . number_format($dip2018->getImpuestosIndirectos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getImpuestosIndirectos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getImpuestosIndirectos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getImpuestosIndirectos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">3. Tasas, Precios Públicos y Otros Ingresos</td>
-                <td style="width:110">' . number_format($dip2018->getTasasPreciosOtros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getTasasPreciosOtros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getTasasPreciosOtros1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getTasasPreciosOtros1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">4. Transferencias Corrientes</td>
-                <td style="width:110">' . number_format($dip2018->getTransferenciasCorrientes1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getTransferenciasCorrientes1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getTransferenciasCorrientes1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getTransferenciasCorrientes1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">5. Ingresos Patrimoniales</td>
-                <td style="width:110">' . number_format($dip2018->getIngresosPatrimoniales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getIngresosPatrimoniales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getIngresosPatrimoniales1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getIngresosPatrimoniales1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>Total Ingresos Corrientes</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalIngresosCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalIngresosCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalIngresosCorrientes1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalIngresosCorrientes1(), 2, ",",".") . '</th>
             </tr>
             <tr>
                 <td style="width:300">6. Enajenación de Inversiones Reales</td>
-                <td style="width:110">' . number_format($dip2018->getEnajenacionInversionesReales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getEnajenacionInversionesReales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getEnajenacionInversionesReales1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getEnajenacionInversionesReales1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">7. Transferencias de Capital</td>
-                <td style="width:110">' . number_format($dip2018->getTransferenciasCapital1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getTransferenciasCapital1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getTransferenciasCapital1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getTransferenciasCapital1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>Ingresos No Financieros</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalIngresosNoCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalIngresosNoCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalIngresosNoCorrientes1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalIngresosNoCorrientes1(), 2, ",",".") . '</th>
             </tr>
             <tr>
                 <td style="width:300">8. Activos Financieros</td>
-                <td style="width:110">' . number_format($dip2018->getActivosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getActivosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getActivosFinancieros1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getActivosFinancieros1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">9. Pasivos Financieros</td>
-                <td style="width:110">' . number_format($dip2018->getPasivosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getPasivosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getPasivosFinancieros1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getPasivosFinancieros1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>TOTAL INGRESOS</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalIngresos1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalIngresos1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalIngresos1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalIngresos1(), 2, ",",".") . '</th>
             </tr>
         </tbody>
         
@@ -302,83 +302,83 @@ $html = '
             </tr>
             <tr>
                 <th style="width:300"><b>Gastos</b></th>
-                <th style="width:110"><b>2018</b></th>
                 <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td style="width:300">1. Gastos del Personal</td>
-                <td style="width:110">' . number_format($dip2018->getGastosPersonal1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getGastosPersonal1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getGastosPersonal1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getGastosPersonal1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">2. Gastos Corrientes en Bienes y Servicios</td>
-                <td style="width:110">' . number_format($dip2018->getGastosCorrientesBienesServicios1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getGastosCorrientesBienesServicios1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getGastosCorrientesBienesServicios1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getGastosCorrientesBienesServicios1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">3. Gastos Financieros</td>
-                <td style="width:110">' . number_format($dip2018->getGastosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getGastosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getGastosFinancieros1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getGastosFinancieros1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">4. Transferencias Corrientes</td>
-                <td style="width:110">' . number_format($dip2018->getTransferenciasCorrientesGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getTransferenciasCorrientesGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getTransferenciasCorrientesGastos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getTransferenciasCorrientesGastos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">5. Fondo de contingencia</td>
-                <td style="width:110">' . number_format($dip2018->getFondoContingencia1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getFondoContingencia1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getFondoContingencia1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getFondoContingencia1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>Total gastos corrientes</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalGastosCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalGastosCorrientes1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalGastosCorrientes1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalGastosCorrientes1(), 2, ",",".") . '</th>
             </tr>
             <tr>
                 <td style="width:300">6. Inversiones Reales</td>
-                <td style="width:110">' . number_format($dip2018->getInversionesReales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getInversionesReales1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getInversionesReales1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getInversionesReales1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">7. Transferencias de capital</td>
-                <td style="width:110">' . number_format($dip2018->getTransferenciasCapitalGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getTransferenciasCapitalGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getTransferenciasCapitalGastos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getTransferenciasCapitalGastos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>Gastos No financieros</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalGastosNoFinancieros1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalGastosNoFinancieros1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalGastosNoFinancieros1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalGastosNoFinancieros1(), 2, ",",".") . '</th>
             </tr>
             <tr>
                 <td style="width:300">8. Activos Financieros</td>
-                <td style="width:110">' . number_format($dip2018->getActivosFinancieros1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getActivosFinancieros1(), 2, ",",".") . '</td>
-                <td style="width:110">' . number_format($dip2020->getActivosFinancierosGastos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2020->getActivosFinancieros1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getActivosFinancierosGastos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <td style="width:300">9. Pasivos Financieros</td>
-                <td style="width:110">' . number_format($dip2018->getPasivosFinancierosGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2019->getPasivosFinancierosGastos1(), 2, ",",".") . '</td>
                 <td style="width:110">' . number_format($dip2020->getPasivosFinancierosGastos1(), 2, ",",".") . '</td>
+                <td style="width:110">' . number_format($dip2021->getPasivosFinancierosGastos1(), 2, ",",".") . '</td>
             </tr>
             <tr>
                 <th style="width:300"><b>TOTAL GASTOS</b></th>
-                <th style="width:110">' . number_format($dip2018->getTotalGastos1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2019->getTotalGastos1(), 2, ",",".") . '</th>
                 <th style="width:110">' . number_format($dip2020->getTotalGastos1(), 2, ",",".") . '</th>
+                <th style="width:110">' . number_format($dip2021->getTotalGastos1(), 2, ",",".") . '</th>
             </tr>
         </tbody>
     </table>
@@ -388,26 +388,26 @@ $html = '
 $html .= '
     <br><br>
     <h3>Endeudamiento</h3>
-    <b>Deuda Financiera 2020: </b>' . number_format($dip2020->getDeudaFinanciera(), 2, ",",".") . "€" . '
-    <br><b>Deuda Financiera 2019: </b>' . number_format($dip2019->getDeudaFinanciera(), 2, ",",".") . "€" . '<br>
+    <b>Deuda Financiera 2021: </b>' . number_format($dip2021->getDeudaFinanciera(), 2, ",",".") . "€" . '
+    <br><b>Deuda Financiera 2020: </b>' . number_format($dip2020->getDeudaFinanciera(), 2, ",",".") . "€" . '<br>
     <br><span style="text-align:left"><table cellspacing="0" cellpadding="5" border="1">
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Endeudamiento</th>
-                <td style="width:110">' . number_format($dip2019->getEndeudamiento()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEndeudamiento()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEndeudamiento()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Endeudamiento Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getEndeudamientoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEndeudamientoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEndeudamientoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -421,20 +421,20 @@ $html .= '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Sostenibilidad Financiera</th>
-                <td style="width:110">' . number_format($dip2019->getSostenibilidadFinanciera()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSostenibilidadFinanciera()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSostenibilidadFinanciera()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Sostenibilidad Financiera Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSostenibilidadFinancieraMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -442,20 +442,20 @@ $html .= '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Apalancamiento Operativo</th>
-                <td style="width:110">' . number_format($dip2019->getApalancamientoOperativo()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getApalancamientoOperativo()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getApalancamientoOperativo()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Apalancamiento Operativo Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getApalancamientoOperativoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getApalancamientoOperativoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getApalancamientoOperativoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -463,20 +463,20 @@ $html .= '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Sostenibilidad de la Deuda</th>
-                <td style="width:110">' . number_format($dip2019->getSostenibilidadDeuda()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSostenibilidadDeuda()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSostenibilidadDeuda()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Sostenibilidad de la Deuda Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSostenibilidadDeudaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -495,26 +495,26 @@ $html = '
     <br><br>
     <span style="text-align:justify;">
     <h3>Liquidez</h3>
-    <b>Fondos líquidos 2020: </b>' . number_format($dip2020->getFondosLiquidos(), 2, ",",".") . "€" . '
-    <br><b>Fondos líquidos 2019: </b>' . number_format($dip2019->getFondosLiquidos(), 2, ",",".") . "€" . '
+    <b>Fondos líquidos 2021: </b>' . number_format($dip2021->getFondosLiquidos(), 2, ",",".") . "€" . '
+    <br><b>Fondos líquidos 2020: </b>' . number_format($dip2020->getFondosLiquidos(), 2, ",",".") . "€" . '
     <br><br><span style="text-align:left"><table cellspacing="0" cellpadding="5" border="1">
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Remanente de Tesorería Gastos Generales</th>
-                <td style="width:110">' . number_format($dip2019->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getRemanenteTesoreriaGastosGenerales()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Remanente de Tesorería Gastos Generales Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getRemanenteTesoreriaGastosGeneralesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -522,20 +522,20 @@ $html = '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Liquidez Inmediata</th>
-                <td style="width:110">' . number_format($dip2019->getLiquidezInmediata()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getLiquidezInmediata()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getLiquidezInmediata()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Solvencia Corto Plazo Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSolvenciaCortoPlazoMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -543,20 +543,20 @@ $html = '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Solvencia Corto Plazo</th>
-                <td style="width:110">' . number_format($dip2019->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSolvenciaCortoPlazo()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Solvencia Corto Plazo Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getSolvenciaCortoPlazoMediaDiputaciones2()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -570,20 +570,20 @@ $html .= '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Eficiencia</th>
-                <td style="width:110">' . number_format($dip2019->getEficiencia()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEficiencia()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEficiencia()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Eficiencia Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getEficienciaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEficienciaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEficienciaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -597,20 +597,20 @@ $html .= '
         <thead>
             <tr>
             <th style="width:410"></th>
-            <th style="width:110"><b>2019</b></th>
             <th style="width:110"><b>2020</b></th>
+            <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Ejecución Ingresos corrientes</th>
-                <td style="width:110">' .number_format($dip2019->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' .number_format($dip2020->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' .number_format($dip2021->getEjecucionIngresosCorrientes()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th>Ejecución Ingresos Corrientes Media Ayuntamientos</th>
-                <td style="width:110">' .number_format($dip2019->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' .number_format($dip2020->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' .number_format($dip2021->getEjecucionIngresosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -618,20 +618,20 @@ $html .= '
         <thead>
             <tr>
             <th style="width:410"></th>
-            <th style="width:110"><b>2019</b></th>
             <th style="width:110"><b>2020</b></th>
+            <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Ejecución Gastos corrientes</th>
-                <td style="width:110">' .number_format($dip2019->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' .number_format($dip2020->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' .number_format($dip2021->getEjecucionGastosCorrientes()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Ejecución Gastos Corrientes Media Ayuntamientos</th>
-                <td style="width:110">' .number_format($dip2019->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' .number_format($dip2020->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' .number_format($dip2021->getEjecucionGastosCorrientesMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -652,26 +652,26 @@ $html = '
     <br><br>
     <span style="text-align:justify;">
     <h3>Cumplimiento de Pagos</h3>
-    <b>Deuda Comercial 2020: </b>' . number_format($dip2020->getDeudaComercial(), 2, ",",".") . "€" . '
-    <br><b>Deuda Comercial 2019: </b>' . number_format($dip2019->getDeudaComercial(), 2, ",",".") . "€" . '
+    <b>Deuda Comercial 2021: </b>' . number_format($dip2021->getDeudaComercial(), 2, ",",".") . "€" . '
+    <br><b>Deuda Comercial 2020: </b>' . number_format($dip2020->getDeudaComercial(), 2, ",",".") . "€" . '
     <br><br><span style="text-align:left"><table cellspacing="0" cellpadding="5" border="1">
         <thead>
             <tr>
             <th style="width:410"></th>
-            <th style="width:110"><b>2019</b></th>
             <th style="width:110"><b>2020</b></th>
+            <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Periodo Medio de Pagos</th>
-                <td style="width:110">' . number_format($dip2019->getPeriodoMedioPagos(), 2, ",",".") . " días" . '</td>
                 <td style="width:110">' . number_format($dip2020->getPeriodoMedioPagos(), 2, ",",".") . " días" . '</td>
+                <td style="width:110">' . number_format($dip2021->getPeriodoMedioPagos(), 2, ",",".") . " días" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Periodo Medio de Pagos Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getPeriodoMedioPagosMediaDiputaciones(), 2, ",",".") . " días" . '</td>
                 <td style="width:110">' . number_format($dip2020->getPeriodoMedioPagosMediaDiputaciones(), 2, ",",".") . " días" . '</td>
+                <td style="width:110">' . number_format($dip2021->getPeriodoMedioPagosMediaDiputaciones(), 2, ",",".") . " días" . '</td>
             </tr>
         </tbody>
     </table>
@@ -679,20 +679,20 @@ $html = '
         <thead>
             <tr>
                 <th style="width:410"></th>
-                <th style="width:110"><b>2019</b></th>
                 <th style="width:110"><b>2020</b></th>
+                <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Pagos sobre Obligaciones Reconocidas</th>
-                <td style="width:110">' . number_format($dip2019->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getPagosSobreObligacionesReconocidas()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Pagos sobre Obligaciones Reconocidas Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getPagosSobreObligacionesReconocidasMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
@@ -702,26 +702,26 @@ $html = '
 $html .= '
     <br><br>
     <h3>Gestión Tributaria</h3>
-    <b>Derechos Pendientes de Cobro 2020: </b>' . number_format($dip2020->getDerechosPendientesCobro(), 2, ",",".") . "€" . '
-    <br><b>Derechos Pendientes de Cobro 2019: </b>' . number_format($dip2019->getDerechosPendientesCobro(), 2, ",",".") . "€" . '
+    <b>Derechos Pendientes de Cobro 2021: </b>' . number_format($dip2021->getDerechosPendientesCobro(), 2, ",",".") . "€" . '
+    <br><b>Derechos Pendientes de Cobro 2020: </b>' . number_format($dip2020->getDerechosPendientesCobro(), 2, ",",".") . "€" . '
     <br><br><span style="text-align:left"><table cellspacing="0" cellpadding="5" border="1">
         <thead>
             <tr>
             <th style="width:410"></th>
-            <th style="width:110"><b>2019</b></th>
             <th style="width:110"><b>2020</b></th>
+            <th style="width:110"><b>2021</b></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th style="width:410">Eficacia Recaudatoria</th>
-                <td style="width:110">' . number_format($dip2019->getEficaciaRecaudatoria()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEficaciaRecaudatoria()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEficaciaRecaudatoria()*100, 2, ",",".") . "%" . '</td>
             </tr>
             <tr>
                 <th style="width:410">Eficacia Recaudatoria Media Ayuntamientos</th>
-                <td style="width:110">' . number_format($dip2019->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
                 <td style="width:110">' . number_format($dip2020->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
+                <td style="width:110">' . number_format($dip2021->getEficaciaRecaudatoriaMediaDiputaciones()*100, 2, ",",".") . "%" . '</td>
             </tr>
         </tbody>
     </table>
